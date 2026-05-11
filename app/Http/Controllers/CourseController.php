@@ -39,6 +39,8 @@ class CourseController extends Controller
                   ->with(['userProgress' => function($q) use ($user) {
                       $q->where('user_id', $user->id);
                   }]);
+        }, 'exams' => function($q) {
+            $q->where('is_published', true)->orderBy('position', 'asc');
         }]);
 
         $purchase = Purchase::where('user_id', $user->id)->where('course_id', $course->id)->first();
@@ -93,6 +95,14 @@ class CourseController extends Controller
 
         if (!$course->is_published) {
             return back()->withErrors(['error' => 'Este curso no esta disponible para compra']);
+        }
+
+        if ($course->is_free) {
+            Purchase::firstOrCreate([
+                'user_id' => $user->id,
+                'course_id' => $course->id
+            ]);
+            return redirect()->back();
         }
 
         if (is_null($course->price) || $course->price <= 0) {

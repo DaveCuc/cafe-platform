@@ -7,7 +7,7 @@ import { TitleForm, DescriptionForm, PriceForm } from "./Components/SimpleForms"
 import { CategoryForm } from "./Components/CategoryForm";
 import { ImageForm } from "./Components/ImageForm";
 import { AttachmentForm } from "./Components/AttachmentForm";
-import { ChaptersForm } from "./Components/ChaptersForm";
+import { CourseContentForm } from "./Components/CourseContentForm";
 import { Actions } from "./Components/Actions";
 import { Banner } from "@/Components/banner";
 import { IconBadge } from "@/Components/icon-badge";
@@ -78,9 +78,9 @@ export default function CourseEditor({ course, categories }) {
             <div>
               <div className="flex items-center gap-x-2 mb-6">
                 <IconBadge variant="teacher" size="md" icon={ListChecks} />
-                <h2 className="text-xl font-semibold">Capítulos del curso</h2>
+                <h2 className="text-xl font-semibold">Contenido del curso</h2>
               </div>
-              <ChaptersForm initialData={course} courseId={course.id} />
+              <CourseContentForm initialData={course} courseId={course.id} />
             </div>
 
             <div>

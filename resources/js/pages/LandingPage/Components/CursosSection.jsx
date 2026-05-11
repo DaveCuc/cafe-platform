@@ -25,12 +25,12 @@ const fadeLeft = {
 
 export default function CursosSection() {
     return (
-        <section className="p-20  mx-auto bg-brand-panel">
+        <section className="p-20  mx-auto bg-brand-nine">
 
-            <div className="text-brand-ink container mx-auto px-4 text-center max-w-7xl">
+            <div className="text-brand-pale container mx-auto px-4 text-center max-w-7xl">
                 <motion.div {...fadeUp}>
-                    <h1 className="text-6xl font-bold text-brand-text text-brand-ink py-5">Únete a nuestra comunidad</h1>
-                    <p className="mt-4 text-2xl text-brand-ink max-w-xl mx-auto text-brand-ink">
+                    <h1 className="text-6xl font-bold text-brand-pale pale-brand-ink py-5">Únete a nuestra comunidad</h1>
+                    <p className="mt-4 text-2xl text-brand-pale max-w-xl mx-auto text-brand-ink">
                         Forma parte de la red de prestadores de servicios de la Reserva de la Biosfera Tehuacán-Cuicatlán. Accede a herramientas de profesionalización y aumenta la visibilidad de tu proyecto ecoturístico para fortalecer el desarrollo sostenible de la región.
                     </p>
                 </motion.div>

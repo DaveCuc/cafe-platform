@@ -37,15 +37,30 @@ export default function CourseShow({
 
       <div className="flex flex-col max-w-4xl mx-auto pb-20">
         <div className="p-4">
-          <VideoPlayer
-            chapterId={chapter.id}
-            title={chapter.title}
-            courseId={course.id}
-            nextChapterId={nextChapter?.id}
-            isLocked={isLocked}
-            completeOnEnd={completeOnEnd}
-            videoUrl={chapter.video_url}
-          />
+          {chapter.is_video_required ? (
+            <VideoPlayer
+              chapterId={chapter.id}
+              title={chapter.title}
+              courseId={course.id}
+              nextChapterId={nextChapter?.id}
+              isLocked={isLocked}
+              completeOnEnd={completeOnEnd}
+              videoUrl={chapter.video_url}
+            />
+          ) : (
+            <div className="relative aspect-video rounded-md overflow-hidden bg-black flex flex-col justify-center items-center">
+              {isLocked ? (
+                <div className="flex flex-col items-center justify-center text-white space-y-2">
+                  <span className="font-semibold">Capítulo Bloqueado</span>
+                  <span className="text-sm">Inscríbete para acceder al contenido.</span>
+                </div>
+              ) : chapter.image_url ? (
+                <img src={chapter.image_url} alt={chapter.title} className="w-full h-full object-cover" />
+              ) : (
+                <div className="text-white">Este capítulo no tiene contenidos multimedia.</div>
+              )}
+            </div>
+          )}
         </div>
         <div>
           <div className="p-4 flex flex-col md:flex-row items-center justify-between">
@@ -60,7 +75,7 @@ export default function CourseShow({
                 isCompleted={isCompleted}
               />
             ) : (
-              <CourseEnrollButton courseId={course.id} price={course.price} />
+              <CourseEnrollButton courseId={course.id} price={course.price} isFree={course.is_free} />
             )}
           </div>
           <Separator />

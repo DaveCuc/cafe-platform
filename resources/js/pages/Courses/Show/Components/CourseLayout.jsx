@@ -1,7 +1,7 @@
 import { CourseSidebar } from "./CourseSidebar";
 import { CourseNavbar } from "./CourseNavbar";
 
-export function CourseLayout({ children, course, progressCount, currentChapterId, purchase }) {
+export function CourseLayout({ children, course, progressCount, currentChapterId, currentExamId, purchase }) {
   return (
     <div className="h-screen bg-brand-pale relative">
       <div className="h-[80px] md:pl-80 fixed inset-y-0 w-full z-50">
@@ -12,6 +12,7 @@ export function CourseLayout({ children, course, progressCount, currentChapterId
             course={course} 
             progressCount={progressCount} 
             currentChapterId={currentChapterId}
+            currentExamId={currentExamId}
             purchase={purchase}
         />
       </div>

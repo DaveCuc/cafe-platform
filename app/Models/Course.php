@@ -18,11 +18,13 @@ class Course extends Model
         'image_url',
         'price',
         'is_published',
-        'category_id'
+        'category_id',
+        'is_free'
     ];
 
     protected $casts = [
         'is_published' => 'boolean',
+        'is_free' => 'boolean',
         'price' => 'float',
     ];
 
@@ -39,6 +41,11 @@ class Course extends Model
     public function attachments(): HasMany
     {
         return $this->hasMany(Attachment::class)->orderBy('created_at', 'desc');
+    }
+
+    public function exams(): HasMany
+    {
+        return $this->hasMany(Exam::class)->orderBy('position', 'asc');
     }
 
     public function purchases(): HasMany

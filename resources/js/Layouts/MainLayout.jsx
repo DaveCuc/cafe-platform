@@ -12,8 +12,8 @@ const Logo = () => (
 );
 
 const guestRoutes = [
-    { icon: Compass, label: "Explorar mas cursos", href: "/search" },
     { icon: Layout, label: "Mi cursos", href: "/dashboard" },
+    { icon: Compass, label: "Explorar mas cursos", href: "/search" },
     { icon: Store, label: "Mi negocio", href: "/trade" },
     { icon: Compass, label: "Descubrir", href: "/discover" },
 ];

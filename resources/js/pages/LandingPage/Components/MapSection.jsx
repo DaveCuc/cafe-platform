@@ -55,7 +55,7 @@ export default function MapSection() {
 
 
     return (
-        <section className="bg-brand-soft p-20  mx-auto" >
+        <section className="bg-brand-seven p-20  mx-auto" >
             <div className="container max-w-7xl mx-auto px-5">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <motion.div {...fadeUp}>

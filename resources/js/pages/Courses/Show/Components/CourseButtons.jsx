@@ -12,9 +12,10 @@ function formatPrice(price) {
 export const CourseEnrollButton = ({
   courseId,
   price,
+  isFree
 }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const canCheckout = Number(price) > 0;
+  const canCheckout = isFree || Number(price) > 0;
 
   const onClick = async () => {
     if (!canCheckout) return;
@@ -44,7 +45,7 @@ export const CourseEnrollButton = ({
       size="sm"
       className="w-full md:w-auto"
     >
-      {canCheckout ? `Enrollar o Comprar por ${formatPrice(price)}` : "Curso no disponible para compra"}
+      {isFree ? "Inscribirse gratis" : (canCheckout ? `Comprar por ${formatPrice(price)}` : "No disponible")}
     </Button>
   )
 }

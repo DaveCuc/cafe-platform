@@ -62,7 +62,7 @@ const getItemImage = (item, index) => item?.image_url || item?.imageUrl || `http
 
 const RegistroSection = () => {
     return (
-        <section className="bg-brand-ring py-20">
+        <section className="bg-brand-nine py-20">
             <div className=" container mx-auto text-center px-4">
                 <motion.div {...fadeUp}>
                     <h1 className="text-white text-3xl md:text-6xl font-bold mb-6">¿Quieres aparecer?</h1>
@@ -120,7 +120,7 @@ const ResultadoSection = () => {
     }, [hasSearch, params]);
 
     return (
-        <section className="bg-brand-soft p-10">
+        <section className="bg-brand-seven p-10">
             <div className=" p-5  py-15 ">
                 <div className="container mx-auto px-4">
                     <motion.div {...fadeUp}>

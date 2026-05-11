@@ -3,10 +3,10 @@ import { router } from "@inertiajs/react";
 import { Loader2, PlusCircle } from "lucide-react";
 import { Button } from "@/Components/ui/button";
 import { Input } from "@/Components/ui/input";
-import { ChaptersList } from "./ChaptersList";
+import { ExamsList } from "./ExamsList";
 import { cn } from "@/lib/utils";
 
-export const ChaptersForm = ({ initialData, courseId }) => {
+export const ExamsForm = ({ initialData, courseId }) => {
   const [isCreating, setIsCreating] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [title, setTitle] = useState("");
@@ -16,7 +16,7 @@ export const ChaptersForm = ({ initialData, courseId }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     setIsUpdating(true);
-    router.post(`/teacher/courses/${courseId}/chapters`, { title }, {
+    router.post(`/teacher/courses/${courseId}/exams`, { title }, {
       preserveScroll: true,
       onSuccess: () => {
         setIsUpdating(false);
@@ -29,7 +29,7 @@ export const ChaptersForm = ({ initialData, courseId }) => {
 
   const onReorder = (updateData) => {
     setIsUpdating(true);
-    router.put(`/teacher/courses/${courseId}/chapters/reorder`, {
+    router.put(`/teacher/courses/${courseId}/exams/reorder`, {
       list: updateData
     }, {
       preserveScroll: true,
@@ -39,7 +39,7 @@ export const ChaptersForm = ({ initialData, courseId }) => {
   }
 
   const onEdit = (id) => {
-    router.visit(`/teacher/courses/${courseId}/chapters/${id}`);
+    router.visit(`/teacher/courses/${courseId}/exams/${id}`);
   }
 
   return (
@@ -50,40 +50,38 @@ export const ChaptersForm = ({ initialData, courseId }) => {
         </div>
       )}
       <div className="font-medium flex items-center justify-between pb-3">
-        Capítulos del curso
+        Exámenes del curso
         <Button onClick={toggleCreating} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
-          {isCreating ? "Cancelar" : <><PlusCircle className="h-4 w-4 mr-2" /> Agregar Capítulo</>}
+          {isCreating ? "Cancelar" : <><PlusCircle className="h-4 w-4 mr-2" /> Agregar Examen</>}
         </Button>
       </div>
 
-      {isCreating && (
+      {isCreating ? (
         <form onSubmit={onSubmit} className="space-y-4 mt-4">
            <Input
               disabled={isUpdating}
-              placeholder="Ej. 'Introducción al curso'"
+              placeholder="Ej. 'Examen final' o 'Cuestionario Módulo 1'"
               value={title}
               onChange={e => setTitle(e.target.value)}
               className="bg-white"
               required
             />
-            <Button disabled={!title || isUpdating} type="submit">Crear</Button>
+            <Button disabled={!title || isUpdating} type="submit">Crear Examen</Button>
         </form>
-      )}
-
-      {!isCreating && (
-        <div className={cn("text-sm mt-2", (!initialData.chapters || initialData.chapters.length === 0) && "text-brand-ink italic")}>
-          {(!initialData.chapters || initialData.chapters.length === 0) && "No hay capitulos creados aún."}
-          <ChaptersList
+      ) : (
+        <div className={cn("text-sm mt-2", (!initialData.exams || initialData.exams.length === 0) && "text-brand-ink italic")}>
+          {(!initialData.exams || initialData.exams.length === 0) && "No hay exámenes creados aún."}
+          <ExamsList
             onEdit={onEdit}
             onReorder={onReorder}
-            items={initialData.chapters || []}
+            items={initialData.exams || []}
           />
         </div>
       )}
 
       {!isCreating && (
         <p className="text-xs text-muted-foreground mt-4">
-          Arrastra y suelta para reordenar los capitulos
+          Arrastra y suelta para reordenar los exámenes
         </p>
       )}
     </div>

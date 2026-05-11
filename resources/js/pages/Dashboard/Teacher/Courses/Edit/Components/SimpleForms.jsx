@@ -6,6 +6,7 @@ import { Input } from "@/Components/ui/input";
 import { Textarea } from "@/Components/ui/textarea";
 import { Editor } from "@/Components/Editor";
 import { Preview } from "@/Components/Preview";
+import Checkbox from "@/Components/Checkbox";
 
 export const TitleForm = ({ initialData, courseId }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -104,6 +105,7 @@ export const DescriptionForm = ({ initialData, courseId }) => {
 export const PriceForm = ({ initialData, courseId }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [price, setPrice] = useState(initialData.price || "");
+  const [isFree, setIsFree] = useState(initialData.is_free || false);
   const [isLoading, setIsLoading] = useState(false);
 
   const toggleEdit = () => setIsEditing((c) => !c);
@@ -111,7 +113,10 @@ export const PriceForm = ({ initialData, courseId }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    router.patch(`/teacher/courses/${courseId}`, { price: parseFloat(price) }, {
+    router.patch(`/teacher/courses/${courseId}`, { 
+      price: isFree ? 0 : parseFloat(price),
+      is_free: isFree
+    }, {
       preserveScroll: true,
       onSuccess: () => {
         setIsLoading(false);
@@ -132,8 +137,8 @@ export const PriceForm = ({ initialData, courseId }) => {
         </Button>
       </div>
       {!isEditing && (
-        <p className={`text-sm mt-2 ${!initialData.price && "text-brand-ink italic"}`}>
-          {initialData.price ? formatPrice(initialData.price) : "Sin precio"}
+        <p className={`text-sm mt-2 ${!initialData.price && !initialData.is_free && "text-brand-ink italic"}`}>
+          {initialData.is_free ? "Gratis" : (initialData.price ? formatPrice(initialData.price) : "Sin precio")}
         </p>
       )}
       {isEditing && (
@@ -141,14 +146,27 @@ export const PriceForm = ({ initialData, courseId }) => {
           <Input 
             type="number" 
             step="0.01" 
-            disabled={isLoading} 
+            disabled={isLoading || isFree} 
             value={price} 
             onChange={e => setPrice(e.target.value)} 
             placeholder="Ej. 199.99" 
-            className="bg-white" 
-            required 
+            className={`bg-white ${isFree ? 'opacity-50' : ''}`} 
+            required={!isFree} 
           />
-          <Button disabled={!price || isLoading} type="submit">Guardar</Button>
+          <div className="flex flex-row items-center space-x-3">
+            <input 
+              type="checkbox"
+              id="is_free_course_checkbox"
+              checked={isFree}
+              onChange={(e) => setIsFree(e.target.checked)}
+              className="h-4 w-4 text-brand-soft rounded border-brand-soft focus:ring-brand-soft cursor-pointer"
+            />
+            <label htmlFor="is_free_course_checkbox" className="text-sm font-medium text-brand-text cursor-pointer">
+              Hacer este curso gratis
+            </label>
+          </div>
+          <Button disabled={(!price && !isFree) || isLoading} type="submit">Guardar</Button>
+        
         </form>
       )}
     </div>

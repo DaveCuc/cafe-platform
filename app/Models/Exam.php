@@ -6,28 +6,25 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Chapter extends Model
+class Exam extends Model
 {
     use HasUuids;
 
     protected $fillable = [
         'title',
         'description',
-        'video_url',
+        'course_id',
         'position',
         'is_published',
-        'is_free',
-        'course_id',
-        'is_video_required',
-        'image_url'
+        'attempts_allowed',
+        'min_score'
     ];
 
     protected $casts = [
         'is_published' => 'boolean',
-        'is_free' => 'boolean',
-        'is_video_required' => 'boolean',
+        'attempts_allowed' => 'integer',
+        'min_score' => 'integer',
         'position' => 'integer',
     ];
 
@@ -36,13 +33,13 @@ class Chapter extends Model
         return $this->belongsTo(Course::class);
     }
 
-    public function muxData(): HasOne
+    public function questions(): HasMany
     {
-        return $this->hasOne(MuxData::class);
+        return $this->hasMany(ExamQuestion::class)->orderBy('position', 'asc');
     }
 
-    public function userProgress(): HasMany
+    public function attempts(): HasMany
     {
-        return $this->hasMany(UserProgress::class);
+        return $this->hasMany(ExamAttempt::class);
     }
 }

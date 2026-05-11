@@ -4,7 +4,7 @@ import { ArrowLeft, Eye, LayoutDashboard, Video } from "lucide-react";
 import MainLayout from "@/Layouts/MainLayout";
 
 import { ChapterTitleForm, ChapterDescriptionForm, ChapterAccessForm } from "./Components/SimpleForms";
-import { ChapterVideoForm } from "./Components/VideoForm";
+import { ChapterVideoForm, ChapterImageForm } from "./Components/VideoForm";
 import { ChapterActions } from "./Components/Actions";
 import { Banner } from "@/Components/banner";
 import { IconBadge } from "@/Components/icon-badge";
@@ -13,7 +13,7 @@ export default function ChapterEditor({ courseId, chapter }) {
   const requiredFields = [
     chapter.title,
     chapter.description,
-    chapter.video_url,
+    chapter.is_video_required ? chapter.video_url : true,
   ];
 
   const totalFields = requiredFields.length;
@@ -82,9 +82,10 @@ export default function ChapterEditor({ courseId, chapter }) {
           <div>
             <div className="flex items-center gap-x-2">
               <IconBadge variant="teacher" size="md" icon={Video} />
-              <h2 className="text-xl font-semibold">Agregar video</h2>
+              <h2 className="text-xl font-semibold">Media del capítulo</h2>
             </div>
             <ChapterVideoForm initialData={chapter} courseId={courseId} chapterId={chapter.id} /> 
+            <ChapterImageForm initialData={chapter} courseId={courseId} chapterId={chapter.id} />
           </div>
         </div>
       </div>

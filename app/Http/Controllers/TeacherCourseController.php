@@ -21,6 +21,8 @@ class TeacherCourseController extends Controller
 
         $course->load(['chapters' => function ($query) {
             $query->orderBy('position', 'asc');
+        }, 'exams' => function ($query) {
+            $query->orderBy('position', 'asc');
         }, 'attachments' => function ($query) {
             $query->orderBy('created_at', 'desc');
         }]);
@@ -41,6 +43,7 @@ class TeacherCourseController extends Controller
             'title' => 'sometimes|string|max:255',
             'description' => 'nullable|string',
             'price' => 'nullable|numeric|min:0',
+            'is_free' => 'nullable|boolean',
             'category_id' => 'nullable|uuid|exists:categories,id',
         ]);
 
@@ -139,13 +142,36 @@ class TeacherCourseController extends Controller
         
         $request->validate(['title' => 'required|string']);
         
-        $lastChapter = $course->chapters()->orderBy('position', 'desc')->first();
-        $newPosition = $lastChapter ? $lastChapter->position + 1 : 1;
+        $lastChapterPosition = $course->chapters()->max('position') ?? 0;
+        $lastExamPosition = $course->exams()->max('position') ?? 0;
+        $newPosition = max($lastChapterPosition, $lastExamPosition) + 1;
         
         $course->chapters()->create([
             'title' => $request->title,
             'position' => $newPosition,
         ]);
+        
+        return back();
+    }
+
+    public function reorderContent(Request $request, Course $course)
+    {
+        if ($course->user_id != Auth::id()) abort(403);
+
+        $validated = $request->validate([
+            'list' => 'required|array',
+            'list.*.id' => 'required|uuid',
+            'list.*.position' => 'required|integer|min:1',
+            'list.*.type' => 'required|string|in:chapter,exam',
+        ]);
+
+        foreach($validated['list'] as $item) {
+            if ($item['type'] === 'chapter') {
+                \App\Models\Chapter::where('id', $item['id'])->where('course_id', $course->id)->update(['position' => $item['position']]);
+            } elseif ($item['type'] === 'exam') {
+                \App\Models\Exam::where('id', $item['id'])->where('course_id', $course->id)->update(['position' => $item['position']]);
+            }
+        }
         
         return back();
     }

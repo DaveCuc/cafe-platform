@@ -31,6 +31,7 @@ class TeacherChapterController extends Controller
             'title' => 'sometimes|string|max:255',
             'description' => 'nullable|string',
             'is_free' => 'sometimes|boolean',
+            'is_video_required' => 'sometimes|boolean',
         ]);
 
         if (!empty($validated)) {
@@ -44,8 +45,12 @@ class TeacherChapterController extends Controller
     {
         if ($course->user_id != Auth::id() || $chapter->course_id != $course->id) abort(403);
         
-        if (!$chapter->title || !$chapter->description || !$chapter->video_url) {
+        if (!$chapter->title || !$chapter->description) {
             return back()->withErrors(['error' => 'Faltan campos obligatorios para publicar']);
+        }
+        
+        if ($chapter->is_video_required && !$chapter->video_url) {
+            return back()->withErrors(['error' => 'Falta el video obligatorio para publicar']);
         }
         
         $chapter->update(['is_published' => true]);
@@ -73,6 +78,9 @@ class TeacherChapterController extends Controller
         if ($chapter->video_url) {
             Storage::disk('public')->delete(str_replace('/storage/', '', $chapter->video_url));
         }
+        if ($chapter->image_url) {
+            Storage::disk('public')->delete(str_replace('/storage/', '', $chapter->image_url));
+        }
         
         $chapter->delete();
         
@@ -97,6 +105,22 @@ class TeacherChapterController extends Controller
         
         $path = $request->file('video')->store('chapters', 'public');
         $chapter->update(['video_url' => '/storage/' . $path]);
+        
+        return back();
+    }
+
+    public function uploadImage(Request $request, Course $course, Chapter $chapter)
+    {
+        if ($course->user_id != Auth::id() || $chapter->course_id != $course->id) abort(403);
+        
+        $request->validate(['image' => 'required|image']);
+        
+        if ($chapter->image_url) {
+             Storage::disk('public')->delete(str_replace('/storage/', '', $chapter->image_url));
+        }
+        
+        $path = $request->file('image')->store('chapters/images', 'public');
+        $chapter->update(['image_url' => '/storage/' . $path]);
         
         return back();
     }

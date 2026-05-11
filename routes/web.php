@@ -255,6 +255,8 @@ Route::middleware('auth')->group(function () {
             $q->where('is_published', true)->orderBy('position', 'asc')->with(['userProgress' => function($query) use ($userId) {
                 $query->where('user_id', $userId);
             }]);
+        }, 'exams' => function($q) {
+            $q->where('is_published', true)->orderBy('position', 'asc');
         }]);
 
         $purchase = \App\Models\Purchase::where('user_id', $userId)->where('course_id', $course->id)->first();
@@ -290,6 +292,14 @@ Route::middleware('auth')->group(function () {
             'progressCount' => $progressCount
         ]);
     })->name('courses.chapters.show');
+
+    // Student Exams
+    Route::get('/courses/{course}/exams/{exam}', [\App\Http\Controllers\ExamController::class, 'show'])->name('courses.exams.show');
+    Route::get('/courses/{course}/exams/{exam}/take', [\App\Http\Controllers\ExamController::class, 'take'])->name('courses.exams.take');
+    Route::post('/courses/{course}/exams/{exam}/take', [\App\Http\Controllers\ExamController::class, 'submit'])->name('courses.exams.submit');
+
+    // Certificates
+    Route::get('/courses/{course}/certificate', [\App\Http\Controllers\CertificateController::class, 'download'])->name('courses.certificate');
 
     Route::put('/courses/{course}/chapters/{chapter}/progress', function (\Illuminate\Http\Request $request, \App\Models\Course $course, \App\Models\Chapter $chapter) {
         if ($chapter->course_id !== $course->id) {
@@ -351,6 +361,25 @@ Route::middleware('auth')->group(function () {
     Route::delete('/teacher/courses/{course}/attachments/{attachment}', [\App\Http\Controllers\TeacherCourseController::class, 'deleteAttachment']);
     Route::post('/teacher/courses/{course}/chapters', [\App\Http\Controllers\TeacherCourseController::class, 'createChapter']);
     Route::put('/teacher/courses/{course}/chapters/reorder', [\App\Http\Controllers\TeacherCourseController::class, 'reorderChapters']);
+    Route::put('/teacher/courses/{course}/content/reorder', [\App\Http\Controllers\TeacherCourseController::class, 'reorderContent'])->name('teacher.courses.content.reorder');
+
+    // Teacher Exams
+    Route::post('/teacher/courses/{course}/exams', [\App\Http\Controllers\TeacherExamController::class, 'store'])->name('teacher.exams.store');
+    Route::put('/teacher/courses/{course}/exams/reorder', [\App\Http\Controllers\TeacherExamController::class, 'reorder'])->name('teacher.exams.reorder');
+    Route::get('/teacher/courses/{course}/exams/{exam}', [\App\Http\Controllers\TeacherExamController::class, 'edit'])->name('teacher.exams.edit');
+    Route::patch('/teacher/courses/{course}/exams/{exam}', [\App\Http\Controllers\TeacherExamController::class, 'update'])->name('teacher.exams.update');
+    Route::delete('/teacher/courses/{course}/exams/{exam}', [\App\Http\Controllers\TeacherExamController::class, 'destroy'])->name('teacher.exams.destroy');
+    Route::patch('/teacher/courses/{course}/exams/{exam}/publish', [\App\Http\Controllers\TeacherExamController::class, 'publish'])->name('teacher.exams.publish');
+    Route::patch('/teacher/courses/{course}/exams/{exam}/unpublish', [\App\Http\Controllers\TeacherExamController::class, 'unpublish'])->name('teacher.exams.unpublish');
+
+    Route::post('/teacher/courses/{course}/exams/{exam}/questions', [\App\Http\Controllers\TeacherExamController::class, 'storeQuestion'])->name('teacher.exams.questions.store');
+    Route::patch('/teacher/courses/{course}/exams/{exam}/questions/{question}', [\App\Http\Controllers\TeacherExamController::class, 'updateQuestion'])->name('teacher.exams.questions.update');
+    Route::delete('/teacher/courses/{course}/exams/{exam}/questions/{question}', [\App\Http\Controllers\TeacherExamController::class, 'destroyQuestion'])->name('teacher.exams.questions.destroy');
+    Route::put('/teacher/courses/{course}/exams/{exam}/questions/reorder', [\App\Http\Controllers\TeacherExamController::class, 'reorderQuestions'])->name('teacher.exams.questions.reorder');
+    
+    Route::post('/teacher/courses/{course}/exams/{exam}/questions/{question}/options', [\App\Http\Controllers\TeacherExamController::class, 'storeOption'])->name('teacher.exams.options.store');
+    Route::patch('/teacher/courses/{course}/exams/{exam}/questions/{question}/options/{option}', [\App\Http\Controllers\TeacherExamController::class, 'updateOption'])->name('teacher.exams.options.update');
+    Route::delete('/teacher/courses/{course}/exams/{exam}/questions/{question}/options/{option}', [\App\Http\Controllers\TeacherExamController::class, 'destroyOption'])->name('teacher.exams.options.destroy');
 
     // Teacher Articles
     Route::get('/teacher/articles', [\App\Http\Controllers\TeacherArticleController::class, 'index'])->name('teacher.articles.index');
@@ -388,6 +417,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/teacher/courses/{course}/chapters/{chapter}/publish', [\App\Http\Controllers\TeacherChapterController::class, 'publish']);
     Route::patch('/teacher/courses/{course}/chapters/{chapter}/unpublish', [\App\Http\Controllers\TeacherChapterController::class, 'unpublish']);
     Route::post('/teacher/courses/{course}/chapters/{chapter}/video', [\App\Http\Controllers\TeacherChapterController::class, 'uploadVideo']);
+    Route::post('/teacher/courses/{course}/chapters/{chapter}/image', [\App\Http\Controllers\TeacherChapterController::class, 'uploadImage']);
 
     Route::get('/teacher/analytics', function () {
         $userId = Auth::id();
