@@ -37,7 +37,14 @@ export default function CourseShow({
 
       <div className="flex flex-col max-w-4xl mx-auto pb-20">
         <div className="p-4">
-          {chapter.is_video_required ? (
+          {isLocked ? (
+            <div className="relative aspect-video rounded-md overflow-hidden bg-black flex flex-col justify-center items-center">
+              <div className="flex flex-col items-center justify-center text-white space-y-2">
+                <span className="font-semibold">CapÃtulo Bloqueado</span>
+                <span className="text-sm">InscrÃbete para acceder al contenido.</span>
+              </div>
+            </div>
+          ) : chapter.video_url || chapter.is_video_required ? (
             <VideoPlayer
               chapterId={chapter.id}
               title={chapter.title}
@@ -47,20 +54,11 @@ export default function CourseShow({
               completeOnEnd={completeOnEnd}
               videoUrl={chapter.video_url}
             />
-          ) : (
+          ) : chapter.image_url ? (
             <div className="relative aspect-video rounded-md overflow-hidden bg-black flex flex-col justify-center items-center">
-              {isLocked ? (
-                <div className="flex flex-col items-center justify-center text-white space-y-2">
-                  <span className="font-semibold">Capítulo Bloqueado</span>
-                  <span className="text-sm">Inscríbete para acceder al contenido.</span>
-                </div>
-              ) : chapter.image_url ? (
-                <img src={chapter.image_url} alt={chapter.title} className="w-full h-full object-cover" />
-              ) : (
-                <div className="text-white">Este capítulo no tiene contenidos multimedia.</div>
-              )}
+              <img src={chapter.image_url} alt={chapter.title} className="w-full h-full object-cover" />
             </div>
-          )}
+          ) : null}
         </div>
         <div>
           <div className="p-4 flex flex-col md:flex-row items-center justify-between">
@@ -81,6 +79,11 @@ export default function CourseShow({
           <Separator />
           <div className="p-4">
             <Preview value={chapter.description || "Sin descripción"} />
+            {!isLocked && (chapter.video_url || chapter.is_video_required) && chapter.image_url && (
+              <div className="mt-6 relative aspect-video rounded-md overflow-hidden bg-black flex flex-col justify-center items-center">
+                <img src={chapter.image_url} alt={chapter.title} className="w-full h-full object-cover" />
+              </div>
+            )}
           </div>
           {attachments?.length > 0 && (
             <>

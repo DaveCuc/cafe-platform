@@ -53,7 +53,7 @@ export const ChaptersForm = ({ initialData, courseId }) => {
         Capítulos del curso
         <Button onClick={toggleCreating} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
           {isCreating ? "Cancelar" : <><PlusCircle className="h-4 w-4 mr-2" /> Agregar Capítulo</>}
-        </Button>
+        </Button> xd
       </div>
 
       {isCreating && (

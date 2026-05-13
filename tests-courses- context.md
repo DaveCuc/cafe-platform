@@ -110,5 +110,19 @@ resources\js\pages\Courses\Show\Components\Certificate.jsx
 10. El fondo del pdf sera la imagen de portada del curso con transparencia de 0.10.
 
 -->
+# Modulo Maestro
+- Cualquier edicion en personaliza tu cruso, contenido de curso, precio de curso o adjuntar archivos al curo,  despublica el curso.
+Editar Capitulo y examen tambien despublica y quita el campo de valido para publicar, 
+- arreglar completar los campos
 
-#
+
+
+# Corregir Certificados
+Corregir el siguiente error:
+No se puede generar el certificado
+Call to undefined relationship [user] on model [App\Models\Course].
+
+
+**Slides**
+Agregar un efecto visual cuando se haya compeltado capitulo y examen, cambiar el color en verde, texto en blanco, y una palomita como icono de exito.
+

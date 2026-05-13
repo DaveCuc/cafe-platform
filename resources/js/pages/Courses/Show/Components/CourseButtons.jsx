@@ -45,7 +45,7 @@ export const CourseEnrollButton = ({
       size="sm"
       className="w-full md:w-auto"
     >
-      {isFree ? "Inscribirse gratis" : (canCheckout ? `Comprar por ${formatPrice(price)}` : "No disponible")}
+      {isFree ? "Inscribirse" : (canCheckout ? `Comprar por ${formatPrice(price)}` : "No disponible")}
     </Button>
   )
 }

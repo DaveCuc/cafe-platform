@@ -22,9 +22,10 @@ export default function CourseEditor({ course, categories }) {
     course.title,
     course.description,
     course.image_url,
-    course.price,
+    course.price !== null || course.is_free,
     course.category_id,
-    course.chapters?.some(chapter => chapter.is_published)
+    (course.chapters?.length > 0 || course.exams?.length > 0) &&
+    [...(course.chapters || []), ...(course.exams || [])].every(item => item.is_published)
   ];
 
   const totalFields = requiredFields.length;
@@ -36,8 +37,11 @@ export default function CourseEditor({ course, categories }) {
     <MainLayout>
       <Head title={`Editar Curso: ${course.title}`} />
       
-      {!course.is_published && (
+      {!course.is_published && isComplete && (
         <Banner variant="warningSolid" label="Este curso no es visible para los estudiantes hasta que lo publiques." />
+      )}
+      {!course.is_published && !isComplete && (
+        <Banner variant="warningSolid" label="A este curso le faltan campos obligatorios para poder ser publicado." />
       )}
 
       <div className="p-6 pb-20 max-w-6xl mx-auto">

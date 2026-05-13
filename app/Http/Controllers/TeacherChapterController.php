@@ -19,6 +19,7 @@ class TeacherChapterController extends Controller
 
         return Inertia::render('Dashboard/Teacher/Courses/Chapters/Edit/Index', [
             'courseId' => $course->id,
+            'courseIsFree' => $course->is_free,
             'chapter' => $chapter
         ]);
     }

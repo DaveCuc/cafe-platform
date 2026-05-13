@@ -101,7 +101,7 @@ export const ChapterDescriptionForm = ({ initialData, courseId, chapterId }) => 
   );
 };
 
-export const ChapterAccessForm = ({ initialData, courseId, chapterId }) => {
+export const ChapterAccessForm = ({ initialData, courseId, chapterId, courseIsFree }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isFree, setIsFree] = useState(initialData.is_free || false);
   const [isLoading, setIsLoading] = useState(false);
@@ -121,10 +121,14 @@ export const ChapterAccessForm = ({ initialData, courseId, chapterId }) => {
     });
   };
 
+  if (courseIsFree) {
+    return null; // Ocultar si el curso entero ya es gratis
+  }
+
   return (
     <div className="mt-6 border bg-brand-pale rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Configuración de acceso
+        Configuración de acceso 
         <Button onClick={toggleEdit} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
           {isEditing ? "Cancelar" : <><Pencil className="h-4 w-4 mr-2" /> Editar acceso</>}
         </Button>
@@ -151,7 +155,7 @@ export const ChapterAccessForm = ({ initialData, courseId, chapterId }) => {
                 Ver este capítulo gratis
               </label>
               <p className="text-sm text-brand-ink">
-                Selecciona esta casilla si quieres que el video esté disponible como demostración.
+                Selecciona esta casilla si quieres que el capítulo esté disponible como demostración.
               </p>
             </div>
           </div>

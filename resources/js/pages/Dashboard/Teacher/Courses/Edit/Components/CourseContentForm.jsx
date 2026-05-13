@@ -61,6 +61,9 @@ export const CourseContentForm = ({ initialData, courseId }) => {
   const combinedContent = [...chaptersForSort, ...examsForSort].sort((a, b) => a.position - b.position);
 
   const isCreating = isCreatingType !== null;
+  const hasContent = combinedContent.length > 0;
+  const allPublished = hasContent && combinedContent.every(item => item.is_published);
+  const hasDrafts = hasContent && combinedContent.some(item => !item.is_published);
 
   return (
     <div className="relative mt-6 border bg-brand-pale rounded-md p-4">
@@ -70,15 +73,27 @@ export const CourseContentForm = ({ initialData, courseId }) => {
         </div>
       )}
       <div className="font-medium flex items-center justify-between pb-3">
-        Contenido del curso
+        <div className="flex items-center gap-x-2">
+          Contenido del curso
+          {allPublished && (
+            <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-semibold">
+              Completo
+            </span>
+          )}
+          {hasDrafts && (
+            <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-semibold">
+              Borradores pendientes
+            </span>
+          )}
+        </div>
         
         {!isCreating && (
           <div className="flex gap-2">
             <Button onClick={() => toggleCreating('chapter')} variant="ghost" size="sm" className="bg-white hover:bg-brand-soft hover:text-white">
-              <BookOpen className="h-4 w-4 mr-2" /> Capítulo
+              <BookOpen className="h-4 w-4 mr-2" /> Añadir Capítulo
             </Button>
             <Button onClick={() => toggleCreating('exam')} variant="ghost" size="sm" className="bg-white hover:bg-brand-soft hover:text-white">
-              <ClipboardList className="h-4 w-4 mr-2" /> Examen
+              <ClipboardList className="h-4 w-4 mr-2" /> Añadir Examen
             </Button>
           </div>
         )}

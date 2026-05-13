@@ -233,9 +233,33 @@ Route::middleware('auth')->group(function () {
     })->name('discover');
 
     Route::get('/courses/{course}', function (\App\Models\Course $course) {
+        $userId = Auth::id();
+        
+        $course->load(['category', 'chapters' => function($q) use ($userId) {
+            $q->where('is_published', true)->orderBy('position', 'asc')->with(['userProgress' => function($query) use ($userId) {
+                $query->where('user_id', $userId);
+            }]);
+        }, 'exams' => function($q) use ($userId) {
+            $q->where('is_published', true)->orderBy('position', 'asc')->with(['attempts' => function($query) use ($userId) {
+                $query->where('user_id', $userId);
+            }]);
+        }]);
+
+        $purchase = \App\Models\Purchase::where('user_id', $userId)->where('course_id', $course->id)->first();
+        if ((string) $course->user_id === (string) $userId) {
+            $purchase = true;
+        }
+
         $firstChapter = $course->chapters()->where('is_published', true)->orderBy('position', 'asc')->first();
-        if (!$firstChapter) return redirect('/');
-        return redirect()->route('courses.chapters.show', ['course' => $course->id, 'chapter' => $firstChapter->id]);
+
+        $progressCount = $course->getProgressPercentageForUser($userId);
+
+        return Inertia::render('Courses/Show/Cover', [
+            'course' => $course,
+            'purchase' => $purchase,
+            'firstChapter' => $firstChapter,
+            'progressCount' => round($progressCount),
+        ]);
     })->name('courses.show');
 
     Route::post('/courses/{course}/checkout', [\App\Http\Controllers\CourseController::class, 'checkout'])->name('courses.checkout');
@@ -255,8 +279,10 @@ Route::middleware('auth')->group(function () {
             $q->where('is_published', true)->orderBy('position', 'asc')->with(['userProgress' => function($query) use ($userId) {
                 $query->where('user_id', $userId);
             }]);
-        }, 'exams' => function($q) {
-            $q->where('is_published', true)->orderBy('position', 'asc');
+        }, 'exams' => function($q) use ($userId) {
+            $q->where('is_published', true)->orderBy('position', 'asc')->with(['attempts' => function($query) use ($userId) {
+                $query->where('user_id', $userId);
+            }]);
         }]);
 
         $purchase = \App\Models\Purchase::where('user_id', $userId)->where('course_id', $course->id)->first();
@@ -277,9 +303,7 @@ Route::middleware('auth')->group(function () {
 
         $userProgress = $chapter->userProgress()->where('user_id', $userId)->first();
 
-        $publishedChapters = $course->chapters()->where('is_published', true)->pluck('id');
-        $completedChapters = \App\Models\UserProgress::where('user_id', $userId)->whereIn('chapter_id', $publishedChapters)->where('is_completed', true)->count();
-        $progressCount = count($publishedChapters) > 0 ? ($completedChapters / count($publishedChapters)) * 100 : 0;
+        $progressCount = $course->getProgressPercentageForUser($userId);
 
         return Inertia::render('Courses/Show/Index', [
             'course' => $course,
@@ -289,7 +313,7 @@ Route::middleware('auth')->group(function () {
             'userProgress' => $userProgress,
             'purchase' => $purchase,
             'isLocked' => !$chapter->is_free && !$purchase,
-            'progressCount' => $progressCount
+            'progressCount' => round($progressCount)
         ]);
     })->name('courses.chapters.show');
 

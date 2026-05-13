@@ -39,8 +39,12 @@ class CourseController extends Controller
                   ->with(['userProgress' => function($q) use ($user) {
                       $q->where('user_id', $user->id);
                   }]);
-        }, 'exams' => function($q) {
-            $q->where('is_published', true)->orderBy('position', 'asc');
+        }, 'exams' => function($q) use ($user) {
+            $q->where('is_published', true)
+              ->orderBy('position', 'asc')
+              ->with(['attempts' => function($query) use ($user) {
+                  $query->where('user_id', $user->id);
+              }]);
         }]);
 
         $purchase = Purchase::where('user_id', $user->id)->where('course_id', $course->id)->first();
@@ -50,14 +54,7 @@ class CourseController extends Controller
             $purchase = true;
         }
         
-        // Cálculo del Porcentaje de Progreso
-        $publishedChapterIds = $course->chapters->pluck('id');
-        $validCompletedChapters = UserProgress::where('user_id', $user->id)
-            ->whereIn('chapter_id', $publishedChapterIds)
-            ->where('is_completed', true)
-            ->count();
-            
-        $progressCount = count($publishedChapterIds) > 0 ? ($validCompletedChapters / count($publishedChapterIds)) * 100 : 0;
+        $progressCount = $course->getProgressPercentageForUser($user->id);
         
         // Datos específicos del Capítulo seleccionado
         $attachments = [];

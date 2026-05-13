@@ -9,11 +9,12 @@ import { ChapterActions } from "./Components/Actions";
 import { Banner } from "@/Components/banner";
 import { IconBadge } from "@/Components/icon-badge";
 
-export default function ChapterEditor({ courseId, chapter }) {
+export default function ChapterEditor({ courseId, courseIsFree, chapter }) {
   const requiredFields = [
     chapter.title,
     chapter.description,
     chapter.is_video_required ? chapter.video_url : true,
+    courseIsFree ? true : (chapter.is_free !== null) // Treat free status as filled if course is free or value is set
   ];
 
   const totalFields = requiredFields.length;
@@ -24,7 +25,7 @@ export default function ChapterEditor({ courseId, chapter }) {
   return (
     <MainLayout>
       <Head title={`Editar Capítulo: ${chapter.title}`} />
-      
+
       {!chapter.is_published && (
         <Banner label="Este capítulo no está publicado aún, no será visible para los estudiantes." variant="warningSolid" />
       )}
@@ -47,11 +48,11 @@ export default function ChapterEditor({ courseId, chapter }) {
                   Completa todos los campos {completionText}
                 </span>
               </div>
-              <ChapterActions 
-                disabled={!isComplete} 
-                courseId={courseId} 
-                chapterId={chapter.id} 
-                isPublished={chapter.is_published} 
+              <ChapterActions
+                disabled={!isComplete}
+                courseId={courseId}
+                chapterId={chapter.id}
+                isPublished={chapter.is_published}
               />
             </div>
           </div>
@@ -68,27 +69,42 @@ export default function ChapterEditor({ courseId, chapter }) {
               <ChapterTitleForm initialData={chapter} courseId={courseId} chapterId={chapter.id} />
               <ChapterDescriptionForm initialData={chapter} courseId={courseId} chapterId={chapter.id} />
             </div>
-            
-            <div>
-              <div className="flex items-center gap-x-2 mt-8">
-                <IconBadge variant="teacher" size="md" icon={Eye} />
-                <h2 className="text-xl font-semibold">Configuración de acceso</h2>
-              </div>
-              <ChapterAccessForm initialData={chapter} courseId={courseId} chapterId={chapter.id} />
-            </div>
-          </div>
 
+            {/* Mostrar elemento solo si no es gratiuto if (courseIsFree) { return null; } */}
+            {!courseIsFree && (
+              <div>
+                <div className="flex items-center gap-x-2 mt-8">
+                  <IconBadge variant="teacher" size="md" icon={Eye} />
+                  <h2 className="text-xl font-semibold">Configuración de acceso</h2>
+                </div>
+
+                <ChapterAccessForm
+                  initialData={chapter}
+                  courseId={courseId}
+                  chapterId={chapter.id}
+                  courseIsFree={courseIsFree}
+                />
+              </div>
+            )}
+
+
+
+
+
+
+
+          </div>
           {/* Columna Derecha */}
           <div>
             <div className="flex items-center gap-x-2">
               <IconBadge variant="teacher" size="md" icon={Video} />
               <h2 className="text-xl font-semibold">Media del capítulo</h2>
             </div>
-            <ChapterVideoForm initialData={chapter} courseId={courseId} chapterId={chapter.id} /> 
+            <ChapterVideoForm initialData={chapter} courseId={courseId} chapterId={chapter.id} />
             <ChapterImageForm initialData={chapter} courseId={courseId} chapterId={chapter.id} />
           </div>
         </div>
       </div>
-    </MainLayout>
+    </MainLayout >
   );
 }

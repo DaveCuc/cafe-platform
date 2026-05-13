@@ -14,8 +14,8 @@ const CourseSidebarItem = ({ label, id, isCompleted, courseId, isLocked, isActiv
       className={cn(
         "flex items-center gap-x-2 text-brand-ink text-sm font-[500] pl-6 transition-all hover:text-brand-text hover:bg-brand-soft/20",
         isActive && "text-brand-text bg-brand-soft/20 hover:bg-brand-soft/20 hover:text-brand-text",
-        isCompleted && "text-emerald-700 hover:text-emerald-700",
-        isCompleted && isActive && "bg-emerald-200/20",
+        isCompleted && "bg-green-600 text-white hover:text-white hover:bg-green-700",
+        isCompleted && isActive && "bg-green-700 text-white hover:text-white",
       )}
     >
       <div className="flex items-center py-4">
@@ -24,7 +24,7 @@ const CourseSidebarItem = ({ label, id, isCompleted, courseId, isLocked, isActiv
           className={cn(
             "text-brand-ink mr-2",
             isActive && "text-brand-text",
-            isCompleted && "text-emerald-700"
+            isCompleted && "text-white"
           )}
         />
         {label}
@@ -33,7 +33,7 @@ const CourseSidebarItem = ({ label, id, isCompleted, courseId, isLocked, isActiv
         className={cn(
           "ml-auto opacity-0 border-[1.5px] border-brand-text h-full transition-all",
           isActive && "opacity-100",
-          isCompleted && "border-emerald-700"
+          isCompleted && "border-white"
         )}
       />
     </Link>
@@ -52,33 +52,49 @@ export const CourseSidebar = ({ course, progressCount, currentChapterId, current
         )}
       </div>
       <div className="flex flex-col w-full">
-        {course.chapters && course.chapters.map((chapter) => (
-          <CourseSidebarItem
-            key={chapter.id}
-            id={chapter.id}
-            label={chapter.title}
-            isCompleted={Array.isArray(chapter.userProgress)
-              ? !!chapter.userProgress.find((progress) => progress?.is_completed)
-              : !!chapter.userProgress?.is_completed}
-            courseId={course.id}
-            isLocked={!chapter.is_free && !purchase}
-            isActive={chapter.id === currentChapterId}
-          />
-        ))}
+        {(() => {
+          const items = [];
+          if (course.chapters) {
+            course.chapters.forEach(c => items.push({ ...c, type: 'chapter' }));
+          }
+          if (course.exams) {
+            course.exams.forEach(e => items.push({ ...e, type: 'exam' }));
+          }
+          
+          items.sort((a, b) => a.position - b.position);
 
-        {course.exams && course.exams.length > 0 && <div className="px-6 py-2 text-xs font-semibold text-brand-ink mt-2 uppercase tracking-wide">Exámenes</div>}
-        {course.exams && course.exams.map((exam) => (
-          <CourseSidebarItem
-            key={exam.id}
-            id={exam.id}
-            label={exam.title}
-            isCompleted={false} 
-            courseId={course.id}
-            isLocked={!course.is_free && !purchase}
-            isActive={exam.id === currentExamId}
-            isExam={true}
-          />
-        ))}
+          return items.map((item) => {
+            if (item.type === 'chapter') {
+              return (
+                <CourseSidebarItem
+                  key={`chapter-${item.id}`}
+                  id={item.id}
+                  label={item.title}
+                  isCompleted={Array.isArray(item.userProgress)
+                    ? !!item.userProgress.find((progress) => progress?.is_completed)
+                    : !!item.userProgress?.is_completed}
+                  courseId={course.id}
+                  isLocked={!item.is_free && !purchase}
+                  isActive={item.id === currentChapterId}
+                />
+              )
+            } else {
+              const hasPassed = Array.isArray(item.attempts) && item.attempts.some(attempt => attempt.score >= item.min_score);
+              return (
+                <CourseSidebarItem
+                  key={`exam-${item.id}`}
+                  id={item.id}
+                  label={item.title}
+                  isCompleted={hasPassed} 
+                  courseId={course.id}
+                  isLocked={!course.is_free && !purchase}
+                  isActive={item.id === currentExamId}
+                  isExam={true}
+                />
+              )
+            }
+          });
+        })()}
 
         {progressCount === 100 && (
           <>

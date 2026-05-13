@@ -52,4 +52,36 @@ class Course extends Model
     {
         return $this->hasMany(Purchase::class);
     }
+
+    public function getProgressPercentageForUser(string $userId): float
+    {
+        $publishedChapterIds = $this->chapters()->where('is_published', true)->pluck('id');
+        
+        $validCompletedChapters = UserProgress::where('user_id', $userId)
+            ->whereIn('chapter_id', $publishedChapterIds)
+            ->where('is_completed', true)
+            ->count();
+
+        $publishedExams = $this->exams()->where('is_published', true)->get();
+        $validCompletedExams = 0;
+        
+        foreach ($publishedExams as $exam) {
+            $hasPassed = $exam->attempts()
+                ->where('user_id', $userId)
+                ->where('score', '>=', $exam->min_score)
+                ->exists();
+                
+            if ($hasPassed) {
+                $validCompletedExams++;
+            }
+        }
+
+        $totalItems = count($publishedChapterIds) + $publishedExams->count();
+
+        if ($totalItems === 0) {
+            return 0;
+        }
+
+        return (($validCompletedChapters + $validCompletedExams) / $totalItems) * 100;
+    }
 }

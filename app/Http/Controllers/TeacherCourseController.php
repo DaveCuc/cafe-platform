@@ -48,7 +48,30 @@ class TeacherCourseController extends Controller
         ]);
 
         if (!empty($validated)) {
+            $wasFree = $course->is_free;
             $course->update($validated);
+            
+            if (isset($validated['is_free'])) {
+                if ($validated['is_free']) {
+                    $course->chapters()->update(['is_free' => true]);
+                } elseif (!$validated['is_free'] && $wasFree) {
+                    // Si cambió de gratis a paga, reiniciar los capítulos
+                    $course->chapters()->update(['is_free' => false]);
+                }
+            }
+        }
+
+        // Si esta publicado pero un elemento es faltante, despublicar
+        if ($course->is_published) {
+            $hasContent = $course->chapters()->count() > 0 || $course->exams()->count() > 0;
+            $hasDrafts = $course->chapters()->where('is_published', false)->exists() || $course->exams()->where('is_published', false)->exists();
+            $isContentValid = $hasContent && !$hasDrafts;
+            
+            $hasValidPrice = $course->is_free || $course->price !== null;
+            if (!$course->title || !$course->description || !$course->image_url || !$course->category_id || !$isContentValid || !$hasValidPrice) {
+                $course->update(['is_published' => false]);
+                return back()->withErrors(['error' => 'Faltan campos obligatorios. El curso ha sido despublicado.']);
+            }
         }
         
         return back()->with('success', 'Curso actualizado');
@@ -58,9 +81,14 @@ class TeacherCourseController extends Controller
     {
         if ($course->user_id != Auth::id()) abort(403);
         
-        $hasPublishedChapter = $course->chapters()->where('is_published', true)->exists();
-        if (!$course->title || !$course->description || !$course->image_url || !$course->category_id || !$hasPublishedChapter) {
-            return back()->withErrors(['error' => 'Faltan campos obligatorios']);
+        $hasContent = $course->chapters()->count() > 0 || $course->exams()->count() > 0;
+        $hasDrafts = $course->chapters()->where('is_published', false)->exists() || $course->exams()->where('is_published', false)->exists();
+        $isContentValid = $hasContent && !$hasDrafts;
+        
+        $hasValidPrice = $course->is_free || $course->price !== null;
+
+        if (!$course->title || !$course->description || !$course->image_url || !$course->category_id || !$isContentValid || !$hasValidPrice) {
+            return back()->withErrors(['error' => 'Faltan campos obligatorios o hay borradores pendientes.']);
         }
         
         $course->update(['is_published' => true]);

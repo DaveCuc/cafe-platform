@@ -146,6 +146,7 @@ export const PriceForm = ({ initialData, courseId }) => {
           <Input 
             type="number" 
             step="0.01" 
+            min="0"
             disabled={isLoading || isFree} 
             value={price} 
             onChange={e => setPrice(e.target.value)} 
@@ -165,7 +166,7 @@ export const PriceForm = ({ initialData, courseId }) => {
               Hacer este curso gratis
             </label>
           </div>
-          <Button disabled={(!price && !isFree) || isLoading} type="submit">Guardar</Button>
+          <Button disabled={isLoading || (!isFree && (!price || Number(price) < 0))} type="submit">Guardar</Button>
         
         </form>
       )}

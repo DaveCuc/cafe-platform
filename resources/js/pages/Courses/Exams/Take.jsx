@@ -1,12 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Head, router } from "@inertiajs/react";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { Button } from "@/Components/ui/button";
 import { CourseLayout } from "../Show/Components/CourseLayout";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function ExamTake({ course, exam, progressCount }) {
     const [answers, setAnswers] = useState({});
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isGenerating, setIsGenerating] = useState(true);
+    const [isConcluding, setIsConcluding] = useState(false);
+    const [slideState, setSlideState] = useState('in'); // 'in' o 'out'
+    const [actionType, setActionType] = useState(null); // 'cancel' o 'submit'
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsGenerating(false);
+        }, 2500);
+        return () => clearTimeout(timer);
+    }, []);
+
+    const allAnswered = exam.questions?.length > 0 && exam.questions.every(
+        (q) => answers[q.id] && answers[q.id].length > 0
+    );
 
     const handleOptionSelect = (questionId, optionId, isMultiple) => {
         setAnswers(prev => {
@@ -30,21 +45,75 @@ export default function ExamTake({ course, exam, progressCount }) {
         });
     }
 
+    const handleCancel = () => {
+        setActionType('cancel');
+        setSlideState('out');
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        setIsSubmitting(true);
-        router.post(`/courses/${course.id}/exams/${exam.id}/take`, { answers }, {
-            preserveScroll: true,
-            onError: () => setIsSubmitting(false)
-        });
+        if (!allAnswered) return;
+        setIsConcluding(true);
+        setTimeout(() => {
+            setActionType('submit');
+            setSlideState('out');
+        }, 2000); // Muestra la carga de finalizar unos segundos antes del barrido a la derecha
     }
 
     return (
-        <CourseLayout course={course} progressCount={progressCount} currentExamId={exam.id} purchase={true}>
-            <div className="min-h-screen bg-brand-pale">
+        <CourseLayout course={course} progressCount={progressCount} currentExamId={exam.id} purchase={true} hideSidebar={true}>
+            <motion.div 
+                initial={{ x: "-100%" }}
+                animate={{ x: slideState === 'in' ? 0 : "100%" }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                onAnimationComplete={() => {
+                    if (slideState === 'out') {
+                        if (actionType === 'cancel') {
+                            router.visit(route("courses.exams.show", { course: course.id, exam: exam.id }));
+                        } else if (actionType === 'submit') {
+                            router.post(`/courses/${course.id}/exams/${exam.id}/take`, { answers }, {
+                                preserveScroll: true
+                            });
+                        }
+                    }
+                }}
+                className="min-h-screen bg-brand-pale relative overflow-hidden"
+            >
                  <Head title={`Rendiendo Examen: ${exam.title}`} />
-                 <div className="max-w-3xl mx-auto p-6 md:p-10 mb-20 bg-white min-h-screen shadow-sm md:rounded-lg">
-                 <button onClick={() => router.visit(route("courses.exams.show", { course: course.id, exam: exam.id }))} className="flex items-center text-sm hover:opacity-75 transition mb-6 text-brand-text">
+                 
+                 <AnimatePresence>
+                     {(isGenerating || isConcluding) && (
+                         <motion.div 
+                             initial={{ opacity: 0 }}
+                             animate={{ opacity: 1 }}
+                             exit={{ opacity: 0 }}
+                             className="absolute inset-0 bg-brand-pale z-20 flex flex-col items-center justify-center p-6"
+                         >
+                             <motion.div
+                                 animate={{ scale: [1, 1.1, 1] }}
+                                 transition={{ repeat: Infinity, duration: 1.5 }}
+                                 className="w-20 h-20 bg-brand-soft rounded-full flex items-center justify-center mb-6 shadow-lg"
+                             >
+                                 <Loader2 className="w-10 h-10 text-brand-ink animate-spin" />
+                             </motion.div>
+                             <motion.h2 
+                                 animate={{ opacity: [0.5, 1, 0.5] }}
+                                 transition={{ repeat: Infinity, duration: 2 }}
+                                 className="text-2xl font-bold text-brand-ink"
+                             >
+                                 {isGenerating ? "Generando examen..." : "Evaluando respuestas..."}
+                             </motion.h2>
+                             <p className="text-brand-text mt-2 text-center max-w-md">
+                                 {isGenerating 
+                                    ? "Preparando tus preguntas y configurando el entorno para tu prueba. No cierres esta ventana."
+                                    : "Guardando tus resultados y calcúlando calificación. Un momento por favor."}
+                             </p>
+                         </motion.div>
+                     )}
+                 </AnimatePresence>
+
+                 <div className="max-w-3xl mx-auto p-6 md:p-10 mb-20 bg-white min-h-screen shadow-sm md:rounded-lg relative z-10">
+                 <button type="button" onClick={handleCancel} className="flex items-center text-sm hover:opacity-75 transition mb-6 text-brand-text cursor-pointer">
                      <ArrowLeft className="h-4 w-4 mr-2" />
                      Volver o Cancelar
                  </button>
@@ -88,16 +157,19 @@ export default function ExamTake({ course, exam, progressCount }) {
                              </div>
                          ))}
                          
-                         <div className="pt-6 border-t flex justify-end">
-                             <Button type="submit" disabled={isSubmitting} size="lg" className="px-10">
-                                 {isSubmitting && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+                         <div className="pt-6 border-t flex justify-end flex-col items-end">
+                             {!allAnswered && (
+                                 <p className="text-rose-500 text-sm mb-3">Debes responder todas las preguntas para entregar el examen.</p>
+                             )}
+                             <Button type="submit" disabled={isConcluding || !allAnswered} size="lg" className="px-10">
+                                 {isConcluding && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
                                  Entregar Examen
                              </Button>
                          </div>
                      </form>
                  )}
              </div>
-        </div>
+        </motion.div>
         </CourseLayout>
     )
 }
