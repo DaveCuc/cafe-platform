@@ -65,14 +65,15 @@ export const CourseSidebar = ({ course, progressCount, currentChapterId, current
 
           return items.map((item) => {
             if (item.type === 'chapter') {
+              const progressList = item.user_progress || item.userProgress;
               return (
                 <CourseSidebarItem
                   key={`chapter-${item.id}`}
                   id={item.id}
                   label={item.title}
-                  isCompleted={Array.isArray(item.userProgress)
-                    ? !!item.userProgress.find((progress) => progress?.is_completed)
-                    : !!item.userProgress?.is_completed}
+                  isCompleted={Array.isArray(progressList)
+                    ? !!progressList.find((progress) => progress?.is_completed)
+                    : !!progressList?.is_completed}
                   courseId={course.id}
                   isLocked={!item.is_free && !purchase}
                   isActive={item.id === currentChapterId}

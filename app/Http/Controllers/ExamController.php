@@ -46,7 +46,8 @@ class ExamController extends Controller
             "exam" => $exam,
             "attempts" => $attempts,
             "hasPassed" => $hasPassed,
-            "progressCount" => round($progressCount)
+            "progressCount" => round($progressCount),
+            "purchase" => $purchase || $isOwner ? true : false,
         ]);
     }
 
@@ -90,7 +91,8 @@ class ExamController extends Controller
         return Inertia::render('Courses/Exams/Take', [
             'course' => $course,
             'exam' => $exam,
-            'progressCount' => round($progressCount)
+            'progressCount' => round($progressCount),
+            'purchase' => $purchase || $isOwner ? true : false,
         ]);
     }
 

@@ -4,14 +4,14 @@ import { CourseLayout } from "../Show/Components/CourseLayout";
 import { Banner } from "@/Components/banner";
 import { Button } from "@/Components/ui/button";
 
-export default function ExamShow({ course, exam, attempts, hasPassed }) {
+export default function ExamShow({ course, exam, attempts, hasPassed, progressCount, purchase }) {
     const isOwner = course.user_id === window.page?.props?.auth?.user?.id;
     const canAttempt = isOwner || !exam.attempts_allowed || attempts.length < exam.attempts_allowed;
 
     const maxScore = attempts.reduce((max, att) => att.score > max ? att.score : max, 0);
 
     return (
-        <CourseLayout course={course} currentExamId={exam.id}>
+        <CourseLayout course={course} currentExamId={exam.id} progressCount={progressCount} purchase={purchase}>
             <Head title={`${course.title} - ${exam.title}`} />
             {!exam.is_published && (
                 <Banner

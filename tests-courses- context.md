@@ -109,11 +109,9 @@ resources\js\pages\Courses\Show\Components\Certificate.jsx
 9. un curso en linea ofrecido atravez de la plataforma de turismo de la reserva de la biosfera del instituto tecnologico de tehuacan.
 10. El fondo del pdf sera la imagen de portada del curso con transparencia de 0.10.
 
--->
-# Modulo Maestro
-- Cualquier edicion en personaliza tu cruso, contenido de curso, precio de curso o adjuntar archivos al curo,  despublica el curso.
-Editar Capitulo y examen tambien despublica y quita el campo de valido para publicar, 
-- arreglar completar los campos
+
+
+
 
 
 
@@ -125,4 +123,63 @@ Call to undefined relationship [user] on model [App\Models\Course].
 
 **Slides**
 Agregar un efecto visual cuando se haya compeltado capitulo y examen, cambiar el color en verde, texto en blanco, y una palomita como icono de exito.
+
+
+# Corregir vista de modulos de cursos
+## Mejorar
+**La vista actual tiene una leyenda que dice "Este capitulo no tiene Contenidos multimedia."**
+- Eliminar esta leyenda y ocultar el espacio de la imagen si est amarcado como sin contenido multimedia desde el editor del profesor.
+**Actualmente la vista la vista de cursos muestra unicamente el video o imagen como contenido multimedia principal pero no en simultaneo**
+- Si se agrega un video y una imagen, agregar la imagen al final del texto mostrado en la vista del capitulo.
+
+
+
+# Vista de Estudiante.
+**Slide de temas**
+- Modificar la vista del slide de contendio del estudiante.
+    - Conservar el orden hecho por el maestro en el editor del curso.
+    - No separar capitulo o examenes en apartados distintos.
+
+- Es obligatorio conluir los examenes con calificacion aprovatoria para dar por hehco que se completo el curso.
+- cuando se complete los examenes contaran para rellenar el porcentaje de completado del curso.
+
+
+-- Agregar Portada dentro de la vista del estudiante
+va a incluir lo siguiente:
+- Foto de portada
+- Titulo del curso
+- Descripcion del Curso
+- Categoria del curso
+
+un boton que diga:
+Si es Gratis: Inscribirse, Accion te inscribe
+Si es de paga: Comprar por ${precio}, Accion de comprar
+Si ya esta comprado: Inscrito, Ninguna botn en gris sin hoover
+
+Un boton que diga Comenzar y que avance al capitulo siguiente: solo va aparecer cuando este comprado o inscrito el curso. 
+
+
+
+**Slides**
+Actualmente se ve incompleto la parte visual del frontend  en el slide del apartado de cursos para los estudaintes:
+
+1. No se ve correctamente visualmente si ya se commpleto un capitulo, estos deben marcarse en verde si estan completados.
+2. Cuando se selecciona el apartado para antes de iniciar el examen, se oculta la barra de progreso ocultando la vista de tu progreso, debe mostrarse la barra en todo momento hasta que se ouclte cunado se inicia el examen.
+
+**Tareas a realizar:** 
+
+- Corregir el efecto visual cuando se haya Completado un "capitulo", se supone que ya esta implementado pero no se ve reflejado al guardar, unicamente se ve reflejado en examenes.
+
+
+-->
+# Corregir Certificados
+Corregir el siguiente error:
+No se puede generar el certificado
+Call to undefined relationship [user] on model [App\Models\Course].
+
+# Modulo Maestro
+- Cualquier edicion en personaliza tu cruso, contenido de curso, precio de curso o adjuntar archivos al curo,  despublica el curso.
+Editar Capitulo y examen tambien despublica y quita el campo de valido para publicar, 
+- arreglar completar los campos
+
 

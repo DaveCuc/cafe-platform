@@ -5,7 +5,7 @@ import { Button } from "@/Components/ui/button";
 import { CourseLayout } from "../Show/Components/CourseLayout";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function ExamTake({ course, exam, progressCount }) {
+export default function ExamTake({ course, exam, progressCount, purchase }) {
     const [answers, setAnswers] = useState({});
     const [isGenerating, setIsGenerating] = useState(true);
     const [isConcluding, setIsConcluding] = useState(false);
@@ -61,7 +61,7 @@ export default function ExamTake({ course, exam, progressCount }) {
     }
 
     return (
-        <CourseLayout course={course} progressCount={progressCount} currentExamId={exam.id} purchase={true} hideSidebar={true}>
+        <CourseLayout course={course} currentExamId={exam.id} progressCount={progressCount} purchase={purchase} hideSidebar={true}>
             <motion.div 
                 initial={{ x: "-100%" }}
                 animate={{ x: slideState === 'in' ? 0 : "100%" }}
