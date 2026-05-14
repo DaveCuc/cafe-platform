@@ -170,10 +170,19 @@ Actualmente se ve incompleto la parte visual del frontend  en el slide del apart
 
 - Corregir el efecto visual cuando se haya Completado un "capitulo", se supone que ya esta implementado pero no se ve reflejado al guardar, unicamente se ve reflejado en examenes.
 
-
--->
 # Corregir Certificados
-Corregir el siguiente error:
+Actualmente no se puede descargar certificados como estudiante
+
+
+**Tareas**
+- Encuentra y describe el porblema del error.
+- Busca una solucion para el error y describela.
+- Aplica la solucion del error.
+
+
+
+
+**Descripcion del error:**
 No se puede generar el certificado
 Call to undefined relationship [user] on model [App\Models\Course].
 
@@ -182,4 +191,107 @@ Call to undefined relationship [user] on model [App\Models\Course].
 Editar Capitulo y examen tambien despublica y quita el campo de valido para publicar, 
 - arreglar completar los campos
 
+-->
 
+**Diseño del certificado**
+
+**USAR COMO REFERENCIA LA IMAGEN ENVIADA.**
+
+Genera una plantilla usando esta informacion de referencia, 
+
+Debe contener lo siguiente:
+
+- Debe ser un documento en formato horizontal A4 con fondo de color verde claro,
+
+- Tendra un margen de 2 centimetros y luego un marco de linea solida en color verde.
+
+- Dentro del marco el fondo sera color blanco, con la imagen del archivo llamada itt.png como marca de agua agrandado con medidas de 14 cm de alto y 14 cmd de ancho centrado en la pagina.
+
+- sobre esa misma pagina con margenes al marco de 2 cm, iran logos institucionales,
+
+- con un pading de 2cm del marco de lado izquierdo y arriba, ira el logo de reserva.png con un tamaño de 2.7 cm de alto respetando la dimension proprocional.
+
+- con un pading de 2cm de derecha y arriba, ira el logo de depi.png, con un tamaño de 3 cm de alto respetando la dimension proprocional.
+
+- con un padding de 2cm de arriba y centrado en el documento ira el itt.png, con un tamaño de 3 cm de alto respetando la dimension proprocional.
+
+**USAR COMO REFERENCIA LA IMAGEN ENVIADA.**
+
+debajo de esos logos con un paddin proporcional para que no se vean encimados los textos iran de la siguiente manera:
+
+Todos los elementos a continuacion deben estar centrados, en formato de mayusculas
+
+1. **Nombre de las intituciones** 
+- El Instituto Tecnológico de Tehuacán (fuente tamaño 14, negrita)
+- y la División de Estudios de Posgrado e Investigación (fuente tamaño 14, negrita)
+2. **Nombramiento** 
+- Certifica a: (fuente tamaño 14)
+- NOMBRE COMPLETO DEL ESTUDIANTE (fuente tamaño 30, negrita, color verde)
+
+3. **Nombre del curso**
+- que completo con exito el curso: (feunte tamaño 14)
+- NOMBRE DEL CURSO (fuente tamaño 25, negrita, color negro)
+
+4. **Frase**
+- un curso en línea ofrecido a través de la plataforma de turismo de la reserva de la biosfera del instituto tecnológico de Tehuacán. (fuente tamaño 14)
+5. **Fecha**
+- Fecha: (tamaño 14)
+{Dia(numero)} de {Mes(texto)} de {Año(numero)} (tamaño 14, negrita)
+
+**USAR COMO REFERENCIA LA IMAGEN ENVIADA.**
+
+Genera el código para una plantilla de certificado editable (preferiblemente en HTML y CSS con diseño de impresión, o en formato SVG) basándote estrictamente en las siguientes especificaciones de diseño. El resultado debe ser un archivo donde pueda reemplazar las imágenes y editar el texto más tarde.
+
+Configuración general y fondo:
+
+Formato: Documento horizontal A4.
+
+Fondo principal: Color verde claro.
+
+Márgenes y Marco: Un margen externo de 2 cm en todos los bordes, seguido de un marco de línea sólida en color verde oscuro.
+
+Fondo interior: Dentro del marco, el fondo debe ser completamente blanco.
+
+Marca de agua: En el centro exacto de la página, coloca una imagen (itt.png) con una opacidad baja (marca de agua). Sus dimensiones deben ser de 14 cm de alto por 14 cm de ancho.
+
+Disposición de Logos (Sección Superior):
+Todos los logos van dentro del marco blanco y deben mantener su proporción original.
+
+Izquierda: Logo reserva.png. Ubicado a 2 cm del borde izquierdo del marco y 2 cm del borde superior del marco. Alto: 2.7 cm.
+
+Derecha: Logo depi.png. Ubicado a 2 cm del borde derecho del marco y 2 cm del borde superior del marco. Alto: 3 cm.
+
+Centro: Logo itt.png. Centrado horizontalmente y ubicado a 2 cm del borde superior del marco. Alto: 3 cm.
+
+Estructura del Texto:
+Todo el texto debe ir debajo de los logos, con un padding proporcional y saltos de línea adecuados para que no se vea encimado. TODO EL TEXTO DEBE ESTAR CENTRADO Y EN MAYÚSCULAS.
+
+Nombre de las instituciones:
+
+"EL INSTITUTO TECNOLÓGICO DE TEHUACÁN" (Fuente tamaño 14pt, Negrita)
+
+"Y LA DIVISIÓN DE ESTUDIOS DE POSGRADO E INVESTIGACIÓN." (Fuente tamaño 14pt, Negrita)
+
+Nombramiento:
+
+"CERTIFICA A:" (Fuente tamaño 14pt, peso normal)
+
+"NOMBRE COMPLETO DEL ESTUDIANTE" (Fuente tamaño 30pt, Negrita, Color Verde a juego con el marco)
+
+Nombre del curso:
+
+"QUE COMPLETO CON ÉXITO EL CURSO:" (Fuente tamaño 14pt, peso normal)
+
+"NOMBRE DEL CURSO" (Fuente tamaño 25pt, Negrita, Color Negro)
+
+Frase:
+
+"UN CURSO EN LÍNEA OFRECIDO A TRAVÉS DE LA PLATAFORMA DE TURISMO DE LA RESERVA DE LA BIOSFERA DEL INSTITUTO TECNOLÓGICO DE TEHUACÁN." (Fuente tamaño 14pt, peso normal, con un ancho máximo ajustado para que ocupe unas dos líneas centradas)
+
+Fecha:
+
+"FECHA:" (Fuente tamaño 14pt, peso normal)
+
+"{DIA} DE {MES} DE {AÑO}" (Fuente tamaño 14pt, Negrita)
+
+**USAR COMO REFERENCIA LA IMAGEN ENVIADA.**

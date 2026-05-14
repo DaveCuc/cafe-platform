@@ -33,6 +33,11 @@ class Course extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function chapters(): HasMany
     {
         return $this->hasMany(Chapter::class)->orderBy('position', 'asc');
