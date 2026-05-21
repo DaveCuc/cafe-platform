@@ -144,7 +144,7 @@ Route::get('/dashboard', function () {
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/trade', [DirectoryTradeController::class, 'index'])->name('trade');
 
     Route::get('/directory/trades', [DirectoryTradeController::class, 'index'])->name('directory.trades.index');
@@ -482,7 +482,9 @@ Route::middleware('auth')->group(function () {
 
 
 
-require __DIR__.'/auth.php';
+
+// require __DIR__.'/auth.php';
+
 
 
 

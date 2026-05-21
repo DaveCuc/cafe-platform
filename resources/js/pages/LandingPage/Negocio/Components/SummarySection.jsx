@@ -134,12 +134,12 @@ const SummarySection = ({ trade }) => {
                             </div>
                         )}
 
-                        {/* div3: Calificaciones (Próximamente) */}
+                        {/* div3:
                         <div className="lg:col-span-2 lg:col-start-4 lg:row-start-1 rounded-xl overflow-hidden shadow-sm border border-white/20 bg-white/10 p-6 flex flex-col items-center justify-center backdrop-blur-md">
                             <h3 className="text-white font-bold text-2xl mb-1">Calificaciones</h3>
                             <span className="text-white/70 text-sm font-medium uppercase tracking-wider">Próximamente</span>
                         </div>
-
+ Calificaciones (Próximamente) */}
                         {/* div2: Mapa */}
                         {mapLocation && mapLocation.length === 2 && !isNaN(mapLocation[0]) && (
                             <div className="lg:col-span-2 lg:row-span-4 lg:col-start-4 lg:row-start-2 rounded-xl overflow-hidden shadow-sm border h-[400px] lg:h-full z-0 relative">

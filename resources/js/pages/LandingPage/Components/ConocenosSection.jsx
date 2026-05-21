@@ -41,16 +41,16 @@ export default function ConocenosSection() {
                                 <h2 className="font-bold text-white mb-4 text-6xl">Conócenos</h2>
 
 
-                                <p className="text-white mb-4">
+                                <div className="text-white mb-4">
                                     <h1 className="text-3xl font-bold">Instituto Tecnológico de Tehuacán (ITT)</h1>
                                     <br />
                                     Institución pública de educación superior perteneciente al Tecnológico Nacional de México. Su misión es formar profesionistas de excelencia y agentes de cambio con trascendencia social, mediante educación de calidad, investigación e innovación tecnológica para impulsar el desarrollo sustentable de la región y del país.
-                                </p>
-                                <p className="text-white mb-4">
+                                </div>
+                                <div className="text-white mb-4">
                                     <h1 className="text-3xl font-bold">Departamento de Estudios de Posgrado e Investigación (DEPI)</h1>
                                     <br />
                                     Área estratégica del ITT enfocada en la formación de especialistas e investigadores a nivel posgrado. Impulsa el desarrollo de proyectos científicos, tecnológicos y de innovación orientados a brindar soluciones prácticas y sostenibles a las problemáticas de los sectores productivo, social y ambiental de la región.
-                                </p>
+                                </div>
                             </motion.div>
                         </div>
                     </div>

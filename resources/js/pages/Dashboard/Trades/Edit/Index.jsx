@@ -105,7 +105,7 @@ export default function TradeEditor({ trade, giros, regions }) {
                         <ShortDescriptionForm initialData={trade} tradeId={trade.id} />
                         <LongDescriptionForm initialData={trade} tradeId={trade.id} />
                         <ActivitiesForm initialData={trade} tradeId={trade.id} />
-                        <BusinessAddressForm initialData={trade} tradeId={trade.id} />
+                        
                         <ImageForm initialData={trade} tradeId={trade.id} />
                     </div>
 
@@ -113,10 +113,12 @@ export default function TradeEditor({ trade, giros, regions }) {
                         <div>
                             <div className="mb-6 flex items-center gap-x-2">
                                 <IconBadge variant="teacher" size="md" icon={Contact} />
-                                <h2 className="text-xl font-semibold">Contacto</h2>
+                                <h2 className="text-xl font-semibold">Forma de Contacto</h2>
                             </div>
                             <BusinessContactForm initialData={trade} tradeId={trade.id} />
+                            <PersonalContactForm initialData={trade} tradeId={trade.id} />
                         </div>
+                        
 
                         <div>
                             <div className="mb-6 flex items-center gap-x-2">
@@ -124,6 +126,7 @@ export default function TradeEditor({ trade, giros, regions }) {
                                 <h2 className="text-xl font-semibold">Ubicación geográfica</h2>
                             </div>
                             <RegionMunicipioForm initialData={trade} tradeId={trade.id} regions={regions} />
+                            <BusinessAddressForm initialData={trade} tradeId={trade.id} />
                         </div>
 
                         <div>
@@ -134,13 +137,7 @@ export default function TradeEditor({ trade, giros, regions }) {
                             <ContentGalleryForm initialData={trade} tradeId={trade.id} />
                         </div>
 
-                        <div>
-                            <div className="mb-6 flex items-center gap-x-2">
-                                <IconBadge variant="teacher" size="md" icon={UserSquare2} />
-                                <h2 className="text-xl font-semibold">Contacto personal</h2>
-                            </div>
-                            <PersonalContactForm initialData={trade} tradeId={trade.id} />
-                        </div>
+                        
                     </div>
                 </div>
             </div>

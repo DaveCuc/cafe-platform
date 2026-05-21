@@ -353,7 +353,7 @@ export function BusinessContactForm({ initialData, tradeId }) {
 
     return (
         <BaseCard
-            title="Contacto"
+            title="Contacto Negocio"
             isEditing={isEditing}
             onToggle={() => setIsEditing((current) => !current)}
             preview={

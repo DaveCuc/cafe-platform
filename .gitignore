@@ -9,7 +9,7 @@
 /vendor.zip
 .DS_Store
 .env
-
+/MD
 .env.backup
 .env.production
 .phpactor.json
@@ -24,3 +24,5 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+.graphifyignore
+/graphify-out

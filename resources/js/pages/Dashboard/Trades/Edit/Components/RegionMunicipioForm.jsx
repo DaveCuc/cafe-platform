@@ -70,7 +70,7 @@ export function RegionMunicipioForm({ initialData, tradeId, regions = [] }) {
                     <p className={initialData.municipio ? "text-brand-text" : "italic text-brand-ink"}>
                         Municipio: {initialData.municipio?.name || "Sin definir"}
                     </p>
-                    <p className="italic text-brand-ink">Maps: aún sin implementar</p>
+                    
                 </div>
             ) : (
                 <form onSubmit={onSubmit} className="mt-4 space-y-4">

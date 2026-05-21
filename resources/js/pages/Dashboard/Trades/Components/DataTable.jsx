@@ -28,6 +28,7 @@ export function DataTable({ columns, data }) {
     const table = useReactTable({
         data,
         columns,
+        columnResizeMode: "onChange",
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
         onSortingChange: setSorting,
@@ -38,6 +39,7 @@ export function DataTable({ columns, data }) {
             sorting,
             columnFilters,
         },
+
     });
 
     return (
@@ -66,13 +68,23 @@ export function DataTable({ columns, data }) {
                         {table.getHeaderGroups().map((headerGroup) => (
                             <TableRow key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => (
-                                    <TableHead key={header.id}>
+                                    <TableHead key={header.id}
+                                        style={{ width: `${header.getSize()}px`, position: "relative" }}
+                                    >
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(
-                                                  header.column.columnDef.header,
-                                                  header.getContext(),
-                                              )}
+                                                header.column.columnDef.header,
+                                                header.getContext(),
+                                            )}
+                                        {header.column.getCanResize() && (
+                                            <div
+                                                onMouseDown={header.getResizeHandler()}
+                                                onTouchStart={header.getResizeHandler()}
+                                                className={`absolute right-0 top-0 h-full w-1 cursor-col-resize select-none bg-gray-300 opacity-0 hover:opacity-100 ${header.column.getIsResizing() ? "bg-blue-500 opacity-100" : ""
+                                                    }`}
+                                            />
+                                        )}
                                     </TableHead>
                                 ))}
                             </TableRow>
@@ -84,7 +96,8 @@ export function DataTable({ columns, data }) {
                             table.getRowModel().rows.map((row) => (
                                 <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
                                     {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id}>
+                                        <TableCell key={cell.id}
+                                            style={{ width: `${cell.column.getSize()}px` }}>
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                         </TableCell>
                                     ))}

@@ -32,7 +32,7 @@ export const columns = [
                 onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
             >
                 Giro
-                <ArrowUpDown className="ml-2 h-4 w-4" />
+                <ArrowUpDown className="ml-2 h-4 w-2" />
             </Button>
         ),
         cell: ({ row }) => {
@@ -45,35 +45,36 @@ export const columns = [
             return value ? value : "Sin definir";
         },
     },
-    {
-        accessorKey: "descripcion_corta",
-        header: ({ column }) => (
-            <Button
-                variant="ghost"
-                onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-            >
-                Descripción corta
-                <ArrowUpDown className="ml-2 h-4 w-4" />
-            </Button>
-        ),
-        cell: ({ row }) => {
-            const value = row.getValue("descripcion_corta");
-            if (!value) {
-                return "Sin definir";
-            }
+    
+{
+    accessorKey: "created_at",
+    header: ({ column }) => (
+        <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+            Fecha de creación
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+    ),
+    // Agrega esto aquí abajo para transformar el "2026-05-21T15:31:14.000000Z"
+    cell: ({ row }) => {
+        const dateValue = row.getValue("created_at");
+        if (!dateValue) return "";
 
-            return String(value).length > 70 ? `${String(value).slice(0, 70)}...` : value;
-        },
+        const date = new Date(dateValue);
+        
+        // Formato DD/MM/AA HH:MM
+        return new Intl.DateTimeFormat("es-ES", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false
+        }).format(date);
     },
-    {
-        accessorKey: "phone",
-        header: "Contacto negocio",
-        cell: ({ row }) => {
-            const phone = row.original.phone || "Sin teléfono";
-            const email = row.original.email || "Sin correo";
-            return `${phone} | ${email}`;
-        },
-    },
+},
     {
         accessorKey: "status",
         header: ({ column }) => (
