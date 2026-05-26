@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { REGIONES } from './GeneralMap';
+import { TradeCard } from './Marker';
 
 const normalizarTexto = (texto) => {
     if (!texto) return "";
@@ -8,12 +9,13 @@ const normalizarTexto = (texto) => {
 
 const LAYER_TITLES = {
     reserva: "Reserva de la Biosfera",
-    general: "Regiones y Municipios"
+    general: "Regiones y Municipios",
+    negocios: "Negocios Locales"
 };
 
-const LAYER_ORDER = ['reserva', 'general'];
+const LAYER_ORDER = ['reserva', 'general', 'negocios'];
 
-const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipios, setHiddenMunicipios, hiddenRegions, setHiddenRegions, activeInfoPanel, setActiveInfoPanel, capasActivas }) => {
+const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipios, setHiddenMunicipios, hiddenRegions, setHiddenRegions, activeInfoPanel, setActiveInfoPanel, capasActivas, selectedTrade, setSelectedTrade }) => {
     const [reservaInfo, setReservaInfo] = useState(null);
     const [regiones, setRegiones] = useState([]);
 
@@ -270,6 +272,22 @@ const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipio
                                                         </div>
                                                     )}
                                                 </div>
+                                            </div>
+                                        )}
+                                        {/* --- CONTENIDO NEGOCIOS --- */}
+                                        {layerKey === 'negocios' && (
+                                            <div className="flex flex-col gap-4">
+                                                {selectedTrade ? (
+                                                    <TradeCard trade={selectedTrade} />
+                                                ) : (
+                                                    <div className="flex flex-col items-center justify-center p-10 bg-brand-soft/5 rounded-lg border border-dashed border-brand-panel text-brand-ink">
+                                                        <svg className="w-10 h-10 mb-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                        </svg>
+                                                        <p className="text-xs text-center font-medium">Selecciona un marcador en el mapa para ver los detalles del negocio.</p>
+                                                    </div>
+                                                )}
                                             </div>
                                         )}
                                     </div>

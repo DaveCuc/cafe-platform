@@ -18,11 +18,11 @@ class DatabaseSeeder extends Seeder
         $this->call(TradeTaxonomySeeder::class);
 
         User::updateOrCreate([
-            'email' => 'test@example.com',
+            'email' => 'admin@admin.com',
         ], [
-            'name' => 'Test User',
+            'name' => 'Admin User',
             'is_teacher' => true,
-            'password' => 'password',
+            'password' => 'admin',
         ]);
     }
 }

@@ -8,27 +8,36 @@ const GALLERY_LIMIT = 10;
 
 export function ContentGalleryForm({ initialData, tradeId }) {
     const [isEditing, setIsEditing] = useState(false);
-    const [file, setFile] = useState(null);
+    const [files, setFiles] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     const gallery = initialData.gallery_images || [];
+    const remainingSlots = Math.max(GALLERY_LIMIT - gallery.length, 0);
 
     const onUpload = (e) => {
         e.preventDefault();
 
-        if (!file) {
+        if (!files.length || !remainingSlots) {
             return;
         }
 
         setIsLoading(true);
 
+        const nextFiles = files.slice(0, remainingSlots);
+        const formData = new FormData();
+
+        nextFiles.forEach((image, index) => {
+            formData.append(`images[${index}]`, image);
+        });
+
         router.post(
             `/directory/trades/${tradeId}/gallery-image`,
-            { image: file },
+            formData,
             {
                 preserveScroll: true,
+                forceFormData: true,
                 onSuccess: () => {
-                    setFile(null);
+                    setFiles([]);
                     setIsLoading(false);
                 },
                 onError: () => setIsLoading(false),
@@ -57,6 +66,9 @@ export function ContentGalleryForm({ initialData, tradeId }) {
             </div>
 
             <p className="mt-2 text-xs text-brand-ink">Límite de 10 fotografías ({gallery.length}/{GALLERY_LIMIT}).</p>
+            {!!files.length && (
+                <p className="mt-1 text-xs text-brand-ink">Seleccionadas: {files.length} fotografía{files.length === 1 ? "" : "s"}.</p>
+            )}
 
             <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3">
                 {gallery.length ? (
@@ -89,11 +101,12 @@ export function ContentGalleryForm({ initialData, tradeId }) {
                     <input
                         type="file"
                         accept="image/*"
-                        onChange={(e) => setFile(e.target.files?.[0] || null)}
+                        multiple
+                        onChange={(e) => setFiles(Array.from(e.target.files || []))}
                         className="w-full cursor-pointer text-sm text-brand-ink file:mr-4 file:rounded-md file:border-0 file:bg-brand-soft file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-brand-dark"
                     />
-                    <Button disabled={!file || isLoading || gallery.length >= GALLERY_LIMIT} type="submit">
-                        Subir fotografía
+                    <Button disabled={!files.length || isLoading || !remainingSlots} type="submit">
+                        Subir fotografía{files.length > 1 ? "s" : ""}
                     </Button>
                 </form>
             )}

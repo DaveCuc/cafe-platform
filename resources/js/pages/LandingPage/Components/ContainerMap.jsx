@@ -1,10 +1,10 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import SlideLeft from "./SlideLeft";
 import ReservaMap from "./ReservaMap";
 import SlideRight from "./SlideRight";
 
 const ContainerMap = () => {
-    const [capasActivas, setCapasActivas] = useState({ general: false, reserva: true, ruta1: false, ruta2: false, ruta3: false, puntos: false });
+    const [capasActivas, setCapasActivas] = useState({ general: false, reserva: true, ruta1: false, ruta2: false, ruta3: false, puntos: false, negocios: false });
     const mapRef = useRef(null);
     
     // Estado para controlar la visibilidad del SlideRight
@@ -15,14 +15,54 @@ const ContainerMap = () => {
     // Estado para saber qué información cargar en el SlideRight (ahora funciona como expandedLayer)
     const [activeInfoPanel, setActiveInfoPanel] = useState('reserva');
 
+    // Estado para los negocios (trades)
+    const [trades, setTrades] = useState([]);
+    const [selectedTrade, setSelectedTrade] = useState(null);
+
+    // Cargar negocios desde la API
+    useEffect(() => {
+        fetch('/api/directorio')
+            .then(res => res.json())
+            .then(data => setTrades(data))
+            .catch(err => console.error("Error fetching trades:", err));
+    }, []);
+
     return (
         <section className="relative z-0">
             <div className="flex w-full h-[100vh] overflow-hidden z-0">
-                <SlideLeft capasActivas={capasActivas} setCapasActivas={setCapasActivas} mapRef={mapRef} setRightSlideOpen={setRightSlideOpen} setActiveInfoPanel={setActiveInfoPanel} />
+                <SlideLeft 
+                    capasActivas={capasActivas} 
+                    setCapasActivas={setCapasActivas} 
+                    mapRef={mapRef} 
+                    setRightSlideOpen={setRightSlideOpen} 
+                    setActiveInfoPanel={setActiveInfoPanel} 
+                />
                 <div className="flex-1 relative h-full z-0">
-                    <ReservaMap capasActivas={capasActivas} mapRef={mapRef} hiddenMunicipios={hiddenMunicipios} hiddenRegions={hiddenRegions} />
+                    <ReservaMap 
+                        capasActivas={capasActivas} 
+                        mapRef={mapRef} 
+                        hiddenMunicipios={hiddenMunicipios} 
+                        hiddenRegions={hiddenRegions} 
+                        trades={trades}
+                        setSelectedTrade={setSelectedTrade}
+                        setRightSlideOpen={setRightSlideOpen}
+                        setActiveInfoPanel={setActiveInfoPanel}
+                    />
                 </div>
-                <SlideRight mapRef={mapRef} rightSlideOpen={rightSlideOpen} setRightSlideOpen={setRightSlideOpen} hiddenMunicipios={hiddenMunicipios} setHiddenMunicipios={setHiddenMunicipios} hiddenRegions={hiddenRegions} setHiddenRegions={setHiddenRegions} activeInfoPanel={activeInfoPanel} setActiveInfoPanel={setActiveInfoPanel} capasActivas={capasActivas} />
+                <SlideRight 
+                    mapRef={mapRef} 
+                    rightSlideOpen={rightSlideOpen} 
+                    setRightSlideOpen={setRightSlideOpen} 
+                    hiddenMunicipios={hiddenMunicipios} 
+                    setHiddenMunicipios={setHiddenMunicipios} 
+                    hiddenRegions={hiddenRegions} 
+                    setHiddenRegions={setHiddenRegions} 
+                    activeInfoPanel={activeInfoPanel} 
+                    setActiveInfoPanel={setActiveInfoPanel} 
+                    capasActivas={capasActivas} 
+                    selectedTrade={selectedTrade}
+                    setSelectedTrade={setSelectedTrade}
+                />
             </div>
         </section>
     );

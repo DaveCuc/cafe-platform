@@ -147,7 +147,7 @@ export function GirosDigitalForm({ initialData, tradeId, giros = [] }) {
 
                     <div className="flex flex-wrap gap-2">
                         {selectedGiros.map((giro) => (
-                            <Badge key={giro.id} className="bg-brand-soft text-brand-text">
+                            <Badge key={giro.id} className="bg-brand-soft text-white">
                                 {giro.name}
                             </Badge>
                         ))}

@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import GeneralMap from './GeneralMap';
 import RutasMap from './RutasMap';
 import PuntosInteresMap from './PuntosInteresMap';
+import { MarkerMap } from './Marker';
 
 // Importante: Para que los iconos de los marcadores por defecto se vean bien en Leaflet
 import L from 'leaflet';
@@ -31,8 +32,14 @@ const MapResizer = () => {
     return null;
 };
 
-const ReservaMap = ({ capasActivas, mapRef, hiddenMunicipios, hiddenRegions }) => {
+const ReservaMap = ({ capasActivas, mapRef, hiddenMunicipios, hiddenRegions, trades, setSelectedTrade, setRightSlideOpen, setActiveInfoPanel }) => {
     const [geoJsonData, setGeoJsonData] = useState(null);
+
+    const handleTradeClick = (trade) => {
+        setSelectedTrade(trade);
+        setActiveInfoPanel('negocios');
+        setRightSlideOpen(true);
+    };
 
     useEffect(() => {
         // Al estar en public/Mapas/tehmap.geojson, la ruta es directamente '/Mapas/tehmap.geojson'
@@ -74,6 +81,15 @@ const ReservaMap = ({ capasActivas, mapRef, hiddenMunicipios, hiddenRegions }) =
                 {capasActivas?.general && <GeneralMap hiddenMunicipios={hiddenMunicipios} hiddenRegions={hiddenRegions} />}
                 <RutasMap capasActivas={capasActivas} />
                 <PuntosInteresMap capasActivas={capasActivas} />
+
+                {/* Marcadores de Negocios */}
+                {capasActivas?.negocios && trades?.map((trade) => (
+                    <MarkerMap 
+                        key={trade.id} 
+                        trade={trade} 
+                        onClick={handleTradeClick}
+                    />
+                ))}
 
                 {/* Solo renderizamos el GeoJSON si la data ya fue cargada */}
                 {capasActivas?.reserva && geoJsonData && (

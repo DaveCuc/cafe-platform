@@ -171,19 +171,25 @@ class DirectoryTradeController extends Controller
         $this->ensureOwner($trade);
 
         $request->validate([
-            'image' => ['required', 'image', 'max:4096'],
+            'images' => ['required', 'array', 'min:1'],
+            'images.*' => ['image', 'max:4096'],
         ]);
 
         $gallery = $trade->gallery_images ?? [];
+        $remainingSlots = self::GALLERY_LIMIT - count($gallery);
 
-        if (count($gallery) >= self::GALLERY_LIMIT) {
+        if ($remainingSlots <= 0) {
             return back()->withErrors([
                 'gallery' => 'Solo puedes cargar hasta 10 fotografias en el contenido.',
             ]);
         }
 
-        $path = $request->file('image')->store('directorios/gallery', 'public');
-        $gallery[] = '/storage/' . $path;
+        $images = array_slice($request->file('images', []), 0, $remainingSlots);
+
+        foreach ($images as $image) {
+            $path = $image->store('directorios/gallery', 'public');
+            $gallery[] = '/storage/' . $path;
+        }
 
         $trade->update([
             'gallery_images' => $gallery,

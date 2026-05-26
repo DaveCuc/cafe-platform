@@ -106,8 +106,8 @@ const SlideLeft = ({ capasActivas, setCapasActivas, mapRef, setRightSlideOpen, s
 
 
                     <button
-                        onClick={() => handleMapAction('puntos', 18.11111, -97.179541, 9)}
-                        className={`w-full text-left px-4 py-3 rounded-md transition-colors font-medium shadow-sm ${capasActivas?.puntos ? 'bg-brand-soft text-white' : 'text-brand-ink hover:bg-brand-panel hover:text-brand-text'}`}
+                        onClick={() => handleMapAction('negocios', 18.11111, -97.179541, 9, true)}
+                        className={`w-full text-left px-4 py-3 rounded-md transition-colors font-medium shadow-sm ${capasActivas?.negocios ? 'bg-brand-soft text-white' : 'text-brand-ink hover:bg-brand-panel hover:text-brand-text'}`}
                     >
                         Negocios
                     </button>

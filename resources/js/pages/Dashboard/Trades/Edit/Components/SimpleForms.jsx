@@ -92,6 +92,8 @@ export function ShortDescriptionForm({ initialData, tradeId }) {
     const [isEditing, setIsEditing] = useState(false);
     const [value, setValue] = useState(initialData.descripcion_corta || "");
     const [isLoading, setIsLoading] = useState(false);
+    const maxCharacters = 200;
+    const characterCount = value.length;
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -126,10 +128,12 @@ export function ShortDescriptionForm({ initialData, tradeId }) {
                 <Textarea
                     disabled={isLoading}
                     value={value}
-                    onChange={(e) => setValue(e.target.value)}
+                    onChange={(e) => setValue(e.target.value.slice(0, maxCharacters))}
+                    maxLength={maxCharacters}
                     placeholder="Describe brevemente tu negocio"
                     className="min-h-24 bg-white"
                 />
+                <p className="text-xs text-brand-ink">{characterCount}/{maxCharacters}</p>
                 <Button type="submit" disabled={!value || isLoading}>
                     Guardar
                 </Button>
