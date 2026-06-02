@@ -9,7 +9,7 @@ export const CategoryItem = ({ label, value, icon: Icon }) => {
     const currentCategory = filters?.categoryId;
     const currentTitle = filters?.title;
 
-    const isSelected = currentCategory === value;
+    const isSelected = currentCategory === value || (!currentCategory && value === null);
 
     const onClick = () => {
         const url = qs.stringifyUrl({
@@ -28,8 +28,8 @@ export const CategoryItem = ({ label, value, icon: Icon }) => {
             onClick={onClick}
             variant="outline"
             className={cn(
-                "py-2 px-5 text-sm border border-brand-soft rounded-full flex items-center gap-x-1 transition hover:bg-brand-pale",
-                isSelected && "bg-brand-text text-white hover:bg-brand-text/80 border-brand-text"
+                "py-2 px-5 text-sm border-2 border-brand rounded-none flex items-center gap-x-1 transition-colors font-bold uppercase tracking-wider shadow-sm",
+                isSelected ? "bg-brand text-white hover:bg-brand-darker hover:border-brand-darker" : "text-brand bg-white hover:bg-brand hover:text-white"
             )}
             type="button"
         >

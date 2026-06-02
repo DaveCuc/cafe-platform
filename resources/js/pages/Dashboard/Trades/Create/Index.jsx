@@ -18,9 +18,9 @@ export default function CreateTrade() {
         <MainLayout>
             <Head title="Crear Registro Trade" />
 
-            <div className="mx-auto mt-10 flex h-full max-w-5xl p-6 md:items-center md:justify-center">
-                <div className="rounded-xl border border-brand-soft bg-white p-8 shadow-sm">
-                    <h1 className="text-2xl font-bold text-brand-text">Registra tu negocio</h1>
+            <div className="mx-auto max-w-5xl">
+                <div className="rounded-none border border-brand-soft bg-white p-8 shadow-sm">
+                    <h2 className="mb-2 text-2xl font-bold tracking-tight text-brand-text">Registra tu negocio</h2>
                     <p className="mt-2 text-sm text-brand-ink">
                         Crea un nuevo registro para tu punto de venta y completa sus datos en el editor.
                     </p>

@@ -50,7 +50,7 @@ export const ExamsList = ({ items, onReorder, onEdit }) => {
                 {(provided) => (
                   <div
                     className={cn(
-                      "flex items-center gap-x-2 bg-white border-brand-soft border text-brand-ink rounded-md mb-4 text-sm",
+                      "flex items-center gap-x-2 bg-white border-brand-soft border text-brand-ink rounded-none mb-4 text-sm",
                       exam.is_published && "bg-brand-mint border-emerald-200 text-emerald-600"
                     )}
                     ref={provided.innerRef}

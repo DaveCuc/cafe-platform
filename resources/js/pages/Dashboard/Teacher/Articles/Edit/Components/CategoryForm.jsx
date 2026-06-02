@@ -26,10 +26,13 @@ export const CategoryForm = ({ initialData, articleId, options }) => {
   const selectedOption = options.find((o) => String(o.value) === String(initialData.category_id));
 
   return (
-    <div className="mt-6 border bg-brand-pale rounded-md p-4">
-      <div className="font-medium flex items-center justify-between">
+    <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
+      <div className="font-medium flex flex-wrap items-center justify-between gap-2">
         Categoría del artículo
-        <Button onClick={toggleEdit} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
+        <Button onClick={toggleEdit} variant={isEditing ? "destructive" : "outline"}
+          className={isEditing 
+            ? "rounded-none font-bold uppercase tracking-wider"
+            : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}>
           {isEditing ? "Cancelar" : <><Pencil className="h-4 w-4 mr-2" /> Editar categoría</>}
         </Button>
       </div>
@@ -44,7 +47,7 @@ export const CategoryForm = ({ initialData, articleId, options }) => {
             disabled={isLoading} 
             value={categoryId} 
             onChange={e => setCategoryId(e.target.value)} 
-            className="w-full rounded-md border border-brand-soft bg-white p-2 text-sm"
+            className="w-full rounded-none border border-brand-soft bg-white p-2 text-sm"
             required 
           >
              <option value="" disabled>Selecciona una categoría...</option>
@@ -54,7 +57,7 @@ export const CategoryForm = ({ initialData, articleId, options }) => {
                 </option>
              ))}
           </select>
-          <Button disabled={!categoryId || isLoading} type="submit">Guardar</Button>
+          <Button disabled={!categoryId || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
         </form>
       )}
     </div>

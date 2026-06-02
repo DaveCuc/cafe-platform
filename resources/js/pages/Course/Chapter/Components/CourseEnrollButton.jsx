@@ -22,7 +22,7 @@ export const CourseEnrollButton = ({ courseId, price }) => {
   }
 
   return (
-    <Button onClick={onClick} disabled={isLoading || !canCheckout} size="sm" className="w-full md:w-auto bg-brand-text hover:bg-brand-dark text-white">
+    <Button onClick={onClick} disabled={isLoading || !canCheckout} size="sm" className="w-full md:w-auto rounded-none bg-brand border-brand text-white hover:bg-brand-darker dark:bg-brand-dark dark:border-brand-dark dark:hover:bg-brand-darker font-bold uppercase tracking-wider">
       {canCheckout ? `Inscribirse por ${formatPrice(price)}` : "Curso no disponible para compra"}
     </Button>
   )

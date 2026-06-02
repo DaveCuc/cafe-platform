@@ -21,25 +21,25 @@ export default function ExamShow({ course, exam, attempts, hasPassed, progressCo
             )}
             <div className="flex flex-col max-w-4xl mx-auto pb-20 mt-8">
                 <div className="p-6">
-                    <h2 className="text-3xl font-bold mb-4">{exam.title}</h2>
+                    <h2 className="text-3xl font-bold mb-4 dark:text-white">{exam.title}</h2>
                     {exam.description && (
-                        <div className="text-brand-ink/80 mb-6 bg-brand-pale/30 p-4 rounded-md border border-brand-soft/50">
+                        <div className="text-brand-ink/80 dark:text-gray-300 mb-6 bg-brand-pale/30 dark:bg-[#252525] p-6 rounded-none">
                             {exam.description}
                         </div>
                     )}
 
                     <div className="flex flex-col md:flex-row gap-6 mb-8 mt-8">
-                        <div className="bg-white border text-center p-6 rounded-lg flex-1 shadow-sm">
-                            <div className="text-sm text-brand-text mb-2">Intentos permitidos</div>
-                            <div className="text-2xl font-bold text-brand-ink">{exam.attempts_allowed || "Ilimitados"}
+                        <div className="bg-white dark:bg-[#252525] text-center p-8 rounded-none flex-1">
+                            <div className="text-sm text-brand-text dark:text-gray-300 mb-2">Intentos permitidos</div>
+                            <div className="text-2xl font-bold text-brand-ink dark:text-white">{exam.attempts_allowed || "Ilimitados"}
                             </div>
                             <br />
-                            <div className="text-sm text-brand-text mb-2">Puntuación mínima para aprobar</div>
-                            <div className="text-2xl font-bold text-brand-ink">{exam.min_score ? `${exam.min_score}%` : '80%'}</div>
+                            <div className="text-sm text-brand-text dark:text-gray-300 mb-2">Puntuación mínima para aprobar</div>
+                            <div className="text-2xl font-bold text-brand-ink dark:text-white">{exam.min_score ? `${exam.min_score}%` : '80%'}</div>
                         </div>
-                        <div className="bg-white border text-center p-6 rounded-lg flex-1 shadow-sm">
-                            <div className="text-2xl font-bold text-brand-text mb-2">Tu Calificación</div>
-                            <div className="text-8xl font-bold text-brand-ink">
+                        <div className="bg-white dark:bg-[#252525] text-center p-8 rounded-none flex-1 flex flex-col justify-center">
+                            <div className="text-2xl font-bold text-brand-text dark:text-white mb-2">Tu Calificación</div>
+                            <div className={`font-bold text-brand-ink dark:text-white ${attempts.length > 0 ? 'text-8xl' : 'text-3xl mt-4'}`}>
                                 {attempts.length > 0 ? `${maxScore}%` : "Sin intentos"}
                             </div>
                         </div>
@@ -47,13 +47,13 @@ export default function ExamShow({ course, exam, attempts, hasPassed, progressCo
 
 
                     {!hasPassed && attempts.length > 0 && !canAttempt && (
-                        <div className="bg-rose-50 border border-rose-200 text-rose-800 p-4 rounded-md mb-8 text-center font-medium">
+                        <div className="bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900 text-rose-800 dark:text-rose-200 p-4 rounded-none mb-8 text-center font-medium">
                             Has agotado todos tus intentos para este examen.
                         </div>
                     )}
 
                     {hasPassed && (
-                        <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 p-6 rounded-md mb-8 text-center">
+                        <div className="bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900 text-emerald-800 dark:text-emerald-200 p-6 rounded-none mb-8 text-center">
                             <h3 className="text-xl font-bold mb-2">¡Felicidades!</h3>
                             <p>Has aprobado este examen con una puntuación máxima de {maxScore}%</p>
                         </div>
@@ -63,7 +63,7 @@ export default function ExamShow({ course, exam, attempts, hasPassed, progressCo
                     <div className="flex justify-center pb-10">
                         {canAttempt && (
                             <Link href={`/courses/${course.id}/exams/${exam.id}/take`}>
-                                <Button size="lg" className="w-full md:w-auto px-8" as="span">
+                                <Button size="lg" className="w-full md:w-auto px-8 rounded-none bg-brand text-white hover:bg-brand-darker border-0 font-bold uppercase tracking-wider" as="span">
                                     {attempts.length > 0 ? "Reintentar Examen" : "Comenzar Examen"}
                                 </Button>
                             </Link>
@@ -75,11 +75,11 @@ export default function ExamShow({ course, exam, attempts, hasPassed, progressCo
 
                     {attempts.length > 0 && (
                         <div className="mb-8">
-                            <h3 className="text-xl font-semibold mb-4">Tus intentos anteriores</h3>
+                            <h3 className="text-xl font-semibold mb-4 dark:text-white">Tus intentos anteriores</h3>
 
-                            <div className="border rounded-md overflow-hidden bg-white">
+                            <div className="rounded-none overflow-hidden bg-white dark:bg-[#252525]">
                                 <table className="w-full text-sm text-left">
-                                    <thead className="bg-brand-pale text-brand-ink uppercase text-xs">
+                                    <thead className="bg-brand-pale dark:bg-brand-darker text-brand-ink dark:text-gray-200 uppercase text-xs">
                                         <tr>
                                             <th className="px-6 py-3">Intento</th>
                                             <th className="px-6 py-3">Puntuación</th>
@@ -88,14 +88,14 @@ export default function ExamShow({ course, exam, attempts, hasPassed, progressCo
                                     </thead>
                                     <tbody>
                                         {attempts.map((attempt, i) => (
-                                            <tr key={attempt.id} className="border-b last:border-0 hover:bg-brand-soft/10">
-                                                <td className="px-6 py-4 font-medium">#{attempts.length - i}</td>
-                                                <td className="px-6 py-4">{attempt.score}%</td>
+                                            <tr key={attempt.id} className="border-b dark:border-brand-soft/20 last:border-0 hover:bg-brand-soft/10 dark:hover:bg-brand-dark/50">
+                                                <td className="px-6 py-4 font-medium dark:text-white">#{attempts.length - i}</td>
+                                                <td className="px-6 py-4 dark:text-gray-300">{attempt.score}%</td>
                                                 <td className="px-6 py-4 text-right">
                                                     {attempt.score >= exam.min_score ? (
-                                                        <span className="bg-emerald-100 text-emerald-800 px-2 py-1 rounded text-xs font-semibold">Aprobado</span>
+                                                        <span className="bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-100 px-2 py-1 rounded-none text-xs font-semibold">Aprobado</span>
                                                     ) : (
-                                                        <span className="bg-rose-100 text-rose-800 px-2 py-1 rounded text-xs font-semibold">Reprobado</span>
+                                                        <span className="bg-rose-100 dark:bg-rose-900 text-rose-800 dark:text-rose-100 px-2 py-1 rounded-none text-xs font-semibold">Reprobado</span>
                                                     )}
                                                 </td>
                                             </tr>

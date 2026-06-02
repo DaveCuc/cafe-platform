@@ -67,6 +67,7 @@ export default {
                     DEFAULT: "var(--brand)",
                     blue: "var(--brand-blue)",
                     dark: "var(--brand-dark)",
+                    darker: "var(--brand-darker)",
                     text: "var(--brand-text)",
                     soft: "var(--brand-soft)",
                     pale: "var(--brand-pale)",

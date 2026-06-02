@@ -31,10 +31,20 @@ export const ImageForm = ({ initialData, articleId, label = "Imagen", endpoint, 
   const currentImageUrl = initialData[field];
 
   return (
-    <div className="mt-6 border bg-brand-pale rounded-md p-4">
-      <div className="font-medium flex items-center justify-between">
-        {label}
-        <Button onClick={toggleEdit} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
+    <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
+      <div className="font-medium flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-x-2">
+            Fotografía del evento
+            {initialData.image_url ? (
+                <div className="flex items-center justify-center rounded-none bg-brand px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Completado</div>
+            ) : (
+                <div className="flex items-center justify-center rounded-none bg-red-500 px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Incompleto</div>
+            )}
+        </div>
+        <Button onClick={toggleEdit} variant={isEditing ? "destructive" : "outline"}
+          className={isEditing 
+            ? "rounded-none font-bold uppercase tracking-wider"
+            : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}>
           {isEditing && <>Cancelar</>}
           {!isEditing && !currentImageUrl && (
             <><PlusCircle className="h-4 w-4 mr-2" /> Agregar imagen</>
@@ -47,29 +57,39 @@ export const ImageForm = ({ initialData, articleId, label = "Imagen", endpoint, 
 
       {!isEditing && (
         !currentImageUrl ? (
-          <div className="flex items-center justify-center h-60 bg-brand-pale mt-2 rounded-md">
+          <div className="flex items-center justify-center h-60 bg-brand-pale mt-2 rounded-none">
             <ImageIcon className="h-10 w-10 text-brand-ink" />
           </div>
         ) : (
           <div className="relative aspect-video mt-2">
             <img
               alt="Upload"
-              className="object-cover rounded-md w-full h-full"
+              className="object-cover rounded-none w-full h-full"
               src={currentImageUrl}
             />
           </div>
+
         )
       )}
 
       {isEditing && (
         <form onSubmit={onSubmit} className="space-y-4 mt-4">
-           <input 
-              type="file"
-              accept="image/*"
-              onChange={e => setFile(e.target.files[0])}
-                 className="w-full text-sm text-brand-ink file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-brand-soft file:text-white hover:file:bg-brand-dark cursor-pointer"
-           />
-           <Button disabled={!file || isLoading} type="submit">Guardar Imagen</Button>
+           <div className="relative flex items-center">
+             <input 
+                id="file-upload-image"
+                type="file"
+                accept="image/*"
+                onChange={e => setFile(e.target.files[0])}
+                   className="hidden"
+             />
+             <label htmlFor="file-upload-image" className="cursor-pointer bg-brand text-white px-4 py-2 hover:bg-brand-darker font-bold uppercase tracking-wider text-sm rounded-none border border-brand transition">
+               Elegir archivo
+             </label>
+             <span className="ml-4 text-sm text-brand-ink">
+               {file ? file.name : "Ningún archivo seleccionado"}
+             </span>
+           </div>
+           <Button disabled={!file || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar Imagen</Button>
         </form>
       )}
     </div>

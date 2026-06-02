@@ -19,7 +19,7 @@ export const CoursesList = ({ items }) => {
         ))}
       </div>
       {items.length === 0 && (
-        <div className="text-center mt-10 p-8 border border-dashed rounded-lg bg-white">
+        <div className="text-center mt-10 p-8 border border-dashed rounded-none bg-white">
           <p className="text-brand-ink font-medium">No se encontraron cursos con estos filtros.</p>
         </div>
       )}

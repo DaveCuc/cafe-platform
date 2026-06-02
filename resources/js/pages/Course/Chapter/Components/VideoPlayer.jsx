@@ -24,12 +24,12 @@ export const VideoPlayer = ({ chapterId, title, courseId, nextChapterId, isLocke
   }
 
   return (
-    <div className="relative aspect-video rounded-md overflow-hidden bg-black">
+    <div className="relative aspect-video rounded-none overflow-hidden bg-black border-2 border-black dark:border-brand-soft/20">
       {isLocked && (
-        <div className="absolute inset-0 flex items-center justify-center bg-brand-text flex-col gap-y-2">
-          <Lock className="h-8 w-8 text-white" />
-          <p className="text-sm text-white font-medium">Este capítulo está bloqueado.</p>
-          <p className="text-xs text-white/70">Inscríbete para acceder al contenido.</p>
+        <div className="absolute inset-0 flex items-center justify-center bg-[#1a1a1a]/90 flex-col gap-y-4">
+          <Lock className="h-10 w-10 text-white" />
+          <p className="text-lg text-white font-bold uppercase tracking-wider">Este capítulo está bloqueado</p>
+          <p className="text-sm text-gray-300">Inscríbete para acceder al contenido.</p>
         </div>
       )}
       {!isLocked && (

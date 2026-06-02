@@ -26,10 +26,20 @@ export const CategoryForm = ({ initialData, courseId, options }) => {
   const selectedOption = options.find((o) => String(o.value) === String(initialData.category_id));
 
   return (
-    <div className="mt-6 border bg-brand-pale rounded-md p-4">
-      <div className="font-medium flex items-center justify-between">
-        Categoría del curso
-        <Button onClick={toggleEdit} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
+    <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
+      <div className="font-medium flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-x-2">
+            Categoría del curso
+            {initialData.category_id ? (
+                <div className="flex items-center justify-center rounded-none bg-brand px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Completado</div>
+            ) : (
+                <div className="flex items-center justify-center rounded-none bg-red-500 px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Incompleto</div>
+            )}
+        </div>
+        <Button onClick={toggleEdit} variant={isEditing ? "destructive" : "outline"}
+          className={isEditing 
+            ? "rounded-none font-bold uppercase tracking-wider"
+            : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}>
           {isEditing ? "Cancelar" : <><Pencil className="h-4 w-4 mr-2" /> Editar categoría</>}
         </Button>
       </div>
@@ -44,7 +54,7 @@ export const CategoryForm = ({ initialData, courseId, options }) => {
             disabled={isLoading} 
             value={categoryId} 
             onChange={e => setCategoryId(e.target.value)} 
-            className="w-full rounded-md border border-brand-soft bg-white p-2 text-sm"
+            className="w-full rounded-none border border-brand-soft bg-white p-2 text-sm"
             required 
           >
              <option value="" disabled>Selecciona una categoría...</option>
@@ -54,7 +64,7 @@ export const CategoryForm = ({ initialData, courseId, options }) => {
                 </option>
              ))}
           </select>
-          <Button disabled={!categoryId || isLoading} type="submit">Guardar</Button>
+          <Button disabled={!categoryId || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
         </form>
       )}
     </div>

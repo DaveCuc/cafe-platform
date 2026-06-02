@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { REGIONES } from './GeneralMap';
 import { TradeCard } from './Marker';
 
@@ -65,7 +66,7 @@ const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipio
         <div className={`relative h-full w-96 shrink-0 bg-white shadow-2xl z-[1001] transition-all duration-300 ease-in-out flex flex-col ${rightSlideOpen ? 'mr-0' : '-mr-96'}`}>
             <button
                 onClick={() => setRightSlideOpen(!rightSlideOpen)}
-                className="absolute top-1/2 -left-10 -translate-y-1/2 flex items-center justify-center w-10 h-16 bg-white rounded-l-xl shadow-[-4px_0_6px_-1px_rgba(0,0,0,0.2)] text-brand-text hover:text-brand hover:bg-brand-light transition-all border border-r-0 border-brand-panel z-[1002]"
+                className="absolute top-1/2 -left-10 -translate-y-1/2 flex items-center justify-center w-10 h-16 bg-brand text-white rounded-none shadow-lg hover:bg-brand-dark transition-all border border-r-0 border-brand z-[1002]"
                 title={rightSlideOpen ? "Cerrar Información" : "Abrir Información"}
             >
                 <svg viewBox="0 0 24 24" className={`w-6 h-6 transition-transform duration-300 ${rightSlideOpen ? '' : 'rotate-180'}`} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -77,11 +78,11 @@ const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipio
                 <h2 className="text-2xl font-semibold text-brand-text">Información</h2>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-4 bg-brand-soft/5">
+            <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-4 bg-gray-50">
                 
                 {activeLayersWithJSON.length === 0 ? (
-                    <div className="flex flex-col gap-4 justify-center items-center h-full text-brand-ink">
-                        <svg className="w-12 h-12 text-brand-soft" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="flex flex-col gap-4 justify-center items-center h-full text-gray-500">
+                        <svg className="w-12 h-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <p className="text-sm text-center px-4">No hay capas activas con información detallada.</p>
@@ -91,10 +92,10 @@ const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipio
                         const isExpanded = activeInfoPanel === layerKey;
                         
                         return (
-                            <div key={layerKey} className="flex flex-col rounded-lg border border-brand-panel bg-white shadow-sm overflow-hidden shrink-0">
+                            <div key={layerKey} className="flex flex-col rounded-none border border-gray-200 bg-white shadow-sm overflow-hidden shrink-0">
                                 {/* Encabezado del Acordeón Principal */}
                                 <div 
-                                    className={`flex items-center justify-between p-4 cursor-pointer transition-colors ${isExpanded ? 'bg-brand text-white' : 'hover:bg-brand-soft/5 text-brand-dark'}`}
+                                    className={`flex items-center justify-between p-4 cursor-pointer transition-colors ${isExpanded ? 'bg-brand text-white' : 'hover:bg-gray-100 text-brand-darker'}`}
                                     onClick={() => setActiveInfoPanel(isExpanded ? null : layerKey)}
                                 >
                                     <h3 className="text-[16px] font-semibold">{LAYER_TITLES[layerKey]}</h3>
@@ -138,8 +139,8 @@ const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipio
                                                 {/* REGIONES */}
                                                 <div className="flex flex-col gap-3">
                                                     <div className="flex flex-col gap-1">
-                                                        <h4 className="text-sm font-semibold text-brand-dark uppercase tracking-wider">Lista de Regiones</h4>
-                                                        <p className="text-xs text-brand-soft italic">Selecciona para explorar.</p>
+                                                        <h4 className="text-sm font-semibold text-brand-darker uppercase tracking-wider">Lista de Regiones</h4>
+                                                        <p className="text-xs text-gray-500 italic">Selecciona para explorar.</p>
                                                     </div>
 
                                                     <div className="flex flex-col gap-2">
@@ -152,7 +153,7 @@ const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipio
                                                             return (
                                                                 <div 
                                                                     key={idx} 
-                                                                    className={`flex flex-col rounded-lg border transition-all cursor-pointer overflow-hidden ${isSelected ? 'ring-1 shadow-sm' : 'border-brand-panel bg-white hover:bg-brand-soft/5'}`}
+                                                                    className={`flex flex-col rounded-none border transition-all cursor-pointer overflow-hidden ${isSelected ? 'ring-1 shadow-sm' : 'border-gray-200 bg-white hover:bg-gray-50'}`}
                                                                     style={isSelected ? { borderColor: regionColor, ringColor: regionColor, backgroundColor: `${regionColor}15` } : {}}
                                                                     onClick={() => {
                                                                         setSelectedRegion(region);
@@ -192,13 +193,13 @@ const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipio
                                                 </div>
 
                                                 {/* MUNICIPIOS */}
-                                                <div className="flex flex-col gap-3 pt-6 border-t border-brand-panel">
+                                                <div className="flex flex-col gap-3 pt-6 border-t border-gray-200">
                                                     <div className="flex flex-col gap-1">
-                                                        <h4 className="text-sm font-semibold text-brand-dark uppercase tracking-wider">Municipios</h4>
+                                                        <h4 className="text-sm font-semibold text-brand-darker uppercase tracking-wider">Municipios</h4>
                                                         {selectedRegion ? (
-                                                            <p className="text-xs text-brand-soft italic">Mostrando municipios de: <span className="font-semibold text-brand-text">{selectedRegion.nombre}</span></p>
+                                                            <p className="text-xs text-gray-500 italic">Mostrando municipios de: <span className="font-semibold text-brand-darker">{selectedRegion.nombre}</span></p>
                                                         ) : (
-                                                            <p className="text-xs text-brand-soft italic">Selecciona una región arriba.</p>
+                                                            <p className="text-xs text-gray-500 italic">Selecciona una región arriba.</p>
                                                         )}
                                                     </div>
 
@@ -210,9 +211,9 @@ const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipio
                                                                 const regionColor = REGIONES[selectedRegion.nombre.toUpperCase()]?.color || '#0B5139';
 
                                                                 return (
-                                                                    <div key={mIdx} className="flex flex-col rounded-lg border border-brand-panel bg-white shadow-sm overflow-hidden">
+                                                                    <div key={mIdx} className="flex flex-col rounded-none border border-gray-200 bg-white shadow-sm overflow-hidden">
                                                                         <div 
-                                                                            className={`flex items-center justify-between p-3 pl-4 cursor-pointer transition-colors ${isMunExpanded ? '' : 'hover:bg-brand-soft/5'}`}
+                                                                            className={`flex items-center justify-between p-3 pl-4 cursor-pointer transition-colors ${isMunExpanded ? '' : 'hover:bg-gray-50'}`}
                                                                             style={isMunExpanded ? { backgroundColor: `${regionColor}15` } : {}}
                                                                             onClick={() => {
                                                                                 setExpandedMunicipio(isMunExpanded ? null : mun.nombre);
@@ -277,17 +278,26 @@ const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipio
                                         {/* --- CONTENIDO NEGOCIOS --- */}
                                         {layerKey === 'negocios' && (
                                             <div className="flex flex-col gap-4">
-                                                {selectedTrade ? (
-                                                    <TradeCard trade={selectedTrade} />
-                                                ) : (
-                                                    <div className="flex flex-col items-center justify-center p-10 bg-brand-soft/5 rounded-lg border border-dashed border-brand-panel text-brand-ink">
-                                                        <svg className="w-10 h-10 mb-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                        </svg>
-                                                        <p className="text-xs text-center font-medium">Selecciona un marcador en el mapa para ver los detalles del negocio.</p>
-                                                    </div>
-                                                )}
+                                                <AnimatePresence mode="wait">
+                                                    {selectedTrade ? (
+                                                        <TradeCard key={`trade-${selectedTrade.id}`} trade={selectedTrade} />
+                                                    ) : (
+                                                        <motion.div 
+                                                            key="empty-state"
+                                                            initial={{ opacity: 0, scale: 0.95 }}
+                                                            animate={{ opacity: 1, scale: 1 }}
+                                                            exit={{ opacity: 0, scale: 0.95 }}
+                                                            transition={{ duration: 0.2 }}
+                                                            className="flex flex-col items-center justify-center p-10 bg-gray-50 rounded-none border border-dashed border-gray-300 text-gray-500"
+                                                        >
+                                                            <svg className="w-10 h-10 mb-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                            </svg>
+                                                            <p className="text-xs text-center font-medium">Selecciona un marcador en el mapa para ver los detalles del negocio.</p>
+                                                        </motion.div>
+                                                    )}
+                                                </AnimatePresence>
                                             </div>
                                         )}
                                     </div>

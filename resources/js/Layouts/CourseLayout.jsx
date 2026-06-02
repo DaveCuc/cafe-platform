@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { usePage, Link } from '@inertiajs/react';
-import { LogOut, Menu } from "lucide-react";
+import { LogOut, Menu, Sun, Moon } from "lucide-react";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/Components/ui/sheet";
 import Dropdown from '@/Components/Dropdown';
 import { Button } from "@/Components/ui/button";
@@ -24,7 +24,7 @@ const NavbarRoutes = () => {
                         <span className="inline-flex rounded-md">
                             <button
                                 type="button"
-                                className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-brand-ink hover:text-brand-text focus:outline-none"
+                                className="inline-flex items-center rounded-none border border-transparent bg-white dark:bg-[#252525] px-3 py-2 text-sm font-medium leading-4 text-brand-ink dark:text-gray-100 hover:text-brand-text focus:outline-none transition-colors"
                             >
                                 {auth?.user?.name || "Usuario"}
                                 <svg className="-me-0.5 ms-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -53,7 +53,7 @@ const CourseMobileSidebar = ({ course, progressCount, purchase }) => (
                 <Menu />
             </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="p-0 bg-white w-72">
+        <SheetContent side="left" className="p-0 bg-white dark:bg-[#252525] w-72 border-r-0">
             <SheetTitle className="hidden">Menú del curso</SheetTitle>
             <CourseSidebar course={course} progressCount={progressCount} purchase={purchase} />
         </SheetContent>
@@ -62,7 +62,7 @@ const CourseMobileSidebar = ({ course, progressCount, purchase }) => (
 
 const CourseNavbar = ({ course, progressCount, purchase }) => {
     return (
-        <div className="p-4 border-b h-full flex items-center bg-white shadow-sm">
+        <div className="p-4 border-b dark:border-brand-soft/20 h-full flex items-center bg-white dark:bg-[#252525] shadow-sm transition-colors">
             <CourseMobileSidebar course={course} progressCount={progressCount} purchase={purchase} />
             <NavbarRoutes />
         </div>
@@ -70,20 +70,42 @@ const CourseNavbar = ({ course, progressCount, purchase }) => {
 };
 
 export default function CourseLayout({ children, course, progressCount, purchase }) {
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    useEffect(() => {
+        const stored = sessionStorage.getItem('course_dark_mode');
+        if (stored === 'true') setIsDarkMode(true);
+    }, []);
+
+    const toggleDarkMode = () => {
+        setIsDarkMode(!isDarkMode);
+        sessionStorage.setItem('course_dark_mode', (!isDarkMode).toString());
+    };
+
     return (
-        <div className="h-full min-h-screen relative bg-brand-pale font-sans">
-            <ConfettiProvider />
-            <div className="h-[80px] md:pl-80 fixed inset-y-0 w-full z-50">
-                <CourseNavbar course={course} progressCount={progressCount} purchase={purchase} />
+        <div className={isDarkMode ? 'dark' : ''}>
+            <div className={`h-full min-h-screen relative font-sans transition-colors duration-300 ${isDarkMode ? 'bg-[#1a1a1a] text-gray-100' : 'bg-gray-50'}`}>
+                <ConfettiProvider />
+                <div className="h-[80px] md:pl-80 fixed inset-y-0 w-full z-50">
+                    <CourseNavbar course={course} progressCount={progressCount} purchase={purchase} />
+                </div>
+                
+                <div className="hidden md:flex h-full w-80 flex-col fixed inset-y-0 z-50 border-r dark:border-brand-soft/20">
+                    <CourseSidebar course={course} progressCount={progressCount} purchase={purchase} />
+                </div>
+                
+                <main className="md:pl-80 pt-[80px] h-full">
+                    {children}
+                </main>
+
+                <button
+                    onClick={toggleDarkMode}
+                    className={`fixed bottom-8 right-8 p-3 shadow-xl z-50 transition-colors flex items-center justify-center border-2 border-brand-mint ${isDarkMode ? 'bg-brand-mint text-brand-darker hover:bg-white' : 'bg-brand text-white hover:bg-brand-darker'}`}
+                    title={isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+                >
+                    {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                </button>
             </div>
-            
-            <div className="hidden md:flex h-full w-80 flex-col fixed inset-y-0 z-50">
-                <CourseSidebar course={course} progressCount={progressCount} purchase={purchase} />
-            </div>
-            
-            <main className="md:pl-80 pt-[80px] h-full">
-                {children}
-            </main>
         </div>
     );
 }

@@ -18,8 +18,8 @@ export const ArticleCard = ({
     const displayImage = cardImageUrl || imageUrl;
     return (
         <Link href={`/articulos/${id}`}>
-            <div className="group hover:shadow-sm transition overflow-hidden border rounded-lg p-3 h-full bg-white border-brand-soft">
-                <div className="relative w-full aspect-video rounded-md overflow-hidden">
+            <div className="group hover:shadow-sm transition overflow-hidden border rounded-none p-3 h-full bg-white border-brand-soft">
+                <div className="relative w-full aspect-video rounded-none overflow-hidden">
                     {displayImage ? (
                         <img
                             className="object-cover w-full h-full"

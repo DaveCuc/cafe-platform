@@ -5,7 +5,7 @@ export const InfoCard = ({ numberOfItems, variant, label, icon: Icon }) => {
   const normalizedVariant = variant === "success" ? "success" : "info";
 
   return (
-    <div className="border rounded-xl flex items-center gap-x-2 p-4 bg-white shadow-sm hover:shadow-md transition">
+    <div className="border rounded-none flex items-center gap-x-2 p-4 bg-white shadow-sm hover:shadow-md transition">
       <IconBadge variant={normalizedVariant} size="md" icon={Icon} />
       <div className="ml-2">
         <p className="font-semibold text-brand-text tracking-tight">{label}</p>

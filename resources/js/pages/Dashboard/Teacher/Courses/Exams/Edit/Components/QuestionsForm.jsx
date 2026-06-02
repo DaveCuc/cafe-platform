@@ -22,8 +22,8 @@ export const QuestionsForm = ({ initialData, courseId, examId }) => {
   const [isCreating, setIsCreating] = useState(false);
 
   return (
-    <div className="relative mt-6 border bg-brand-pale rounded-md p-4">
-      <div className="font-medium flex items-center justify-between pb-3 border-b border-brand-soft mb-4">
+    <div className="relative relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
+      <div className="font-medium flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-brand-soft mb-4">
         Lista de Preguntas
       </div>
 
@@ -52,7 +52,7 @@ export const QuestionsForm = ({ initialData, courseId, examId }) => {
           />
         ) : (
           <div className="flex items-center justify-center pt-4">
-            <Button onClick={() => setIsCreating(true)} variant="landing_page_primary">
+            <Button onClick={() => setIsCreating(true)} className="rounded-none bg-black text-white hover:bg-gray-800 font-bold uppercase tracking-wider">
               <PlusCircle className="h-4 w-4 mr-2" /> Agregar Nueva Pregunta
             </Button>
           </div>
@@ -91,11 +91,11 @@ const QuestionItem = ({ question, index, courseId, examId }) => {
   const IconEmpty = question.type === "single" ? Circle : Square;
 
   return (
-    <div className="bg-white border border-brand-soft rounded-lg shadow-sm p-5 transition-all">
+    <div className="bg-white border border-brand-soft rounded-none shadow-sm p-5 transition-all">
       <div className="flex justify-between items-start gap-4">
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-xs font-bold bg-brand-soft text-white px-2 py-0.5 rounded">
+            <span className="text-xs font-bold bg-brand text-white px-2 py-0.5 rounded-none uppercase tracking-wider">
               Pregunta {index + 1}
             </span>
             <span className="text-xs text-brand-text italic">
@@ -119,7 +119,7 @@ const QuestionItem = ({ question, index, courseId, examId }) => {
         <ul className="space-y-2">
           {question.options?.map(option => (
             <li key={option.id} className="flex items-center gap-3 p-2 rounded text-sm hover:bg-gray-50">
-              <div className={option.is_correct ? 'text-emerald-500' : 'text-gray-300'}>
+              <div className={option.is_correct ? 'text-brand' : 'text-gray-300'}>
                 {option.is_correct ? <IconCorrect className="h-4 w-4" /> : <IconEmpty className="h-4 w-4" />}
               </div>
               <span className={`flex-1 ${option.is_correct ? 'font-medium' : ''}`}>
@@ -249,7 +249,7 @@ const QuestionBuilder = ({ courseId, examId, onCancel, initialData = null }) => 
   const canSave = content.trim().length > 0;
 
   return (
-    <div className={`bg-white border-2 rounded-lg shadow-md p-6 mb-6 transition-all ${isEditingMode ? 'border-amber-400/50' : 'border-brand-soft'}`}>
+    <div className={`bg-white border-2 rounded-none shadow-md p-6 mb-6 transition-all ${isEditingMode ? 'border-brand' : 'border-gray-200'}`}>
       <div className="flex justify-between mb-2">
         <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
           {isEditingMode ? 'Editando Pregunta' : 'Nueva Pregunta'}
@@ -261,12 +261,12 @@ const QuestionBuilder = ({ courseId, examId, onCancel, initialData = null }) => 
           placeholder="Escribe la pregunta aquí..." 
           value={content} 
           onChange={e => setContent(e.target.value)} 
-          className="flex-1 text-lg font-medium border-0 border-b-2 border-gray-100 rounded-none focus-visible:ring-0 focus-visible:border-brand-soft px-1 bg-gray-50/50 resize-y min-h-[44px]"
+          className="flex-1 text-lg font-medium border-0 border-b-2 border-gray-100 rounded-none focus-visible:ring-0 focus-visible:border-brand px-1 bg-gray-50/50 resize-y min-h-[44px]"
           rows={1}
         />
         <div className="w-full md:w-64 shrink-0">
           <Select value={type} onValueChange={handleTypeChange}>
-            <SelectTrigger className="bg-white border-gray-200 focus:ring-brand-soft">
+            <SelectTrigger className="bg-white border-gray-200 rounded-none focus:ring-brand">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -285,7 +285,7 @@ const QuestionBuilder = ({ courseId, examId, onCancel, initialData = null }) => 
             <button 
               type="button"
               onClick={() => handleToggleCorrect(option.id)}
-              className={`shrink-0 transition-colors ${option.is_correct ? 'text-emerald-500' : 'text-gray-300 hover:text-gray-400'}`}
+              className={`shrink-0 transition-colors ${option.is_correct ? 'text-brand' : 'text-gray-300 hover:text-gray-400'}`}
               title={option.is_correct ? "Desmarcar" : "Marcar como correcta"}
             >
               {option.is_correct ? <IconCorrect className="h-6 w-6" /> : <IconEmpty className="h-6 w-6" />}
@@ -296,7 +296,7 @@ const QuestionBuilder = ({ courseId, examId, onCancel, initialData = null }) => 
               value={option.content}
               onChange={(e) => handleUpdateOption(option.id, e.target.value)}
               placeholder={`Opción ${index + 1}`}
-              className="flex-1 border-transparent hover:border-gray-200 focus-visible:border-b-2 focus-visible:border-b-brand-soft focus-visible:ring-0 rounded-none px-2 h-10 shadow-none text-base"
+              className="flex-1 border-transparent hover:border-gray-200 focus-visible:border-b-2 focus-visible:border-b-brand focus-visible:ring-0 rounded-none px-2 h-10 shadow-none text-base"
             />
 
             <Button 
@@ -331,8 +331,8 @@ const QuestionBuilder = ({ courseId, examId, onCancel, initialData = null }) => 
       )}
 
       <div className="flex flex-col sm:flex-row justify-between items-center pt-4 border-t border-gray-100 gap-4">
-        <span className="text-xs text-gray-500 font-medium flex items-center bg-gray-50 px-3 py-1.5 rounded-full">
-          <CheckCircle2 className="h-4 w-4 mr-2 text-emerald-500" /> 
+        <span className="text-xs text-gray-500 font-medium flex items-center bg-gray-50 px-3 py-1.5 rounded-none">
+          <CheckCircle2 className="h-4 w-4 mr-2 text-brand" /> 
           Haz clic en el icono para marcar la respuesta correcta
         </span>
         
@@ -345,7 +345,7 @@ const QuestionBuilder = ({ courseId, examId, onCancel, initialData = null }) => 
           <Button 
             onClick={handleSave} 
             disabled={!canSave || isSaving}
-            className="w-full sm:w-auto bg-brand-soft text-white hover:bg-brand-soft/90"
+            className="w-full sm:w-auto rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider"
           >
             {isSaving ? "Guardando..." : "Guardar Pregunta"}
           </Button>

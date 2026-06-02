@@ -12,19 +12,19 @@ export const CourseSidebarItem = ({ label, id, isCompleted, courseId, isLocked }
     <Link
       href={`/courses/${courseId}/chapters/${id}`}
       className={cn(
-        "flex items-center gap-x-2 text-brand-ink text-sm font-[500] pl-6 transition-all hover:text-brand-text hover:bg-brand-soft/20",
-        isActive && "text-brand-text bg-brand-soft/20 hover:bg-brand-soft/20 hover:text-brand-text",
-        isCompleted && "text-brand-text hover:text-brand-text",
-        isCompleted && isActive && "bg-brand-mint/50"
+        "flex items-center gap-x-2 text-brand-ink dark:text-gray-300 text-sm font-[500] pl-6 transition-all hover:text-brand-text hover:bg-brand/10 dark:hover:bg-brand/20",
+        isActive && "text-brand-text dark:text-white bg-brand/10 dark:bg-brand/20 hover:bg-brand/10 hover:text-brand-text",
+        isCompleted && "text-brand-text dark:text-white hover:text-brand-text",
+        isCompleted && isActive && "bg-brand-pale dark:bg-brand-darker"
       )}
     >
       <div className="flex items-center gap-x-2 py-4">
         <Icon 
           size={22} 
           className={cn(
-            "text-brand-ink", 
-            isActive && "text-brand-text", 
-            isCompleted && "text-brand-text"
+            "text-brand-ink dark:text-gray-400", 
+            isActive && "text-brand-text dark:text-white", 
+            isCompleted && "text-brand-text dark:text-white"
           )} 
         />
         {label}
@@ -42,18 +42,18 @@ export const CourseSidebarItem = ({ label, id, isCompleted, courseId, isLocked }
 
 export const CourseSidebar = ({ course, progressCount, purchase }) => {
   return (
-    <div className="h-full border-r flex flex-col overflow-y-auto shadow-sm bg-white">
-      <div className="p-8 flex flex-col border-b">
-        <h1 className="font-semibold">{course.title}</h1>
+    <div className="h-full border-r dark:border-brand-soft/20 flex flex-col overflow-y-auto shadow-sm bg-white dark:bg-[#252525]">
+      <div className="p-8 flex flex-col border-b dark:border-brand-soft/20">
+        <h1 className="font-semibold dark:text-white">{course.title}</h1>
         {purchase && (
           <div className="mt-10">
             <div className="w-full">
-               <p className="text-sm font-medium mb-2 text-brand-text">
+               <p className="text-sm font-medium mb-2 text-brand-text dark:text-gray-300">
                  {progressCount}% Completado
                </p>
-               <div className="w-full bg-brand-soft rounded-full h-2">
+               <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-none h-2">
                  <div 
-                   className="bg-brand-text h-2 rounded-full transition-all" 
+                   className="bg-brand dark:bg-white h-2 rounded-none transition-all" 
                    style={{ width: `${progressCount}%` }}
                  ></div>
                </div>

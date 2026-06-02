@@ -21,7 +21,12 @@ const iconMap = {
 
 export const Categories = ({ items }) => {
     return ( 
-        <div className="flex items-center gap-x-2 overflow-x-auto pb-2 scrollbar-hide shrink-0">
+        <div className="flex items-center gap-2 overflow-x-auto md:overflow-visible md:flex-wrap pb-2 md:pb-0 scrollbar-hide shrink-0">
+            <CategoryItem
+                label="Todos"
+                icon={FcGlobe}
+                value={null}
+            />
             {items.map((item) => (
                 <CategoryItem
                     key={item.id}

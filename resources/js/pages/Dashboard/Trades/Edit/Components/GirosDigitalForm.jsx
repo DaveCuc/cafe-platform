@@ -56,10 +56,23 @@ export function GirosDigitalForm({ initialData, tradeId, giros = [] }) {
     };
 
     return (
-        <div className="mt-6 rounded-md border bg-brand-pale p-4">
+        <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between font-medium">
-                Giro
-                <Button onClick={toggleEdit} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
+                <div className="flex items-center gap-x-2">
+                    Giro
+                    {selectedGiroIds.length > 0 && (
+                        <div className="flex items-center justify-center rounded-none bg-brand px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">
+                            Completado
+                        </div>
+                    )}
+                </div>
+                <Button 
+                    onClick={toggleEdit} 
+                    variant={isEditing ? "destructive" : "outline"}
+                    className={isEditing 
+                        ? "rounded-none font-bold uppercase tracking-wider" 
+                        : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}
+                >
                     {isEditing ? (
                         "Cancelar"
                     ) : (
@@ -101,8 +114,8 @@ export function GirosDigitalForm({ initialData, tradeId, giros = [] }) {
                         </Button>
 
                         {open && (
-                            <div className="absolute z-20 mt-2 w-full rounded-md border bg-white p-3 shadow-lg">
-                                <div className="mb-3 flex items-center gap-2 rounded-md border px-3">
+                            <div className="absolute z-20 mt-2 w-full rounded-none border bg-white p-3 shadow-lg">
+                                <div className="mb-3 flex items-center gap-2 rounded-none border px-3">
                                     <Search className="h-4 w-4 text-brand-ink opacity-50" />
                                     <Input
                                         value={search}
@@ -121,11 +134,11 @@ export function GirosDigitalForm({ initialData, tradeId, giros = [] }) {
                                                     <div
                                                     key={giro.id}
                                                     onClick={() => toggleGiro(giro.id)}
-                                                        className="flex w-full cursor-pointer items-center gap-3 rounded-md px-2 py-2 text-left text-sm hover:bg-brand-pale"
+                                                        className="flex w-full cursor-pointer items-center gap-3 rounded-none px-2 py-2 text-left text-sm hover:bg-brand-pale"
                                                 >
                                                         <span
                                                             className={cn(
-                                                                "flex h-4 w-4 items-center justify-center rounded-sm border",
+                                                                "flex h-4 w-4 items-center justify-center rounded-none border",
                                                                 isSelected && "border-brand-text bg-brand-text text-white",
                                                             )}
                                                         >
@@ -153,7 +166,7 @@ export function GirosDigitalForm({ initialData, tradeId, giros = [] }) {
                         ))}
                     </div>
 
-                    <Button type="submit" disabled={isLoading}>
+                    <Button type="submit" disabled={isLoading} className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">
                         Guardar
                     </Button>
                 </form>

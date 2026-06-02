@@ -31,7 +31,7 @@ export default function ChapterEditor({ courseId, courseIsFree, chapter }) {
       )}
 
       <div className="p-6 pb-20 max-w-6xl mx-auto">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="w-full">
             <Link
               href={`/teacher/courses/${courseId}`}
@@ -41,7 +41,7 @@ export default function ChapterEditor({ courseId, courseIsFree, chapter }) {
               Volver a la configuración del curso
             </Link>
 
-            <div className="flex items-center justify-between w-full">
+            <div className="flex flex-wrap items-center justify-between gap-2 w-full">
               <div className="flex flex-col gap-y-2">
                 <h1 className="text-2xl font-bold">Creación del capítulo</h1>
                 <span className="text-sm text-brand-text">

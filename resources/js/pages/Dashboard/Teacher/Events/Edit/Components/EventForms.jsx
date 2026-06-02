@@ -38,16 +38,19 @@ const GenericForm = ({ initialData, eventId, field, label, type = "text", placeh
   }
 
   return (
-    <div className="mt-6 border bg-brand-pale rounded-md p-4">
-      <div className="font-medium flex items-center justify-between">
+    <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
+      <div className="font-medium flex flex-wrap items-center justify-between gap-2">
         {label}
-        <Button onClick={toggleEdit} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
+        <Button onClick={toggleEdit} variant={isEditing ? "destructive" : "outline"}
+          className={isEditing 
+            ? "rounded-none font-bold uppercase tracking-wider"
+            : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}>
           {isEditing ? "Cancelar" : <><Pencil className="h-4 w-4 mr-2" /> Editar</>}
         </Button>
       </div>
 
       {!isEditing && (
-        <p className={`text-sm mt-2 ${!initialData[field] && "text-brand-ink italic"}`}>
+        <p className={`text-sm mt-2 break-all ${!initialData[field] && "text-brand-ink italic"}`}>
           {displayValue}
         </p>
       )}
@@ -62,7 +65,7 @@ const GenericForm = ({ initialData, eventId, field, label, type = "text", placeh
             placeholder={placeholder}
           />
           <div className="flex items-center gap-x-2">
-            <Button disabled={processing} type="submit">Guardar</Button>
+            <Button disabled={processing} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
           </div>
         </form>
       )}
@@ -94,10 +97,13 @@ export const DescriptionForm = ({ initialData, eventId }) => {
   };
 
   return (
-    <div className="mt-6 border bg-brand-pale rounded-md p-4">
-      <div className="font-medium flex items-center justify-between">
+    <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
+      <div className="font-medium flex flex-wrap items-center justify-between gap-2">
         Descripción Completa
-        <Button onClick={toggleEdit} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
+        <Button onClick={toggleEdit} variant={isEditing ? "destructive" : "outline"}
+          className={isEditing 
+            ? "rounded-none font-bold uppercase tracking-wider"
+            : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}>
           {isEditing ? "Cancelar" : <><Pencil className="h-4 w-4 mr-2" /> Editar</>}
         </Button>
       </div>
@@ -112,11 +118,11 @@ export const DescriptionForm = ({ initialData, eventId }) => {
             disabled={processing}
             value={data.description}
             onChange={(e) => setData("description", e.target.value)}
-            className="flex min-h-[150px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex min-h-[150px] w-full rounded-none border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
             placeholder="Descripción detallada del evento..."
           />
           <div className="flex items-center gap-x-2">
-            <Button disabled={processing} type="submit">Guardar</Button>
+            <Button disabled={processing} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
           </div>
         </form>
       )}
@@ -152,10 +158,13 @@ export const TopicsForm = ({ initialData, eventId }) => {
   };
 
   return (
-    <div className="mt-6 border bg-brand-pale rounded-md p-4">
-      <div className="font-medium flex items-center justify-between">
+    <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
+      <div className="font-medium flex flex-wrap items-center justify-between gap-2">
         Temas a Tratar
-        <Button onClick={toggleEdit} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
+        <Button onClick={toggleEdit} variant={isEditing ? "destructive" : "outline"}
+          className={isEditing 
+            ? "rounded-none font-bold uppercase tracking-wider"
+            : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}>
           {isEditing ? "Cancelar" : <><Pencil className="h-4 w-4 mr-2" /> Editar</>}
         </Button>
       </div>
@@ -166,7 +175,7 @@ export const TopicsForm = ({ initialData, eventId }) => {
             <p className="text-sm text-brand-ink italic">No hay temas agregados.</p>
           ) : (
             initialData.topics.map((t, i) => (
-              <span key={i} className="px-3 py-1 bg-brand-soft text-white text-xs rounded-full">
+              <span key={i} className="px-3 py-1 bg-brand text-white text-xs rounded-none font-bold tracking-wide uppercase">
                 {t}
               </span>
             ))
@@ -193,7 +202,7 @@ export const TopicsForm = ({ initialData, eventId }) => {
           
           <div className="flex flex-wrap gap-2 mt-2">
             {data.topics.map((t, i) => (
-              <div key={i} className="flex items-center gap-1 bg-brand-pale border px-2 py-1 rounded-full text-xs">
+              <div key={i} className="flex items-center gap-1 bg-brand-pale border px-2 py-1 rounded-none text-xs">
                 <span>{t}</span>
                 <button type="button" onClick={() => removeTopic(i)} className="text-red-500 hover:text-red-700 ml-1">
                   <Trash className="w-3 h-3" />
@@ -258,10 +267,13 @@ export const PeopleForm = ({ initialData, eventId, field, label }) => {
   };
 
   return (
-    <div className="mt-6 border bg-brand-pale rounded-md p-4">
-      <div className="font-medium flex items-center justify-between mb-4">
+    <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
+      <div className="font-medium flex flex-wrap items-center justify-between gap-2 mb-4">
         {label}
-        <Button onClick={toggleEdit} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
+        <Button onClick={toggleEdit} variant={isEditing ? "destructive" : "outline"}
+          className={isEditing 
+            ? "rounded-none font-bold uppercase tracking-wider"
+            : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}>
           {isEditing ? "Cancelar" : <><Pencil className="h-4 w-4 mr-2" /> Editar</>}
         </Button>
       </div>
@@ -273,7 +285,7 @@ export const PeopleForm = ({ initialData, eventId, field, label }) => {
           ) : (
             initialData[field].map((p, i) => (
               <div key={i} className="flex items-center gap-4 bg-white p-2 rounded shadow-sm border border-brand-soft">
-                <div className="w-10 h-10 rounded-full bg-brand-pale overflow-hidden shrink-0 border">
+                <div className="w-10 h-10 rounded-none bg-brand-pale overflow-hidden shrink-0 border">
                   {p.photo_url && <img src={p.photo_url} alt={p.name} className="w-full h-full object-cover" />}
                 </div>
                 <div>
@@ -289,7 +301,7 @@ export const PeopleForm = ({ initialData, eventId, field, label }) => {
       {isEditing && (
         <form onSubmit={onSubmit} className="flex flex-col gap-y-4">
           
-          <div className="p-4 bg-white border border-brand-soft rounded-md space-y-3">
+          <div className="p-4 bg-white border border-brand-soft rounded-none space-y-3">
              <h4 className="text-sm font-semibold mb-2">Agregar Nuevo</h4>
              <Input 
                 placeholder="Nombre" 
@@ -310,7 +322,7 @@ export const PeopleForm = ({ initialData, eventId, field, label }) => {
                     disabled={uploading}
                  />
              </div>
-             {newPerson.photo_url && <img src={newPerson.photo_url} className="w-10 h-10 rounded-full object-cover" />}
+             {newPerson.photo_url && <img src={newPerson.photo_url} className="w-10 h-10 rounded-none object-cover" />}
              
              <Button type="button" size="sm" onClick={addPerson} disabled={!newPerson.name || uploading}>
                 Agregar a la lista
@@ -321,7 +333,7 @@ export const PeopleForm = ({ initialData, eventId, field, label }) => {
             {data[field].map((p, i) => (
               <div key={i} className="flex justify-between items-center bg-brand-pale border p-2 rounded text-sm">
                 <div className="flex items-center gap-2">
-                   {p.photo_url && <img src={p.photo_url} className="w-6 h-6 rounded-full object-cover" />}
+                   {p.photo_url && <img src={p.photo_url} className="w-6 h-6 rounded-none object-cover" />}
                    <span>{p.name} ({p.title})</span>
                 </div>
                 <button type="button" onClick={() => removePerson(i)} className="text-red-500 hover:text-red-700">

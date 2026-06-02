@@ -28,10 +28,20 @@ export const ChapterTitleForm = ({ initialData, courseId, chapterId }) => {
   };
 
   return (
-    <div className="mt-6 border bg-brand-pale rounded-md p-4">
-      <div className="font-medium flex items-center justify-between">
-        Título del capítulo
-        <Button onClick={toggleEdit} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
+    <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
+      <div className="font-medium flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-x-2">
+            Título del capítulo
+            {initialData.title ? (
+                <div className="flex items-center justify-center rounded-none bg-brand px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Completado</div>
+            ) : (
+                <div className="flex items-center justify-center rounded-none bg-red-500 px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Incompleto</div>
+            )}
+        </div>
+        <Button onClick={toggleEdit} variant={isEditing ? "destructive" : "outline"}
+          className={isEditing 
+            ? "rounded-none font-bold uppercase tracking-wider"
+            : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}>
           {isEditing ? "Cancelar" : <><Pencil className="h-4 w-4 mr-2" /> Editar título</>}
         </Button>
       </div>
@@ -46,7 +56,7 @@ export const ChapterTitleForm = ({ initialData, courseId, chapterId }) => {
             className="bg-white" 
             required 
           />
-          <Button disabled={!title || isLoading} type="submit">Guardar</Button>
+          <Button disabled={!title || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
         </form>
       )}
     </div>
@@ -74,10 +84,20 @@ export const ChapterDescriptionForm = ({ initialData, courseId, chapterId }) => 
   };
 
   return (
-    <div className="mt-6 border bg-brand-pale rounded-md p-4">
-      <div className="font-medium flex items-center justify-between">
-        Descripción del capítulo
-        <Button onClick={toggleEdit} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
+    <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
+      <div className="font-medium flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-x-2">
+            Descripción del capítulo
+            {initialData.description ? (
+                <div className="flex items-center justify-center rounded-none bg-brand px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Completado</div>
+            ) : (
+                <div className="flex items-center justify-center rounded-none bg-red-500 px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Incompleto</div>
+            )}
+        </div>
+        <Button onClick={toggleEdit} variant={isEditing ? "destructive" : "outline"}
+          className={isEditing 
+            ? "rounded-none font-bold uppercase tracking-wider"
+            : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}>
           {isEditing ? "Cancelar" : <><Pencil className="h-4 w-4 mr-2" /> Editar descripción</>}
         </Button>
       </div>
@@ -94,7 +114,7 @@ export const ChapterDescriptionForm = ({ initialData, courseId, chapterId }) => 
             value={description}
             onChange={(val) => setDescription(val)}
           />
-          <Button disabled={!description || isLoading} type="submit">Guardar</Button>
+          <Button disabled={!description || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
         </form>
       )}
     </div>
@@ -126,10 +146,20 @@ export const ChapterAccessForm = ({ initialData, courseId, chapterId, courseIsFr
   }
 
   return (
-    <div className="mt-6 border bg-brand-pale rounded-md p-4">
-      <div className="font-medium flex items-center justify-between">
-        Configuración de acceso 
-        <Button onClick={toggleEdit} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
+    <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
+      <div className="font-medium flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-x-2">
+            Configuración de acceso
+            {initialData.is_free !== null ? (
+                <div className="flex items-center justify-center rounded-none bg-brand px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Completado</div>
+            ) : (
+                <div className="flex items-center justify-center rounded-none bg-red-500 px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Incompleto</div>
+            )}
+        </div>
+        <Button onClick={toggleEdit} variant={isEditing ? "destructive" : "outline"}
+          className={isEditing 
+            ? "rounded-none font-bold uppercase tracking-wider"
+            : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}>
           {isEditing ? "Cancelar" : <><Pencil className="h-4 w-4 mr-2" /> Editar acceso</>}
         </Button>
       </div>
@@ -142,13 +172,13 @@ export const ChapterAccessForm = ({ initialData, courseId, chapterId, courseIsFr
       )}
       {isEditing && (
         <form onSubmit={onSubmit} className="space-y-4 mt-4">
-          <div className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 bg-white">
+          <div className="flex flex-row items-start space-x-3 space-y-0 rounded-none border p-4 bg-white">
             <input 
               type="checkbox"
               id="is_free_checkbox"
               checked={isFree}
               onChange={(e) => setIsFree(e.target.checked)}
-              className="mt-1 h-4 w-4 text-brand-soft rounded border-brand-soft focus:ring-brand-soft"
+              className="mt-1 h-4 w-4 text-brand rounded-none border-brand focus:ring-brand"
             />
             <div className="space-y-1 leading-none">
               <label htmlFor="is_free_checkbox" className="text-sm font-medium text-brand-text cursor-pointer">
@@ -159,7 +189,7 @@ export const ChapterAccessForm = ({ initialData, courseId, chapterId, courseIsFr
               </p>
             </div>
           </div>
-          <Button disabled={isLoading} type="submit">Guardar</Button>
+          <Button disabled={isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
         </form>
       )}
     </div>

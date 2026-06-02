@@ -27,9 +27,9 @@ export const TitleForm = ({ initialData, courseId, examId }) => {
     }
 
     return (
-        <div className="relative mt-6 border bg-brand-pale rounded-md p-4">
-            {isUpdating && <div className="absolute h-full w-full bg-brand-pale/40 top-0 right-0 rounded-md flex items-center justify-center z-10"><Loader2 className="animate-spin h-6 w-6 text-brand-soft" /></div>}
-            <div className="font-medium flex items-center justify-between">
+        <div className="relative relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
+            {isUpdating && <div className="absolute h-full w-full bg-brand-pale/40 top-0 right-0 rounded-none flex items-center justify-center z-10"><Loader2 className="animate-spin h-6 w-6 text-brand-soft" /></div>}
+            <div className="font-medium flex flex-wrap items-center justify-between gap-2">
                 Título del examen
                 <Button onClick={toggleEdit} variant="ghost">
                     {isEditing ? "Cancelar" : <><Pencil className="h-4 w-4 mr-2" /> Editar</>}
@@ -39,7 +39,7 @@ export const TitleForm = ({ initialData, courseId, examId }) => {
             {isEditing && (
                 <form onSubmit={onSubmit} className="space-y-4 mt-4">
                     <Input disabled={isUpdating} value={title} onChange={(e) => setTitle(e.target.value)} required />
-                    <Button disabled={!title || isUpdating} type="submit">Guardar</Button>
+                    <Button disabled={!title || isUpdating} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
                 </form>
             )}
         </div>
@@ -67,9 +67,9 @@ export const DescriptionForm = ({ initialData, courseId, examId }) => {
     }
 
     return (
-        <div className="relative mt-6 border bg-brand-pale rounded-md p-4">
-            {isUpdating && <div className="absolute h-full w-full bg-brand-pale/40 top-0 right-0 rounded-md flex items-center justify-center z-10"><Loader2 className="animate-spin h-6 w-6 text-brand-soft" /></div>}
-            <div className="font-medium flex items-center justify-between">
+        <div className="relative relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
+            {isUpdating && <div className="absolute h-full w-full bg-brand-pale/40 top-0 right-0 rounded-none flex items-center justify-center z-10"><Loader2 className="animate-spin h-6 w-6 text-brand-soft" /></div>}
+            <div className="font-medium flex flex-wrap items-center justify-between gap-2">
                 Descripción del examen (Max. 200 caracteres)
                 <Button onClick={toggleEdit} variant="ghost">
                     {isEditing ? "Cancelar" : <><Pencil className="h-4 w-4 mr-2" /> Editar</>}
@@ -84,7 +84,7 @@ export const DescriptionForm = ({ initialData, courseId, examId }) => {
                     <div className="text-xs text-brand-ink flex justify-end">
                         {description.length}/200
                     </div>
-                    <Button disabled={!description || description.length > 200 || isUpdating} type="submit">Guardar</Button>
+                    <Button disabled={!description || description.length > 200 || isUpdating} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
                 </form>
             )}
         </div>
@@ -140,13 +140,13 @@ export const SettingsForm = ({ initialData, courseId, examId }) => {
     }
 
     return (
-        <div className="relative mt-6 border bg-brand-pale rounded-md p-4">
+        <div className="relative relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
             {isUpdating && (
-                <div className="absolute h-full w-full bg-brand-pale/40 top-0 left-0 rounded-md flex items-center justify-center z-10">
+                <div className="absolute h-full w-full bg-brand-pale/40 top-0 left-0 rounded-none flex items-center justify-center z-10">
                     <Loader2 className="animate-spin h-6 w-6 text-brand-soft" />
                 </div>
             )}
-            <div className="font-medium flex items-center justify-between">
+            <div className="font-medium flex flex-wrap items-center justify-between gap-2">
                 Opciones de calificación
                 <Button onClick={toggleEdit} variant="ghost">
                     {isEditing ? "Cancelar" : <><Pencil className="h-4 w-4 mr-2" /> Editar</>}
@@ -216,7 +216,7 @@ export const SettingsForm = ({ initialData, courseId, examId }) => {
                         </div>
                     </div>
                     
-                    <Button disabled={isUpdating} type="submit">Guardar</Button>
+                    <Button disabled={isUpdating} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
                 </form>
             )}
         </div>

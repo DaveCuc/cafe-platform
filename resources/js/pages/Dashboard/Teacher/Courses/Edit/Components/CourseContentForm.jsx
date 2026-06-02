@@ -66,33 +66,28 @@ export const CourseContentForm = ({ initialData, courseId }) => {
   const hasDrafts = hasContent && combinedContent.some(item => !item.is_published);
 
   return (
-    <div className="relative mt-6 border bg-brand-pale rounded-md p-4">
+    <div className="relative relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
       {isUpdating && (
-        <div className="absolute h-full w-full bg-brand-pale/40 top-0 right-0 rounded-md flex items-center justify-center z-10">
+        <div className="absolute h-full w-full bg-brand-pale/40 top-0 right-0 rounded-none flex items-center justify-center z-10">
           <Loader2 className="animate-spin h-6 w-6 text-brand-soft" />
         </div>
       )}
-      <div className="font-medium flex items-center justify-between pb-3">
+      <div className="font-medium flex flex-wrap items-center justify-between gap-2 pb-3">
         <div className="flex items-center gap-x-2">
           Contenido del curso
-          {allPublished && (
-            <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-semibold">
-              Completo
-            </span>
-          )}
-          {hasDrafts && (
-            <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-semibold">
-              Borradores pendientes
-            </span>
+          {hasContent && allPublished ? (
+            <div className="flex items-center justify-center rounded-none bg-brand px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Completado</div>
+          ) : (
+            <div className="flex items-center justify-center rounded-none bg-red-500 px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Incompleto</div>
           )}
         </div>
         
         {!isCreating && (
           <div className="flex gap-2">
-            <Button onClick={() => toggleCreating('chapter')} variant="ghost" size="sm" className="bg-white hover:bg-brand-soft hover:text-white">
+            <Button onClick={() => toggleCreating('chapter')} variant="outline" size="sm" className="bg-white hover:bg-black hover:text-white border-black text-black rounded-none font-bold uppercase tracking-wider">
               <BookOpen className="h-4 w-4 mr-2" /> Añadir Capítulo
             </Button>
-            <Button onClick={() => toggleCreating('exam')} variant="ghost" size="sm" className="bg-white hover:bg-brand-soft hover:text-white">
+            <Button onClick={() => toggleCreating('exam')} variant="outline" size="sm" className="bg-white hover:bg-black hover:text-white border-black text-black rounded-none font-bold uppercase tracking-wider">
               <ClipboardList className="h-4 w-4 mr-2" /> Añadir Examen
             </Button>
           </div>
@@ -114,7 +109,7 @@ export const CourseContentForm = ({ initialData, courseId }) => {
               className="bg-white"
               required
             />
-            <Button disabled={!title || isUpdating} type="submit">
+            <Button disabled={!title || isUpdating} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">
                 {isCreatingType === 'chapter' ? "Crear Capítulo" : "Crear Examen"}
             </Button>
         </form>

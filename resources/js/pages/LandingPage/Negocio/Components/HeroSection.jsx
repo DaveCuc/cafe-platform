@@ -46,14 +46,14 @@ export default function HeroSection({ trade }) {
                 >
                     {/* Entrance Animation */}
                     <motion.div {...fadeUp} className="w-full flex justify-center h-full">
-                        <div className="relative z-10 h-full flex items-end w-full pb-40">
+                        <div className="relative z-10 h-full flex items-end w-full pb-32">
                             <div className="container mx-auto px-4 md:px-8">
                                 <div>
-                                    <Badge className="inline-flex items-center rounded-full border border-white/30 bg-white/15 px-4 py-1 text-sm font-semibold uppercase tracking-wider text-white backdrop-blur-md shadow-lg md:px-6 md:py-2 md:text-base">
+                                    <Badge className="inline-flex items-center rounded-none border border-white/40 bg-white/10 px-5 py-2 text-sm font-bold uppercase tracking-widest text-white backdrop-blur-md shadow-lg md:text-base mb-2">
                                         Región
                                     </Badge>
-                                    <h2 className='text-5xl md:text-9xl font-bold mb-4 drop-shadow-md pt-5'>{regionName}</h2>
-                                    <p className="text-2xl md:text-6xl font-light drop-shadow-md">{municipioName}</p>
+                                    <h2 className='text-6xl md:text-8xl lg:text-9xl font-extrabold mb-2 drop-shadow-xl pt-2 tracking-tight'>{regionName}</h2>
+                                    <p className="text-3xl md:text-5xl lg:text-6xl font-medium drop-shadow-lg opacity-90">{municipioName}</p>
                                 </div>
                             </div>
                         </div>

@@ -14,35 +14,35 @@ export default function EventBanner({ event, isScrolled }) {
   const isPastEvent = event.event_date ? new Date(event.event_date.substring(0, 10) + 'T23:59:59') < new Date() : false;
 
   return (
-    <div className={`sticky top-[80px] z-40 bg-white border-b border-brand-panel shadow-sm transition-all duration-300 ${isScrolled ? 'py-3' : 'py-5'}`}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-6 text-brand-text font-medium">
+    <div className={`sticky top-[80px] z-40 bg-brand-mint shadow-xl transition-all duration-300 ${isScrolled ? 'py-4' : 'py-6'}`}>
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex flex-col sm:flex-row items-center gap-6 text-brand-darker">
           {event.event_date && (
-            <div className="flex items-center">
-              <Calendar className="w-5 h-5 mr-2 text-brand" />
+            <div className="flex items-center text-lg md:text-xl font-bold uppercase tracking-wider">
+              <Calendar className="w-6 h-6 md:w-8 md:h-8 mr-3 text-brand-darker" />
               {formatDate(event.event_date)}
             </div>
           )}
           {event.event_time && (
-            <div className="flex items-center">
-              <Clock className="w-5 h-5 mr-2 text-brand" />
+            <div className="flex items-center text-lg md:text-xl font-bold uppercase tracking-wider">
+              <Clock className="w-6 h-6 md:w-8 md:h-8 mr-3 text-brand-darker" />
               {event.event_time}
             </div>
           )}
         </div>
-        <div>
+        <div className="w-full md:w-auto">
           {isPastEvent ? (
-            <Button size="lg" disabled className="bg-brand-panel text-brand-ink cursor-not-allowed px-8 shadow-sm font-bold">
+            <Button size="lg" disabled className="w-full md:w-auto bg-[#e5e5e5] text-[#9ca3af] cursor-not-allowed px-10 py-6 md:py-8 rounded-none text-base md:text-lg font-extrabold tracking-widest uppercase">
               Evento Finalizado
             </Button>
           ) : event.rsvp_link ? (
-            <a href={event.rsvp_link} target="_blank" rel="noopener noreferrer">
-              <Button size="lg" className="bg-brand hover:bg-brand-dark text-white font-bold px-8 shadow-md">
-                RSVP / Registrarme <ExternalLink className="w-4 h-4 ml-2" />
+            <a href={event.rsvp_link} target="_blank" rel="noopener noreferrer" className="block w-full md:w-auto">
+              <Button size="lg" className="w-full md:w-auto bg-white hover:bg-gray-100 text-brand rounded-none px-10 py-6 md:py-8 text-base md:text-lg font-extrabold tracking-widest uppercase transition-colors shadow-sm">
+                RSVP / Registrarme <ExternalLink className="w-5 h-5 ml-3" />
               </Button>
             </a>
           ) : (
-            <Button size="lg" disabled className="bg-brand-panel text-brand-ink cursor-not-allowed font-bold">
+            <Button size="lg" disabled className="w-full md:w-auto bg-[#e5e5e5] text-[#9ca3af] cursor-not-allowed px-10 py-6 md:py-8 rounded-none text-base md:text-lg font-extrabold tracking-widest uppercase">
               Registro no disponible
             </Button>
           )}

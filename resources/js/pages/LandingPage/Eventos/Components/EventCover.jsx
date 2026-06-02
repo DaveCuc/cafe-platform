@@ -3,36 +3,46 @@ import { MapPin } from 'lucide-react';
 
 export default function EventCover({ event }) {
   return (
-    <div className=" relative pt-20">
-      <div className="w-full h-[40vh] md:h-[50vh] bg-brand-dark relative">
-        {event.cover_image_url && (
-          <img
-            src={event.cover_image_url}
-            alt={event.title}
-            className="w-full h-full object-cover opacity-60"
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/40 to-transparent" />
-        <div className="absolute bottom-0 left-0 w-full">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 pb-10 w-full">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white max-w-4xl leading-tight">
-              {event.title}
-            </h1>
-            {event.short_description && (
-              <p className="mt-4 text-lg md:text-xl text-brand-mint max-w-2xl">
-                {event.short_description}
-              </p>
+    <div className="pt-20">
+      <div className="w-full flex flex-col md:flex-row min-h-[50vh] md:min-h-[60vh] bg-brand">
+        
+        {/* Bloque sólido de texto */}
+        <div className="w-full md:w-1/2 p-8 md:p-16 lg:p-20 flex flex-col justify-center bg-brand z-10">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight uppercase tracking-widest">
+            {event.title}
+          </h1>
+          
+          {event.short_description && (
+            <p className="mt-8 text-xl text-brand-mint max-w-2xl leading-relaxed">
+              {event.short_description}
+            </p>
+          )}
+          
+          <div className="flex items-center gap-4 mt-10 text-white font-medium">
+            {event.location && (
+              <div className="flex items-center text-lg bg-black/20 p-4">
+                <MapPin className="w-6 h-6 mr-3 text-brand-mint" />
+                {event.location}
+              </div>
             )}
-            <div className="flex items-center gap-4 mt-6 text-brand-mint font-medium">
-              {event.location && (
-                <div className="flex items-center">
-                  <MapPin className="w-5 h-5 mr-2" />
-                  {event.location}
-                </div>
-              )}
-            </div>
           </div>
         </div>
+
+        {/* Bloque de Imagen */}
+        <div className="w-full md:w-1/2 h-[40vh] md:h-auto relative">
+          {event.cover_image_url ? (
+            <img
+              src={event.cover_image_url}
+              alt={event.title}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="w-full h-full bg-brand flex items-center justify-center">
+              <span className="text-white/20 font-bold uppercase tracking-widest">Sin Portada</span>
+            </div>
+          )}
+        </div>
+        
       </div>
     </div>
   );

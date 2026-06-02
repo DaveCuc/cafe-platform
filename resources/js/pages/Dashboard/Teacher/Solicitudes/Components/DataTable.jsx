@@ -40,7 +40,7 @@ export function DataTable({ columns, data }) {
 
     return (
         <div>
-            <div className="flex items-center justify-between py-4">
+            <div className="flex flex-wrap items-center justify-between gap-2 py-4">
                 <Input
                     placeholder="Filtrar solicitudes..."
                     value={table.getColumn("comercial_name")?.getFilterValue() || ""}
@@ -51,7 +51,7 @@ export function DataTable({ columns, data }) {
                 />
             </div>
 
-            <div className="overflow-hidden rounded-md border bg-white">
+            <div className="overflow-hidden rounded-none border bg-white">
                 <Table>
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (

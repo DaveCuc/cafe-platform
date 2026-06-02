@@ -57,10 +57,23 @@ export function ContentGalleryForm({ initialData, tradeId }) {
     };
 
     return (
-        <div className="mt-6 rounded-md border bg-brand-pale p-4">
+        <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between font-medium">
-                Fotografías del negocio
-                <Button onClick={() => setIsEditing((current) => !current)} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
+                <div className="flex items-center gap-x-2">
+                    Fotografías del negocio
+                    {gallery.length > 0 && (
+                        <div className="flex items-center justify-center rounded-none bg-brand px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">
+                            Completado
+                        </div>
+                    )}
+                </div>
+                <Button 
+                    onClick={() => setIsEditing((current) => !current)} 
+                    variant={isEditing ? "destructive" : "outline"}
+                    className={isEditing 
+                        ? "rounded-none font-bold uppercase tracking-wider" 
+                        : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}
+                >
                     {isEditing ? "Cerrar" : <><PlusCircle className="mr-2 h-4 w-4" />Gestionar</>}
                 </Button>
             </div>
@@ -73,7 +86,7 @@ export function ContentGalleryForm({ initialData, tradeId }) {
             <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3">
                 {gallery.length ? (
                     gallery.map((imageUrl) => (
-                        <div key={imageUrl} className="relative overflow-hidden rounded-md border bg-white">
+                        <div key={imageUrl} className="relative overflow-hidden rounded-none border bg-white">
                             <img src={imageUrl} alt="Contenido del negocio" className="h-28 w-full object-cover" />
                             {isEditing && (
                                 <Button
@@ -89,7 +102,7 @@ export function ContentGalleryForm({ initialData, tradeId }) {
                         </div>
                     ))
                 ) : (
-                    <div className="col-span-full flex h-28 items-center justify-center rounded-md border bg-white text-sm text-brand-ink">
+                    <div className="col-span-full flex h-28 items-center justify-center rounded-none border bg-white text-sm text-brand-ink">
                         <ImageIcon className="mr-2 h-4 w-4" />
                         Sin fotografías de contenido
                     </div>
@@ -103,9 +116,9 @@ export function ContentGalleryForm({ initialData, tradeId }) {
                         accept="image/*"
                         multiple
                         onChange={(e) => setFiles(Array.from(e.target.files || []))}
-                        className="w-full cursor-pointer text-sm text-brand-ink file:mr-4 file:rounded-md file:border-0 file:bg-brand-soft file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-brand-dark"
+                        className="w-full cursor-pointer text-sm text-brand-ink file:mr-4 file:rounded-none file:border-0 file:bg-brand-soft file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-brand-dark"
                     />
-                    <Button disabled={!files.length || isLoading || !remainingSlots} type="submit">
+                    <Button disabled={!files.length || isLoading || !remainingSlots} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">
                         Subir fotografía{files.length > 1 ? "s" : ""}
                     </Button>
                 </form>

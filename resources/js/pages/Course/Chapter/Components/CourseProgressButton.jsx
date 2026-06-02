@@ -30,8 +30,8 @@ export const CourseProgressButton = ({ chapterId, courseId, nextChapterId, isCom
       onClick={onClick} 
       disabled={isLoading} 
       size="sm" 
-      variant={isCompleted ? "outline" : "default"} 
-      className={`w-full md:w-auto ${isCompleted ? "border-emerald-700 text-emerald-700 hover:bg-emerald-50" : "bg-emerald-700 hover:bg-emerald-800 text-white"}`}
+      variant="outline"
+      className={`w-full md:w-auto rounded-none font-bold uppercase tracking-wider transition-colors ${isCompleted ? "border-black text-black bg-white hover:bg-black hover:text-white dark:border-gray-300 dark:text-gray-300 dark:bg-transparent dark:hover:bg-gray-300 dark:hover:text-black" : "bg-brand border-brand text-white hover:bg-brand-darker dark:bg-brand-dark dark:border-brand-dark dark:hover:bg-brand-darker"}`}
     >
       {isCompleted ? "Marcar como incompleto" : "Marcar como completado"}
       {isCompleted ? <XCircle className="h-4 w-4 ml-2" /> : <CheckCircle className="h-4 w-4 ml-2" />}

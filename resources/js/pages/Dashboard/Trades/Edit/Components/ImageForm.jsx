@@ -33,10 +33,23 @@ export const ImageForm = ({ initialData, tradeId }) => {
     };
 
     return (
-        <div className="mt-6 rounded-md border bg-brand-pale p-4">
+        <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between font-medium">
-                Foto del negocio
-                <Button onClick={toggleEdit} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
+                <div className="flex items-center gap-x-2">
+                    Foto del negocio
+                    {initialData.image_url && (
+                        <div className="flex items-center justify-center rounded-none bg-brand px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">
+                            Completado
+                        </div>
+                    )}
+                </div>
+                <Button 
+                    onClick={toggleEdit} 
+                    variant={isEditing ? "destructive" : "outline"}
+                    className={isEditing 
+                        ? "rounded-none font-bold uppercase tracking-wider" 
+                        : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}
+                >
                     {isEditing && <>Cancelar</>}
                     {!isEditing && !initialData.image_url && (
                         <>
@@ -55,14 +68,14 @@ export const ImageForm = ({ initialData, tradeId }) => {
 
             {!isEditing &&
                 (!initialData.image_url ? (
-                    <div className="mt-2 flex h-60 items-center justify-center rounded-md bg-brand-pale">
+                    <div className="mt-2 flex h-60 items-center justify-center rounded-none bg-brand-pale">
                         <ImageIcon className="h-10 w-10 text-brand-ink" />
                     </div>
                 ) : (
                     <div className="relative mt-2 aspect-video">
                         <img
                             alt="Negocio"
-                            className="h-full w-full rounded-md object-cover"
+                            className="h-full w-full rounded-none object-cover"
                             src={initialData.image_url}
                         />
                     </div>
@@ -74,9 +87,9 @@ export const ImageForm = ({ initialData, tradeId }) => {
                         type="file"
                         accept="image/*"
                         onChange={(e) => setFile(e.target.files[0])}
-                        className="w-full cursor-pointer text-sm text-brand-ink file:mr-4 file:rounded-md file:border-0 file:bg-brand-soft file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-brand-dark"
+                        className="w-full cursor-pointer text-sm text-brand-ink file:mr-4 file:rounded-none file:border-0 file:bg-brand-soft file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-brand-dark"
                     />
-                    <Button disabled={!file || isLoading} type="submit">
+                    <Button disabled={!file || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">
                         Guardar imagen
                     </Button>
                     <div className="mt-4 text-xs text-muted-foreground">

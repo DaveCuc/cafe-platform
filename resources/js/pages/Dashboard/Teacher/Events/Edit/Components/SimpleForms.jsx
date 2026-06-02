@@ -28,10 +28,20 @@ export const TitleForm = ({ initialData, articleId }) => {
   };
 
   return (
-    <div className="mt-6 border bg-brand-pale rounded-md p-4">
-      <div className="font-medium flex items-center justify-between">
-        Título del artículo
-        <Button onClick={toggleEdit} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
+    <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
+      <div className="font-medium flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-x-2">
+            Título del evento
+            {initialData.title ? (
+                <div className="flex items-center justify-center rounded-none bg-brand px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Completado</div>
+            ) : (
+                <div className="flex items-center justify-center rounded-none bg-red-500 px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Incompleto</div>
+            )}
+        </div>
+        <Button onClick={toggleEdit} variant={isEditing ? "destructive" : "outline"}
+          className={isEditing 
+            ? "rounded-none font-bold uppercase tracking-wider"
+            : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}>
           {isEditing ? "Cancelar" : <><Pencil className="h-4 w-4 mr-2 " /> Editar título</>}
         </Button>
       </div>
@@ -46,7 +56,7 @@ export const TitleForm = ({ initialData, articleId }) => {
             className="bg-white" 
             required 
           />
-          <Button disabled={!title || isLoading} type="submit">Guardar</Button>
+          <Button disabled={!title || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
         </form>
       )}
     </div>
@@ -74,10 +84,20 @@ export const ShortDescriptionForm = ({ initialData, articleId }) => {
   };
 
   return (
-    <div className="mt-6 border bg-brand-pale rounded-md p-4">
-      <div className="font-medium flex items-center justify-between">
-        Descripción corta (Max. 200)
-        <Button onClick={toggleEdit} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
+    <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
+      <div className="font-medium flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-x-2">
+            Descripción Corta
+            {initialData.short_description ? (
+                <div className="flex items-center justify-center rounded-none bg-brand px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Completado</div>
+            ) : (
+                <div className="flex items-center justify-center rounded-none bg-red-500 px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Incompleto</div>
+            )}
+        </div> (Max. 200)
+        <Button onClick={toggleEdit} variant={isEditing ? "destructive" : "outline"}
+          className={isEditing 
+            ? "rounded-none font-bold uppercase tracking-wider"
+            : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}>
           {isEditing ? "Cancelar" : <><Pencil className="h-4 w-4 mr-2" /> Editar descripción corta</>}
         </Button>
       </div>
@@ -100,7 +120,7 @@ export const ShortDescriptionForm = ({ initialData, articleId }) => {
           <div className="text-xs text-brand-ink flex justify-end">
              {shortDescription.length}/200
           </div>
-          <Button disabled={!shortDescription || shortDescription.length > 200 || isLoading} type="submit">Guardar</Button>
+          <Button disabled={!shortDescription || shortDescription.length > 200 || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
         </form>
       )}
     </div>
@@ -128,10 +148,20 @@ export const ContentForm = ({ initialData, articleId }) => {
   };
 
   return (
-    <div className="mt-6 border bg-brand-pale rounded-md p-4">
-      <div className="font-medium flex items-center justify-between">
-        Contenido del artículo
-        <Button onClick={toggleEdit} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
+    <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
+      <div className="font-medium flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-x-2">
+            Contenido del evento
+            {initialData.content ? (
+                <div className="flex items-center justify-center rounded-none bg-brand px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Completado</div>
+            ) : (
+                <div className="flex items-center justify-center rounded-none bg-red-500 px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Incompleto</div>
+            )}
+        </div>
+        <Button onClick={toggleEdit} variant={isEditing ? "destructive" : "outline"}
+          className={isEditing 
+            ? "rounded-none font-bold uppercase tracking-wider"
+            : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}>
           {isEditing ? "Cancelar" : <><Pencil className="h-4 w-4 mr-2" /> Editar contenido</>}
         </Button>
       </div>
@@ -148,7 +178,7 @@ export const ContentForm = ({ initialData, articleId }) => {
             value={content}
             onChange={(val) => setContent(val)}
           />
-          <Button disabled={!content || isLoading} type="submit">Guardar</Button>
+          <Button disabled={!content || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
         </form>
       )}
     </div>

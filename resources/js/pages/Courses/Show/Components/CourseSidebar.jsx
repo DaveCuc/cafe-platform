@@ -1,4 +1,4 @@
-﻿import { Link } from "@inertiajs/react";
+import { Link } from "@inertiajs/react";
 import { CheckCircle, Lock, PlayCircle, BookOpenCheck, FileBadge } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CourseProgress } from "@/Components/CourseCard"; // Simplificado del anterior
@@ -12,18 +12,18 @@ const CourseSidebarItem = ({ label, id, isCompleted, courseId, isLocked, isActiv
       href={linkHref}
       preserveState
       className={cn(
-        "flex items-center gap-x-2 text-brand-ink text-sm font-[500] pl-6 transition-all hover:text-brand-text hover:bg-brand-soft/20",
-        isActive && "text-brand-text bg-brand-soft/20 hover:bg-brand-soft/20 hover:text-brand-text",
-        isCompleted && "bg-green-600 text-white hover:text-white hover:bg-green-700",
-        isCompleted && isActive && "bg-green-700 text-white hover:text-white",
+        "flex items-center gap-x-2 text-brand-ink dark:text-gray-300 text-sm font-[500] pl-6 transition-all hover:text-brand-text hover:bg-brand/10 dark:hover:bg-brand/20",
+        isActive && "text-brand-text dark:text-white bg-brand/10 dark:bg-brand/20 hover:bg-brand/10 hover:text-brand-text",
+        isCompleted && "bg-brand text-white hover:text-white hover:bg-brand-darker dark:bg-brand-dark dark:hover:bg-brand-darker",
+        isCompleted && isActive && "bg-brand-darker text-white hover:text-white",
       )}
     >
       <div className="flex items-center py-4">
         <Icon
           size={18}
           className={cn(
-            "text-brand-ink mr-2",
-            isActive && "text-brand-text",
+            "text-brand-ink dark:text-gray-400 mr-2",
+            isActive && "text-brand-text dark:text-white",
             isCompleted && "text-white"
           )}
         />
@@ -42,9 +42,9 @@ const CourseSidebarItem = ({ label, id, isCompleted, courseId, isLocked, isActiv
 
 export const CourseSidebar = ({ course, progressCount, currentChapterId, currentExamId, purchase }) => {
   return (
-    <div className="h-full border-r flex flex-col overflow-y-auto shadow-sm bg-white">
-      <div className="p-8 flex flex-col border-b">
-        <h1 className="font-semibold">{course.title}</h1>
+    <div className="h-full border-r dark:border-brand-soft/20 flex flex-col overflow-y-auto shadow-sm bg-white dark:bg-[#252525]">
+      <div className="p-8 flex flex-col border-b dark:border-brand-soft/20">
+        <h1 className="font-semibold dark:text-white">{course.title}</h1>
         {purchase && (
           <div className="mt-10">
             <CourseProgress value={progressCount} />
@@ -99,14 +99,14 @@ export const CourseSidebar = ({ course, progressCount, currentChapterId, current
 
         {progressCount === 100 && (
           <>
-            <div className="px-6 py-2 text-xs font-semibold text-brand-ink mt-2 uppercase tracking-wide">Certificado</div>
+            <div className="px-6 py-2 text-xs font-semibold text-brand-ink dark:text-gray-400 mt-2 uppercase tracking-wide">Certificado</div>
             <a
               href={`/courses/${course.id}/certificate`}
-              className="flex items-center gap-x-2 text-brand-ink text-sm font-[500] pl-6 py-4 transition-all hover:text-brand-text hover:bg-brand-soft/20"
+              className="flex items-center gap-x-2 text-brand-ink dark:text-gray-300 text-sm font-[500] pl-6 py-4 transition-all hover:text-brand-text hover:bg-brand/10 dark:hover:bg-brand/20"
               target="_blank"
               rel="noreferrer"
             >
-              <FileBadge size={18} className="text-emerald-700 mr-2" />
+              <FileBadge size={18} className="text-brand mr-2" />
               Descargar Certificado
             </a>
           </>

@@ -51,29 +51,29 @@ export const CourseContentList = ({ items, onReorder, onEditChapter, onEditExam 
                 {(provided) => (
                   <div
                     className={cn(
-                      "flex items-center gap-x-2 bg-white border-brand-soft border text-brand-ink rounded-md mb-4 text-sm",
-                      item.is_published && "bg-emerald-100/50 border-emerald-200 text-emerald-600"
+                      "flex flex-wrap items-center justify-between gap-2 bg-white text-brand-ink rounded-none mb-4 text-sm shadow-sm",
+                      item.is_published && "bg-brand-pale text-brand"
                     )}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                   >
                     <div
                       className={cn(
-                        "px-2 py-3 border-r border-r-brand-soft hover:bg-brand-pale rounded-l-md transition",
-                        item.is_published && "border-r-emerald-200 hover:bg-emerald-100"
+                        "px-2 py-3 hover:bg-gray-100 transition",
+                        item.is_published && "hover:bg-brand/20"
                       )}
                       {...provided.dragHandleProps}
                     >
                       <Grip className="h-5 w-5" />
                     </div>
                     <div className="flex items-center gap-x-2 px-2">
-                      {item.type === 'chapter' ? <BookOpen className="h-4 w-4 text-brand-soft" /> : <ClipboardList className="h-4 w-4 text-brand-soft" />}
+                      {item.type === 'chapter' ? <BookOpen className="h-4 w-4" /> : <ClipboardList className="h-4 w-4" />}
                       <span className="font-medium">{item.title}</span>
                     </div>
                     <div className="ml-auto pr-2 flex items-center gap-x-2">
                       <span className="text-xs text-gray-500 uppercase font-bold tracking-wider hidden sm:block">{item.type === 'chapter' ? 'Capítulo' : 'Examen'}</span>
                       {item.type === 'chapter' && item.is_free && <Badge>Gratis</Badge>}
-                      <Badge className={cn("bg-brand-soft", item.is_published && "bg-[#04bd7e] text-white hover:bg-[#04bd7e]/80")}>
+                      <Badge className={cn("bg-gray-200 text-gray-700 rounded-none uppercase font-bold tracking-wider", item.is_published && "bg-brand text-white hover:bg-brand-darker")}>
                         {item.is_published ? "Publicado" : "Borrador"}
                       </Badge>
                       <Pencil

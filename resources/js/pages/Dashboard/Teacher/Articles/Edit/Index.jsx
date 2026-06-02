@@ -44,7 +44,7 @@ export default function ArticleEditor({ article, categories }) {
           <ArrowLeft className="h-4 w-4 mr-2" />
           Volver a la lista de artículos
         </Link>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex flex-col gap-y-2">
             <h1 className="text-2xl font-bold">Configuración del artículo</h1>
             <span className="text-sm text-brand-text">
@@ -69,8 +69,8 @@ export default function ArticleEditor({ article, categories }) {
             <TitleForm initialData={article} articleId={article.id} />
             <ShortDescriptionForm initialData={article} articleId={article.id} />
 
-            <div className="mt-6 border bg-brand-pale rounded-md p-4">
-              <div className="font-medium flex items-center justify-between">
+            <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
+              <div className="font-medium flex flex-wrap items-center justify-between gap-2">
                 Autor
               </div>
               <Input

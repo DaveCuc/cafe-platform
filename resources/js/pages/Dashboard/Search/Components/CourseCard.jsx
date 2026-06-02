@@ -15,8 +15,8 @@ export const CourseCard = ({ id, title, imageUrl, chaptersLength, price, progres
 
   return (
     <Link href={`/courses/${id}`}>
-      <div className="group hover:shadow-sm transition overflow-hidden border rounded-lg p-3 h-full">
-        <div className="relative w-full aspect-video rounded-md overflow-hidden bg-brand-pale flex items-center justify-center">
+      <div className="group bg-white dark:bg-[#252525] border-0 shadow-lg dark:shadow-xl hover:shadow-md hover:translate-y-1 transition-all overflow-hidden rounded-none flex flex-col h-full">
+        <div className="relative w-full aspect-video rounded-none overflow-hidden bg-brand-pale dark:bg-black border-0">
           <img 
             className="object-cover w-full h-full" 
             alt={title} 
@@ -24,28 +24,28 @@ export const CourseCard = ({ id, title, imageUrl, chaptersLength, price, progres
             onError={(e) => { e.target.onerror = null; e.target.src = '/logo.svg'; }} 
           />
         </div>
-        <div className="flex flex-col pt-2 h-32">
-          <div className="text-lg md:text-base font-medium group-hover:text-brand-text transition line-clamp-2">
+        <div className="flex flex-col p-6 h-auto min-h-[10rem] flex-grow">
+          <div className="text-xl md:text-2xl font-bold group-hover:text-brand transition text-brand-ink dark:text-white uppercase tracking-wide">
             {title}
           </div>
-          <p className="text-xs text-muted-foreground">{category}</p>
-          <div className="my-3 flex items-center gap-x-2 text-sm md:text-xs">
-            <div className="flex items-center gap-x-1 text-brand-ink">
+          <p className="text-sm font-semibold text-brand-ink/70 dark:text-gray-400 mt-2">{category}</p>
+          <div className="my-4 flex items-center gap-x-2 text-sm font-semibold text-brand-ink dark:text-gray-300">
+            <div className="flex items-center gap-x-1">
               <IconBadge size="sm" icon={BookOpen} />
               <span>{chaptersLength} {chaptersLength === 1 ? "Capítulo" : "Capítulos"}</span>
             </div>
           </div>
           
-          <div className="mt-auto">
+          <div className="mt-auto pt-4 border-t-0">
             {progress !== null ? (
-              <div className="w-full">
-                 <p className="text-xs font-semibold text-emerald-700">{Math.round(progress)}% Completado</p>
-                 <div className="w-full bg-brand-soft rounded-full h-1.5 mt-1 overflow-hidden">
-                   <div className="bg-emerald-700 h-1.5 rounded-full transition-all" style={{ width: `${progress}%` }}></div>
+              <div className="w-full pt-2">
+                 <p className="text-sm font-bold text-brand dark:text-white mb-2 uppercase tracking-wider">{Math.round(progress)}% Completado</p>
+                 <div className="w-full bg-brand-pale dark:bg-gray-700 rounded-none h-2 border-0">
+                   <div className="bg-brand-dark dark:bg-white h-2 rounded-none transition-all" style={{ width: `${progress}%` }}></div>
                  </div>
               </div>
             ) : (
-              <p className="text-md md:text-sm font-semibold text-brand-text">
+              <p className="text-xl mt-2 font-black text-brand dark:text-white bg-brand-pale dark:bg-brand-dark p-2 text-center uppercase tracking-wider border-0">
                 {price === 0 || price === null ? "Gratis" : formatPrice(price)}
               </p>
             )}

@@ -121,6 +121,7 @@ export function BusinessAddressForm({ initialData, tradeId }) {
             title="Dirección del negocio"
             isEditing={isEditing}
             onToggle={handleToggle}
+            isCompleted={!!initialData.address}
             preview={<p className={`mt-2 text-sm ${initialData.address ? "text-brand-text" : "italic text-brand-ink"}`}>{initialData.address || "Sin dirección"}</p>}
         >
             <div className="mt-4 space-y-4">
@@ -145,7 +146,7 @@ export function BusinessAddressForm({ initialData, tradeId }) {
                 </div>
 
                 {searchResults.length > 0 && (
-                    <div className="border rounded-md bg-white shadow-sm max-h-48 overflow-y-auto z-10 relative">
+                    <div className="border rounded-none bg-white shadow-sm max-h-48 overflow-y-auto z-10 relative">
                         {searchResults.map((result, idx) => (
                             <button
                                 key={idx}
@@ -163,7 +164,7 @@ export function BusinessAddressForm({ initialData, tradeId }) {
                     Si no encuentras tu dirección, haz clic en el mapa para colocar el marcador manualmente.
                 </p>
 
-                <div className="border rounded-md overflow-hidden relative z-0">
+                <div className="border rounded-none overflow-hidden relative z-0">
                     <MapContainer
                         center={initialPosition}
                         zoom={position ? 15 : 13}
@@ -179,8 +180,8 @@ export function BusinessAddressForm({ initialData, tradeId }) {
                 </div>
 
                 <div className="flex justify-end gap-2">
-                    <Button type="button" variant="ghost" onClick={handleToggle} disabled={isLoading}>Cancelar</Button>
-                    <Button type="button" onClick={onSubmit} disabled={isLoading}>Guardar</Button>
+                    <Button type="button" variant="destructive" onClick={handleToggle} disabled={isLoading} className="rounded-none font-bold uppercase tracking-wider">Cancelar</Button>
+                    <Button type="button" onClick={onSubmit} disabled={isLoading} className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
                 </div>
             </div>
         </BaseCard>

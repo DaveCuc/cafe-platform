@@ -47,10 +47,23 @@ export function RegionMunicipioForm({ initialData, tradeId, regions = [] }) {
     };
 
     return (
-        <div className="mt-6 rounded-md border bg-brand-pale p-4">
+        <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between font-medium">
-                Ubicación geográfica
-                <Button onClick={toggleEdit} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
+                <div className="flex items-center gap-x-2">
+                    Ubicación geográfica
+                    {(initialData.region_id || initialData.municipio_id) && (
+                        <div className="flex items-center justify-center rounded-none bg-brand px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">
+                            Completado
+                        </div>
+                    )}
+                </div>
+                <Button 
+                    onClick={toggleEdit} 
+                    variant={isEditing ? "destructive" : "outline"}
+                    className={isEditing 
+                        ? "rounded-none font-bold uppercase tracking-wider" 
+                        : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}
+                >
                     {isEditing ? (
                         "Cancelar"
                     ) : (
@@ -100,7 +113,7 @@ export function RegionMunicipioForm({ initialData, tradeId, regions = [] }) {
                         </SelectContent>
                     </Select>
                     
-                    <Button type="submit" disabled={isLoading}>
+                    <Button type="submit" disabled={isLoading} className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">
                         Guardar
                     </Button>
                 </form>

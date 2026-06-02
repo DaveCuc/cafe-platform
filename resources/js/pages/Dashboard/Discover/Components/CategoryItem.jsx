@@ -4,7 +4,7 @@ import { Button } from "@/Components/ui/button";
 import { cn } from "@/lib/utils";
 import { router, usePage } from "@inertiajs/react";
 
-export const CategoryItem = ({ label, value, icon: Icon, isSpecial }) => {
+export const CategoryItem = ({ label, value, isSpecial }) => {
     const { filters } = usePage().props;
     const currentCategory = filters?.categoryId;
     const currentTitle = filters?.title;
@@ -30,13 +30,13 @@ export const CategoryItem = ({ label, value, icon: Icon, isSpecial }) => {
             onClick={onClick}
             variant="outline"
             className={cn(
-                "py-2 px-5 text-sm rounded-full flex items-center gap-x-1 transition",
-                isSpecial ? "bg-brand text-white border-brand hover:bg-brand-dark" : "border border-brand-soft hover:bg-brand-pale",
-                isSelected && (isSpecial ? "ring-2 ring-offset-2 ring-brand" : "bg-brand-text text-white hover:bg-brand-text/80 border-brand-text")
+                "py-2 px-5 text-sm border-2 rounded-none flex items-center gap-x-1 transition-colors font-bold uppercase tracking-wider shadow-sm",
+                isSpecial ? "border-brand-mint text-brand-darker bg-brand-mint hover:bg-white hover:text-brand-darker hover:border-brand-darker" : "border-brand",
+                !isSpecial && (isSelected ? "bg-brand text-white hover:bg-brand-darker hover:border-brand-darker" : "text-brand bg-white hover:bg-brand hover:text-white"),
+                isSpecial && isSelected && "bg-brand-darker text-brand-mint border-brand-darker hover:bg-brand-darker hover:text-brand-mint"
             )}
             type="button"
         >
-            {Icon && <Icon size={isSpecial ? 20 : 24} className={isSpecial ? "mr-1" : ""} />}
             <div className="truncate">
                 {label}
             </div>

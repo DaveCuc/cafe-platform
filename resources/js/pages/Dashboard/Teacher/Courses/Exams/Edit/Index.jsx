@@ -26,7 +26,7 @@ export default function ExamEditor({ course, exam }) {
                     <ArrowLeft className="h-4 w-4 mr-2" />
                     Volver a la configuración del curso
                 </Link>
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-2">
                     <div className="flex flex-col gap-y-2">
                         <h1 className="text-2xl font-bold">Configuración del examen</h1>
                         <span className="text-sm text-brand-text">

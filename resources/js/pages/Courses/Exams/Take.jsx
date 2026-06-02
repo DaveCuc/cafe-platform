@@ -77,7 +77,7 @@ export default function ExamTake({ course, exam, progressCount, purchase }) {
                         }
                     }
                 }}
-                className="min-h-screen bg-brand-pale relative overflow-hidden"
+                className="min-h-screen bg-brand-pale dark:bg-[#121212] relative overflow-hidden transition-colors"
             >
                  <Head title={`Rendiendo Examen: ${exam.title}`} />
                  
@@ -87,23 +87,23 @@ export default function ExamTake({ course, exam, progressCount, purchase }) {
                              initial={{ opacity: 0 }}
                              animate={{ opacity: 1 }}
                              exit={{ opacity: 0 }}
-                             className="absolute inset-0 bg-brand-pale z-20 flex flex-col items-center justify-center p-6"
+                             className="absolute inset-0 bg-brand-pale dark:bg-[#121212] z-20 flex flex-col items-center justify-center p-6"
                          >
                              <motion.div
                                  animate={{ scale: [1, 1.1, 1] }}
                                  transition={{ repeat: Infinity, duration: 1.5 }}
-                                 className="w-20 h-20 bg-brand-soft rounded-full flex items-center justify-center mb-6 shadow-lg"
+                                 className="w-20 h-20 bg-brand dark:bg-brand-dark rounded-none flex items-center justify-center mb-6 shadow-xl"
                              >
-                                 <Loader2 className="w-10 h-10 text-brand-ink animate-spin" />
+                                 <Loader2 className="w-10 h-10 text-white animate-spin" />
                              </motion.div>
                              <motion.h2 
                                  animate={{ opacity: [0.5, 1, 0.5] }}
                                  transition={{ repeat: Infinity, duration: 2 }}
-                                 className="text-2xl font-bold text-brand-ink"
+                                 className="text-2xl font-bold text-brand-ink dark:text-white"
                              >
                                  {isGenerating ? "Generando examen..." : "Evaluando respuestas..."}
                              </motion.h2>
-                             <p className="text-brand-text mt-2 text-center max-w-md">
+                             <p className="text-brand-text dark:text-gray-400 mt-2 text-center max-w-md">
                                  {isGenerating 
                                     ? "Preparando tus preguntas y configurando el entorno para tu prueba. No cierres esta ventana."
                                     : "Guardando tus resultados y calcúlando calificación. Un momento por favor."}
@@ -112,43 +112,43 @@ export default function ExamTake({ course, exam, progressCount, purchase }) {
                      )}
                  </AnimatePresence>
 
-                 <div className="max-w-3xl mx-auto p-6 md:p-10 mb-20 bg-white min-h-screen shadow-sm md:rounded-lg relative z-10">
-                 <button type="button" onClick={handleCancel} className="flex items-center text-sm hover:opacity-75 transition mb-6 text-brand-text cursor-pointer">
+                 <div className="max-w-4xl mx-auto p-8 md:p-16 mb-20 bg-white dark:bg-[#1a1a1a] min-h-screen shadow-xl rounded-none relative z-10 transition-colors">
+                 <button type="button" onClick={handleCancel} className="flex items-center text-sm hover:opacity-75 transition mb-10 text-brand-text dark:text-gray-400 cursor-pointer font-bold uppercase tracking-wider">
                      <ArrowLeft className="h-4 w-4 mr-2" />
                      Volver o Cancelar
                  </button>
                  
-                 <h1 className="text-3xl font-bold mb-8 text-brand-ink">{exam.title}</h1>
+                 <h1 className="text-4xl md:text-5xl font-black mb-12 text-brand-ink dark:text-white leading-tight">{exam.title}</h1>
                  
                  {exam.questions?.length === 0 ? (
-                     <p className="text-brand-ink italic">Este examen no tiene preguntas aún.</p>
+                     <p className="text-brand-ink dark:text-gray-400 italic">Este examen no tiene preguntas aún.</p>
                  ) : (
-                     <form onSubmit={handleSubmit} className="space-y-12">
+                     <form onSubmit={handleSubmit} className="space-y-16">
                          {exam.questions?.map((question, i) => (
-                             <div key={question.id} className="border border-brand-soft rounded-lg p-6 bg-brand-pale/10 shadow-sm relative">
-                                 <h3 className="font-semibold text-lg mb-4 flex gap-4">
-                                     <span className="text-brand-ink bg-brand-soft px-3 py-1 rounded text-sm font-bold align-top">
+                             <div key={question.id} className="border-0 rounded-none p-8 md:p-12 bg-white dark:bg-[#252525] shadow-lg relative transition-colors">
+                                 <h3 className="font-bold text-xl md:text-2xl mb-6 flex gap-6 text-brand-ink dark:text-white leading-relaxed">
+                                     <span className="text-white bg-brand dark:bg-brand-dark px-4 py-2 rounded-none text-lg font-black align-top shadow-md">
                                          {i + 1}
                                      </span>
-                                     <div>
+                                     <div className="pt-1">
                                          {question.content}
                                      </div>
                                  </h3>
-                                 <span className="text-xs text-brand-text mb-4 italic block ml-14">
+                                 <span className="text-xs font-bold text-brand-text dark:text-gray-400 mb-6 uppercase tracking-widest block ml-16 md:ml-20">
                                      {question.type === 'single' ? 'Selecciona una opción' : 'Selecciona múltiples opciones'}
                                  </span>
                                  
-                                 <div className="space-y-3 ml-14">
+                                 <div className="space-y-4 ml-16 md:ml-20">
                                      {question.options?.map(option => (
-                                         <label key={option.id} className={`flex items-start gap-4 p-4 border rounded cursor-pointer transition ${answers[question.id]?.includes(option.id) ? 'bg-brand-soft/20 border-brand-soft' : 'bg-white hover:bg-brand-pale border-gray-200'}`}>
+                                         <label key={option.id} className={`flex items-start gap-4 p-5 md:p-6 border-0 rounded-none cursor-pointer transition-all shadow-md ${answers[question.id]?.includes(option.id) ? 'bg-brand dark:bg-brand-dark text-white' : 'bg-brand-pale dark:bg-[#1a1a1a] text-brand-ink dark:text-gray-300 hover:bg-brand/10 dark:hover:bg-brand/20 hover:-translate-y-1'}`}>
                                              <input 
                                                  type={question.type === 'single' ? 'radio' : 'checkbox'} 
                                                  name={`q-${question.id}`}
                                                  checked={answers[question.id]?.includes(option.id) || false}
                                                  onChange={() => handleOptionSelect(question.id, option.id, question.type === 'multiple')}
-                                                 className="mt-1"
+                                                 className="mt-1 w-5 h-5 accent-brand border-none outline-none shadow-none focus:ring-0 rounded-none cursor-pointer"
                                              />
-                                             <span className="text-sm font-medium leading-tight">
+                                             <span className={`text-base md:text-lg font-bold leading-relaxed ${answers[question.id]?.includes(option.id) ? 'text-white' : 'text-brand-ink dark:text-gray-300'}`}>
                                                  {option.content}
                                              </span>
                                          </label>
@@ -157,12 +157,12 @@ export default function ExamTake({ course, exam, progressCount, purchase }) {
                              </div>
                          ))}
                          
-                         <div className="pt-6 border-t flex justify-end flex-col items-end">
+                         <div className="pt-10 flex justify-end flex-col items-end">
                              {!allAnswered && (
-                                 <p className="text-rose-500 text-sm mb-3">Debes responder todas las preguntas para entregar el examen.</p>
+                                 <p className="text-rose-500 dark:text-rose-400 font-bold text-sm mb-4 uppercase tracking-widest bg-rose-50 dark:bg-rose-950 p-4">Debes responder todas las preguntas para entregar el examen.</p>
                              )}
-                             <Button type="submit" disabled={isConcluding || !allAnswered} size="lg" className="px-10">
-                                 {isConcluding && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+                             <Button type="submit" disabled={isConcluding || !allAnswered} size="lg" className="px-12 py-8 text-xl font-black uppercase tracking-wider rounded-none bg-brand text-white hover:bg-brand-dark border-0 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all w-full md:w-auto">
+                                 {isConcluding && <Loader2 className="w-6 h-6 mr-3 animate-spin" />}
                                  Entregar Examen
                              </Button>
                          </div>

@@ -16,7 +16,7 @@ export default function SearchIndex({ categories, courses }) {
       </div>
       
       <div className="p-6 space-y-6">
-        <div className="bg-white p-4 rounded-xl shadow-sm border border-brand-soft">
+        <div className="bg-white p-4 rounded-none shadow-sm border border-brand-soft">
            <Categories items={categories} />
         </div>
         

@@ -116,10 +116,10 @@ const NavbarRoutes = () => {
             <div className="relative ml-2">
                 <Dropdown>
                     <Dropdown.Trigger>
-                        <span className="inline-flex rounded-md">
+                        <span className="inline-flex rounded-none">
                             <button
                                 type="button"
-                                className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-brand-ink hover:text-brand-text focus:outline-none"
+                                className="inline-flex items-center rounded-none border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-brand-ink hover:text-brand-text focus:outline-none"
                             >
                                 {auth?.user?.name || "Usuario"}
                                 <svg className="-me-0.5 ms-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">

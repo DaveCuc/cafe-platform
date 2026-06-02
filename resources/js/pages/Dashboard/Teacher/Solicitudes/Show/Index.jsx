@@ -48,13 +48,13 @@ export default function TeacherSolicitudShow({ trade }) {
                     Volver a solicitudes
                 </Link>
 
-                <div className="rounded-xl border bg-white p-6 shadow-sm">
+                <div className="rounded-none border bg-white p-6 shadow-sm">
                     <div className="flex flex-wrap items-start justify-between gap-4 border-b pb-6">
                         <div className="flex items-center gap-4">
                             {trade.image_url ? (
-                                <img src={trade.image_url} alt={trade.comercial_name} className="h-20 w-20 rounded-md object-cover border" />
+                                <img src={trade.image_url} alt={trade.comercial_name} className="h-20 w-20 rounded-none object-cover border" />
                             ) : (
-                                <div className="flex h-20 w-20 items-center justify-center rounded-md bg-brand-pale text-brand-ink border">
+                                <div className="flex h-20 w-20 items-center justify-center rounded-none bg-white text-brand-ink border border-brand-soft">
                                     Sin foto
                                 </div>
                             )}
@@ -70,7 +70,7 @@ export default function TeacherSolicitudShow({ trade }) {
                             <Button
                                 onClick={approve}
                                 disabled={!canReview}
-                                className="bg-emerald-600 hover:bg-emerald-700"
+                                className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider"
                             >
                                 <CheckCircle className="mr-2 h-4 w-4" />
                                 Aprobar
@@ -78,8 +78,8 @@ export default function TeacherSolicitudShow({ trade }) {
                             <Button
                                 onClick={reject}
                                 disabled={!canReview}
-                                variant="outline"
-                                className="border-rose-200 text-rose-700 hover:bg-rose-50"
+                                variant="destructive"
+                                className="rounded-none font-bold uppercase tracking-wider"
                             >
                                 <XCircle className="mr-2 h-4 w-4" />
                                 Rechazar
@@ -92,7 +92,7 @@ export default function TeacherSolicitudShow({ trade }) {
                         <div className="space-y-8">
                             <section>
                                 <h2 className="mb-3 text-lg font-semibold text-brand-text">Acerca del negocio</h2>
-                                <div className="space-y-4 rounded-lg border bg-brand-pale p-5 text-sm text-brand-ink">
+                                <div className="space-y-4 rounded-none border border-brand-soft bg-white p-5 text-sm text-brand-ink">
                                     <div>
                                         <span className="font-bold">Giros: </span>
                                         {(trade.giros || []).length
@@ -106,7 +106,7 @@ export default function TeacherSolicitudShow({ trade }) {
                                     <div>
                                         <span className="font-bold">Descripción Larga: </span>
                                         {trade.descripcion_larga ? (
-                                            <div className="mt-2 rounded bg-white p-3 border">
+                                            <div className="mt-2 rounded-none bg-white p-3 border border-brand-soft">
                                                 <Preview value={trade.descripcion_larga} />
                                             </div>
                                         ) : (
@@ -128,11 +128,11 @@ export default function TeacherSolicitudShow({ trade }) {
 
                             <section>
                                 <h2 className="mb-3 text-lg font-semibold text-brand-text">Galería de Imágenes</h2>
-                                <div className="rounded-lg border bg-brand-pale p-5">
+                                <div className="rounded-none border border-brand-soft bg-white p-5">
                                     {trade.gallery_images?.length ? (
                                         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                                             {trade.gallery_images.map((img, i) => (
-                                                <img key={i} src={img} alt={`Galería ${i}`} className="h-24 w-full rounded object-cover border bg-white" />
+                                                <img key={i} src={img} alt={`Galería ${i}`} className="h-24 w-full rounded-none object-cover border bg-white" />
                                             ))}
                                         </div>
                                     ) : (
@@ -146,7 +146,7 @@ export default function TeacherSolicitudShow({ trade }) {
                         <div className="space-y-8">
                             <section>
                                 <h2 className="mb-3 text-lg font-semibold text-brand-text">Contacto del Negocio</h2>
-                                <div className="space-y-3 rounded-lg border bg-brand-pale p-5 text-sm text-brand-ink">
+                                <div className="space-y-3 rounded-none border border-brand-soft bg-white p-5 text-sm text-brand-ink">
                                     <p><strong>Teléfono:</strong> {trade.phone || "No definido"}</p>
                                     <p><strong>Correo:</strong> {trade.email || "No definido"}</p>
                                     <p>
@@ -162,7 +162,7 @@ export default function TeacherSolicitudShow({ trade }) {
 
                             <section>
                                 <h2 className="mb-3 text-lg font-semibold text-brand-text">Ubicación</h2>
-                                <div className="space-y-3 rounded-lg border bg-brand-pale p-5 text-sm text-brand-ink">
+                                <div className="space-y-3 rounded-none border border-brand-soft bg-white p-5 text-sm text-brand-ink">
                                     <p><strong>Región:</strong> {trade.region?.name || trade.region || "No definida"}</p>
                                     <p><strong>Municipio:</strong> {trade.municipio?.name || "No definido"}</p>
                                     <p><strong>Dirección:</strong> {trade.address || "No definida"}</p>
@@ -179,7 +179,7 @@ export default function TeacherSolicitudShow({ trade }) {
 
                             <section>
                                 <h2 className="mb-3 text-lg font-semibold text-brand-text">Contacto Personal (Propietario)</h2>
-                                <div className="space-y-3 rounded-lg border bg-brand-pale p-5 text-sm text-brand-ink">
+                                <div className="space-y-3 rounded-none border border-brand-soft bg-white p-5 text-sm text-brand-ink">
                                     <p><strong>Nombre:</strong> {trade.personal_name || "No definido"}</p>
                                     <p><strong>Teléfono:</strong> {trade.personal_phone || "No definido"}</p>
                                     <p><strong>Correo:</strong> {trade.personal_email || "No definido"}</p>

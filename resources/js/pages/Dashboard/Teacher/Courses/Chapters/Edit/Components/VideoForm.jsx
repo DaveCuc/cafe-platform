@@ -42,13 +42,13 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }) => {
 
   return (
     <>
-      <div className="mt-6 flex flex-row items-start space-x-3 rounded-md border p-4 bg-brand-pale">
+      <div className="relative mt-6 flex flex-row items-start space-x-3 rounded-none border border-brand-soft p-4 bg-white shadow-sm">
         <input 
           type="checkbox"
           id="no_video_checkbox"
           checked={!isVideoRequired}
           onChange={onToggleVideoRequired}
-          className="mt-1 h-4 w-4 text-brand-soft rounded border-brand-soft focus:ring-brand-soft cursor-pointer"
+          className="mt-1 h-4 w-4 text-brand rounded-none border-brand focus:ring-brand cursor-pointer"
         />
         <div className="space-y-1 leading-none">
           <label htmlFor="no_video_checkbox" className="text-sm font-medium text-brand-text cursor-pointer">
@@ -58,10 +58,20 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }) => {
       </div>
 
       {isVideoRequired && (
-        <div className="mt-4 border bg-brand-pale rounded-md p-4">
-          <div className="font-medium flex items-center justify-between">
-            Video del capítulo
-            <Button onClick={toggleEdit} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
+        <div className="relative mt-4 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
+          <div className="font-medium flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center gap-x-2">
+                Video del capítulo
+                {initialData.video_url ? (
+                    <div className="flex items-center justify-center rounded-none bg-brand px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Completado</div>
+                ) : (
+                    <div className="flex items-center justify-center rounded-none bg-red-500 px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Incompleto</div>
+                )}
+            </div>
+            <Button onClick={toggleEdit} variant={isEditing ? "destructive" : "outline"}
+          className={isEditing 
+            ? "rounded-none font-bold uppercase tracking-wider"
+            : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}>
               {isEditing && <>Cancelar</>}
               {!isEditing && !initialData.video_url && (
                 <><PlusCircle className="h-4 w-4 mr-2" /> Agregar video</>
@@ -74,7 +84,7 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }) => {
 
           {!isEditing && (
             !initialData.video_url ? (
-              <div className="flex items-center justify-center h-60 bg-brand-pale mt-2 rounded-md">
+              <div className="flex items-center justify-center h-60 bg-white border border-brand-soft mt-2 rounded-none">
                 <Video className="h-10 w-10 text-brand-ink" />
               </div>
             ) : (
@@ -83,7 +93,7 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }) => {
                   controls
                   controlsList="nodownload"
                   preload="metadata"
-                  className="object-cover rounded-md w-full h-full bg-black"
+                  className="object-cover rounded-none w-full h-full bg-black"
                   src={initialData.video_url}
                 />
               </div>
@@ -92,14 +102,23 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }) => {
 
           {isEditing && (
             <form onSubmit={onSubmit} className="space-y-4 mt-4">
-               {errors.video && <div className="text-red-600 text-sm font-semibold bg-red-100 p-2 rounded-md">{errors.video}</div>}
-               <input 
-                  type="file"
-                  accept="video/mp4,video/x-m4v,video/*"
-                  onChange={e => setData('video', e.target.files[0])}
-                     className="w-full text-sm text-brand-ink file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-brand-soft file:text-white hover:file:bg-brand-dark cursor-pointer"
-               />
-               <Button disabled={!data.video || processing} type="submit">Guardar Video</Button>
+               {errors.video && <div className="text-red-600 text-sm font-semibold bg-red-100 p-2 rounded-none">{errors.video}</div>}
+               <div className="relative flex items-center">
+                 <input 
+                    id="file-upload-video"
+                    type="file"
+                    accept="video/mp4,video/x-m4v,video/*"
+                    onChange={e => setData('video', e.target.files[0])}
+                       className="hidden"
+                 />
+                 <label htmlFor="file-upload-video" className="cursor-pointer bg-brand text-white px-4 py-2 hover:bg-brand-darker font-bold uppercase tracking-wider text-sm rounded-none border border-brand transition">
+                   Elegir archivo
+                 </label>
+                 <span className="ml-4 text-sm text-brand-ink">
+                   {data.video ? data.video.name : "Ningún archivo seleccionado"}
+                 </span>
+               </div>
+               <Button disabled={!data.video || processing} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar Video</Button>
                <div className="text-xs text-muted-foreground mt-4">
                  Sube el video de este capítulo (MP4 recomendado).
                </div>
@@ -140,10 +159,18 @@ export const ChapterImageForm = ({ initialData, courseId, chapterId }) => {
   };
 
   return (
-    <div className="mt-6 border bg-brand-pale rounded-md p-4">
-      <div className="font-medium flex items-center justify-between">
-        Imagen del capítulo (Opcional)
-        <Button onClick={toggleEdit} variant="ghost" className="bg-white hover:bg-brand-soft hover:text-white">
+    <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
+      <div className="font-medium flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-x-2">
+            Imagen del capítulo (Opcional)
+            {initialData.image_url ? (
+                <div className="flex items-center justify-center rounded-none bg-brand px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wider">Completado</div>
+            ) : null}
+        </div>
+        <Button onClick={toggleEdit} variant={isEditing ? "destructive" : "outline"}
+          className={isEditing 
+            ? "rounded-none font-bold uppercase tracking-wider"
+            : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}>
           {isEditing && <>Cancelar</>}
           {!isEditing && !initialData.image_url && (
             <><PlusCircle className="h-4 w-4 mr-2" /> Agregar imagen</>
@@ -156,14 +183,14 @@ export const ChapterImageForm = ({ initialData, courseId, chapterId }) => {
 
       {!isEditing && (
         !initialData.image_url ? (
-          <div className="flex items-center justify-center h-60 bg-brand-pale mt-2 rounded-md">
+          <div className="flex items-center justify-center h-60 bg-white border border-brand-soft mt-2 rounded-none">
             <ImageIcon className="h-10 w-10 text-brand-ink" />
           </div>
         ) : (
           <div className="relative aspect-video mt-2">
             <img
               alt="Imagen del capítulo"
-              className="object-cover rounded-md w-full h-full"
+              className="object-cover rounded-none w-full h-full"
               src={initialData.image_url}
             />
           </div>
@@ -172,14 +199,23 @@ export const ChapterImageForm = ({ initialData, courseId, chapterId }) => {
 
       {isEditing && (
         <form onSubmit={onSubmit} className="space-y-4 mt-4">
-           {errors.image && <div className="text-red-600 text-sm font-semibold bg-red-100 p-2 rounded-md">{errors.image}</div>}
-           <input 
-              type="file"
-              accept="image/*"
-              onChange={e => setData('image', e.target.files[0])}
-                 className="w-full text-sm text-brand-ink file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-brand-soft file:text-white hover:file:bg-brand-dark cursor-pointer"
-           />
-           <Button disabled={!data.image || processing} type="submit">Guardar Imagen</Button>
+           {errors.image && <div className="text-red-600 text-sm font-semibold bg-red-100 p-2 rounded-none">{errors.image}</div>}
+           <div className="relative flex items-center">
+             <input 
+                id="file-upload-image"
+                type="file"
+                accept="image/*"
+                onChange={e => setData('image', e.target.files[0])}
+                   className="hidden"
+             />
+             <label htmlFor="file-upload-image" className="cursor-pointer bg-brand text-white px-4 py-2 hover:bg-brand-darker font-bold uppercase tracking-wider text-sm rounded-none border border-brand transition">
+               Elegir archivo
+             </label>
+             <span className="ml-4 text-sm text-brand-ink">
+               {data.image ? data.image.name : "Ningún archivo seleccionado"}
+             </span>
+           </div>
+           <Button disabled={!data.image || processing} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar Imagen</Button>
         </form>
       )}
     </div>

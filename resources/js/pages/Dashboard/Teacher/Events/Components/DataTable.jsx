@@ -58,7 +58,7 @@ export function DataTable({ columns, data }) {
                     </Button>
                 </Link>
             </div>
-            <div className="overflow-hidden rounded-md border bg-white">
+            <div className="overflow-hidden rounded-none border bg-white">
                 <Table>
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
