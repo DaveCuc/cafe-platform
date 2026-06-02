@@ -16,7 +16,7 @@ export default function ResetPassword({ token, email }) {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('password.store'), {
+        post(route('password.update'), {
             onFinish: () => reset('password', 'password_confirmation'),
         });
     };
@@ -86,7 +86,7 @@ export default function ResetPassword({ token, email }) {
                 <div className="mt-4 flex items-center justify-between">
                     <Link
                         href={route('login')}
-                        className="rounded-md text-sm text-brand-ink underline hover:text-brand-text focus:outline-none focus:ring-2 focus:ring-brand-ring focus:ring-offset-2"
+                        className="rounded-none text-sm text-brand-ink underline hover:text-brand-text focus:outline-none focus:ring-0"
                     >
                         Volver a iniciar sesión
                     </Link>

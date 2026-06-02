@@ -131,32 +131,32 @@ const TeacherSection = () => {
             <div className="container mx-auto px-4 text-center max-w-6xl">
                 <motion.div {...fadeUp} >
                     <span className="inline-block text-brand-mint font-semibold tracking-widest text-sm uppercase mb-4 border-b border-brand-mint pb-1">Excelencia Académica</span>
-                    <h2 className="text-4xl md:text-5xl font-bold mb-16 text-white tracking-tight">Conoce a Nuestro Profesorado</h2>
+                    <h2 className="text-4xl md:text-5xl font-bold mb-16 text-white tracking-tight">Conoce a Nuestros Educadores</h2>
                 </motion.div>
                 <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
                     <motion.div {...fadeRight} >
                         <div className="bg-white p-10 rounded-none border border-brand-dark institutional-shadow hover:institutional-shadow-strong hover:-translate-y-2 transition-all duration-300 flex flex-col h-full">
                             <img
-                                src="https://i.pravatar.cc/200?img=68"
-                                alt="Foto del Profesor 1"
-                                className="w-40 h-40 rounded-none mx-auto mb-8 object-cover border-4 border-brand-soft shadow-md"
+                                src="/Maestros/j11287332.jpg"
+                                alt="Dra. Jessica Cruz Manzo"
+                                className="w-40 h-40 rounded-none mx-auto mb-8 object-cover shadow-md"
                             />
-                            <h3 className="text-2xl font-bold mb-3 text-brand-darker">Dr. Roberto Sánchez</h3>
+                            <h3 className="text-2xl font-bold mb-3 text-brand-darker">Dra. Jessica Cruz Manzo</h3>
                             <p className="text-gray-600 font-light leading-relaxed flex-grow">
-                                Especialista en turismo sustentable y desarrollo comunitario. Con más de 15 años de experiencia implementando estrategias de ecoturismo en áreas naturales protegidas.
+                                Jefa de la División de Estudios de Posgrado e Investigación (TecNM) en el Instituto Tecnológico de Tehuacán.
                             </p>
                         </div>
                     </motion.div>
                     <motion.div {...fadeLeft} >
                         <div className="bg-white p-10 rounded-none border border-brand-dark institutional-shadow hover:institutional-shadow-strong hover:-translate-y-2 transition-all duration-300 flex flex-col h-full">
                             <img
-                                src="https://i.pravatar.cc/200?img=60"
-                                alt="Foto del Profesor 2"
-                                className="w-40 h-40 rounded-none mx-auto mb-8 object-cover border-4 border-brand-soft shadow-md"
+                                src="/Maestros/a11378115.jpg"
+                                alt="M.I.I. Angélica Granados Sánchez"
+                                className="w-40 h-40 rounded-none mx-auto mb-8 object-cover  shadow-md"
                             />
-                            <h3 className="text-2xl font-bold mb-3 text-brand-darker">Dra. Elena Mendoza</h3>
+                            <h3 className="text-2xl font-bold mb-3 text-brand-darker">M.I.I. Angélica Granados Sánchez</h3>
                             <p className="text-gray-600 font-light leading-relaxed flex-grow">
-                                Investigadora principal del ITT en gestión de patrimonio biocultural. Dedicada a la vinculación académica para la preservación de tradiciones y el aprovechamiento responsable del entorno.
+                                Docente en el Instituto Tecnológico de Tehuacán.
                             </p>
                         </div>
                     </motion.div>

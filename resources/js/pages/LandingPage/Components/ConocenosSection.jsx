@@ -23,13 +23,12 @@ const fadeLeft = {
 export default function ConocenosSection() {
     return (
         <section className="bg-brand-pale px-4 py-20 md:px-8 md:py-32 relative overflow-hidden">
-            {/* Elegant Background Accents */}
-            <div className="absolute top-0 right-0 w-1/3 h-full bg-white opacity-40 transform -skew-x-12 origin-top"></div>
-            
+
+
             <div className="max-w-7xl mx-auto p-8 md:p-16 bg-white border border-gray-200 institutional-shadow-strong z-10 relative">
                 {/* Minimalist corner accents */}
-                <div className="absolute top-0 left-0 w-16 h-16 border-t border-l border-brand"></div>
-                <div className="absolute bottom-0 right-0 w-16 h-16 border-b border-r border-brand"></div>
+
+
 
                 <div className="container mx-auto px-4 relative z-20">
                     <motion.div {...fadeUp} className="w-full max-w-5xl mx-auto">

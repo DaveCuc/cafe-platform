@@ -29,26 +29,28 @@ export default function VerifyEmail({ status }) {
             )}
 
             <form onSubmit={submit}>
-                <div className="mt-4 flex items-center justify-between">
-                    <Link
-                        href={route('login')}
-                        className="rounded-md text-sm text-brand-ink underline hover:text-brand-text focus:outline-none focus:ring-2 focus:ring-brand-ring focus:ring-offset-2"
-                    >
-                        Volver a iniciar sesión
-                    </Link>
-
-                    <PrimaryButton disabled={processing}>
+                <div className="mt-8 flex flex-col gap-6">
+                    <PrimaryButton disabled={processing} className="w-full justify-center text-center py-3 text-sm">
                         Reenviar correo de verificación
                     </PrimaryButton>
 
-                    <Link
-                        href={route('logout')}
-                        method="post"
-                        as="button"
-                        className="rounded-md text-sm text-brand-ink underline hover:text-brand-text focus:outline-none focus:ring-2 focus:ring-brand-ring focus:ring-offset-2"
-                    >
-                        Cerrar sesión
-                    </Link>
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <Link
+                            href={route('login')}
+                            className="rounded-none text-sm text-brand-ink underline hover:text-brand-text focus:outline-none focus:ring-0"
+                        >
+                            Volver a iniciar sesión
+                        </Link>
+
+                        <Link
+                            href={route('logout')}
+                            method="post"
+                            as="button"
+                            className="rounded-none text-sm text-brand-ink underline hover:text-brand-text focus:outline-none focus:ring-0"
+                        >
+                            Cerrar sesión
+                        </Link>
+                    </div>
                 </div>
             </form>
         </GuestLayout>

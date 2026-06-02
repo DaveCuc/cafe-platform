@@ -26,7 +26,7 @@ export default function Login({ status, canResetPassword }) {
             <Head title="Iniciar sesión" />
 
             {status && (
-                <div className="mb-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700">
+                <div className="mb-4 rounded-none border-0 bg-brand text-white px-4 py-3 text-sm font-medium">
                     {status}
                 </div>
             )}
@@ -75,14 +75,12 @@ export default function Login({ status, canResetPassword }) {
                         </span>
                     </label>
 
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="rounded-md text-sm text-brand-ink underline hover:text-brand-text focus:outline-none focus:ring-2 focus:ring-brand-ring focus:ring-offset-2"
-                        >
-                            ¿Olvidaste tu contraseña?
-                        </Link>
-                    )}
+                    <Link
+                        href={route('password.request')}
+                        className="rounded-none text-sm text-brand-ink underline hover:text-brand-text focus:outline-none focus:ring-0"
+                    >
+                        ¿Olvidaste tu contraseña?
+                    </Link>
                 </div>
 
                 <div className="flex items-center justify-end">

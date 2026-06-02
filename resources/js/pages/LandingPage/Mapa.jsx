@@ -29,7 +29,7 @@ const InfoSection = () => {
     return (
         <section className="bg-gray-50 pt-24 pb-32 border-t border-gray-200 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-mint/10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
-            
+
             <div className="container mx-auto px-6 max-w-6xl relative z-10">
                 <motion.div {...fadeUp} className="text-center mb-20">
                     <span className="inline-block text-brand font-bold tracking-widest text-sm uppercase mb-6 border-b border-brand pb-1">Conoce el Territorio</span>
@@ -53,9 +53,9 @@ const InfoSection = () => {
                     {[
                         { title: "Ruta 1: Onix y Sal", desc: "Recorre los paisajes de las salinas de Zapotitlán y descubre los métodos prehispánicos de extracción de sal, además de conocer el mundo del ónix.", img: "/Fotos/Recorridos/onix.jpg" },
                         { title: "Ruta 2: Dinosaurios", desc: "Descubre los senderos y sitios arqueológicos donde las huellas de dinosaurios cobran vida.", img: "/Fotos/Recorridos/dinosaurios.jpg" },
-                        { title: "Ruta 3: Mezcal y Barro", desc: "Descubre el proceso artesanal de producción de mezcal y la tradicional elaboración de barro negro.", img: "/Fotos/Recorridos/mezcal.jpg" }
+                        { title: "Ruta 3: Mezcal y Barro", desc: "Descubre el proceso artesanal de producción de mezcal.", img: "/Fotos/Recorridos/mezcal.jpg" }
                     ].map((ruta, index) => (
-                        <motion.div 
+                        <motion.div
                             key={index}
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
