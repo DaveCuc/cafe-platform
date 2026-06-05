@@ -39,7 +39,7 @@ export const Actions = ({ disabled, courseId, isPublished }) => {
   };
 
   return (
-    <div className="flex items-center gap-x-2">
+    <div className="flex flex-wrap items-center gap-2">
       <Button
         onClick={onClick}
         disabled={disabled || isLoading}

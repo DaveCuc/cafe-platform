@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { router } from "@inertiajs/react";
 import { Pencil, PlusCircle, ImageIcon } from "lucide-react";
 import { Button } from "@/Components/ui/button";
+import { CustomFileUpload } from "@/Components/CustomFileUpload";
 
 export const ImageForm = ({ initialData, courseId }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [file, setFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const toggleEdit = () => setIsEditing((current) => !current);
 
@@ -20,12 +22,17 @@ export const ImageForm = ({ initialData, courseId }) => {
       image: file,
     }, {
       preserveScroll: true,
+      onProgress: (e) => setProgress(e.percentage),
       onSuccess: () => {
         setIsLoading(false);
+        setProgress(0);
         setFile(null);
         toggleEdit();
       },
-      onError: () => setIsLoading(false)
+      onError: () => {
+        setIsLoading(false);
+        setProgress(0);
+      }
     });
   };
 
@@ -72,21 +79,14 @@ export const ImageForm = ({ initialData, courseId }) => {
 
       {isEditing && (
         <form onSubmit={onSubmit} className="space-y-4 mt-4">
-           <div className="relative flex items-center">
-             <input 
-                id="file-upload-image"
-                type="file"
-                accept="image/*"
-                onChange={e => setFile(e.target.files[0])}
-                   className="hidden"
-             />
-             <label htmlFor="file-upload-image" className="cursor-pointer bg-brand text-white px-4 py-2 hover:bg-brand-darker font-bold uppercase tracking-wider text-sm rounded-none border border-brand transition">
-               Elegir archivo
-             </label>
-             <span className="ml-4 text-sm text-brand-ink">
-               {file ? file.name : "Ningún archivo seleccionado"}
-             </span>
-           </div>
+           <CustomFileUpload
+               id="course-image-upload"
+               accept="image/*"
+               file={file}
+               onChange={(e) => setFile(e.target.files?.[0] || null)}
+               isLoading={isLoading}
+               progress={progress}
+           />
            <Button disabled={!file || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar Imagen</Button>
            <div className="text-xs text-muted-foreground mt-4">
              Se recomienda una relación de aspecto de 16:9

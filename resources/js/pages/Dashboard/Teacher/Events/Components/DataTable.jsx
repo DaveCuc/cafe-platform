@@ -103,7 +103,7 @@ export function DataTable({ columns, data }) {
                 </Table>
             </div>
             <div className="flex items-center justify-end space-x-2 py-4">
-               <span className="text-sm text-brand-ink mr-2">Página {table.getState().pagination.pageIndex + 1} de {table.getPageCount() || 1}</span>
+               <span className="text-base text-brand-ink mr-2">Página {table.getState().pagination.pageIndex + 1} de {table.getPageCount() || 1}</span>
                 <Button
                     variant="outline"
                     size="sm"

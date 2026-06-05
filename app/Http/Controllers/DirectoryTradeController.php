@@ -57,7 +57,7 @@ class DirectoryTradeController extends Controller
     public function edit(Directorio $trade)
     {
         $this->ensureOwner($trade);
-        $trade->load(['giros', 'region', 'municipio']);
+        $trade->load(['giros', 'region', 'municipio', 'certificates']);
 
         $giros = Giro::orderBy('name')->get();
         $regions = Region::with(['municipios' => function ($query) {
@@ -224,6 +224,55 @@ class DirectoryTradeController extends Controller
         return back();
     }
 
+    public function storeCertificate(Request $request, Directorio $trade)
+    {
+        $this->ensureOwner($trade);
+
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'issued_at' => ['nullable', 'date'],
+            'file' => ['required', 'file', 'mimes:pdf,jpg,jpeg,png', 'max:5120'],
+        ]);
+
+        $path = $request->file('file')->store('directorios/certificates', 'public');
+
+        $trade->certificates()->create([
+            'name' => $validated['name'],
+            'issued_at' => $validated['issued_at'],
+            'file_url' => '/storage/' . $path,
+        ]);
+
+        if ($trade->status === self::STATUS_APPROVED) {
+            $trade->update([
+                'status' => self::STATUS_DRAFT,
+                'is_published' => false,
+            ]);
+        }
+
+        return back();
+    }
+
+    public function destroyCertificate(Request $request, Directorio $trade, \App\Models\DirectorioCertificate $certificate)
+    {
+        $this->ensureOwner($trade);
+
+        if ($certificate->directorio_id !== $trade->id) {
+            return back();
+        }
+
+        $this->deleteFromPublicDisk($certificate->file_url);
+        $certificate->delete();
+
+        if ($trade->status === self::STATUS_APPROVED) {
+            $trade->update([
+                'status' => self::STATUS_DRAFT,
+                'is_published' => false,
+            ]);
+        }
+
+        return back();
+    }
+
     public function revertToDraft(Directorio $trade)
     {
         $this->ensureOwner($trade);
@@ -345,7 +394,7 @@ class DirectoryTradeController extends Controller
     {
         $this->ensureReviewer();
 
-        $trade->load(['user', 'giros', 'region', 'municipio']);
+        $trade->load(['user', 'giros', 'region', 'municipio', 'certificates']);
 
         return Inertia::render('Dashboard/Teacher/Solicitudes/Show/Index', [
             'trade' => $trade,
@@ -365,12 +414,13 @@ class DirectoryTradeController extends Controller
         $trade->update([
             'status' => self::STATUS_APPROVED,
             'is_published' => true,
+            'rejection_reason' => null,
         ]);
 
         return back();
     }
 
-    public function reject(Directorio $trade)
+    public function reject(Request $request, Directorio $trade)
     {
         $this->ensureReviewer();
 
@@ -380,9 +430,14 @@ class DirectoryTradeController extends Controller
             ]);
         }
 
+        $validated = $request->validate([
+            'rejection_reason' => ['required', 'string', 'max:1000'],
+        ]);
+
         $trade->update([
             'status' => self::STATUS_REJECTED,
             'is_published' => false,
+            'rejection_reason' => $validated['rejection_reason'],
         ]);
 
         return back();

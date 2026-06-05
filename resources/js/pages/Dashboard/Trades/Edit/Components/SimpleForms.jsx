@@ -15,7 +15,7 @@ import { Preview } from "@/Components/Preview";
 export function BaseCard({ title, isEditing, onToggle, children, preview, isCompleted }) {
     return (
         <div className="mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm relative">
-            <div className="flex items-center justify-between font-medium">
+            <div className="font-medium flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-x-2">
                     {title}
                     {isCompleted && (
@@ -90,7 +90,7 @@ export function ComercialNameForm({ initialData, tradeId }) {
                     className="bg-white"
                     required
                 />
-                <Button type="submit" disabled={!value || isLoading} className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">
+                <Button type="submit" disabled={!value || isLoading} className="w-full md:w-auto rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">
                     Guardar
                 </Button>
             </form>
@@ -261,7 +261,7 @@ export function ActivitiesForm({ initialData, tradeId }) {
 
     return (
         <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
-            <div className="flex items-center justify-between font-medium">
+            <div className="font-medium flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-x-2">
                     Lista de actividades
                     {activities.length > 0 && (
@@ -270,15 +270,29 @@ export function ActivitiesForm({ initialData, tradeId }) {
                         </div>
                     )}
                 </div>
-                <Button
-                    onClick={() => setIsCreating((current) => !current)}
-                    variant={isCreating ? "destructive" : "outline"}
-                    className={isCreating 
-                        ? "rounded-none font-bold uppercase tracking-wider" 
-                        : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}
-                >
-                    {isCreating ? "Cancelar" : <><PlusCircle className="mr-2 h-4 w-4" />Agregar actividad</>}
-                </Button>
+                <div className="flex items-center gap-2">
+                    {!isEditing && activities.length > 0 && !isCreating && (
+                        <Button
+                            onClick={() => setIsEditing(true)}
+                            variant="outline"
+                            className="border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"
+                        >
+                            <Pencil className="mr-2 h-4 w-4" />
+                            Editar lista
+                        </Button>
+                    )}
+                    {!isEditing && (
+                        <Button
+                            onClick={() => setIsCreating((current) => !current)}
+                            variant={isCreating ? "destructive" : "outline"}
+                            className={isCreating 
+                                ? "rounded-none font-bold uppercase tracking-wider" 
+                                : "border-brand text-brand bg-white hover:bg-brand hover:text-white rounded-none font-bold uppercase tracking-wider"}
+                        >
+                            {isCreating ? "Cancelar" : <><PlusCircle className="mr-2 h-4 w-4" />Agregar actividad</>}
+                        </Button>
+                    )}
+                </div>
             </div>
 
             {isCreating && (
@@ -290,7 +304,7 @@ export function ActivitiesForm({ initialData, tradeId }) {
                         placeholder="Ej. Recorrido guiado, taller artesanal"
                         className="bg-white"
                     />
-                    <Button type="submit" disabled={!newActivity || isLoading} className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
+                    <Button type="submit" disabled={!newActivity || isLoading} className="w-full md:w-auto rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
                 </form>
             )}
 
@@ -305,14 +319,6 @@ export function ActivitiesForm({ initialData, tradeId }) {
                     ) : (
                         <p className="italic text-brand-ink">Sin actividades registradas</p>
                     )}
-                    <Button
-                        onClick={() => setIsEditing(true)}
-                        variant="ghost"
-                        className="mt-2 bg-white hover:bg-brand-soft hover:text-white"
-                    >
-                        <Pencil className="mr-2 h-4 w-4" />
-                        Editar lista
-                    </Button>
                 </div>
             )}
 
@@ -339,9 +345,9 @@ export function ActivitiesForm({ initialData, tradeId }) {
                     ) : (
                         <p className="italic text-brand-ink">Sin actividades registradas</p>
                     )}
-                    <div className="flex items-center gap-2">
-                        <Button type="submit" disabled={isLoading} className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar cambios</Button>
-                        <Button type="button" variant="destructive" className="rounded-none font-bold uppercase tracking-wider" onClick={() => setIsEditing(false)}>Cancelar</Button>
+                    <div className="flex flex-wrap items-center gap-2">
+                        <Button type="submit" disabled={isLoading} className="w-full md:w-auto rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar cambios</Button>
+                        <Button type="button" variant="destructive" className="w-full md:w-auto rounded-none font-bold uppercase tracking-wider" onClick={() => setIsEditing(false)}>Cancelar</Button>
                     </div>
                 </form>
             )}

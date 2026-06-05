@@ -19,10 +19,10 @@ export const ArticlesList = ({ items }) => {
                     />
                 ))}
             </div>
-            
+
             {items.length === 0 && (
                 <div className="text-center text-sm text-brand-ink mt-10">
-                    No se encontraron artículos
+                    No se encontraron enlaces
                 </div>
             )}
         </div>

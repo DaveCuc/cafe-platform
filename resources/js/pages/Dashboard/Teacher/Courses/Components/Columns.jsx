@@ -25,28 +25,7 @@ export const columns = [
         )
     },
   },
-  {
-    accessorKey: "price",
-    header: ({ column }) => {
-        return (
-            <Button
-                variant="ghost"
-                onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                >
-                Precio
-                <ArrowUpDown className="ml-2 h-4 w-4" />
-            </Button>
-        )
-    },
-    cell: ({ row }) => {
-        const price = parseFloat(row.getValue("price") || "0") ;
-        const formattedPrice = price.toLocaleString("es-MX", {
-            style: "currency",
-            currency: "MXN",
-        });
-        return <span>{formattedPrice}</span>;
-    }
-  },
+
   {
     accessorKey: "is_published",
     header: ({ column }) => {

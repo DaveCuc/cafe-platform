@@ -33,20 +33,20 @@ export default function ArticleEditor({ article, categories }) {
 
   return (
     <MainLayout>
-      <Head title={`Editar Artículo: ${article.title}`} />
+      <Head title={`Editar Enlace de Interés: ${article.title}`} />
 
       {!article.is_published && (
-        <Banner variant="warningSolid" label="Este artículo no es visible al público hasta que lo publiques." />
+        <Banner variant="warningSolid" label="Este enlace de interés no es visible al público hasta que lo publiques." />
       )}
 
       <div className="p-6 pb-20 max-w-6xl mx-auto">
         <Link href={`/teacher/articles`} className="flex items-center text-sm hover:opacity-75 transition mb-6">
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Volver a la lista de artículos
+          Volver a la lista de enlaces de interés
         </Link>
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex flex-col gap-y-2">
-            <h1 className="text-2xl font-bold">Configuración del artículo</h1>
+            <h1 className="text-2xl font-bold">Configuración del enlace de interés</h1>
             <span className="text-sm text-brand-text">
               Completa todos los campos {completionText}
             </span>
@@ -63,7 +63,7 @@ export default function ArticleEditor({ article, categories }) {
           <div>
             <div className="flex items-center gap-x-2">
               <IconBadge variant="teacher" size="md" icon={LayoutDashboard} />
-              <h2 className="text-xl font-semibold">Personaliza tu artículo</h2>
+              <h2 className="text-xl font-semibold">Personaliza tu enlace de interés</h2>
             </div>
 
             <TitleForm initialData={article} articleId={article.id} />
@@ -86,7 +86,7 @@ export default function ArticleEditor({ article, categories }) {
             <ImageForm
               initialData={article}
               articleId={article.id}
-              label="Imagen de portada (dentro del artículo)"
+              label="Imagen de portada (dentro del enlace de interés)"
               endpoint={`/teacher/articles/${article.id}/image`}
               field="image_url"
             />

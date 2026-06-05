@@ -3,7 +3,7 @@ import { router } from "@inertiajs/react";
 import { Pencil } from "lucide-react";
 
 import { Button } from "@/Components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/Components/ui/select";
+import { Combobox } from "@/Components/ui/combobox";
 
 export function RegionMunicipioForm({ initialData, tradeId, regions = [] }) {
     const [isEditing, setIsEditing] = useState(false);
@@ -16,13 +16,41 @@ export function RegionMunicipioForm({ initialData, tradeId, regions = [] }) {
         [regions, regionId],
     );
 
-    const municipios = currentRegion?.municipios || [];
+    const currentMunicipio = useMemo(
+        () => currentRegion?.municipios?.find(m => m.id === municipioId),
+        [currentRegion, municipioId]
+    );
+
+    // Flatten all municipalities to create options for the Combobox
+    const allMunicipiosOptions = useMemo(() => {
+        const options = [];
+        regions.forEach(region => {
+            if (region.municipios) {
+                region.municipios.forEach(municipio => {
+                    options.push({
+                        label: municipio.name,
+                        value: municipio.id,
+                        regionId: region.id
+                    });
+                });
+            }
+        });
+        // Optionally sort alphabetically
+        return options.sort((a, b) => a.label.localeCompare(b.label));
+    }, [regions]);
 
     const toggleEdit = () => setIsEditing((current) => !current);
 
-    const handleRegionChange = (value) => {
-        setRegionId(value);
-        setMunicipioId("");
+    const handleMunicipioChange = (selectedMunicipioId) => {
+        setMunicipioId(selectedMunicipioId);
+        
+        // Find which region this municipio belongs to
+        const found = allMunicipiosOptions.find(opt => opt.value === selectedMunicipioId);
+        if (found) {
+            setRegionId(found.regionId);
+        } else {
+            setRegionId("");
+        }
     };
 
     const onSubmit = (e) => {
@@ -48,7 +76,7 @@ export function RegionMunicipioForm({ initialData, tradeId, regions = [] }) {
 
     return (
         <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
-            <div className="flex items-center justify-between font-medium">
+            <div className="font-medium flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-x-2">
                     Ubicación geográfica
                     {(initialData.region_id || initialData.municipio_id) && (
@@ -77,43 +105,32 @@ export function RegionMunicipioForm({ initialData, tradeId, regions = [] }) {
 
             {!isEditing ? (
                 <div className="mt-2 space-y-1 text-sm">
-                    <p className={currentRegion ? "text-brand-text" : "italic text-brand-ink"}>
-                        Región: {currentRegion?.name || "Sin definir"}
-                    </p>
                     <p className={initialData.municipio ? "text-brand-text" : "italic text-brand-ink"}>
                         Municipio: {initialData.municipio?.name || "Sin definir"}
                     </p>
-                    
+                    <p className={currentRegion ? "text-brand-text" : "italic text-brand-ink"}>
+                        Región: {currentRegion?.name || "Sin definir"}
+                    </p>
                 </div>
             ) : (
                 <form onSubmit={onSubmit} className="mt-4 space-y-4">
-                    <Select value={regionId} onValueChange={handleRegionChange}>
-                        <SelectTrigger className="w-full bg-white">
-                            <SelectValue placeholder="Selecciona una región" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {regions.map((region) => (
-                                <SelectItem key={region.id} value={region.id}>
-                                    {region.name}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-sm font-semibold text-brand-dark">Escoge tu municipio</label>
+                        <Combobox
+                        options={allMunicipiosOptions}
+                        value={municipioId}
+                        onChange={handleMunicipioChange}
+                        buttonPlaceholder="Selecciona o busca un municipio..."
+                        searchPlaceholder="Buscar municipio por nombre..."
+                    />
+                    </div>
 
-                    <Select value={municipioId} onValueChange={setMunicipioId} disabled={!regionId}>
-                        <SelectTrigger className="w-full bg-white">
-                            <SelectValue placeholder="Selecciona un municipio" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {municipios.map((municipio) => (
-                                <SelectItem key={municipio.id} value={municipio.id}>
-                                    {municipio.name}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
-                    
-                    <Button type="submit" disabled={isLoading} className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">
+                    {currentRegion && (
+                        <p className="text-sm text-brand-ink italic">
+                            Región asignada automáticamente: <span className="font-medium text-brand-text">{currentRegion.name}</span>
+                        </p>
+                    )}
+                    <Button type="submit" disabled={isLoading} className="w-full md:w-auto rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">
                         Guardar
                     </Button>
                 </form>

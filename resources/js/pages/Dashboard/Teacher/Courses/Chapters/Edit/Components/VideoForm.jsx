@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { useForm, router } from "@inertiajs/react";
 import { Pencil, PlusCircle, Video, Image as ImageIcon } from "lucide-react";
 import { Button } from "@/Components/ui/button";
+import { CustomFileUpload } from "@/Components/CustomFileUpload";
 
 export const ChapterVideoForm = ({ initialData, courseId, chapterId }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isVideoRequired, setIsVideoRequired] = useState(initialData.is_video_required ?? true);
   
-  const { data, setData, post, processing, errors, reset, clearErrors } = useForm({
+  const { data, setData, post, processing, errors, reset, clearErrors, progress } = useForm({
     video: null,
   });
 
@@ -103,21 +104,14 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }) => {
           {isEditing && (
             <form onSubmit={onSubmit} className="space-y-4 mt-4">
                {errors.video && <div className="text-red-600 text-sm font-semibold bg-red-100 p-2 rounded-none">{errors.video}</div>}
-               <div className="relative flex items-center">
-                 <input 
-                    id="file-upload-video"
-                    type="file"
-                    accept="video/mp4,video/x-m4v,video/*"
-                    onChange={e => setData('video', e.target.files[0])}
-                       className="hidden"
-                 />
-                 <label htmlFor="file-upload-video" className="cursor-pointer bg-brand text-white px-4 py-2 hover:bg-brand-darker font-bold uppercase tracking-wider text-sm rounded-none border border-brand transition">
-                   Elegir archivo
-                 </label>
-                 <span className="ml-4 text-sm text-brand-ink">
-                   {data.video ? data.video.name : "Ningún archivo seleccionado"}
-                 </span>
-               </div>
+               <CustomFileUpload
+                   id="file-upload-video"
+                   accept="video/mp4,video/x-m4v,video/*"
+                   file={data.video}
+                   onChange={e => setData('video', e.target.files[0])}
+                   isLoading={processing}
+                   progress={progress ? progress.percentage : 0}
+               />
                <Button disabled={!data.video || processing} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar Video</Button>
                <div className="text-xs text-muted-foreground mt-4">
                  Sube el video de este capítulo (MP4 recomendado).
@@ -133,7 +127,7 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }) => {
 export const ChapterImageForm = ({ initialData, courseId, chapterId }) => {
   const [isEditing, setIsEditing] = useState(false);
   
-  const { data, setData, post, processing, errors, reset, clearErrors } = useForm({
+  const { data, setData, post, processing, errors, reset, clearErrors, progress } = useForm({
     image: null,
   });
 
@@ -200,21 +194,14 @@ export const ChapterImageForm = ({ initialData, courseId, chapterId }) => {
       {isEditing && (
         <form onSubmit={onSubmit} className="space-y-4 mt-4">
            {errors.image && <div className="text-red-600 text-sm font-semibold bg-red-100 p-2 rounded-none">{errors.image}</div>}
-           <div className="relative flex items-center">
-             <input 
-                id="file-upload-image"
-                type="file"
-                accept="image/*"
-                onChange={e => setData('image', e.target.files[0])}
-                   className="hidden"
-             />
-             <label htmlFor="file-upload-image" className="cursor-pointer bg-brand text-white px-4 py-2 hover:bg-brand-darker font-bold uppercase tracking-wider text-sm rounded-none border border-brand transition">
-               Elegir archivo
-             </label>
-             <span className="ml-4 text-sm text-brand-ink">
-               {data.image ? data.image.name : "Ningún archivo seleccionado"}
-             </span>
-           </div>
+           <CustomFileUpload
+               id="file-upload-image"
+               accept="image/*"
+               file={data.image}
+               onChange={e => setData('image', e.target.files[0])}
+               isLoading={processing}
+               progress={progress ? progress.percentage : 0}
+           />
            <Button disabled={!data.image || processing} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar Imagen</Button>
         </form>
       )}

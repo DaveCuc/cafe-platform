@@ -20,7 +20,7 @@ export const Actions = ({ disabled, articleId, isPublished }) => {
   };
 
   const onDelete = () => {
-    if (window.confirm("¿Estás súper seguro de que deseas eliminar este artículo permanentemente?")) {
+    if (window.confirm("¿Estás súper seguro de que deseas eliminar este enlace de interés permanentemente?")) {
       setIsLoading(true);
       router.delete(`/teacher/articles/${articleId}`, {
         onFinish: () => setIsLoading(false),
@@ -29,7 +29,7 @@ export const Actions = ({ disabled, articleId, isPublished }) => {
   };
 
   return (
-    <div className="flex items-center gap-x-2">
+    <div className="flex flex-wrap items-center gap-2">
       <Button
         onClick={onClick}
         disabled={disabled || isLoading}

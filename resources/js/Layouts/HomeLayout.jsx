@@ -10,6 +10,29 @@ import {
     SheetTrigger,
 } from "@/Components/ui/sheet";
 
+export const LogoTecnm = ({ isScrolled = false, className = "" }) => (
+    <img
+        src={isScrolled ? "/Institution/tecnm.png" : "/Institution/tecnm-white.png"}
+        alt="Logo"
+        className={cn("h-[50px] w-auto transition-all", className)}
+    />
+);
+
+export const LogoITT = ({ isScrolled = false, className = "" }) => (
+    <img
+        src={isScrolled ? "/Institution/itt.png" : "/Institution/itt-white.png"}
+        alt="Logo"
+        className={cn("h-[50px] w-auto transition-all", className)}
+    />
+);
+
+export const LogoSecihti = ({ isScrolled = false, className = "" }) => (
+    <img
+        src={isScrolled ? "/Institution/secihti.png" : "/Institution/secihti-white.png"}
+        alt="Logo"
+        className={cn("h-[50px] w-auto transition-all", className)}
+    />
+);
 export const Logo = ({ isScrolled = false, className = "" }) => (
     <img
         src={isScrolled ? "/logo.svg" : "/logo2.svg"}
@@ -18,6 +41,7 @@ export const Logo = ({ isScrolled = false, className = "" }) => (
     />
 );
 
+import BubbleTC from "@/Components/BubbleTC";
 const HomeNavbarRoutes = ({ isScrolled }) => {
     const linkClass = cn(
         "transition-all duration-200 font-medium",
@@ -50,8 +74,20 @@ const HomeNavbarRoutes = ({ isScrolled }) => {
 
             <div className="flex-shrink-0">
                 <Link href="/" className="inline-flex items-center focus:outline-none">
-                    <Logo isScrolled={isScrolled} />
+                    {/*<Logo isScrolled={isScrolled} /> */}
+
                 </Link>
+                <div className="inline-flex items-center focus:outline-none" >
+                    <a href="https://secihti.mx/" target="_blank" rel="noopener noreferrer" className="pr-2 block hover:opacity-80 transition-opacity">
+                        <LogoSecihti isScrolled={isScrolled} />
+                    </a>
+                    <a href="https://www.tecnm.mx/" target="_blank" rel="noopener noreferrer" className="pr-2 block hover:opacity-80 transition-opacity">
+                        <LogoTecnm isScrolled={isScrolled} />
+                    </a>
+                    <a href="http://www.ittehuacan.edu.mx/" target="_blank" rel="noopener noreferrer" className="pr-2 block hover:opacity-80 transition-opacity">
+                        <LogoITT isScrolled={isScrolled} />
+                    </a>
+                </div>
             </div>
 
             <nav className="hidden md:flex items-center gap-x-2 flex-1 justify-center">
@@ -148,7 +184,12 @@ export const Footer = () => {
                     <div>
                         <h3 className="font-bold mb-4 text-lg">Nosotros</h3>
                         <div className="flex flex-col space-y-3">
-                            <a href="http://www.ittehuacan.edu.mx/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-brand-light transition">Instituto Tecnológico de Tehuacán</a>
+                            <a href="http://www.ittehuacan.edu.mx/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-brand-light transition"><b>Instituto Tecnológico de Tehuacán</b></a>
+                            <a href="https://www.tecnm.mx/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-brand-light transition"><b>Tecnológico Nacional de México</b> (TECNM)</a>
+                            <a href="https://secihti.mx/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-brand-light transition"><b>Secretaría de Ciencia, Humanidades, Tecnología e Innovación</b> (SECIHTI)</a>
+                            <a href="https://www.gob.mx/sectur" target="_blank" rel="noopener noreferrer" className="text-white hover:text-brand-light transition"><b>Secretaría de Turismo</b> (SECTUR)</a>
+
+
                         </div>
                     </div>
                 </div>
@@ -163,9 +204,11 @@ export default function HomeLayout({ children }) {
         <div className="min-h-screen flex flex-col font-sans bg-brand-pale">
             <HomeNavbar />
 
-            <main className="flex-grow">
+            <main className="flex-grow relative">
                 {children}
             </main>
+
+            <BubbleTC />
 
             <Footer />
         </div>

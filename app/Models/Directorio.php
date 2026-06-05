@@ -37,6 +37,7 @@ class Directorio extends Model
         'personal_phone',
         'personal_email',
         'gallery_images',
+        'rejection_reason',
     ];
 
     protected $casts = [
@@ -64,5 +65,10 @@ class Directorio extends Model
     public function municipio(): BelongsTo
     {
         return $this->belongsTo(Municipio::class);
+    }
+
+    public function certificates(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(DirectorioCertificate::class)->orderBy('issued_at', 'desc');
     }
 }

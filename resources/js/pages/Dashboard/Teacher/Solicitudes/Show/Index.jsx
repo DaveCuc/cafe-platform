@@ -1,18 +1,38 @@
+import React, { useState } from "react";
 import { Head, Link, router } from "@inertiajs/react";
-import { ArrowLeft, CheckCircle, XCircle } from "lucide-react";
+import { ArrowLeft, CheckCircle, XCircle, FileText, Image as ImageIcon } from "lucide-react";
 
 import MainLayout from "@/Layouts/MainLayout";
 import { Banner } from "@/Components/banner";
 import { Button } from "@/Components/ui/button";
 import { Preview } from "@/Components/Preview";
+import { Textarea } from "@/Components/ui/textarea";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/Components/ui/dialog";
 
 export default function TeacherSolicitudShow({ trade }) {
+    const [isRejectOpen, setIsRejectOpen] = useState(false);
+    const [rejectReason, setRejectReason] = useState("");
+
     const approve = () => {
         router.patch(`/teacher/solicitudes/${trade.id}/approve`);
     };
 
     const reject = () => {
-        router.patch(`/teacher/solicitudes/${trade.id}/reject`);
+        if (!rejectReason.trim()) return;
+        router.patch(`/teacher/solicitudes/${trade.id}/reject`, { rejection_reason: rejectReason }, {
+            onSuccess: () => {
+                setIsRejectOpen(false);
+                setRejectReason("");
+            }
+        });
     };
 
     const canReview = trade.status === "pending";
@@ -48,6 +68,13 @@ export default function TeacherSolicitudShow({ trade }) {
                     Volver a solicitudes
                 </Link>
 
+                {trade.rejection_reason && (
+                    <div className="mb-6 rounded-none border border-red-200 bg-red-50 p-4 text-red-800 shadow-sm">
+                        <h3 className="font-bold text-base">Motivo de rechazo anterior reportado al negocio:</h3>
+                        <p className="mt-1 text-sm">{trade.rejection_reason}</p>
+                    </div>
+                )}
+
                 <div className="rounded-none border bg-white p-6 shadow-sm">
                     <div className="flex flex-wrap items-start justify-between gap-4 border-b pb-6">
                         <div className="flex items-center gap-4">
@@ -66,7 +93,7 @@ export default function TeacherSolicitudShow({ trade }) {
                             </div>
                         </div>
 
-                        <div className="flex gap-2">
+                        <div className="flex flex-wrap items-center gap-2 mt-4 sm:mt-0">
                             <Button
                                 onClick={approve}
                                 disabled={!canReview}
@@ -75,16 +102,39 @@ export default function TeacherSolicitudShow({ trade }) {
                                 <CheckCircle className="mr-2 h-4 w-4" />
                                 Aprobar
                             </Button>
-                            <Button
-                                onClick={reject}
-                                disabled={!canReview}
-                                variant="destructive"
-                                className="rounded-none font-bold uppercase tracking-wider"
-                            >
-                                <XCircle className="mr-2 h-4 w-4" />
-                                Rechazar
-                            </Button>
+
+                            <Dialog open={isRejectOpen} onOpenChange={setIsRejectOpen}>
+                                <DialogTrigger asChild>
+                                    <Button
+                                        disabled={!canReview}
+                                        variant="destructive"
+                                        className="rounded-none font-bold uppercase tracking-wider"
+                                    >
+                                        <XCircle className="mr-2 h-4 w-4" />
+                                        Rechazar
+                                    </Button>
+                                </DialogTrigger>
+                                <DialogContent className="rounded-none">
+                                    <DialogHeader>
+                                        <DialogTitle>Rechazar Solicitud</DialogTitle>
+                                        <DialogDescription>
+                                            Por favor, indica el motivo del rechazo. Este comentario será visible para el solicitante.
+                                        </DialogDescription>
+                                    </DialogHeader>
+                                    <Textarea
+                                        value={rejectReason}
+                                        onChange={(e) => setRejectReason(e.target.value)}
+                                        placeholder="Escribe el motivo del rechazo aquí..."
+                                        className="min-h-[100px] rounded-none border-brand-soft focus-visible:ring-brand"
+                                    />
+                                    <DialogFooter>
+                                        <Button variant="outline" onClick={() => setIsRejectOpen(false)} className="rounded-none">Cancelar</Button>
+                                        <Button variant="destructive" onClick={reject} disabled={!rejectReason.trim()} className="rounded-none">Confirmar Rechazo</Button>
+                                    </DialogFooter>
+                                </DialogContent>
+                            </Dialog>
                         </div>
+                        {/* Banner de comentario de rechazo */}
                     </div>
 
                     <div className="mt-6 grid grid-cols-1 gap-8 md:grid-cols-2">
@@ -137,6 +187,50 @@ export default function TeacherSolicitudShow({ trade }) {
                                         </div>
                                     ) : (
                                         <p className="text-sm text-brand-ink">Sin imágenes en galería</p>
+                                    )}
+                                </div>
+                            </section>
+
+                            <section>
+                                <h2 className="mb-3 text-lg font-semibold text-brand-text">Certificados</h2>
+                                <div className="rounded-none border border-brand-soft bg-white p-5">
+                                    {trade.certificates?.length ? (
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                            {trade.certificates.map((cert) => (
+                                                <Dialog key={cert.id}>
+                                                    <DialogTrigger asChild>
+                                                        <button className="flex w-full items-center gap-x-3 overflow-hidden border border-brand-soft bg-brand-pale/50 p-2 hover:bg-brand-pale transition-colors text-left cursor-pointer">
+                                                            <div className="flex-shrink-0 h-10 w-10 bg-white border border-brand-soft flex items-center justify-center text-brand">
+                                                                {cert.file_url.endsWith('.pdf') ? <FileText size={20} /> : <ImageIcon size={20} />}
+                                                            </div>
+                                                            <div className="flex flex-col truncate flex-grow">
+                                                                <span className="text-sm font-semibold text-brand-text truncate">{cert.name}</span>
+                                                                {cert.issued_at && (
+                                                                    <span className="text-xs text-brand-ink">{new Date(cert.issued_at).toLocaleDateString('es-ES')}</span>
+                                                                )}
+                                                            </div>
+                                                        </button>
+                                                    </DialogTrigger>
+                                                    <DialogContent className="max-w-4xl h-[85vh] flex flex-col p-0 gap-0">
+                                                        <DialogHeader className="p-4 border-b bg-white">
+                                                            <DialogTitle className="text-brand-text">{cert.name}</DialogTitle>
+                                                            <DialogDescription>Vista previa del certificado</DialogDescription>
+                                                        </DialogHeader>
+                                                        <div className="flex-grow overflow-hidden bg-gray-100/50">
+                                                            {cert.file_url.endsWith('.pdf') ? (
+                                                                <iframe src={cert.file_url} className="w-full h-full border-0" title={cert.name} />
+                                                            ) : (
+                                                                <div className="w-full h-full flex items-center justify-center p-4">
+                                                                    <img src={cert.file_url} alt={cert.name} className="max-w-full max-h-full object-contain drop-shadow-md" />
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    </DialogContent>
+                                                </Dialog>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <p className="text-sm text-brand-ink">Sin certificados</p>
                                     )}
                                 </div>
                             </section>

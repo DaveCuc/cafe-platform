@@ -38,7 +38,7 @@ Route::get('/cursos', function () {
 })->name('cursos.index');
 
 Route::get('/negocio/{trade}', function (\App\Models\Directorio $trade) {
-    $trade->load(['giros', 'region', 'municipio']);
+    $trade->load(['giros', 'region', 'municipio', 'certificates']);
     return Inertia::render('LandingPage/Negocio/index', [
         'trade' => $trade
     ]);
@@ -160,6 +160,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/directory/trades/{trade}/image', [DirectoryTradeController::class, 'uploadImage'])->name('directory.trades.image');
     Route::post('/directory/trades/{trade}/gallery-image', [DirectoryTradeController::class, 'uploadGalleryImage'])->name('directory.trades.gallery.image');
     Route::delete('/directory/trades/{trade}/gallery-image', [DirectoryTradeController::class, 'deleteGalleryImage'])->name('directory.trades.gallery.image.delete');
+    Route::post('/directory/trades/{trade}/certificates', [DirectoryTradeController::class, 'storeCertificate'])->name('directory.trades.certificates.store');
+    Route::delete('/directory/trades/{trade}/certificates/{certificate}', [DirectoryTradeController::class, 'destroyCertificate'])->name('directory.trades.certificates.destroy');
 
     Route::get('/teacher/solicitudes', [DirectoryTradeController::class, 'requestsIndex'])->name('teacher.requests.index');
     Route::get('/teacher/solicitudes/{trade}', [DirectoryTradeController::class, 'requestShow'])->name('teacher.requests.show');
@@ -443,36 +445,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/teacher/courses/{course}/chapters/{chapter}/video', [\App\Http\Controllers\TeacherChapterController::class, 'uploadVideo']);
     Route::post('/teacher/courses/{course}/chapters/{chapter}/image', [\App\Http\Controllers\TeacherChapterController::class, 'uploadImage']);
 
-    Route::get('/teacher/analytics', function () {
-        $userId = Auth::id();
-
-        $purchases = \App\Models\Purchase::whereHas('course', function($query) use ($userId) {
-            $query->where('user_id', $userId);
-        })->with('course')->get();
-
-        $groupedEarnings = [];
-        foreach ($purchases as $purchase) {
-            $courseTitle = $purchase->course->title;
-            if (!isset($groupedEarnings[$courseTitle])) {
-                $groupedEarnings[$courseTitle] = 0;
-            }
-            $groupedEarnings[$courseTitle] += $purchase->course->price ?? 0;
-        }
-
-        $data = [];
-        $totalRevenue = 0;
-        foreach ($groupedEarnings as $title => $total) {
-            $data[] = ['name' => $title, 'total' => $total];
-            $totalRevenue += $total;
-        }
-        $totalSales = count($purchases);
-
-        return Inertia::render('Dashboard/Teacher/Analytics/Index', [
-            'data' => $data,
-            'totalRevenue' => $totalRevenue,
-            'totalSales' => $totalSales,
-        ]);
-    })->name('teacher.analytics');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -488,50 +460,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 
-// Endpoint abierto exento de CSRF (cross-site request forgery) para recibir pagos de Stripe
-Route::post('/webhook', function(\Illuminate\Http\Request $request) {
-    \Stripe\Stripe::setApiKey(env('STRIPE_API_KEY'));
-    $endpoint_secret = env('STRIPE_WEBHOOK_SECRET');
-    
-    $payload = $request->getContent();
-    $sig_header = $request->header('Stripe-Signature');
-    $event = null;
-    
-    try {
-        if ($endpoint_secret) {
-            $event = \Stripe\Webhook::constructEvent($payload, $sig_header, $endpoint_secret);
-        } else {
-            // Fallback para testing si no hay endpoint_secret definido localmente.
-            $event = \Stripe\Event::constructFrom(json_decode($payload, true));
-        }
-    } catch(\UnexpectedValueException $e) {   
-        return response()->json(['error' => 'Invalid payload'], 400);
-    } catch(\Stripe\Exception\SignatureVerificationException $e) {  
-        return response()->json(['error' => 'Invalid signature'], 400);
-    }
-    
-    // Accionar con base al tipo de evento
-    if ($event->type == 'checkout.session.completed') {
-        $session = $event->data->object;
-        
-        $courseId = $session->metadata->courseId ?? null;
-        $userId = $session->metadata->userId ?? null;
-        
-        if ($courseId && $userId) {
-            $course = \App\Models\Course::find($courseId);
-            $user = \App\Models\User::find($userId);
-
-            if ($course && $user && (string) $course->user_id !== (string) $user->id) {
-                \App\Models\Purchase::firstOrCreate([
-                    'course_id' => $courseId,
-                    'user_id' => $userId,
-                ]);
-            }
-        }
-    }
-
-    
-    
-    return response('Webhook Handled By Laravel', 200);
-});
+// Webhook removed
 

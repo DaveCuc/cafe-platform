@@ -56,40 +56,51 @@ export default function EventEditor({ event }) {
           {/* Columna Izquierda */}
           <div className="space-y-6">
             <div>
-                <div className="flex items-center gap-x-2 mb-6">
+              <div className="flex items-center gap-x-2 mb-6">
                 <IconBadge variant="teacher" size="md" icon={LayoutDashboard} />
                 <h2 className="text-xl font-semibold">Portada e Información General</h2>
-                </div>
+              </div>
 
-                <TitleForm initialData={event} eventId={event.id} />
-                <ShortDescriptionForm initialData={event} eventId={event.id} />
-                
-                <ImageForm
+              <TitleForm initialData={event} eventId={event.id} />
+              <ShortDescriptionForm initialData={event} eventId={event.id} />
+
+              <ImageForm
                 initialData={event}
                 articleId={event.id}
                 label="Imagen de tarjeta (Card)"
                 endpoint={`/teacher/events/${event.id}/image`}
                 field="image_url"
-                />
-                <ImageForm
+              />
+              <ImageForm
                 initialData={event}
                 articleId={event.id}
                 label="Imagen de portada (Banner Principal)"
                 endpoint={`/teacher/events/${event.id}/cover-image`}
                 field="cover_image_url"
-                />
+              />
             </div>
 
             <div>
-                <div className="flex items-center gap-x-2 mb-6">
+              <div className="flex items-center gap-x-2 mb-6">
                 <IconBadge variant="teacher" size="md" icon={Calendar} />
                 <h2 className="text-xl font-semibold">Cuándo y Dónde (Banner)</h2>
-                </div>
-                
-                <DateForm initialData={event} eventId={event.id} />
-                <TimeForm initialData={event} eventId={event.id} />
-                <LocationForm initialData={event} eventId={event.id} />
-                <RsvpForm initialData={event} eventId={event.id} />
+              </div>
+
+              <DateForm initialData={event} eventId={event.id} />
+              <TimeForm initialData={event} eventId={event.id} />
+              <LocationForm initialData={event} eventId={event.id} />
+              <RsvpForm initialData={event} eventId={event.id} />
+            </div>
+
+            <div>
+              <div className="flex items-center gap-x-2 mb-6">
+                <IconBadge variant="teacher" size="md" icon={Users} />
+                <h2 className="text-xl font-semibold">Participantes</h2>
+              </div>
+
+              <PeopleForm initialData={event} eventId={event.id} field="hosts" label="Anfitriones" />
+              <PeopleForm initialData={event} eventId={event.id} field="collaborators" label="Colaboradores" />
+              <PeopleForm initialData={event} eventId={event.id} field="organizers" label="Organizadores" />
             </div>
           </div>
 
@@ -100,20 +111,12 @@ export default function EventEditor({ event }) {
                 <IconBadge variant="teacher" size="md" icon={FileText} />
                 <h2 className="text-xl font-semibold">Acerca del evento</h2>
               </div>
-              <DescriptionForm initialData={event} eventId={event.id} />
               <TopicsForm initialData={event} eventId={event.id} />
+              <DescriptionForm initialData={event} eventId={event.id} />
+
             </div>
 
-            <div>
-                <div className="flex items-center gap-x-2 mb-6">
-                <IconBadge variant="teacher" size="md" icon={Users} />
-                <h2 className="text-xl font-semibold">Participantes</h2>
-                </div>
-                
-                <PeopleForm initialData={event} eventId={event.id} field="hosts" label="Anfitriones" />
-                <PeopleForm initialData={event} eventId={event.id} field="collaborators" label="Colaboradores" />
-                <PeopleForm initialData={event} eventId={event.id} field="organizers" label="Organizadores" />
-            </div>
+
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ const ActivitysSection = ({ activities }) => {
     if (!activities || activities.length === 0) return null;
 
     return (
-        <section className="bg-[#3E2E24]">
+        <section className="bg-brand">
             <div className=" container max-w-7xl mx-auto px-5 py-8 md:py-12">
                 <div className=" p-6 md:p-8">
                     <h2 className="text-4xl font-extrabold uppercase tracking-widest text-white mb-8 text-center">Actividades</h2>
@@ -13,7 +13,7 @@ const ActivitysSection = ({ activities }) => {
                         {activities.map((act, index) => (
                             <div
                                 key={index}
-                                className="flex items-center px-4 py-2 bg-white rounded-none shadow-md text-brand-darker font-bold text-sm transition-transform hover:-translate-y-1 hover:shadow-lg"
+                                className="flex items-center px-4 py-2 bg-white rounded-none shadow-md text-brand-darker font-bold text-md transition-transform hover:-translate-y-1 hover:shadow-lg"
                             >
                                 <Star className="w-4 h-4 mr-2 text-brand" />
                                 {act}

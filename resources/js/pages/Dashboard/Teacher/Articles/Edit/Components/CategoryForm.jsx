@@ -28,7 +28,7 @@ export const CategoryForm = ({ initialData, articleId, options }) => {
   return (
     <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
       <div className="font-medium flex flex-wrap items-center justify-between gap-2">
-        Categoría del artículo
+        Categoría del enlace de interés
         <Button onClick={toggleEdit} variant={isEditing ? "destructive" : "outline"}
           className={isEditing 
             ? "rounded-none font-bold uppercase tracking-wider"
@@ -57,7 +57,7 @@ export const CategoryForm = ({ initialData, articleId, options }) => {
                 </option>
              ))}
           </select>
-          <Button disabled={!categoryId || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
+          <Button disabled={!categoryId || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider w-full md:w-auto">Guardar</Button>
         </form>
       )}
     </div>

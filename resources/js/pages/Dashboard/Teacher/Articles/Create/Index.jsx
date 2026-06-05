@@ -15,17 +15,17 @@ export default function CreateArticle() {
 
   return ( 
     <MainLayout>
-      <Head title="Crear Artículo" />
+      <Head title="Crear Enlace de Interés" />
       <div className="max-w-5xl mx-auto flex md:items-center md:justify-center h-full p-6 mt-10">
         <div className="bg-white p-8 rounded-xl shadow-sm border border-brand-soft">
-          <h1 className="text-2xl font-bold">Nombra tu artículo</h1>
+          <h1 className="text-2xl font-bold">Nombra tu enlace de interés</h1>
           <p className="text-sm text-brand-ink mt-2">
-            ¿De qué tratará este artículo? No te preocupes, puedes cambiar el título más tarde.
+            ¿De qué tratará este enlace de interés? No te preocupes, puedes cambiar el título más tarde.
           </p>
           
           <form onSubmit={onSubmit} className="space-y-8 mt-8">
             <div className="space-y-2">
-                <label className="text-sm font-medium leading-none">Título del artículo</label>
+                <label className="text-sm font-medium leading-none">Título del enlace de interés</label>
                 <Input
                     disabled={processing}
                     placeholder="Ej. 'Turismo Sostenible en México'"

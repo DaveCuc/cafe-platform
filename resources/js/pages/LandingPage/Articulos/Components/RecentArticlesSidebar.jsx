@@ -10,14 +10,14 @@ import { ArrowUpRight } from "lucide-react";
 export const RecentArticlesSidebar = ({ articles, isDarkMode }) => {
     return (
         <div className="lg:w-1/3">
-            <h2 className={`text-2xl font-extrabold uppercase tracking-widest mb-6 ${isDarkMode ? 'text-brand-mint' : 'text-brand-darker'}`}>Artículos Recientes</h2>
+            <h2 className={`text-2xl font-extrabold uppercase tracking-widest mb-6 ${isDarkMode ? 'text-brand-mint' : 'text-brand-darker'}`}>Enlaces de Interés Recientes</h2>
             <div className="flex flex-col gap-8">
                 {articles.length === 0 ? (
-                    <p className={`text-sm font-bold ${isDarkMode ? 'text-white' : 'text-muted-foreground'}`}>No hay más artículos disponibles.</p>
+                    <p className={`text-sm font-bold ${isDarkMode ? 'text-white' : 'text-muted-foreground'}`}>No hay más enlaces de interés disponibles.</p>
                 ) : (
                     articles.map((recent) => (
                         <Card key={recent.id} className={`group relative min-h-[300px] overflow-hidden rounded-none border-0 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col ${isDarkMode ? 'bg-[#252525]' : 'bg-white'}`}>
-                            
+
                             <div className="relative h-40 w-full overflow-hidden">
                                 {(recent.card_image_url || recent.image_url) ? (
                                     <img
@@ -40,7 +40,7 @@ export const RecentArticlesSidebar = ({ articles, isDarkMode }) => {
                                 <CardTitle className={`mb-2 text-xl font-extrabold leading-tight line-clamp-2 uppercase tracking-wide ${isDarkMode ? 'text-white' : 'text-brand-darker'}`}>
                                     {recent.title}
                                 </CardTitle>
-                                
+
                                 <p className={`text-xs font-bold mb-2 uppercase tracking-wide ${isDarkMode ? 'text-white' : 'text-brand'}`}>
                                     Por {recent.user?.name} &middot; {recent.published_at ? format(new Date(recent.published_at), "dd MMM yyyy", { locale: es }) : "Reciente"}
                                 </p>
@@ -51,7 +51,7 @@ export const RecentArticlesSidebar = ({ articles, isDarkMode }) => {
 
                                 <Button asChild className={`w-full rounded-none px-4 py-6 text-sm font-extrabold uppercase tracking-widest transition-colors ${isDarkMode ? 'bg-brand text-white hover:bg-white hover:text-brand-darker' : 'bg-brand-mint text-brand-darker hover:bg-brand hover:text-white'}`}>
                                     <Link href={`/articulos/${recent.id}`} className="inline-flex items-center justify-center gap-2">
-                                        Leer Artículo
+                                        Ver enlace
                                         <ArrowUpRight className="h-4 w-4" />
                                     </Link>
                                 </Button>

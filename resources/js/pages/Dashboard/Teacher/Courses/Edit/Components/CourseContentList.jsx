@@ -72,7 +72,7 @@ export const CourseContentList = ({ items, onReorder, onEditChapter, onEditExam 
                     </div>
                     <div className="ml-auto pr-2 flex items-center gap-x-2">
                       <span className="text-xs text-gray-500 uppercase font-bold tracking-wider hidden sm:block">{item.type === 'chapter' ? 'Capítulo' : 'Examen'}</span>
-                      {item.type === 'chapter' && item.is_free && <Badge>Gratis</Badge>}
+
                       <Badge className={cn("bg-gray-200 text-gray-700 rounded-none uppercase font-bold tracking-wider", item.is_published && "bg-brand text-white hover:bg-brand-darker")}>
                         {item.is_published ? "Publicado" : "Borrador"}
                       </Badge>

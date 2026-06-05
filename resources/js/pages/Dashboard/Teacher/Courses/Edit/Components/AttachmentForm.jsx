@@ -93,7 +93,7 @@ export const AttachmentForm = ({ initialData, courseId }) => {
                {file ? file.name : "Ningún archivo seleccionado"}
              </span>
            </div>
-           <Button disabled={!file || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Subir archivo</Button>
+           <Button disabled={!file || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider w-full md:w-auto">Subir archivo</Button>
            <div className="text-xs text-muted-foreground mt-4">
             Agrega archivos relacionados con el curso, como PDFs, documentos o recursos adicionales.
           </div>

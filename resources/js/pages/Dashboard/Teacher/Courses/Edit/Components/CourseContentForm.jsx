@@ -83,7 +83,7 @@ export const CourseContentForm = ({ initialData, courseId }) => {
         </div>
         
         {!isCreating && (
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <Button onClick={() => toggleCreating('chapter')} variant="outline" size="sm" className="bg-white hover:bg-black hover:text-white border-black text-black rounded-none font-bold uppercase tracking-wider">
               <BookOpen className="h-4 w-4 mr-2" /> Añadir Capítulo
             </Button>
@@ -109,7 +109,7 @@ export const CourseContentForm = ({ initialData, courseId }) => {
               className="bg-white"
               required
             />
-            <Button disabled={!title || isUpdating} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">
+            <Button disabled={!title || isUpdating} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider w-full md:w-auto">
                 {isCreatingType === 'chapter' ? "Crear Capítulo" : "Crear Examen"}
             </Button>
         </form>

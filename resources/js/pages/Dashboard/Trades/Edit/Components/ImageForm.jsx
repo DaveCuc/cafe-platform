@@ -3,11 +3,13 @@ import { router } from "@inertiajs/react";
 import { Pencil, PlusCircle, ImageIcon } from "lucide-react";
 
 import { Button } from "@/Components/ui/button";
+import { CustomFileUpload } from "@/Components/CustomFileUpload";
 
 export const ImageForm = ({ initialData, tradeId }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [file, setFile] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [progress, setProgress] = useState(0);
 
     const toggleEdit = () => setIsEditing((current) => !current);
 
@@ -22,19 +24,24 @@ export const ImageForm = ({ initialData, tradeId }) => {
             { image: file },
             {
                 preserveScroll: true,
+                onProgress: (e) => setProgress(e.percentage),
                 onSuccess: () => {
                     setIsLoading(false);
+                    setProgress(0);
                     setFile(null);
                     toggleEdit();
                 },
-                onError: () => setIsLoading(false),
+                onError: () => {
+                    setIsLoading(false);
+                    setProgress(0);
+                },
             },
         );
     };
 
     return (
         <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
-            <div className="flex items-center justify-between font-medium">
+            <div className="font-medium flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-x-2">
                     Foto del negocio
                     {initialData.image_url && (
@@ -83,13 +90,15 @@ export const ImageForm = ({ initialData, tradeId }) => {
 
             {isEditing && (
                 <form onSubmit={onSubmit} className="mt-4 space-y-4">
-                    <input
-                        type="file"
+                    <CustomFileUpload
+                        id="trade-image-upload"
                         accept="image/*"
-                        onChange={(e) => setFile(e.target.files[0])}
-                        className="w-full cursor-pointer text-sm text-brand-ink file:mr-4 file:rounded-none file:border-0 file:bg-brand-soft file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-brand-dark"
+                        file={file}
+                        onChange={(e) => setFile(e.target.files?.[0] || null)}
+                        isLoading={isLoading}
+                        progress={progress}
                     />
-                    <Button disabled={!file || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">
+                    <Button disabled={!file || isLoading} type="submit" className="w-full md:w-auto rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider w-full">
                         Guardar imagen
                     </Button>
                     <div className="mt-4 text-xs text-muted-foreground">

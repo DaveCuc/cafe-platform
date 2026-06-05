@@ -179,9 +179,9 @@ export function BusinessAddressForm({ initialData, tradeId }) {
                     </MapContainer>
                 </div>
 
-                <div className="flex justify-end gap-2">
-                    <Button type="button" variant="destructive" onClick={handleToggle} disabled={isLoading} className="rounded-none font-bold uppercase tracking-wider">Cancelar</Button>
-                    <Button type="button" onClick={onSubmit} disabled={isLoading} className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
+                <div className="flex flex-wrap justify-end gap-2">
+                    <Button type="button" variant="destructive" onClick={handleToggle} disabled={isLoading} className="w-full md:w-auto rounded-none font-bold uppercase tracking-wider">Cancelar</Button>
+                    <Button type="button" onClick={onSubmit} disabled={isLoading} className="w-full md:w-auto rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
                 </div>
             </div>
         </BaseCard>

@@ -94,6 +94,20 @@ export default {
                 md: "calc(var(--radius) - 2px)",
                 sm: "calc(var(--radius) - 4px)",
             },
+            keyframes: {
+                "circle-loading": {
+                    "0%": { strokeDashoffset: "380" },
+                    "100%": { strokeDashoffset: "0" },
+                },
+                "check-loading": {
+                    "0%": { strokeDashoffset: "45" },
+                    "100%": { strokeDashoffset: "90" },
+                },
+            },
+            animation: {
+                "circle-loading": "circle-loading 2s ease-in-out forwards",
+                "check-loading": "check-loading 0.2s 2s ease-in-out forwards",
+            },
         },
     },
     plugins: [

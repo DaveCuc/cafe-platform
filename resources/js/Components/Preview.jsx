@@ -4,7 +4,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 
-export const Preview = ({ value }) => {
+export const Preview = ({ value, className }) => {
   const editor = useEditor({
     editable: false,
     extensions: [
@@ -18,7 +18,7 @@ export const Preview = ({ value }) => {
     immediatelyRender: false,
     editorProps: {
         attributes: {
-        class: "prose prose-sm max-w-none text-brand-text bg-transparent"
+        class: className || "prose prose-sm max-w-none text-brand-text bg-transparent"
         }
     }
   });

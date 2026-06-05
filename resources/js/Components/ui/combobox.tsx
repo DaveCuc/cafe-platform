@@ -21,6 +21,8 @@ interface ComboboxProps {
   options: { label: string; value: string }[];
   value?: string;
   onChange: (value: string) => void;
+  buttonPlaceholder?: string;
+  searchPlaceholder?: string;
 }
 
 // ... imports
@@ -28,7 +30,9 @@ interface ComboboxProps {
 export const Combobox = ({
   options,
   value,
-  onChange
+  onChange,
+  buttonPlaceholder = "Selecciona una opción...",
+  searchPlaceholder = "Buscar categoría..."
 }: ComboboxProps) => {
   const [open, setOpen] = React.useState(false)
 
@@ -46,15 +50,15 @@ export const Combobox = ({
         >
           {value
             ? options.find((option) => option.value === value)?.label
-            : "Selecciona una opción..."}
+            : buttonPlaceholder}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
         <Command>
-          <CommandInput placeholder="Buscar categoría..." />
+          <CommandInput placeholder={searchPlaceholder} />
           <CommandList>
-            <CommandEmpty>No se encontró ninguna categoría.</CommandEmpty>
+            <CommandEmpty>No se encontró ninguna coincidencia.</CommandEmpty>
             <CommandGroup>
               {options.map((option, idx) => (
                 <CommandItem

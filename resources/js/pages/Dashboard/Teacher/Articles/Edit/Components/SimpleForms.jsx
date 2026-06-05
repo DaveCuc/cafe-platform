@@ -30,7 +30,7 @@ export const TitleForm = ({ initialData, articleId }) => {
   return (
     <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
       <div className="font-medium flex flex-wrap items-center justify-between gap-2">
-        Título del artículo
+        Título del enlace de interés
         <Button onClick={toggleEdit} variant={isEditing ? "destructive" : "outline"}
           className={isEditing 
             ? "rounded-none font-bold uppercase tracking-wider"
@@ -49,7 +49,7 @@ export const TitleForm = ({ initialData, articleId }) => {
             className="bg-white" 
             required 
           />
-          <Button disabled={!title || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
+          <Button disabled={!title || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider w-full md:w-auto">Guardar</Button>
         </form>
       )}
     </div>
@@ -106,7 +106,7 @@ export const ShortDescriptionForm = ({ initialData, articleId }) => {
           <div className="text-xs text-brand-ink flex justify-end">
              {shortDescription.length}/200
           </div>
-          <Button disabled={!shortDescription || shortDescription.length > 200 || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
+          <Button disabled={!shortDescription || shortDescription.length > 200 || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider w-full md:w-auto">Guardar</Button>
         </form>
       )}
     </div>
@@ -136,7 +136,7 @@ export const ContentForm = ({ initialData, articleId }) => {
   return (
     <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
       <div className="font-medium flex flex-wrap items-center justify-between gap-2">
-        Contenido del artículo
+        Contenido del enlace de interés
         <Button onClick={toggleEdit} variant={isEditing ? "destructive" : "outline"}
           className={isEditing 
             ? "rounded-none font-bold uppercase tracking-wider"
@@ -157,7 +157,7 @@ export const ContentForm = ({ initialData, articleId }) => {
             value={content}
             onChange={(val) => setContent(val)}
           />
-          <Button disabled={!content || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
+          <Button disabled={!content || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider w-full md:w-auto">Guardar</Button>
         </form>
       )}
     </div>

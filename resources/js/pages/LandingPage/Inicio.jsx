@@ -17,6 +17,8 @@ export default function Welcome({ recentEvents }) {
 
             <HeroSection />
 
+            {/* <VideoSection /> */}
+
             <NewsSection recentEvents={recentEvents} />
 
             <MapSection />

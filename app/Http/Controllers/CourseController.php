@@ -87,78 +87,26 @@ class CourseController extends Controller
         $user = Auth::user();
 
         if ((string) $course->user_id === (string) $user->id) {
-            return back()->withErrors(['error' => 'No puedes comprar tu propio curso']);
+            return back()->withErrors(['error' => 'No puedes inscribirte a tu propio curso']);
         }
 
         if (!$course->is_published) {
-            return back()->withErrors(['error' => 'Este curso no esta disponible para compra']);
+            return back()->withErrors(['error' => 'Este curso no esta disponible para inscripción']);
         }
 
-        if ($course->is_free) {
-            Purchase::firstOrCreate([
-                'user_id' => $user->id,
-                'course_id' => $course->id
-            ]);
-            return redirect()->back();
-        }
-
-        if (is_null($course->price) || $course->price <= 0) {
-            return back()->withErrors(['error' => 'Este curso no tiene un precio valido']);
-        }
-
-        // Validar si ya lo compró
+        // Validar si ya lo compró/inscribió
         $purchase = Purchase::where('user_id', $user->id)->where('course_id', $course->id)->exists();
         if ($purchase) {
-            return back()->withErrors(['error' => 'Ya compraste este curso']);
+            return back()->withErrors(['error' => 'Ya estás inscrito en este curso']);
         }
 
-        $stripeApiKey = env('STRIPE_API_KEY');
-        if (empty($stripeApiKey)) {
-            return back()->withErrors(['error' => 'No se pudo iniciar el pago. Intenta mas tarde']);
-        }
+        // Inscripción directa (bypass)
+        Purchase::firstOrCreate([
+            'user_id' => $user->id,
+            'course_id' => $course->id
+        ]);
 
-        \Stripe\Stripe::setApiKey($stripeApiKey);
-
-        // Obtener o crear Customer
-        $stripeCustomer = \App\Models\StripeCustomer::where('user_id', $user->id)->first();
-        if (!$stripeCustomer) {
-            $customer = \Stripe\Customer::create([
-                'email' => $user->email,
-            ]);
-            $stripeCustomer = \App\Models\StripeCustomer::create([
-                'user_id' => $user->id,
-                'stripe_customer_id' => $customer->id,
-            ]);
-        }
-
-        try {
-            $session = \Stripe\Checkout\Session::create([
-                'customer' => $stripeCustomer->stripe_customer_id,
-                'payment_method_types' => ['card'],
-                'line_items' => [[
-                    'price_data' => [
-                        'currency' => 'mxn',
-                        'product_data' => [
-                            'name' => $course->title,
-                            'description' => strip_tags($course->description ?? ''),
-                        ],
-                        'unit_amount' => round($course->price * 100),
-                    ],
-                    'quantity' => 1,
-                ]],
-                'mode' => 'payment',
-                'success_url' => route('courses.show', $course->id) . '?success=1',
-                'cancel_url' => route('courses.show', $course->id) . '?canceled=1',
-                'metadata' => [
-                    'courseId' => $course->id,
-                    'userId' => $user->id,
-                ],
-            ]);
-        } catch (\Stripe\Exception\ApiErrorException $e) {
-            return back()->withErrors(['error' => 'No se pudo iniciar el pago. Intenta mas tarde']);
-        }
-
-        return \Inertia\Inertia::location($session->url);
+        return redirect()->back();
     }
 
     public function progress(Request $request, Course $course, Chapter $chapter)

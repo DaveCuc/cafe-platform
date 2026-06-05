@@ -3,7 +3,7 @@ import { Head, Link } from "@inertiajs/react";
 import { ArrowLeft, Eye, LayoutDashboard, Video } from "lucide-react";
 import MainLayout from "@/Layouts/MainLayout";
 
-import { ChapterTitleForm, ChapterDescriptionForm, ChapterAccessForm } from "./Components/SimpleForms";
+import { ChapterTitleForm, ChapterDescriptionForm } from "./Components/SimpleForms";
 import { ChapterVideoForm, ChapterImageForm } from "./Components/VideoForm";
 import { ChapterActions } from "./Components/Actions";
 import { Banner } from "@/Components/banner";
@@ -14,7 +14,7 @@ export default function ChapterEditor({ courseId, courseIsFree, chapter }) {
     chapter.title,
     chapter.description,
     chapter.is_video_required ? chapter.video_url : true,
-    courseIsFree ? true : (chapter.is_free !== null) // Treat free status as filled if course is free or value is set
+
   ];
 
   const totalFields = requiredFields.length;
@@ -70,22 +70,7 @@ export default function ChapterEditor({ courseId, courseIsFree, chapter }) {
               <ChapterDescriptionForm initialData={chapter} courseId={courseId} chapterId={chapter.id} />
             </div>
 
-            {/* Mostrar elemento solo si no es gratiuto if (courseIsFree) { return null; } */}
-            {!courseIsFree && (
-              <div>
-                <div className="flex items-center gap-x-2 mt-8">
-                  <IconBadge variant="teacher" size="md" icon={Eye} />
-                  <h2 className="text-xl font-semibold">Configuración de acceso</h2>
-                </div>
 
-                <ChapterAccessForm
-                  initialData={chapter}
-                  courseId={courseId}
-                  chapterId={chapter.id}
-                  courseIsFree={courseIsFree}
-                />
-              </div>
-            )}
 
 
 

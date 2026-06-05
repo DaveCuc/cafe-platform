@@ -3,7 +3,7 @@ import { Head } from '@inertiajs/react';
 import HomeLayout from '@/Layouts/HomeLayout';
 import { motion } from "framer-motion";
 import { Button } from "@/Components/ui/button";
-import { Carousel, CarouselContent, CarouselItem } from "@/Components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/Components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
 const fadeUp = {
@@ -125,41 +125,98 @@ const CursoSection = () => {
     );
 }
 
+const teachers = [
+    {
+        name: "Dra. Jessica Cruz Manzo",
+        image: "/Maestros/jesi.jpg",
+        description: "Jefa de la División de Estudios de Posgrado e Investigación (TecNM) en el Instituto Tecnológico de Tehuacán."
+    },
+    {
+        name: "M.I.I. Angélica Granados Sánchez",
+        image: "/Maestros/angi.jpg",
+        description: "Docente en el Instituto Tecnológico de Tehuacán."
+    },
+    {
+        name: "Mtra. Magda Elizabeth Marín Beltran",
+        image: "/Maestros/magda.jpg",
+        description: "Docente en el Instituto Tecnológico de Tehuacán."
+    },
+    {
+        name: "Dr. José Luis Ruan Cervantes",
+        image: "/Maestros/ruan.jpg",
+        description: "Docente en el Instituto Tecnológico de Tehuacán."
+    },
+    {
+        name: "Dr. Rogelio Rojas Ramos",
+        image: "/Maestros/rogelio.jpg",
+        description: "Docente en el Instituto Tecnológico de Tehuacán."
+    },
+    {
+        name: "Mtra. Iniria Guevara Ramírez",
+        image: "/Maestros/iniria.jpg",
+        description: "Docente en el Instituto Tecnológico de Tehuacán."
+    },
+    {
+        name: "Dr. Luis Carlos Ortuño Barba",
+        image: "/Maestros/luis.jpg",
+        description: "Docente en el Instituto Tecnológico de Tehuacán."
+    },
+    {
+        name: "Dr. Iván Araoz Baltazar",
+        image: "/Maestros/ivan.jpg",
+        description: "Docente en el Instituto Tecnológico de Tehuacán."
+    },
+    {
+        name: "Dra. Olga López Fortiz",
+        image: "/Maestros/olga.jpg",
+        description: "Docente en el Instituto Tecnológico de Tehuacán."
+    }
+];
+
 const TeacherSection = () => {
     return (
-        <section className="bg-brand py-24 border-t border-brand-darker">
-            <div className="container mx-auto px-4 text-center max-w-6xl">
+        <section className="bg-brand py-24 border-t border-brand-darker overflow-hidden">
+            <div className="container mx-auto px-4 text-center max-w-7xl">
                 <motion.div {...fadeUp} >
                     <span className="inline-block text-brand-mint font-semibold tracking-widest text-sm uppercase mb-4 border-b border-brand-mint pb-1">Excelencia Académica</span>
                     <h2 className="text-4xl md:text-5xl font-bold mb-16 text-white tracking-tight">Conoce a Nuestros Educadores</h2>
                 </motion.div>
-                <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-                    <motion.div {...fadeRight} >
-                        <div className="bg-white p-10 rounded-none border border-brand-dark institutional-shadow hover:institutional-shadow-strong hover:-translate-y-2 transition-all duration-300 flex flex-col h-full">
-                            <img
-                                src="/Maestros/j11287332.jpg"
-                                alt="Dra. Jessica Cruz Manzo"
-                                className="w-40 h-40 rounded-none mx-auto mb-8 object-cover shadow-md"
-                            />
-                            <h3 className="text-2xl font-bold mb-3 text-brand-darker">Dra. Jessica Cruz Manzo</h3>
-                            <p className="text-gray-600 font-light leading-relaxed flex-grow">
-                                Jefa de la División de Estudios de Posgrado e Investigación (TecNM) en el Instituto Tecnológico de Tehuacán.
-                            </p>
-                        </div>
-                    </motion.div>
-                    <motion.div {...fadeLeft} >
-                        <div className="bg-white p-10 rounded-none border border-brand-dark institutional-shadow hover:institutional-shadow-strong hover:-translate-y-2 transition-all duration-300 flex flex-col h-full">
-                            <img
-                                src="/Maestros/a11378115.jpg"
-                                alt="M.I.I. Angélica Granados Sánchez"
-                                className="w-40 h-40 rounded-none mx-auto mb-8 object-cover  shadow-md"
-                            />
-                            <h3 className="text-2xl font-bold mb-3 text-brand-darker">M.I.I. Angélica Granados Sánchez</h3>
-                            <p className="text-gray-600 font-light leading-relaxed flex-grow">
-                                Docente en el Instituto Tecnológico de Tehuacán.
-                            </p>
-                        </div>
-                    </motion.div>
+                
+                <div className="relative px-4 md:px-12 mx-auto">
+                    <Carousel
+                        opts={{
+                            align: "start",
+                            loop: true,
+                        }}
+                        plugins={[
+                            Autoplay({
+                                delay: 4000,
+                                stopOnInteraction: true,
+                            })
+                        ]}
+                        className="w-full"
+                    >
+                        <CarouselContent className="-ml-6 py-4">
+                            {teachers.map((teacher, index) => (
+                                <CarouselItem key={index} className="pl-6 md:basis-1/2 lg:basis-1/3">
+                                    <div className="bg-white p-10 rounded-none border border-brand-dark institutional-shadow hover:institutional-shadow-strong hover:-translate-y-2 transition-all duration-300 flex flex-col h-full">
+                                        <img
+                                            src={teacher.image}
+                                            alt={teacher.name}
+                                            className="w-40 h-40 rounded-none mx-auto mb-8 object-cover shadow-md"
+                                        />
+                                        <h3 className="text-2xl font-bold mb-3 text-brand-darker">{teacher.name}</h3>
+                                        <p className="text-gray-600 font-light leading-relaxed flex-grow">
+                                            {teacher.description}
+                                        </p>
+                                    </div>
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+
+                        <CarouselPrevious className="-left-4 md:-left-12 h-14 w-14 bg-white rounded-none border-transparent shadow-lg text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-all duration-300" />
+                        <CarouselNext className="-right-4 md:-right-12 h-14 w-14 bg-white rounded-none border-transparent shadow-lg text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-all duration-300" />
+                    </Carousel>
                 </div>
             </div>
         </section>

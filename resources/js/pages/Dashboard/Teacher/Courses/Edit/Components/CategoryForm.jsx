@@ -64,7 +64,7 @@ export const CategoryForm = ({ initialData, courseId, options }) => {
                 </option>
              ))}
           </select>
-          <Button disabled={!categoryId || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">Guardar</Button>
+          <Button disabled={!categoryId || isLoading} type="submit" className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider w-full md:w-auto">Guardar</Button>
         </form>
       )}
     </div>

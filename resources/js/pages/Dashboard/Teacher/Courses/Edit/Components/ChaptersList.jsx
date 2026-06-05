@@ -67,7 +67,7 @@ export const ChaptersList = ({ items, onReorder, onEdit }) => {
                     </div>
                     {chapter.title}
                     <div className="ml-auto pr-2 flex items-center gap-x-2">
-                      {chapter.is_free && <Badge>Gratis</Badge>}
+
                       <Badge className={cn("bg-brand-soft", chapter.is_published && "bg-white")}>
                         {chapter.is_published ? "Publicado" : "Borrador"}
                       </Badge>

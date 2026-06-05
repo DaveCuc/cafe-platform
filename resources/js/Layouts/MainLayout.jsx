@@ -1,6 +1,6 @@
 import React from 'react';
 import { usePage, Link } from '@inertiajs/react';
-import { Layout, Compass, List, BarChart, LogOut, Menu, Store, FileText, Mail, Calendar } from "lucide-react";
+import { Layout, Compass, List, LogOut, Menu, Store, FileText, Mail, Calendar } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/Components/ui/sheet";
@@ -20,9 +20,8 @@ const guestRoutes = [
 
 const teacherRoutes = [
     { icon: List, label: "Cursos", href: "/teacher/courses" },
-    { icon: BarChart, label: "Estadísticas", href: "/teacher/analytics" },
     { icon: Mail, label: "Solicitudes", href: "/teacher/solicitudes" },
-    { icon: FileText, label: "Articulos", href: "/teacher/articles" },
+    { icon: FileText, label: "Enlaces de interés", href: "/teacher/articles" },
     { icon: Calendar, label: "Eventos", href: "/teacher/events" },
 ];
 
@@ -35,7 +34,7 @@ const SidebarItem = ({ icon: Icon, label, href }) => {
         <Link
             href={href}
             className={cn(
-                "flex items-center gap-x-2 text-brand-text text-sm font-[500] pl-6 transition-all hover:text-white hover:bg-brand-text w-full",
+                "flex items-center gap-x-2 text-brand-text text-base font-[500] pl-6 transition-all hover:text-white hover:bg-brand-text w-full",
                 isActive && "text-brand-text bg-white hover:bg-brand-pale hover:text-brand-text"
             )}
         >
@@ -101,13 +100,13 @@ const NavbarRoutes = () => {
         <div className="flex gap-x-2 ml-auto items-center">
             {isTeacherRoute || isPlayerPage ? (
                 <Link href="/dashboard">
-                    <Button size="sm" variant="ghost">
+                    <Button size="sm" variant="ghost" className={isTeacherRoute ? "text-white hover:bg-white/20 hover:text-white" : ""}>
                         <LogOut className="h-4 w-4 mr-2" /> Salir del Modo
                     </Button>
                 </Link>
             ) : isTeacher ? (
                 <Link href="/teacher/courses">
-                    <Button size="sm" variant="outline">
+                    <Button size="sm" className="bg-brand-darker text-white hover:bg-brand font-bold">
                         Modo Profesor
                     </Button>
                 </Link>
@@ -119,7 +118,7 @@ const NavbarRoutes = () => {
                         <span className="inline-flex rounded-none">
                             <button
                                 type="button"
-                                className="inline-flex items-center rounded-none border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-brand-ink hover:text-brand-text focus:outline-none"
+                                className="inline-flex items-center rounded-none border border-transparent bg-white px-3 py-2 text-base font-medium leading-4 text-brand-ink hover:text-brand-text focus:outline-none"
                             >
                                 {auth?.user?.name || "Usuario"}
                                 <svg className="-me-0.5 ms-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -144,11 +143,14 @@ const NavbarRoutes = () => {
 import { ConfettiProvider } from "@/Components/providers/confetti-provider";
 
 export default function MainLayout({ children }) {
+    const { url } = usePage();
+    const isTeacherRoute = url.startsWith("/teacher");
+
     return (
         <div className="h-full min-h-screen relative bg-brand-pale font-sans">
             <ConfettiProvider />
             <div className="h-[80px] md:pl-56 fixed inset-y-0 w-full z-50">
-                <div className="p-4 border-b h-full flex items-center bg-white shadow-sm">
+                <div className={cn("p-4 border-b h-full flex items-center shadow-sm transition-colors", isTeacherRoute ? "bg-brand text-white border-brand-darker" : "bg-white")}>
                     <MobileSidebar />
                     <NavbarRoutes />
                 </div>

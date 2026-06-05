@@ -14,11 +14,12 @@ import {
     PersonalContactForm,
 } from "./Components/SimpleForms";
 import { ImageForm } from "./Components/ImageForm";
-import {BusinessAddressForm} from "./Components/BusinessAddressForm";
+import { BusinessAddressForm } from "./Components/BusinessAddressForm";
 import { Actions } from "./Components/Actions";
 import { GirosDigitalForm } from "./Components/GirosDigitalForm";
 import { RegionMunicipioForm } from "./Components/RegionMunicipioForm";
 import { ContentGalleryForm } from "./Components/ContentGalleryForm";
+import { CertificateForm } from "./Components/CertificateForm";
 
 export default function TradeEditor({ trade, giros, regions }) {
     const requiredFields = [
@@ -79,7 +80,7 @@ export default function TradeEditor({ trade, giros, regions }) {
                     Volver a la lista de registros
                 </Link>
 
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-4">
                     <div className="flex flex-col gap-y-2">
                         <h1 className="text-2xl font-bold text-brand-text">Configuración del negocio</h1>
                         <span className="text-sm text-brand-text">
@@ -93,6 +94,14 @@ export default function TradeEditor({ trade, giros, regions }) {
                     />
                 </div>
 
+                {/* Banner con el comentario del motivo del rechazo de su solicitud */}
+                {(trade.status === "rejected" || trade.status === "pending") && trade.rejection_reason && (
+                    <div className="mt-6 rounded-none border border-red-200 bg-red-50 p-4 text-red-800 shadow-sm">
+                        <h3 className="font-bold text-base">Motivo del rechazo anterior:</h3>
+                        <p className="mt-1 text-sm">{trade.rejection_reason}</p>
+                    </div>
+                )}
+
                 <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
                     <div className="space-y-6">
                         <div className="flex items-center gap-x-2">
@@ -105,8 +114,8 @@ export default function TradeEditor({ trade, giros, regions }) {
                         <ShortDescriptionForm initialData={trade} tradeId={trade.id} />
                         <LongDescriptionForm initialData={trade} tradeId={trade.id} />
                         <ActivitiesForm initialData={trade} tradeId={trade.id} />
-                        
-                        <ImageForm initialData={trade} tradeId={trade.id} />
+                        <CertificateForm initialData={trade} tradeId={trade.id} />
+
                     </div>
 
                     <div className="space-y-6">
@@ -118,7 +127,7 @@ export default function TradeEditor({ trade, giros, regions }) {
                             <BusinessContactForm initialData={trade} tradeId={trade.id} />
                             <PersonalContactForm initialData={trade} tradeId={trade.id} />
                         </div>
-                        
+
 
                         <div>
                             <div className="mb-6 flex items-center gap-x-2">
@@ -134,10 +143,12 @@ export default function TradeEditor({ trade, giros, regions }) {
                                 <IconBadge variant="teacher" size="md" icon={FileImage} />
                                 <h2 className="text-xl font-semibold">Contenido</h2>
                             </div>
+                            <ImageForm initialData={trade} tradeId={trade.id} />
+
                             <ContentGalleryForm initialData={trade} tradeId={trade.id} />
                         </div>
 
-                        
+
                     </div>
                 </div>
             </div>

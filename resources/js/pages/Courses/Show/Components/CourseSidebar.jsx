@@ -12,7 +12,7 @@ const CourseSidebarItem = ({ label, id, isCompleted, courseId, isLocked, isActiv
       href={linkHref}
       preserveState
       className={cn(
-        "flex items-center gap-x-2 text-brand-ink dark:text-gray-300 text-sm font-[500] pl-6 transition-all hover:text-brand-text hover:bg-brand/10 dark:hover:bg-brand/20",
+        "flex items-center gap-x-2 text-brand-ink dark:text-gray-300 text-base font-[500] pl-6 transition-all hover:text-brand-text hover:bg-brand/10 dark:hover:bg-brand/20",
         isActive && "text-brand-text dark:text-white bg-brand/10 dark:bg-brand/20 hover:bg-brand/10 hover:text-brand-text",
         isCompleted && "bg-brand text-white hover:text-white hover:bg-brand-darker dark:bg-brand-dark dark:hover:bg-brand-darker",
         isCompleted && isActive && "bg-brand-darker text-white hover:text-white",
@@ -102,7 +102,7 @@ export const CourseSidebar = ({ course, progressCount, currentChapterId, current
             <div className="px-6 py-2 text-xs font-semibold text-brand-ink dark:text-gray-400 mt-2 uppercase tracking-wide">Certificado</div>
             <a
               href={`/courses/${course.id}/certificate`}
-              className="flex items-center gap-x-2 text-brand-ink dark:text-gray-300 text-sm font-[500] pl-6 py-4 transition-all hover:text-brand-text hover:bg-brand/10 dark:hover:bg-brand/20"
+              className="flex items-center gap-x-2 text-brand-ink dark:text-gray-300 text-base font-[500] pl-6 py-4 transition-all hover:text-brand-text hover:bg-brand/10 dark:hover:bg-brand/20"
               target="_blank"
               rel="noreferrer"
             >

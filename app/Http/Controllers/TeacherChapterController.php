@@ -31,7 +31,6 @@ class TeacherChapterController extends Controller
         $validated = $request->validate([
             'title' => 'sometimes|string|max:255',
             'description' => 'nullable|string',
-            'is_free' => 'sometimes|boolean',
             'is_video_required' => 'sometimes|boolean',
         ]);
 

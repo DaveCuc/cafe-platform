@@ -16,7 +16,7 @@ export default function ArticleView({ article, recentArticles }) {
             <div className={`min-h-screen transition-colors duration-300 ${isDarkMode ? 'dark bg-[#1a1a1a] text-gray-100' : 'bg-gray-50'}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col lg:flex-row gap-10">
                     
-                    {/* Contenedor 1: Artículo */}
+                    {/* Contenedor 1: Enlace de Interés */}
                     <div className="lg:w-2/3 space-y-8">
                         
                         <ArticleCover 
@@ -36,7 +36,7 @@ export default function ArticleView({ article, recentArticles }) {
                         </div>
                     </div>
 
-                    {/* Contenedor 2: Otros Artículos */}
+                    {/* Contenedor 2: Otros Enlaces de Interés */}
                     <RecentArticlesSidebar articles={recentArticles} isDarkMode={isDarkMode} />
 
                 </div>

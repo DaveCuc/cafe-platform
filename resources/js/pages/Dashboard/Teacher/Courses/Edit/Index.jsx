@@ -3,7 +3,7 @@ import { Head, Link } from "@inertiajs/react";
 import { CircleDollarSign, File, LayoutDashboard, ListChecks, ArrowLeft } from "lucide-react";
 import MainLayout from "@/Layouts/MainLayout";
 
-import { TitleForm, DescriptionForm, PriceForm } from "./Components/SimpleForms";
+import { TitleForm, DescriptionForm } from "./Components/SimpleForms";
 import { CategoryForm } from "./Components/CategoryForm";
 import { ImageForm } from "./Components/ImageForm";
 import { AttachmentForm } from "./Components/AttachmentForm";
@@ -22,7 +22,7 @@ export default function CourseEditor({ course, categories }) {
     course.title,
     course.description,
     course.image_url,
-    course.price !== null || course.is_free,
+
     course.category_id,
     (course.chapters?.length > 0 || course.exams?.length > 0) &&
     [...(course.chapters || []), ...(course.exams || [])].every(item => item.is_published)
@@ -87,13 +87,7 @@ export default function CourseEditor({ course, categories }) {
               <CourseContentForm initialData={course} courseId={course.id} />
             </div>
 
-            <div>
-              <div className="flex items-center gap-x-2 mb-6">
-                <IconBadge variant="teacher" size="md" icon={CircleDollarSign} />
-                <h2 className="text-xl font-semibold">Precio del curso</h2>
-              </div>
-              <PriceForm initialData={course} courseId={course.id} />
-            </div>
+
 
             <div>
               <div className="flex items-center gap-x-2 mb-6">

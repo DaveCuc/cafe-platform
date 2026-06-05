@@ -44,7 +44,7 @@ export function DataTable({ columns, data }) {
         <div>
             <div className="flex items-center py-4 justify-between">
                 <Input
-                    placeholder="Filtrar artículos..."
+                    placeholder="Filtrar enlaces de interés..."
                     value={(table.getColumn("title")?.getFilterValue()) || ""}
                     onChange={(event) =>
                         table.getColumn("title")?.setFilterValue(event.target.value)
@@ -54,7 +54,7 @@ export function DataTable({ columns, data }) {
                 <Link href="/teacher/articles/create">
                     <Button>
                         <PlusCircle className="mr-2 h-4 w-4" />
-                        Nuevo Artículo
+                        Nuevo Enlace de Interés
                     </Button>
                 </Link>
             </div>
@@ -103,7 +103,7 @@ export function DataTable({ columns, data }) {
                 </Table>
             </div>
             <div className="flex items-center justify-end space-x-2 py-4">
-               <span className="text-sm text-brand-ink mr-2">Página {table.getState().pagination.pageIndex + 1} de {table.getPageCount() || 1}</span>
+               <span className="text-base text-brand-ink mr-2">Página {table.getState().pagination.pageIndex + 1} de {table.getPageCount() || 1}</span>
                 <Button
                     variant="outline"
                     size="sm"

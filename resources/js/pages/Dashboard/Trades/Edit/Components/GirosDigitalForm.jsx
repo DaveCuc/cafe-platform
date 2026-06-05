@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useRef, useEffect } from "react";
 import { router } from "@inertiajs/react";
 import { Check, ChevronDown, Pencil, Search } from "lucide-react";
 
@@ -15,6 +15,21 @@ export function GirosDigitalForm({ initialData, tradeId, giros = [] }) {
     const [isLoading, setIsLoading] = useState(false);
     const [open, setOpen] = useState(false);
     const [search, setSearch] = useState("");
+    
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [dropdownRef]);
 
     const selectedGiros = useMemo(
         () => giros.filter((giro) => selectedGiroIds.includes(giro.id)),
@@ -57,7 +72,7 @@ export function GirosDigitalForm({ initialData, tradeId, giros = [] }) {
 
     return (
         <div className="relative mt-6 rounded-none border border-brand-soft bg-white p-4 shadow-sm">
-            <div className="flex items-center justify-between font-medium">
+            <div className="font-medium flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-x-2">
                     Giro
                     {selectedGiroIds.length > 0 && (
@@ -100,7 +115,7 @@ export function GirosDigitalForm({ initialData, tradeId, giros = [] }) {
                 </div>
             ) : (
                 <form onSubmit={onSubmit} className="mt-4 space-y-4">
-                    <div className="relative">
+                    <div className="relative" ref={dropdownRef}>
                         <Button
                             type="button"
                             variant="outline"
@@ -160,13 +175,13 @@ export function GirosDigitalForm({ initialData, tradeId, giros = [] }) {
 
                     <div className="flex flex-wrap gap-2">
                         {selectedGiros.map((giro) => (
-                            <Badge key={giro.id} className="bg-brand-soft text-white">
+                            <Badge key={giro.id} className="bg-brand-text text-white">
                                 {giro.name}
                             </Badge>
                         ))}
                     </div>
 
-                    <Button type="submit" disabled={isLoading} className="rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">
+                    <Button type="submit" disabled={isLoading} className="w-full md:w-auto rounded-none bg-brand text-white hover:bg-brand-darker font-bold uppercase tracking-wider">
                         Guardar
                     </Button>
                 </form>
