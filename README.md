@@ -1,56 +1,92 @@
-# PROPUESTA DE UN PROTOTIPO DE PLATAFORMA DIGITAL DE CAPACITACIÓN Y PROMOCIÓN TURÍSTICA PARA LA RESERVA DE LA BIOSFERA TEHUACÁN – CUICATLÁN
+<p align="center">
+  <h1 align="center">Plataforma Digital de Capacitación y Promoción Turística<br>Reserva de la Biosfera Tehuacán–Cuicatlán</h1>
+</p>
 
-## Autor: **DAVID CUAHUTENCOS**
+<p align="center">
+  <img src="https://img.shields.io/badge/PHP-8.5-777BB4?style=flat-square&logo=php&logoColor=white" alt="PHP">
+  <img src="https://img.shields.io/badge/Laravel-11-FF2D20?style=flat-square&logo=laravel&logoColor=white" alt="Laravel">
+  <img src="https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React">
+  <img src="https://img.shields.io/badge/Inertia.js-9553E9?style=flat-square&logo=inertia&logoColor=white" alt="Inertia.js">
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white" alt="Tailwind">
+</p>
 
-## Estado: **Proyecto Final**
+<p align="center">
+  <em>Prototipo funcional integral para la gestión turística y la capacitación comunitaria (LMS), diseñado con un enfoque profesional y minimalista.</em>
+</p>
 
-## Asunto: **PARA LA OBTENCIÓN DEL TITULO DE INGENIERÍA EN SISTEMAS COMPUTACIONALES**
+---
 
-## Asosciado a la investigacion: **Viabilidad tecnológica y prototipo de una plataforma digital para la gestión turística en la Reserva de la Biosfera Tehuacán-Cuicatlán.**
+## 📋 Prerrequisitos
 
-## Descripción
-Este es un proyecto con la finalidad de solucionar las siguientes problematicas en las comunidades de la Reserva de la Biosfera Tehuacan-Cuicatlán
-- Falta de visibilidad digital.
-- Acceso limitado a capacitacion especializada.
-- Falta de centralziacion de informacion turistica.
-El objetivo es
-- proveer de una plataforma digital integral de gestion turistica.
-- proveer capacitacion a traves de un gestor de aprendizaje (LMS).
+Antes de iniciar, asegúrate de tener instalado el siguiente software en sus versiones correspondientes para garantizar un entorno estable:
 
-## Características Técnicas
+- **PHP** (v8.5)
+- **Composer** (v2.9.5)
+- **Node.js** (v25.6.1)
+- **npm** (v11.9.0)
+- **Git** (v2.53.0)
+- **XAMPP** (requerido para el servidor de base de datos MySQL)
 
-- **Stack**: Backend Laravel 11 (PHP), frontend Inertia.js + React (JSX), Vite para bundling, Tailwind CSS para estilos.
-- **Estructura**: MVC en Laravel; páginas Inertia en `resources/js/pages/*.jsx`; rutas en `routes/web.php` y `routes/auth.php`.
-- **Autenticación y autorización**: Fortify para autenticación; checks de propiedad/ownership en controladores para autorización de recursos.
-- **Bases de datos**: MySQL / MariaDB (configurable en `.env`); migraciones en `database/migrations`; seeders en `database/seeders`.
-- **IDs y modelos**: UUIDs como claves primarias (trait `HasUuids`) en modelos principales (`Course`, `Chapter`, `Purchase`, `Attachment`, etc.).
-- **Almacenamiento**: Archivos públicos en disco `public` (disk `public`), URLs guardadas como `/storage/...`; el código elimina el prefijo `/storage/` al borrar.
-- **Arquitectura LMS**: Modelos principales: `Course`, `Chapter`, `Attachment`, `Purchase`, `UserProgress`. Flujos separados para estudiantes y docentes (`TeacherCourseController`, `TeacherChapterController`).
-- **Frontend**: Import alias `@/` configurado en `jsconfig.json`; componentes React en JSX (no TSX); rutas generadas por Ziggy (`route(...)`).
-- **Validación**: Requests en `app/Http/Requests/*` con reglas (`uuid`, etc.) para proteger entradas.
-- **Seguridad**:
-  - Protege rutas sensibles con middleware (`auth`) y comprobaciones de propiedad.
-  - `robots.txt` y `sitemap.xml` para control de indexación (robots no es seguridad).
-  - Configurar reglas del servidor y autenticación para contenido privado.
-- **Entornos**:
-  - Variables en `.env`: `APP_ENV`, `APP_URL`, `DB_*`, `STRIPE_*`, `FILESYSTEM_DRIVER`, `CACHE_*`, `QUEUE_CONNECTION`.
-  - Recomendado bloquear staging con `robots.txt` (`Disallow: /`) y producción con `Sitemap:` explícito.
-- **Colas y tareas**: Soporte para `queue` (configurar `QUEUE_CONNECTION` y workers).
-- **Testing & calidad**:
-  - Tests PHPUnit en `tests/Feature` y `tests/Unit`.
-  - Ejecutar tests: `php artisan test`.
-  - Lint/format PHP: `vendor/bin/pint`.
-  - Frontend: `npm run dev`, `npm run build`.
-- **CI / despliegue**:
-  - Ejecutar migraciones: `php artisan migrate --force`.
-  - Ejecutar seeders si procede: `php artisan db:seed --class=SeederName`.
-  - Compilar assets: `npm ci && npm run build`.
-  - Recomendado: tareas de CI para tests, lint y build.
-- **Observabilidad**:
-  - Logs en `storage/logs` (Laravel logging).
-  - Integrar monitoreo/alertas (Sentry, New Relic) según necesidad.
-- **Backup & mantenimiento**:
-  - Backups periódicos de la base de datos y `storage`/assets.
-  - Rotación de logs y políticas de retención.
-- **Notas operativas**:
-  - No confiar en `robots.txt` para seguridad; usar autenticación y reglas de servidor.
+---
+
+## 🚀 Tecnologías Utilizadas
+
+El sistema aprovecha un stack moderno para asegurar una experiencia de usuario rápida y un código fácil de mantener:
+
+- **Backend:** Laravel 11 (PHP) bajo arquitectura MVC.
+- **Frontend:** React (JSX) gestionado reactivamente con Inertia.js.
+- **Estilos:** Tailwind CSS para una interfaz limpia y estética.
+- **Base de Datos:** MySQL / MariaDB (gestión mediante UUIDs).
+- **Autenticación:** Laravel Fortify.
+
+---
+
+## 📂 Estructura General del Proyecto
+
+La organización del código fuente sigue las convenciones del ecosistema Laravel e Inertia:
+
+```text
+├── app/
+|   ├── Actions/Forty        # Action Classes para el funcionamiento de Laravel Forty
+│   ├── Http/Controllers/    # Controladores separados por roles
+|   ├── Models/              # Modelos del LMS (Course, Chapter, Purchase)
+│   └── Providers/           # Arranque y configuración global de los servicios de la aplicación.   
+├── database/
+│   ├── migrations/          # Definición de esquemas con UUIDs
+│   └── seeders/             # Semillas de datos para desarrollo
+├── documentacion/           # Guías detalladas del proyecto (*.md)
+├── public/                  
+|   ├── Certificados         # Logos institucionales de DEPI, ITT y Reserva de la Biosfera
+|   ├── Decorativo           # Contiene imagenes SVG para decorar el Landing Page 
+|   ├── Directorios          # Imagenes que sirven para el HerosSection de Directorios
+|   ├── Fotos                # Imagenes que sirven para el Herosection Principal
+|   ├── Institution          # Logos institucionales del NavBar
+|   ├── Maestros             # Fotos del carrucel de maestros de Cursos
+|   └── Mapas                # Contiene Archivos .geojson para generar los mapas ilustrativos
+├── resources/js/            
+|   ├── css                  # Configuracion del CSS del proyecto
+|   ├── js
+|   |   ├── Components       # Componentes React (Botones, formularios, etc)
+|   |   ├── hooks            # Elementos visuales
+|   |   ├── Layout           # Layouts principales del proyecto
+|   |   ├── lib
+|   |   └── pages            # Estructura completa de las paginas formato JSX
+|   |       ├── Auth         # Autenticacion de usuario
+|   |       ├── Courses      # Cursos (Private)
+|   |       ├── Dashboard    # Panel principal (Private)
+|   |       ├── LandingPage  # Pagina de inicio, contiene mapa, directorio, acerca de los cursos.
+|   |       └── Profile      # Editor del perfil (Private)
+│   └── views/               # Generador de documentos como el certificado y el correo electronico.
+├── routes/                  # Definiciones de rutas (web.php y auth.php)
+└── sotrage                  # Almacenamiento de archivos e imagenes cargadas
+```
+---
+## 📖 Documentación Extendida
+Toda la información operativa y guías profundas están estructuradas de manera modular en la carpeta /documentacion:
+
+- Guía de Instalación
+- 
+
+## 👤 Información del Proyecto
+Autor: Jose David Cuahutencos Peña
+Investigación: Viabilidad tecnológica y prototipo de una plataforma digital para la gestión turística en la Reserva de la Biosfera Tehuacán-Cuicatlán.
