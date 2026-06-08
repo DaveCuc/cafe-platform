@@ -25,7 +25,6 @@ El objetivo es
 - **Bases de datos**: MySQL / MariaDB (configurable en `.env`); migraciones en `database/migrations`; seeders en `database/seeders`.
 - **IDs y modelos**: UUIDs como claves primarias (trait `HasUuids`) en modelos principales (`Course`, `Chapter`, `Purchase`, `Attachment`, etc.).
 - **Almacenamiento**: Archivos públicos en disco `public` (disk `public`), URLs guardadas como `/storage/...`; el código elimina el prefijo `/storage/` al borrar.
-- **Pagos**: Integración con Stripe (cliente y webhooks) para checkout y persistencia de compras.
 - **Arquitectura LMS**: Modelos principales: `Course`, `Chapter`, `Attachment`, `Purchase`, `UserProgress`. Flujos separados para estudiantes y docentes (`TeacherCourseController`, `TeacherChapterController`).
 - **Frontend**: Import alias `@/` configurado en `jsconfig.json`; componentes React en JSX (no TSX); rutas generadas por Ziggy (`route(...)`).
 - **Validación**: Requests en `app/Http/Requests/*` con reglas (`uuid`, etc.) para proteger entradas.
@@ -55,4 +54,3 @@ El objetivo es
   - Rotación de logs y políticas de retención.
 - **Notas operativas**:
   - No confiar en `robots.txt` para seguridad; usar autenticación y reglas de servidor.
-  - Proteger endpoints de webhook con firma (`STRIPE_WEBHOOK_SECRET`).
