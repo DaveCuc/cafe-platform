@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <em>Prototipo funcional integral para la gestión turística y la capacitación comunitaria (LMS), diseñado con un enfoque profesional y minimalista.</em>
+  <em>Prototipo funcional integral para la gestión turística y la capacitación comunitaria (LMS)</em>
 </p>
 
 ---
@@ -85,33 +85,39 @@ La organización del código fuente sigue las convenciones del ecosistema Larave
 ## 📖 Documentación
 Toda la información operativa y guías profundas están estructuradas de manera modular en la carpeta /documentacion:
 - [Guía de Instalación](./documentacion/Guia%20de%20Instalación.md) 
+
 ---
+
 ## 🛠️ Inicio Rápido
 Para levantar el entorno local de desarrollo de forma rapida (Solo si antes ya leiste la guia completa):
 
 1. Clonar el repositorio y acceder a la carpeta del proyecto
-Ref: [1. Clonar el repositorio](./documentacion/Guia%20de%20Instalación.md#1-clonar-el-repositorio)
+> Ref: [1. Clonar el repositorio](./documentacion/Guia%20de%20Instalación.md#1-clonar-el-repositorio)
+```
 git clone https://github.com/DaveCuc/reserva-platform.git
 cd reserva-platform
-
+```
 2. Instalar dependencias del Backend (PHP) y Frontend (React)
-Ref: [2. Instalar dependencias](./documentacion/Guia%20de%20Instalación.md#2-instalar-dependencias)
+> Ref: [2. Instalar dependencias](./documentacion/Guia%20de%20Instalación.md#2-instalar-dependencias)
+```
 composer install
 npm install
-
+```
 3. Configurar entorno, generar clave y migrar base de datos (Asegúrate de iniciar MySQL en XAMPP)
-Ref: [3. Configurar el entorno y base de datos](./documentacion/Guia%20de%20Instalación.md#3-configurar-el-entorno-y-base-de-datos)
+> Ref: [3. Configurar el entorno y base de datos](./documentacion/Guia%20de%20Instalación.md#3-configurar-el-entorno-y-base-de-datos)
+```
 cp .env.example .env
 php artisan key:generate
 php artisan migrate --seed
-
+```
 4. Ejecutar el servidor de desarrollo Backend
-Ref: [4. Ejecutar los servidores de desarrollo](./documentacion/Guia%20de%20Instalación.md#4-ejecutar-los-servidores-de-desarrollo)
+> Ref: [4. Ejecutar los servidores de desarrollo](./documentacion/Guia%20de%20Instalación.md#4-ejecutar-los-servidores-de-desarrollo)
+```
 php artisan serve
 npm run dev
+```
+
 ---
-
-
 
 ## 👤 Información del Proyecto
 Autor: Jose David Cuahutencos Peña
