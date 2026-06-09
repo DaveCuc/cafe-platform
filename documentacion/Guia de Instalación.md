@@ -1,3 +1,7 @@
+<p align="center">
+  <h1 align="center">Guia de Instalación</h1>
+</p>
+
 # Cómo configurar el entorno de desarrollo local
 
 En esta guía configurarás tu entorno de desarrollo local y levantarás la aplicación para verificar que todo funcione correctamente antes de comenzar a trabajar.
