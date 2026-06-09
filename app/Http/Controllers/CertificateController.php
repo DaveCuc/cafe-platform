@@ -9,23 +9,36 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Controlador encargado de la gestión y generación de certificados.
+ */
 class CertificateController extends Controller
 {
+    /**
+     * Genera y descarga el certificado en PDF para un curso completado.
+     *
+     * @param Course $course Curso del cual se desea obtener el certificado.
+     * @return \Illuminate\Http\Response
+     */
     public function download(Course $course)
     {
         $userId = Auth::id();
 
-        // 1. Verificar que el usuario tenga acceso al curso (comprado, gratis, o es dueño - aunque el dueño no suele sacar certificado)
+        // 1. Verificar que el usuario tenga acceso al curso
         $purchase = \App\Models\Purchase::where('user_id', $userId)->where('course_id', $course->id)->first();
         if (!$purchase && !$course->is_free && $course->user_id !== $userId) {
             abort(403, 'Debes estar inscrito en el curso.');
         }
 
-        $course->load(['chapters' => function($q) {
-            $q->where('is_published', true);
-        }, 'exams' => function($q) {
-            $q->where('is_published', true);
-        }, 'user']);
+        $course->load([
+            'chapters' => function ($q) {
+                $q->where('is_published', true);
+            },
+            'exams' => function ($q) {
+                $q->where('is_published', true);
+            },
+            'user'
+        ]);
 
         // 2. Verificar que completó todos los capítulos publicados
         $publishedChapterIds = $course->chapters->pluck('id');

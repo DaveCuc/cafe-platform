@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 
+/**
+ * Modelo principal que representa a un usuario (estudiante, profesor o administrador) de la plataforma.
+ */
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -48,6 +51,11 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
+    /**
+     * Obtiene todos los comercios del directorio creados y gestionados por este usuario.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function directorios()
     {
         return $this->hasMany(Directorio::class);

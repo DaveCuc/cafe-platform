@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
     /**
-     * Run the migrations.
+     * Descripción Principal: Revierte el tipo de dato de la fecha de evento dejándolo nuevamente como "date".
      */
     public function up(): void
     {

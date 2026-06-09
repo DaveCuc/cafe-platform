@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
     /**
-     * Run the migrations.
+     * Descripción Principal: Ajusta los tipos de datos de fecha y hora en la tabla de eventos.
      */
     public function up(): void
     {

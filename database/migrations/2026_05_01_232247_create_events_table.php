@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
     /**
-     * Run the migrations.
+     * Descripción Principal: Crea la tabla para registrar eventos públicos, presenciales o masterclasses online.
      */
     public function up(): void
     {

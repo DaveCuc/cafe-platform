@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
+    /**
+     * Descripción Principal: Conecta los comercios del directorio con las nuevas tablas de región y municipio.
+     */
     public function up(): void
     {
         Schema::table('directorios', function (Blueprint $table) {

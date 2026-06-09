@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
     /**
-     * Run the migrations.
+     * Descripción Principal: Añade columnas a usuarios para soportar Autenticación de Dos Factores (2FA).
      */
     public function up(): void
     {

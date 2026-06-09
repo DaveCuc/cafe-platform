@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Modelo que representa un evento organizado o promocionado en la plataforma.
+ */
 class Event extends Model
 {
     use HasUuids;
@@ -39,6 +42,11 @@ class Event extends Model
         'organizers' => 'array',
     ];
 
+    /**
+     * Obtiene el usuario (organizador/profesor) que creó este evento.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

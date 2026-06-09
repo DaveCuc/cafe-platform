@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
+    /**
+     * Descripción Principal: Añade campos extendidos al directorio (descripciones, actividades, galería, contacto).
+     */
     public function up(): void
     {
         Schema::table('directorios', function (Blueprint $table) {

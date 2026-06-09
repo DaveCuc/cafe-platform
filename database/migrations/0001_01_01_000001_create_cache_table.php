@@ -7,6 +7,12 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
+     * Descripción Principal: Crea las tablas base para el sistema de caché.
+     * 
+     * Base de datos/Apartado:
+     * - cache: Almacena la llave, valor y tiempo de expiración.
+     * - cache_locks: Utilizado para manejar los bloqueos de concurrencia en la caché.
+     *
      * Run the migrations.
      */
     public function up(): void

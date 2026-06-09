@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Descripción Principal: Crea la tabla principal de cursos.
+     * 
+     * Base de datos/Apartado:
+     * - courses: Almacena título, descripción, precio, estado de publicación y relación con categoría y creador.
+     */
     public function up(): void
     {
         Schema::create('courses', function (Blueprint $table) {

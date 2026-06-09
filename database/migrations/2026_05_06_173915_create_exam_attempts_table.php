@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
     /**
-     * Run the migrations.
+     * Descripción Principal: Registra los intentos y calificaciones de los usuarios al hacer un examen.
      */
     public function up(): void
     {

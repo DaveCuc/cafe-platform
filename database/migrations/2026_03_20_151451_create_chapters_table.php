@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Descripción Principal: Crea la tabla de capítulos para organizar el contenido de cada curso.
+     * 
+     * Base de datos/Apartado:
+     * - chapters: Almacena título, url del video, orden de aparición (position) y relación con el curso.
+     */
     public function up(): void
     {
         Schema::create('chapters', function (Blueprint $table) {

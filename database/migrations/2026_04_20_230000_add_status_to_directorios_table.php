@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
+    /**
+     * Descripción Principal: Añade el campo "status" a los comercios para controlar un flujo de revisión/aprobación.
+     */
     public function up(): void
     {
         Schema::table('directorios', function (Blueprint $table) {

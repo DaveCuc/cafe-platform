@@ -9,8 +9,14 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Controlador para la gestión de capítulos de un curso por parte del profesor.
+ */
 class TeacherChapterController extends Controller
 {
+    /**
+     * Muestra el formulario para editar un capítulo.
+     */
     public function edit(Course $course, Chapter $chapter)
     {
         if ($course->user_id != Auth::id() || $chapter->course_id != $course->id) {
@@ -24,6 +30,9 @@ class TeacherChapterController extends Controller
         ]);
     }
 
+    /**
+     * Actualiza la información básica de un capítulo.
+     */
     public function update(Request $request, Course $course, Chapter $chapter)
     {
         if ($course->user_id != Auth::id() || $chapter->course_id != $course->id) abort(403);
@@ -41,6 +50,9 @@ class TeacherChapterController extends Controller
         return back()->with('success', 'Capítulo actualizado');
     }
 
+    /**
+     * Publica un capítulo si tiene el contenido obligatorio requerido.
+     */
     public function publish(Course $course, Chapter $chapter)
     {
         if ($course->user_id != Auth::id() || $chapter->course_id != $course->id) abort(403);
@@ -57,6 +69,9 @@ class TeacherChapterController extends Controller
         return back();
     }
 
+    /**
+     * Oculta un capítulo publicado. Si era el último capítulo publicado, despublica el curso.
+     */
     public function unpublish(Course $course, Chapter $chapter)
     {
         if ($course->user_id != Auth::id() || $chapter->course_id != $course->id) abort(403);
@@ -71,6 +86,9 @@ class TeacherChapterController extends Controller
         return back();
     }
 
+    /**
+     * Elimina un capítulo y sus archivos asociados (video, imagen).
+     */
     public function destroy(Course $course, Chapter $chapter)
     {
         if ($course->user_id != Auth::id() || $chapter->course_id != $course->id) abort(403);
@@ -92,6 +110,9 @@ class TeacherChapterController extends Controller
         return redirect()->route('teacher.courses.edit', $course->id);
     }
 
+    /**
+     * Sube o reemplaza el video de un capítulo.
+     */
     public function uploadVideo(Request $request, Course $course, Chapter $chapter)
     {
         if ($course->user_id != Auth::id() || $chapter->course_id != $course->id) abort(403);
@@ -109,6 +130,9 @@ class TeacherChapterController extends Controller
         return back();
     }
 
+    /**
+     * Sube o reemplaza la imagen de portada de un capítulo.
+     */
     public function uploadImage(Request $request, Course $course, Chapter $chapter)
     {
         if ($course->user_id != Auth::id() || $chapter->course_id != $course->id) abort(403);

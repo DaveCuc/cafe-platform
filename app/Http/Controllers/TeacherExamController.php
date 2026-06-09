@@ -10,8 +10,14 @@ use App\Models\ExamOption;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
+/**
+ * Controlador para la creación y gestión de exámenes por parte del profesor.
+ */
 class TeacherExamController extends Controller
 {
+    /**
+     * Crea un nuevo examen en el curso.
+     */
     public function store(Request $request, Course $course)
     {
         if ($course->user_id != Auth::id()) abort(403);
@@ -30,6 +36,9 @@ class TeacherExamController extends Controller
         return back()->with("success", "Examen creado");
     }
 
+    /**
+     * Reordena la lista de exámenes de un curso.
+     */
     public function reorder(Request $request, Course $course)
     {
         if ($course->user_id != Auth::id()) abort(403);
@@ -52,6 +61,9 @@ class TeacherExamController extends Controller
         return back();
     }
 
+    /**
+     * Muestra el formulario para editar la información y preguntas de un examen.
+     */
     public function edit(Course $course, Exam $exam)
     {
         if ($course->user_id != Auth::id()) abort(403);
@@ -65,6 +77,9 @@ class TeacherExamController extends Controller
         ]);
     }
 
+    /**
+     * Actualiza la configuración de un examen.
+     */
     public function update(Request $request, Course $course, Exam $exam)
     {
         if ($course->user_id != Auth::id()) abort(403);
@@ -82,6 +97,9 @@ class TeacherExamController extends Controller
         return back()->with("success", "Examen actualizado");
     }
 
+    /**
+     * Publica un examen si tiene preguntas configuradas.
+     */
     public function publish(Course $course, Exam $exam)
     {
         if ($course->user_id != Auth::id()) abort(403);
@@ -96,6 +114,9 @@ class TeacherExamController extends Controller
         return back();
     }
 
+    /**
+     * Oculta un examen publicado.
+     */
     public function unpublish(Course $course, Exam $exam)
     {
         if ($course->user_id != Auth::id()) abort(403);
@@ -105,6 +126,9 @@ class TeacherExamController extends Controller
         return back();
     }
 
+    /**
+     * Elimina un examen por completo.
+     */
     public function destroy(Course $course, Exam $exam)
     {
         if ($course->user_id != Auth::id()) abort(403);
@@ -114,7 +138,9 @@ class TeacherExamController extends Controller
         return redirect()->route("teacher.courses.edit", $course->id)->with("success", "Examen eliminado");
     }
 
-    // Questions
+    /**
+     * Crea una nueva pregunta con sus respectivas opciones para un examen.
+     */
     public function storeQuestion(Request $request, Course $course, Exam $exam)
     {
         if ($course->user_id != Auth::id()) abort(403);
@@ -142,6 +168,9 @@ class TeacherExamController extends Controller
         return back();
     }
 
+    /**
+     * Actualiza el contenido y las opciones de una pregunta existente.
+     */
     public function updateQuestion(Request $request, Course $course, Exam $exam, ExamQuestion $question)
     {
         if ($course->user_id != Auth::id() || $exam->course_id !== $course->id || $question->exam_id !== $exam->id) abort(403);
@@ -165,6 +194,9 @@ class TeacherExamController extends Controller
         return back();
     }
 
+    /**
+     * Reordena las preguntas de un examen.
+     */
     public function reorderQuestions(Request $request, Course $course, Exam $exam)
     {
         if ($course->user_id != Auth::id() || $exam->course_id !== $course->id) abort(403);
@@ -185,6 +217,9 @@ class TeacherExamController extends Controller
         return back();
     }
 
+    /**
+     * Elimina una pregunta de un examen.
+     */
     public function destroyQuestion(Course $course, Exam $exam, ExamQuestion $question)
     {
         if ($course->user_id != Auth::id() || $exam->course_id !== $course->id || $question->exam_id !== $exam->id) abort(403);
@@ -192,7 +227,9 @@ class TeacherExamController extends Controller
         return back();
     }
 
-    // Options
+    /**
+     * Añade una nueva opción de respuesta a una pregunta.
+     */
     public function storeOption(Request $request, Course $course, Exam $exam, ExamQuestion $question)
     {
         if ($course->user_id != Auth::id() || $exam->course_id !== $course->id || $question->exam_id !== $exam->id) abort(403);
@@ -214,6 +251,9 @@ class TeacherExamController extends Controller
         return back();
     }
 
+    /**
+     * Actualiza el contenido o estado de una opción de respuesta.
+     */
     public function updateOption(Request $request, Course $course, Exam $exam, ExamQuestion $question, ExamOption $option)
     {
         if ($course->user_id != Auth::id() || $exam->course_id !== $course->id || $question->exam_id !== $exam->id || $option->question_id !== $question->id) abort(403);
@@ -232,6 +272,9 @@ class TeacherExamController extends Controller
         return back();
     }
 
+    /**
+     * Elimina una opción de respuesta.
+     */
     public function destroyOption(Course $course, Exam $exam, ExamQuestion $question, ExamOption $option)
     {
         if ($course->user_id != Auth::id() || $exam->course_id !== $course->id || $question->exam_id !== $exam->id || $option->question_id !== $question->id) abort(403);

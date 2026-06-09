@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
+    /**
+     * Descripción Principal: Crea la tabla para almacenar la información de los clientes en Stripe (pagos).
+     */
     public function up(): void
     {
         Schema::create('stripe_customers', function (Blueprint $table) {

@@ -7,6 +7,13 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
+     * Descripción Principal: Crea las tablas para manejar los trabajos en segundo plano (Colas/Queues).
+     * 
+     * Base de datos/Apartado:
+     * - jobs: Tareas pendientes por ejecutarse.
+     * - job_batches: Lotes de tareas agrupadas.
+     * - failed_jobs: Registro de tareas que fallaron al ejecutarse.
+     *
      * Run the migrations.
      */
     public function up(): void

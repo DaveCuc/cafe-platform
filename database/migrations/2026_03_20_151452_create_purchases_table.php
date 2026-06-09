@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
+    /**
+     * Descripción Principal: Crea la tabla de compras o inscripciones de estudiantes a los cursos.
+     */
     public function up(): void
     {
         Schema::create('purchases', function (Blueprint $table) {

@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
     /**
-     * Run the migrations.
+     * Descripción Principal: Añade una URL para la imagen de portada de la tarjeta del artículo del blog.
      */
     public function up(): void
     {

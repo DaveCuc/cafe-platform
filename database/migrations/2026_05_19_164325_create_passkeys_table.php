@@ -7,8 +7,9 @@ use Laravel\Passkeys\Passkeys;
 
 return new class extends Migration
 {
+
     /**
-     * Run the migrations.
+     * Descripción Principal: Crea la tabla para almacenar credenciales biométricas (Passkeys) de inicio de sesión.
      */
     public function up(): void
     {

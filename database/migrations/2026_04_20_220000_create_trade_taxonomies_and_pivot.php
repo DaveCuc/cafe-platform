@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
+    /**
+     * Descripción Principal: Crea las tablas de taxonomías (giros, regiones, municipios) para estructurar el directorio.
+     */
     public function up(): void
     {
         Schema::create('giros', function (Blueprint $table) {

@@ -9,8 +9,18 @@ use App\Models\ExamAttempt;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
+/**
+ * Controlador para la visualización y realización de exámenes por parte de los estudiantes.
+ */
 class ExamController extends Controller
 {
+    /**
+     * Muestra los detalles y resultados previos de un examen específico.
+     *
+     * @param Course $course
+     * @param Exam $exam
+     * @return \Inertia\Response|\Illuminate\Http\RedirectResponse
+     */
     public function show(Course $course, Exam $exam)
     {
         if ($exam->course_id !== $course->id || !$exam->is_published) abort(404);
@@ -51,6 +61,13 @@ class ExamController extends Controller
         ]);
     }
 
+    /**
+     * Muestra la interfaz para realizar un examen.
+     *
+     * @param Course $course
+     * @param Exam $exam
+     * @return \Inertia\Response|\Illuminate\Http\RedirectResponse
+     */
     public function take(Course $course, Exam $exam)
     {
         if ($exam->course_id !== $course->id || !$exam->is_published) abort(404);
@@ -96,6 +113,14 @@ class ExamController extends Controller
         ]);
     }
 
+    /**
+     * Califica y guarda el intento de un examen realizado por el estudiante.
+     *
+     * @param Request $request
+     * @param Course $course
+     * @param Exam $exam
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     */
     public function submit(Request $request, Course $course, Exam $exam)
     {
         if ($exam->course_id !== $course->id || !$exam->is_published) abort(404);

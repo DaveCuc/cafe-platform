@@ -7,6 +7,13 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
+     * Descripción Principal: Crea las tablas base para la autenticación y sesiones de Laravel.
+     * 
+     * Base de datos/Apartado:
+     * - users: Tabla principal para almacenar usuarios (nombre, email, contraseña).
+     * - password_reset_tokens: Almacena los tokens para recuperar la contraseña.
+     * - sessions: Almacena la información de sesión de los usuarios.
+     *
      * Run the migrations.
      */
     public function up(): void

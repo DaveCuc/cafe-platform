@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Descripción Principal: Crea la tabla base del directorio turístico para registrar empresas.
+     * 
+     * Base de datos/Apartado:
+     * - directorios: Guarda la información inicial del negocio (nombre, giro, región, contacto).
+     */
     public function up(): void
     {
         Schema::create('directorios', function (Blueprint $table) {

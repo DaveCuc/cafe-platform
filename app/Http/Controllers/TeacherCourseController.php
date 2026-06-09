@@ -11,8 +11,14 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Controlador para la creación y gestión de cursos por parte del profesor.
+ */
 class TeacherCourseController extends Controller
 {
+    /**
+     * Muestra la vista para editar un curso y gestionar su contenido.
+     */
     public function edit(Course $course)
     {
         if ($course->user_id != Auth::id()) {
@@ -35,6 +41,9 @@ class TeacherCourseController extends Controller
         ]);
     }
 
+    /**
+     * Actualiza la información principal de un curso.
+     */
     public function update(Request $request, Course $course)
     {
         if ($course->user_id != Auth::id()) abort(403);
@@ -64,6 +73,9 @@ class TeacherCourseController extends Controller
         return back()->with('success', 'Curso actualizado');
     }
 
+    /**
+     * Publica un curso si cumple con los requisitos y tiene contenido válido.
+     */
     public function publish(Course $course)
     {
         if ($course->user_id != Auth::id()) abort(403);
@@ -80,6 +92,9 @@ class TeacherCourseController extends Controller
         return back();
     }
 
+    /**
+     * Oculta un curso previamente publicado.
+     */
     public function unpublish(Course $course)
     {
         if ($course->user_id != Auth::id()) abort(403);
@@ -88,6 +103,9 @@ class TeacherCourseController extends Controller
         return back();
     }
 
+    /**
+     * Elimina un curso completo con todas sus imágenes y adjuntos.
+     */
     public function destroy(Course $course)
     {
         if ($course->user_id != Auth::id()) abort(403);
@@ -103,6 +121,9 @@ class TeacherCourseController extends Controller
         return redirect()->route('teacher.courses');
     }
 
+    /**
+     * Sube o reemplaza la imagen de portada del curso.
+     */
     public function uploadImage(Request $request, Course $course)
     {
         if ($course->user_id != Auth::id()) abort(403);
@@ -119,6 +140,9 @@ class TeacherCourseController extends Controller
         return back();
     }
 
+    /**
+     * Sube un archivo adjunto general al curso.
+     */
     public function uploadAttachment(Request $request, Course $course)
     {
              if ($course->user_id != Auth::id()) abort(403);
@@ -135,6 +159,9 @@ class TeacherCourseController extends Controller
          return back();
     }
     
+    /**
+     * Elimina un archivo adjunto del curso.
+     */
     public function deleteAttachment(Course $course, Attachment $attachment)
     {
         if ($course->user_id != Auth::id()) abort(403);
@@ -149,6 +176,9 @@ class TeacherCourseController extends Controller
         return back();
     }
 
+    /**
+     * Crea un nuevo capítulo vacío en el curso.
+     */
     public function createChapter(Request $request, Course $course)
     {
         if ($course->user_id != Auth::id()) abort(403);
@@ -167,6 +197,9 @@ class TeacherCourseController extends Controller
         return back();
     }
 
+    /**
+     * Reordena el contenido mixto (capítulos y exámenes) del curso.
+     */
     public function reorderContent(Request $request, Course $course)
     {
         if ($course->user_id != Auth::id()) abort(403);
@@ -189,6 +222,9 @@ class TeacherCourseController extends Controller
         return back();
     }
 
+    /**
+     * Reordena exclusivamente los capítulos de un curso.
+     */
     public function reorderChapters(Request $request, Course $course)
     {
         if ($course->user_id != Auth::id()) abort(403);

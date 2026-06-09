@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
+/**
+ * Controlador para la gestión del directorio comercial y solicitudes de revisión.
+ */
 class DirectoryTradeController extends Controller
 {
     private const STATUS_DRAFT = 'draft';
@@ -20,6 +23,9 @@ class DirectoryTradeController extends Controller
     private const STATUS_REJECTED = 'rejected';
     private const GALLERY_LIMIT = 10;
 
+    /**
+     * Muestra la lista de comercios del usuario autenticado.
+     */
     public function index()
     {
         $trades = Directorio::query()
@@ -33,11 +39,17 @@ class DirectoryTradeController extends Controller
         ]);
     }
 
+    /**
+     * Muestra la vista para crear un nuevo registro de directorio.
+     */
     public function create()
     {
         return Inertia::render('Dashboard/Trades/Create/Index');
     }
 
+    /**
+     * Almacena un nuevo comercio en estado de borrador con su nombre inicial.
+     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -54,6 +66,9 @@ class DirectoryTradeController extends Controller
         return redirect()->route('directory.trades.edit', $trade->id);
     }
 
+    /**
+     * Muestra la vista para editar un registro de directorio y sus campos relacionados.
+     */
     public function edit(Directorio $trade)
     {
         $this->ensureOwner($trade);
@@ -71,6 +86,9 @@ class DirectoryTradeController extends Controller
         ]);
     }
 
+    /**
+     * Actualiza la información de un comercio del directorio.
+     */
     public function update(Request $request, Directorio $trade)
     {
         $this->ensureOwner($trade);
@@ -145,6 +163,9 @@ class DirectoryTradeController extends Controller
         return back();
     }
 
+    /**
+     * Sube o actualiza la imagen principal del comercio.
+     */
     public function uploadImage(Request $request, Directorio $trade)
     {
         $this->ensureOwner($trade);
@@ -166,6 +187,9 @@ class DirectoryTradeController extends Controller
         return back();
     }
 
+    /**
+     * Sube múltiples imágenes a la galería del comercio (límite de 10).
+     */
     public function uploadGalleryImage(Request $request, Directorio $trade)
     {
         $this->ensureOwner($trade);
@@ -198,6 +222,9 @@ class DirectoryTradeController extends Controller
         return back();
     }
 
+    /**
+     * Elimina una imagen de la galería.
+     */
     public function deleteGalleryImage(Request $request, Directorio $trade)
     {
         $this->ensureOwner($trade);
@@ -224,6 +251,9 @@ class DirectoryTradeController extends Controller
         return back();
     }
 
+    /**
+     * Sube y almacena un certificado asociado al comercio.
+     */
     public function storeCertificate(Request $request, Directorio $trade)
     {
         $this->ensureOwner($trade);
@@ -252,6 +282,9 @@ class DirectoryTradeController extends Controller
         return back();
     }
 
+    /**
+     * Elimina un certificado del comercio.
+     */
     public function destroyCertificate(Request $request, Directorio $trade, \App\Models\DirectorioCertificate $certificate)
     {
         $this->ensureOwner($trade);
@@ -273,6 +306,9 @@ class DirectoryTradeController extends Controller
         return back();
     }
 
+    /**
+     * Revierte un comercio aprobado a estado de borrador.
+     */
     public function revertToDraft(Directorio $trade)
     {
         $this->ensureOwner($trade);
@@ -289,6 +325,9 @@ class DirectoryTradeController extends Controller
         return back();
     }
 
+    /**
+     * Publica (aprueba por compatibilidad legacy) un comercio.
+     */
     public function publish(Directorio $trade)
     {
         $this->ensureOwner($trade);
@@ -302,6 +341,9 @@ class DirectoryTradeController extends Controller
         return back();
     }
 
+    /**
+     * Despublica un comercio y lo pasa a borrador.
+     */
     public function unpublish(Directorio $trade)
     {
         $this->ensureOwner($trade);
@@ -314,6 +356,9 @@ class DirectoryTradeController extends Controller
         return back();
     }
 
+    /**
+     * Envía la solicitud a revisión por parte de los administradores si los datos están completos.
+     */
     public function submitForReview(Directorio $trade)
     {
         $this->ensureOwner($trade);
@@ -357,6 +402,9 @@ class DirectoryTradeController extends Controller
         return back();
     }
 
+    /**
+     * Elimina un comercio y todos sus archivos asociados.
+     */
     public function destroy(Directorio $trade)
     {
         $this->ensureOwner($trade);
@@ -374,6 +422,9 @@ class DirectoryTradeController extends Controller
         return redirect()->route('directory.trades.index');
     }
 
+    /**
+     * (Revisor) Muestra la lista de solicitudes de directorio pendientes de aprobación.
+     */
     public function requestsIndex()
     {
         $this->ensureReviewer();
@@ -390,6 +441,9 @@ class DirectoryTradeController extends Controller
         ]);
     }
 
+    /**
+     * (Revisor) Muestra el detalle de una solicitud de directorio específica.
+     */
     public function requestShow(Directorio $trade)
     {
         $this->ensureReviewer();
@@ -401,6 +455,9 @@ class DirectoryTradeController extends Controller
         ]);
     }
 
+    /**
+     * (Revisor) Aprueba una solicitud de directorio pendiente.
+     */
     public function approve(Directorio $trade)
     {
         $this->ensureReviewer();
@@ -420,6 +477,9 @@ class DirectoryTradeController extends Controller
         return back();
     }
 
+    /**
+     * (Revisor) Rechaza una solicitud de directorio con su respectivo motivo.
+     */
     public function reject(Request $request, Directorio $trade)
     {
         $this->ensureReviewer();

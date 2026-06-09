@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
+    /**
+     * Descripción Principal: Modifica la tabla del directorio añadiendo campos web y de ubicación del comercio.
+     */
     public function up(): void
     {
         Schema::table('directorios', function (Blueprint $table) {

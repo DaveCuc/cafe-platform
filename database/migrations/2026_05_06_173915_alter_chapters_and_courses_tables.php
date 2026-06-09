@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
     /**
-     * Run the migrations.
+     * Descripción Principal: Añade campos como "is_free" o "is_video_required" a cursos y capítulos.
      */
     public function up(): void
     {

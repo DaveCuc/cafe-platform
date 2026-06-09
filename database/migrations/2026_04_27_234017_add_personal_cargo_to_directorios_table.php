@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
     /**
-     * Run the migrations.
+     * Descripción Principal: Añade el cargo personal (puesto) del encargado del negocio en el directorio.
      */
     public function up(): void
     {

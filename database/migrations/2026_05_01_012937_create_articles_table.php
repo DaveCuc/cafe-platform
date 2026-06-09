@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
     /**
-     * Run the migrations.
+     * Descripción Principal: Crea la tabla principal para gestionar y publicar artículos de blog.
      */
     public function up(): void
     {

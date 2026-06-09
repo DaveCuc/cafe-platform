@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
+    /**
+     * Descripción Principal: Añade la opción de borrador/publicado a los negocios registrados en el directorio.
+     */
     public function up(): void
     {
         Schema::table('directorios', function (Blueprint $table) {

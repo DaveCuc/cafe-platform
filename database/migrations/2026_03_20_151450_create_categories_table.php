@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Descripción Principal: Crea la tabla de categorías para organizar los cursos.
+     * 
+     * Base de datos/Apartado:
+     * - categories: Guarda el nombre único de la categoría.
+     */
     public function up(): void
     {
         Schema::create('categories', function (Blueprint $table) {

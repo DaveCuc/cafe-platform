@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
     /**
-     * Run the migrations.
+     * Descripción Principal: Añade la bandera "is_teacher" a la tabla de usuarios para diferenciar instructores.
      */
     public function up(): void
     {

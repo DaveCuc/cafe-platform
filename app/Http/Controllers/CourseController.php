@@ -10,8 +10,17 @@ use App\Models\UserProgress;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Controlador para la visualización pública y progreso de los cursos (vista de estudiante).
+ */
 class CourseController extends Controller
 {
+    /**
+     * Redirige al estudiante al primer capítulo publicado del curso.
+     *
+     * @param Course $course Curso al que se intenta acceder.
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function show(Course $course)
     {
         $firstChapter = $course->chapters()->where('is_published', true)->orderBy('position', 'asc')->first();
@@ -23,6 +32,13 @@ class CourseController extends Controller
         return redirect()->route('courses.chapter', [$course->id, $firstChapter->id]);
     }
 
+    /**
+     * Muestra un capítulo específico del curso y gestiona el acceso según compras o permisos.
+     *
+     * @param Course $course Curso al que pertenece el capítulo.
+     * @param Chapter $chapter Capítulo a mostrar.
+     * @return \Inertia\Response|\Illuminate\Http\RedirectResponse
+     */
     public function chapter(Course $course, Chapter $chapter)
     {
         $user = Auth::user();
@@ -82,6 +98,13 @@ class CourseController extends Controller
         ]);
     }
 
+    /**
+     * Procesa la inscripción a un curso.
+     *
+     * @param Request $request
+     * @param Course $course Curso al que el usuario se inscribe.
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function checkout(Request $request, Course $course)
     {
         $user = Auth::user();
@@ -109,6 +132,14 @@ class CourseController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Actualiza el progreso de un usuario en un capítulo específico marcándolo como completado o no completado.
+     *
+     * @param Request $request
+     * @param Course $course
+     * @param Chapter $chapter
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function progress(Request $request, Course $course, Chapter $chapter)
     {
         if ($chapter->course_id !== $course->id) {

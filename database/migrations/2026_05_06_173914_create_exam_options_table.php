@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
     /**
-     * Run the migrations.
+     * Descripción Principal: Crea la tabla de opciones de respuesta múltiple para las preguntas de examen.
      */
     public function up(): void
     {

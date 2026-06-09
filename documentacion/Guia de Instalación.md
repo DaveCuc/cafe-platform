@@ -110,7 +110,3 @@ Deberías ver la pantalla de inicio de la plataforma.
 ## Siguientes pasos
 
 Para continuar interactuando con la plataforma, consulta la siguiente documentación:
-
-- **Guías Prácticas (How-To):** [Cómo crear una nueva reserva]()
-- **Referencia:** [Referencia de la API REST]()
-- **Explicación:** [Arquitectura del sistema de reservas]()

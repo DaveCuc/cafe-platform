@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
     /**
-     * Run the migrations.
+     * Descripción Principal: Crea la tabla principal de exámenes o evaluaciones asociados a los cursos.
      */
     public function up(): void
     {

@@ -9,14 +9,23 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Controlador para la gestión de eventos por parte del profesor.
+ */
 class TeacherEventController extends Controller
 {
+    /**
+     * Muestra la lista de eventos creados por el profesor.
+     */
     public function index()
     {
         $events = Event::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
         return Inertia::render('Dashboard/Teacher/Events/Index', ['events' => $events]);
     }
 
+    /**
+     * Crea un nuevo evento en estado borrador.
+     */
     public function store(Request $request)
     {
         $request->validate(['title' => 'required|string|max:255']);
@@ -27,6 +36,9 @@ class TeacherEventController extends Controller
         return redirect()->route('teacher.events.edit', $event->id);
     }
 
+    /**
+     * Muestra la vista para editar un evento específico.
+     */
     public function edit(Event $event)
     {
         if ($event->user_id != Auth::id()) {
@@ -38,6 +50,9 @@ class TeacherEventController extends Controller
         ]);
     }
 
+    /**
+     * Actualiza la información de un evento.
+     */
     public function update(Request $request, Event $event)
     {
         if ($event->user_id != Auth::id()) abort(403);
@@ -63,6 +78,9 @@ class TeacherEventController extends Controller
         return back()->with('success', 'Evento actualizado');
     }
 
+    /**
+     * Publica un evento si cumple con los campos obligatorios.
+     */
     public function publish(Event $event)
     {
         if ($event->user_id != Auth::id()) abort(403);
@@ -78,6 +96,9 @@ class TeacherEventController extends Controller
         return back();
     }
 
+    /**
+     * Oculta un evento regresándolo a estado borrador.
+     */
     public function unpublish(Event $event)
     {
         if ($event->user_id != Auth::id()) abort(403);
@@ -89,6 +110,9 @@ class TeacherEventController extends Controller
         return back();
     }
 
+    /**
+     * Elimina un evento y sus imágenes de portada principales asociadas.
+     */
     public function destroy(Event $event)
     {
         if ($event->user_id != Auth::id()) abort(403);
@@ -106,6 +130,9 @@ class TeacherEventController extends Controller
         return redirect()->route('teacher.events.index');
     }
 
+    /**
+     * Sube o reemplaza la imagen en miniatura de un evento.
+     */
     public function uploadImage(Request $request, Event $event)
     {
         if ($event->user_id != Auth::id()) abort(403);
@@ -122,6 +149,9 @@ class TeacherEventController extends Controller
         return back();
     }
 
+    /**
+     * Sube o reemplaza la imagen de portada de un evento.
+     */
     public function uploadCoverImage(Request $request, Event $event)
     {
         if ($event->user_id != Auth::id()) abort(403);
@@ -138,8 +168,10 @@ class TeacherEventController extends Controller
         return back();
     }
     
-    // Generic upload endpoint for person photos (Hosts/Collaborators/Organizers)
-    // Returns the URL of the uploaded photo so the frontend can add it to the JSON state
+    /**
+     * Sube imágenes genéricas de personas (hosts, organizadores, etc.) para el evento.
+     * Retorna la URL de la imagen para ser añadida al estado JSON.
+     */
     public function uploadPersonImage(Request $request, Event $event)
     {
         if ($event->user_id != Auth::id()) abort(403);

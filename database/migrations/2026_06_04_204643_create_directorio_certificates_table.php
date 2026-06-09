@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
     /**
-     * Run the migrations.
+     * Descripción Principal: Crea la tabla para almacenar los certificados/distintivos subidos por empresas del directorio.
      */
     public function up(): void
     {

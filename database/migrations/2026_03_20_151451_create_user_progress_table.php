@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Descripción Principal: Crea la tabla para rastrear el progreso de los usuarios en los capítulos.
+     * 
+     * Base de datos/Apartado:
+     * - user_progress: Indica si un usuario ha completado o no un capítulo específico.
+     */
     public function up(): void
     {
         Schema::create('user_progress', function (Blueprint $table) {

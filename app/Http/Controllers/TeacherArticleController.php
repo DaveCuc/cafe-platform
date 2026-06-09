@@ -10,14 +10,23 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Controlador para la gestión de artículos (blog) por parte del profesor.
+ */
 class TeacherArticleController extends Controller
 {
+    /**
+     * Muestra la lista de artículos creados por el profesor.
+     */
     public function index()
     {
         $articles = Article::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
         return Inertia::render('Dashboard/Teacher/Articles/Index', ['articles' => $articles]);
     }
 
+    /**
+     * Crea un nuevo artículo en borrador.
+     */
     public function store(Request $request)
     {
         $request->validate(['title' => 'required|string|max:255']);
@@ -28,6 +37,9 @@ class TeacherArticleController extends Controller
         return redirect()->route('teacher.articles.edit', $article->id);
     }
 
+    /**
+     * Muestra el formulario para editar un artículo.
+     */
     public function edit(Article $article)
     {
         if ($article->user_id != Auth::id()) {
@@ -42,6 +54,9 @@ class TeacherArticleController extends Controller
         ]);
     }
 
+    /**
+     * Actualiza la información de un artículo.
+     */
     public function update(Request $request, Article $article)
     {
         if ($article->user_id != Auth::id()) abort(403);
@@ -60,6 +75,9 @@ class TeacherArticleController extends Controller
         return back()->with('success', 'Articulo actualizado');
     }
 
+    /**
+     * Publica un artículo si cumple con los requisitos mínimos.
+     */
     public function publish(Article $article)
     {
         if ($article->user_id != Auth::id()) abort(403);
@@ -75,6 +93,9 @@ class TeacherArticleController extends Controller
         return back();
     }
 
+    /**
+     * Oculta un artículo publicado volviéndolo borrador.
+     */
     public function unpublish(Article $article)
     {
         if ($article->user_id != Auth::id()) abort(403);
@@ -86,6 +107,9 @@ class TeacherArticleController extends Controller
         return back();
     }
 
+    /**
+     * Elimina un artículo y sus imágenes asociadas.
+     */
     public function destroy(Article $article)
     {
         if ($article->user_id != Auth::id()) abort(403);
@@ -101,6 +125,9 @@ class TeacherArticleController extends Controller
         return redirect()->route('teacher.articles.index');
     }
 
+    /**
+     * Sube o reemplaza la imagen principal del artículo.
+     */
     public function uploadImage(Request $request, Article $article)
     {
         if ($article->user_id != Auth::id()) abort(403);
@@ -117,6 +144,9 @@ class TeacherArticleController extends Controller
         return back();
     }
 
+    /**
+     * Sube o reemplaza la imagen de tarjeta (miniatura) del artículo.
+     */
     public function uploadCardImage(Request $request, Article $article)
     {
         if ($article->user_id != Auth::id()) abort(403);

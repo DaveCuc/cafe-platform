@@ -85,6 +85,7 @@ La organización del código fuente sigue las convenciones del ecosistema Larave
 ## 📖 Documentación
 Toda la información operativa y guías profundas están estructuradas de manera modular en la carpeta /documentacion:
 - [Guía de Instalación](./documentacion/Guia%20de%20Instalación.md) 
+- [Guia para Producción.md](./documentacion/Guia%20para%20Producción.md)
 
 ---
 
