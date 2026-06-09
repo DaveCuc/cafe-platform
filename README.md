@@ -121,5 +121,5 @@ npm run dev
 ---
 
 ## 👤 Información del Proyecto
-Autor: Jose David Cuahutencos Peña
-Investigación: Viabilidad tecnológica y prototipo de una plataforma digital para la gestión turística en la Reserva de la Biosfera Tehuacán-Cuicatlán.
+- **Autor**: Jose David Cuahutencos Peña
+- **Investigación**: Viabilidad tecnológica y prototipo de una plataforma digital para la gestión turística en la Reserva de la Biosfera Tehuacán-Cuicatlán.

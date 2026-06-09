@@ -1,10 +1,13 @@
+/* 1. Importación de fuentes tipográficas (Outfit para títulos, Plus Jakarta Sans para texto) */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
+/* 2. Directivas base de Tailwind CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  /* 3. Variables de colores globales (Tema Claro / Modo Día) */
   :root {
     --radius: 0rem;
     --background: #fdfdfd;
@@ -43,6 +46,7 @@
     --light: #ffffff;
   }
 
+  /* 4. Variables de colores globales (Tema Oscuro / Dark Mode) */
   .dark {
     --background: #111827;
     --foreground: #f9fafb;
@@ -80,12 +84,14 @@
     @apply border-border;
   }
 
+  /* 5. Configuraciones estructurales de la página */
   html,
   body,
   #app {
     min-height: 100%;
   }
 
+  /* 6. Asignación de fuentes tipográficas globales */
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
@@ -107,6 +113,7 @@
 }
 
 @layer utilities {
+  /* 7. Sombras personalizadas con estilo "institucional/corporativo" */
   .institutional-shadow {
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
   }
@@ -115,7 +122,7 @@
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
   }
 
-  /* Custom Leaflet Popup Overrides */
+  /* 8. Estilos personalizados para los popups de los mapas de Leaflet (Directorio Turístico) */
   .modern-popup .leaflet-popup-content-wrapper {
     background: transparent !important;
     box-shadow: none !important;
@@ -149,7 +156,7 @@
   }
 }
 
-/* Custom React Image Gallery Overrides - Bulletproof 4:3 */
+/* 9. Sobrescrituras para la librería React Image Gallery (Galería de fotos de los negocios) */
   .image-gallery-content:not(.fullscreen) .image-gallery-image {
     aspect-ratio: 4 / 3 !important;
     object-fit: cover !important;
