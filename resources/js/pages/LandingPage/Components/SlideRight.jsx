@@ -1,69 +1,101 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { REGIONES } from './GeneralMap';
 import { TradeCard } from './Marker';
 
-const normalizarTexto = (texto) => {
-    if (!texto) return "";
-    return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
-};
+// PENDIENTE — Reserva y General: cuando se reactiven estas capas, descomentar las siguientes
+// importaciones y restaurar los bloques de estado, fetch y render marcados con PENDIENTE.
+// import { REGIONES } from './GeneralMap';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PENDIENTE: normalizarTexto — se usa en los filtros de regiones y municipios.
+// Descomentar cuando se reactive la capa 'general'.
+// const normalizarTexto = (texto) => {
+//     if (!texto) return "";
+//     return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+// };
+// ─────────────────────────────────────────────────────────────────────────────
 
 // LAYER_TITLES define qué capas tienen panel de información en el SlideRight.
-// PENDIENTE: 'reserva' y 'general' comentados porque sus capas GeoJSON están desactivadas.
-// Para reactivarlos: descomenta las líneas correspondientes y activa las capas en SlideLeft.jsx
+// PENDIENTE: descomenta 'reserva' y 'general' cuando sus capas GeoJSON sean reactivadas.
 const LAYER_TITLES = {
-    // reserva: "Reserva de la Biosfera",   // PENDIENTE: descomenta al reactivar tehmap.geojson
-    // general: "Regiones y Municipios",     // PENDIENTE: descomenta al reactivar general.geojson
+    // reserva: "Reserva de la Biosfera",  // PENDIENTE: reactivar con tehmap.geojson
+    // general: "Regiones y Municipios",   // PENDIENTE: reactivar con general.geojson
     negocios: "Caficultores y Tiendas"
 };
 
-// PENDIENTE: agregar 'reserva' y 'general' cuando sus capas sean reactivadas
+// PENDIENTE: agrega 'reserva' y/o 'general' cuando sus capas sean reactivadas.
 const LAYER_ORDER = ['negocios'];
 
-const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipios, setHiddenMunicipios, hiddenRegions, setHiddenRegions, activeInfoPanel, setActiveInfoPanel, capasActivas, selectedTrade, setSelectedTrade }) => {
-    const [reservaInfo, setReservaInfo] = useState(null);
-    const [regiones, setRegiones] = useState([]);
+const SlideRight = ({
+    mapRef,
+    rightSlideOpen,
+    setRightSlideOpen,
+    // PENDIENTE: los siguientes props son usados por los filtros de regiones/municipios.
+    // Mantenlos en la firma para no romper la interfaz con ContainerMap.jsx.
+    // Cuando se reactive la capa 'general', descomenta los bloques de estado y handlers abajo.
+    hiddenMunicipios,
+    setHiddenMunicipios,
+    hiddenRegions,
+    setHiddenRegions,
+    activeInfoPanel,
+    setActiveInfoPanel,
+    capasActivas,
+    selectedTrade,
+    setSelectedTrade
+}) => {
 
-    const [selectedRegion, setSelectedRegion] = useState(null);
-    const [expandedMunicipio, setExpandedMunicipio] = useState(null);
+    // ─── PENDIENTE: Estado para la capa reserva ──────────────────────────────
+    // Descomentar cuando se reactive tehmap.geojson y el panel de Reserva de la Biosfera.
+    // const [reservaInfo, setReservaInfo] = useState(null);
 
-    useEffect(() => {
-        Promise.all([
-            fetch('/Mapas/Informacion/reserva.json').then(res => res.json()),
-            fetch('/Mapas/Informacion/general.json').then(res => res.json())
-        ]).then(([reservaData, generalData]) => {
-            setReservaInfo(reservaData);
-            setRegiones(generalData.regiones || []);
-        }).catch(err => console.error("Error loading info:", err));
-    }, []);
+    // ─── PENDIENTE: Estado para la capa general ──────────────────────────────
+    // Descomentar cuando se reactive general.geojson y el panel de Regiones y Municipios.
+    // const [regiones, setRegiones] = useState([]);
+    // const [selectedRegion, setSelectedRegion] = useState(null);
+    // const [expandedMunicipio, setExpandedMunicipio] = useState(null);
 
-    const handleZoom = (lat, lng, zoom = 14) => {
-        if (mapRef?.current && lat && lng) {
-            mapRef.current.flyTo([lat, lng], zoom, { duration: 1.5 });
-        }
-    };
+    // ─── PENDIENTE: Fetch de archivos JSON de información ────────────────────
+    // Descomentar cuando se reactiven las capas 'reserva' y 'general'.
+    // useEffect(() => {
+    //     Promise.all([
+    //         fetch('/Mapas/Informacion/reserva.json').then(res => res.json()),
+    //         fetch('/Mapas/Informacion/general.json').then(res => res.json())
+    //     ]).then(([reservaData, generalData]) => {
+    //         setReservaInfo(reservaData);
+    //         setRegiones(generalData.regiones || []);
+    //     }).catch(err => console.error("Error loading info:", err));
+    // }, []);
 
-    const toggleRegionCheckbox = (region, e) => {
-        e.stopPropagation();
-        const regionName = normalizarTexto(region.nombre);
-        if (hiddenRegions.includes(regionName)) {
-            setHiddenRegions(prev => prev.filter(r => r !== regionName));
-        } else {
-            setHiddenRegions(prev => [...prev, regionName]);
-        }
-    };
+    // ─── PENDIENTE: handleZoom ────────────────────────────────────────────────
+    // Descomentar cuando se reactive el panel de Regiones/Municipios.
+    // const handleZoom = (lat, lng, zoom = 14) => {
+    //     if (mapRef?.current && lat && lng) {
+    //         mapRef.current.flyTo([lat, lng], zoom, { duration: 1.5 });
+    //     }
+    // };
 
-    const toggleMunicipioCheckbox = (municipioName, e) => {
-        e.stopPropagation();
-        const normalName = normalizarTexto(municipioName);
-        if (hiddenMunicipios.includes(normalName)) {
-            setHiddenMunicipios(prev => prev.filter(m => m !== normalName));
-        } else {
-            setHiddenMunicipios(prev => [...prev, normalName]);
-        }
-    };
+    // ─── PENDIENTE: Filtros de regiones y municipios ──────────────────────────
+    // Descomentar cuando se reactive la capa 'general' con general.geojson.
+    // const toggleRegionCheckbox = (region, e) => {
+    //     e.stopPropagation();
+    //     const regionName = normalizarTexto(region.nombre);
+    //     if (hiddenRegions.includes(regionName)) {
+    //         setHiddenRegions(prev => prev.filter(r => r !== regionName));
+    //     } else {
+    //         setHiddenRegions(prev => [...prev, regionName]);
+    //     }
+    // };
+    // const toggleMunicipioCheckbox = (municipioName, e) => {
+    //     e.stopPropagation();
+    //     const normalName = normalizarTexto(municipioName);
+    //     if (hiddenMunicipios.includes(normalName)) {
+    //         setHiddenMunicipios(prev => prev.filter(m => m !== normalName));
+    //     } else {
+    //         setHiddenMunicipios(prev => [...prev, normalName]);
+    //     }
+    // };
 
-    // Filtramos las capas activas que sí tienen contenido JSON definido en LAYER_TITLES, respetando el orden del menú izquierdo
+    // Filtra las capas activas que tienen panel de información definido en LAYER_TITLES
     const activeLayersWithJSON = LAYER_ORDER.filter(key => capasActivas[key] && LAYER_TITLES[key]);
 
     return (
@@ -83,7 +115,7 @@ const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipio
             </div>
 
             <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-4 bg-gray-50">
-                
+
                 {activeLayersWithJSON.length === 0 ? (
                     <div className="flex flex-col gap-4 justify-center items-center h-full text-gray-500">
                         <svg className="w-12 h-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -100,11 +132,11 @@ const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipio
                 ) : (
                     activeLayersWithJSON.map((layerKey) => {
                         const isExpanded = activeInfoPanel === layerKey;
-                        
+
                         return (
                             <div key={layerKey} className="flex flex-col rounded-none border border-gray-200 bg-white shadow-sm overflow-hidden shrink-0">
-                                {/* Encabezado del Acordeón Principal */}
-                                <div 
+                                {/* Encabezado del Acordeón */}
+                                <div
                                     className={`flex items-center justify-between p-4 cursor-pointer transition-colors ${isExpanded ? 'bg-brand text-white' : 'hover:bg-gray-100 text-brand-darker'}`}
                                     onClick={() => setActiveInfoPanel(isExpanded ? null : layerKey)}
                                 >
@@ -115,12 +147,13 @@ const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipio
                                 {/* Contenido Expansible */}
                                 <div className={`transition-all duration-300 ease-in-out ${isExpanded ? 'opacity-100 max-h-[2000px]' : 'max-h-0 opacity-0 overflow-hidden'}`}>
                                     <div className="p-5 border-t border-brand-panel bg-white flex flex-col gap-6">
-                                        
-                                        {/* --- CONTENIDO RESERVA --- */}
+
+                                        {/* ─── PENDIENTE: Panel de la Reserva de la Biosfera ──────────────────
+                                            Descomentar cuando se reactive tehmap.geojson.
+                                            También descomentar: useState(reservaInfo), useEffect de fetch.
                                         {layerKey === 'reserva' && reservaInfo && (
                                             <div className="flex flex-col gap-5">
                                                 <p className="text-[14px] text-brand-ink leading-relaxed">{reservaInfo.descripcion}</p>
-                                                
                                                 {reservaInfo.aspectos_clave && (
                                                     <div className="flex flex-col gap-3 mt-2 bg-brand-light/30 p-4 rounded-lg border border-brand-panel">
                                                         <h4 className="font-semibold text-brand-text flex items-center gap-2">
@@ -142,55 +175,50 @@ const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipio
                                                 )}
                                             </div>
                                         )}
+                                        ─────────────────────────────────────────────────────────────────── */}
 
-                                        {/* --- CONTENIDO GENERAL (Regiones y Municipios) --- */}
+                                        {/* ─── PENDIENTE: Panel de Regiones y Municipios ──────────────────────
+                                            Descomentar cuando se reactive general.geojson.
+                                            También descomentar: REGIONES import, normalizarTexto, estados de
+                                            regiones/selectedRegion/expandedMunicipio, useEffect de fetch,
+                                            handleZoom, toggleRegionCheckbox, toggleMunicipioCheckbox.
                                         {layerKey === 'general' && (
                                             <div className="flex flex-col gap-6">
-                                                {/* REGIONES */}
                                                 <div className="flex flex-col gap-3">
                                                     <div className="flex flex-col gap-1">
                                                         <h4 className="text-sm font-semibold text-brand-darker uppercase tracking-wider">Lista de Regiones</h4>
                                                         <p className="text-xs text-gray-500 italic">Selecciona para explorar.</p>
                                                     </div>
-
                                                     <div className="flex flex-col gap-2">
                                                         {regiones.map((region, idx) => {
-                                                            const regionMuns = region.municipios.map(m => normalizarTexto(m.nombre));
                                                             const isRegionChecked = !hiddenRegions.includes(normalizarTexto(region.nombre));
                                                             const isSelected = selectedRegion?.nombre === region.nombre;
-                                                            const regionColor = REGIONES[region.nombre.toUpperCase()]?.color || '#0B5139'; // #0B5139 is brand color
-
+                                                            const regionColor = REGIONES[region.nombre.toUpperCase()]?.color || '#0B5139';
                                                             return (
-                                                                <div 
-                                                                    key={idx} 
+                                                                <div
+                                                                    key={idx}
                                                                     className={`flex flex-col rounded-none border transition-all cursor-pointer overflow-hidden ${isSelected ? 'ring-1 shadow-sm' : 'border-gray-200 bg-white hover:bg-gray-50'}`}
-                                                                    style={isSelected ? { borderColor: regionColor, ringColor: regionColor, backgroundColor: `${regionColor}15` } : {}}
+                                                                    style={isSelected ? { borderColor: regionColor, backgroundColor: `${regionColor}15` } : {}}
                                                                     onClick={() => {
                                                                         setSelectedRegion(region);
-                                                                        if (region.coordenadas) {
-                                                                            handleZoom(region.coordenadas.lat, region.coordenadas.lng, region.coordenadas.zoom || 9);
-                                                                        }
+                                                                        if (region.coordenadas) handleZoom(region.coordenadas.lat, region.coordenadas.lng, region.coordenadas.zoom || 9);
                                                                     }}
                                                                 >
                                                                     <div className="flex items-center justify-between p-3">
                                                                         <div className="flex items-center gap-3">
-                                                                            <input 
-                                                                                type="checkbox" 
-                                                                                checked={isRegionChecked} 
+                                                                            <input
+                                                                                type="checkbox"
+                                                                                checked={isRegionChecked}
                                                                                 onChange={(e) => toggleRegionCheckbox(region, e)}
                                                                                 onClick={(e) => e.stopPropagation()}
                                                                                 className="w-4 h-4 rounded cursor-pointer shrink-0"
                                                                                 style={{ color: regionColor }}
                                                                             />
-                                                                            <span 
-                                                                                className="font-semibold text-[14px] transition-colors"
-                                                                                style={{ color: isSelected ? regionColor : 'inherit' }}
-                                                                            >
+                                                                            <span className="font-semibold text-[14px] transition-colors" style={{ color: isSelected ? regionColor : 'inherit' }}>
                                                                                 {region.nombre}
                                                                             </span>
                                                                         </div>
                                                                     </div>
-                                                                    
                                                                     {isSelected && (
                                                                         <div className="p-3 pt-0 text-[12px] text-brand-ink leading-relaxed pl-10 border-t border-brand-panel/30 mt-2">
                                                                             {region.descripcion}
@@ -201,8 +229,6 @@ const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipio
                                                         })}
                                                     </div>
                                                 </div>
-
-                                                {/* MUNICIPIOS */}
                                                 <div className="flex flex-col gap-3 pt-6 border-t border-gray-200">
                                                     <div className="flex flex-col gap-1">
                                                         <h4 className="text-sm font-semibold text-brand-darker uppercase tracking-wider">Municipios</h4>
@@ -212,30 +238,26 @@ const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipio
                                                             <p className="text-xs text-gray-500 italic">Selecciona una región arriba.</p>
                                                         )}
                                                     </div>
-
                                                     {selectedRegion && (
                                                         <div className="flex flex-col gap-2">
                                                             {selectedRegion.municipios.map((mun, mIdx) => {
                                                                 const isMunChecked = !hiddenMunicipios.includes(normalizarTexto(mun.nombre));
                                                                 const isMunExpanded = expandedMunicipio === mun.nombre;
                                                                 const regionColor = REGIONES[selectedRegion.nombre.toUpperCase()]?.color || '#0B5139';
-
                                                                 return (
                                                                     <div key={mIdx} className="flex flex-col rounded-none border border-gray-200 bg-white shadow-sm overflow-hidden">
-                                                                        <div 
+                                                                        <div
                                                                             className={`flex items-center justify-between p-3 pl-4 cursor-pointer transition-colors ${isMunExpanded ? '' : 'hover:bg-gray-50'}`}
                                                                             style={isMunExpanded ? { backgroundColor: `${regionColor}15` } : {}}
                                                                             onClick={() => {
                                                                                 setExpandedMunicipio(isMunExpanded ? null : mun.nombre);
-                                                                                if (mun.coordenadas) {
-                                                                                    handleZoom(mun.coordenadas.lat, mun.coordenadas.lng, mun.coordenadas.zoom || 14);
-                                                                                }
+                                                                                if (mun.coordenadas) handleZoom(mun.coordenadas.lat, mun.coordenadas.lng, mun.coordenadas.zoom || 14);
                                                                             }}
                                                                         >
                                                                             <div className="flex items-center gap-3">
-                                                                                <input 
-                                                                                    type="checkbox" 
-                                                                                    checked={isMunChecked} 
+                                                                                <input
+                                                                                    type="checkbox"
+                                                                                    checked={isMunChecked}
                                                                                     onChange={(e) => toggleMunicipioCheckbox(mun.nombre, e)}
                                                                                     onClick={(e) => e.stopPropagation()}
                                                                                     className="w-4 h-4 rounded cursor-pointer shrink-0"
@@ -245,7 +267,6 @@ const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipio
                                                                             </div>
                                                                             <svg viewBox="0 0 24 24" className={`w-4 h-4 shrink-0 text-brand-ink transition-transform duration-200 ${isMunExpanded ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                                                         </div>
-
                                                                         {isMunExpanded && (
                                                                             <div className="p-4 bg-brand-light/20 flex flex-col gap-4 text-[12px] border-t border-brand-panel/50">
                                                                                 {mun.agricultura && (
@@ -285,14 +306,16 @@ const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipio
                                                 </div>
                                             </div>
                                         )}
-                                        {/* --- CONTENIDO NEGOCIOS --- */}
+                                        ─────────────────────────────────────────────────────────────────── */}
+
+                                        {/* Panel activo: Caficultores y Tiendas */}
                                         {layerKey === 'negocios' && (
                                             <div className="flex flex-col gap-4">
                                                 <AnimatePresence mode="wait">
                                                     {selectedTrade ? (
                                                         <TradeCard key={`trade-${selectedTrade.id}`} trade={selectedTrade} />
                                                     ) : (
-                                                        <motion.div 
+                                                        <motion.div
                                                             key="empty-state"
                                                             initial={{ opacity: 0, scale: 0.95 }}
                                                             animate={{ opacity: 1, scale: 1 }}
@@ -310,6 +333,7 @@ const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipio
                                                 </AnimatePresence>
                                             </div>
                                         )}
+
                                     </div>
                                 </div>
                             </div>

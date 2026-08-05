@@ -108,21 +108,26 @@ const SlideLeft = ({ capasActivas, setCapasActivas, mapRef, setRightSlideOpen, s
                 </div>
                 */}
 
+                {/* PENDIENTE: Puntos de Interés (localidades)
+                    Descomentar cuando exista puntosinteres.geojson con datos cafetaleros.
+                    También reactivar PuntosInteresMap en ReservaMap.jsx.
                 <div className="flex flex-col rounded-none border border-gray-200 bg-white shadow-sm overflow-hidden shrink-0">
                     <div className="p-3 bg-gray-100/50 border-b border-gray-200">
                         <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Puntos de Interés</h3>
                     </div>
-
-                    {/**
-
                     <button
                         onClick={() => handleMapAction('puntos', 18.11111, -97.179541, 9)}
                         className={`w-full text-left px-4 py-3 transition-colors font-medium text-sm border-b border-gray-100 ${capasActivas?.puntos ? 'bg-brand text-white' : 'text-brand-darker hover:bg-gray-50'}`}
                     >
                         Localidades
                     </button>
-                    **/}
+                </div>
+                */}
 
+                <div className="flex flex-col rounded-none border border-gray-200 bg-white shadow-sm overflow-hidden shrink-0">
+                    <div className="p-3 bg-gray-100/50 border-b border-gray-200">
+                        <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Caficultores</h3>
+                    </div>
                     <button
                         onClick={() => handleMapAction('negocios', 18.11111, -97.179541, 9, true)}
                         className={`w-full text-left px-4 py-3 transition-colors font-medium text-sm ${capasActivas?.negocios ? 'bg-brand text-white' : 'text-brand-darker hover:bg-gray-50'}`}
