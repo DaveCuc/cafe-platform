@@ -51,7 +51,7 @@ const SlideLeft = ({ capasActivas, setCapasActivas, mapRef, setRightSlideOpen, s
                         onClick={() => handleMapAction('reserva', 18.11111, -97.179541, 9, true)}
                         className={`w-full text-left p-4 transition-colors font-semibold text-[16px] ${capasActivas?.reserva ? 'bg-brand text-white' : 'text-brand-darker hover:bg-gray-100'}`}
                     >
-                        Reserva de la Biosfera
+                        Distribución Cafetalera
                     </button>
                 </div>
 
@@ -69,28 +69,28 @@ const SlideLeft = ({ capasActivas, setCapasActivas, mapRef, setRightSlideOpen, s
 
                 <div className="flex flex-col rounded-none border border-gray-200 bg-white shadow-sm overflow-hidden shrink-0">
                     <div className="p-3 bg-gray-100/50 border-b border-gray-200">
-                        <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Rutas Turísticas</h3>
+                        <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Rutas del Café</h3>
                     </div>
 
                     <button
                         onClick={() => handleMapAction('ruta1', 18.3273, -97.4752, 13)}
                         className={`w-full text-left px-4 py-3 transition-colors font-medium text-sm border-b border-gray-100 ${capasActivas?.ruta1 ? 'bg-brand text-white' : 'text-brand-darker hover:bg-gray-50'}`}
                     >
-                        Onix y Sal
+                        Ruta 1: Trazabilidad
                     </button>
 
                     <button
                         onClick={() => handleMapAction('ruta2', 18.3145, -97.6149, 13)}
                         className={`w-full text-left px-4 py-3 transition-colors font-medium text-sm border-b border-gray-100 ${capasActivas?.ruta2 ? 'bg-brand text-white' : 'text-brand-darker hover:bg-gray-50'}`}
                     >
-                        Dinosaurios
+                        Ruta 2: Capacitación
                     </button>
 
                     <button
                         onClick={() => handleMapAction('ruta3', 18.2252, -97.4865, 13)}
                         className={`w-full text-left px-4 py-3 transition-colors font-medium text-sm ${capasActivas?.ruta3 ? 'bg-brand text-white' : 'text-brand-darker hover:bg-gray-50'}`}
                     >
-                        Mezcal y Barro
+                        Ruta 3: Comercialización
                     </button>
                 </div>
 
@@ -113,7 +113,7 @@ const SlideLeft = ({ capasActivas, setCapasActivas, mapRef, setRightSlideOpen, s
                         onClick={() => handleMapAction('negocios', 18.11111, -97.179541, 9, true)}
                         className={`w-full text-left px-4 py-3 transition-colors font-medium text-sm ${capasActivas?.negocios ? 'bg-brand text-white' : 'text-brand-darker hover:bg-gray-50'}`}
                     >
-                        Negocios
+                        Caficultores y Tiendas
                     </button>
                 </div>
 

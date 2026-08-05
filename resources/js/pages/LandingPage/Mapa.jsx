@@ -33,27 +33,27 @@ const InfoSection = () => {
             <div className="container mx-auto px-6 max-w-6xl relative z-10">
                 <motion.div {...fadeUp} className="text-center mb-20">
                     <span className="inline-block text-brand font-bold tracking-widest text-sm uppercase mb-6 border-b border-brand pb-1">Conoce el Territorio</span>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-brand-darker tracking-tight">Reserva de la Biosfera</h2>
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-brand-darker tracking-tight">Clúster de la Sierra Negra</h2>
                 </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-gray-700 font-medium text-lg leading-relaxed mb-24">
                     <motion.div {...fadeRight} className="border-l-4 border-brand-mint pl-8">
                         <p>
-                            La Reserva de la Biosfera Tehuacán-Cuicatlán, reconocida como Patrimonio Mixto de la Humanidad por la UNESCO, abarca un vasto territorio entre los estados de Puebla y Oaxaca. Este mapa interactivo te permite visualizar la magnitud de su riqueza natural, desde los densos bosques de cactáceas hasta las zonas de importancia histórica y arqueológica.
+                            El Clúster Cafetalero de la Sierra Negra de Puebla, impulsado por el Instituto Tecnológico de Tehuacán, tiene como misión fortalecer la cadena de valor y el desarrollo territorial sustentable de los productores. Este mapa interactivo te permite geolocalizar fincas productoras y ubicar los puntos de venta y proveedores de café de la región.
                         </p>
                     </motion.div>
                     <motion.div {...fadeLeft} className="border-l-4 border-brand-mint pl-8">
                         <p>
-                            Navega a través de las diferentes regiones para planificar tu visita. Selecciona las rutas para descubrir los ecosistemas únicos, identificar los centros ecoturísticos y conocer la ubicación exacta de las comunidades que lideran los esfuerzos de conservación y turismo sostenible.
+                            Navega a través del territorio y utiliza los filtros de capas para visualizar las zonas de cultivo bajo sombra, identificar los centros de beneficio y ubicar de manera directa a los caficultores de especialidad. Esta herramienta facilita el comercio justo al conectar a los compradores directamente con el productor.
                         </p>
                     </motion.div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {[
-                        { title: "Ruta 1: Onix y Sal", desc: "Recorre los paisajes de las salinas de Zapotitlán y descubre los métodos prehispánicos de extracción de sal, además de conocer el mundo del ónix.", img: "/Fotos/Recorridos/onix.jpg" },
-                        { title: "Ruta 2: Dinosaurios", desc: "Descubre los senderos y sitios arqueológicos donde las huellas de dinosaurios cobran vida.", img: "/Fotos/Recorridos/dinosaurios.jpg" },
-                        { title: "Ruta 3: Mezcal y Barro", desc: "Descubre el proceso artesanal de producción de mezcal.", img: "/Fotos/Recorridos/mezcal.jpg" }
+                        { title: "Meta 1: Trazabilidad y Ubicación", desc: "Mapeo territorial de proveedores y tiendas de café. Permite a los compradores y clientes geolocalizar fincas productoras y puntos de venta de café de especialidad de la Sierra Negra.", img: "/Fotos/Recorridos/onix.jpg" },
+                        { title: "Meta 2: Profesionalización y Cursos", desc: "Capacitación constante a productores y vendedores locales. Programas de tecnificación agrícola y comercialización digital para aumentar la competitividad de la cadena de valor.", img: "/Fotos/Recorridos/dinosaurios.jpg" },
+                        { title: "Meta 3: Articulación Comercial", desc: "Directorio interactivo de clientes y proveedores que conecta directamente a los caficultores de la Sierra Negra con mercados locales, nacionales y de comercio justo.", img: "/Fotos/Recorridos/mezcal.jpg" }
                     ].map((ruta, index) => (
                         <motion.div
                             key={index}
