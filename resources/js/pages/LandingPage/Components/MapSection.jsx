@@ -150,7 +150,7 @@ export default function MapSection() {
                                                 <motion.img
                                                     animate={{ y: [0, 15, 0], rotate: [0, -5, 0] }}
                                                     transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                                                    src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Heraldic_coffee_branch.svg"
+                                                    src="/Decorativo/rama_cafe.svg"
                                                     className="absolute w-32 lg:w-48 top-[20%] right-[10%] lg:right-[20%] opacity-40 hover:opacity-100 transition-opacity duration-300 pointer-events-auto"
                                                     alt="Rama de café decorativa"
                                                 />
@@ -178,14 +178,14 @@ export default function MapSection() {
                                                 <motion.img
                                                     animate={{ y: [0, -10, 0], rotate: [-10, 0, -10] }}
                                                     transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                                                    src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Coffee_bean_symbol.svg"
+                                                    src="/Decorativo/grano_cafe.svg"
                                                     className="absolute w-24 lg:w-36 filter invert top-[10%] left-[10%] lg:left-[20%] opacity-20 hover:opacity-80 transition-opacity duration-300 pointer-events-auto"
                                                     alt="Grano de café decorativo 1"
                                                 />
                                                 <motion.img
                                                     animate={{ y: [0, 10, 0], rotate: [10, 20, 10] }}
                                                     transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                                                    src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Coffee_bean_symbol.svg"
+                                                    src="/Decorativo/grano_cafe.svg"
                                                     className="absolute w-16 lg:w-24 filter invert bottom-[10%] right-[10%] lg:right-[30%] opacity-25 hover:opacity-85 transition-opacity duration-300 pointer-events-auto"
                                                     alt="Grano de café decorativo 2"
                                                 />
@@ -220,21 +220,21 @@ export default function MapSection() {
                                                 <motion.img
                                                     animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }}
                                                     transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-                                                    src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Heraldic_coffee_branch.svg"
+                                                    src="/Decorativo/rama_cafe.svg"
                                                     className="absolute w-32 lg:w-48 top-[5%] left-[5%] lg:left-[10%] opacity-40 hover:opacity-100 transition-opacity duration-300 pointer-events-auto"
                                                     alt="Rama de café decorativo 3"
                                                 />
                                                 <motion.img
                                                     animate={{ y: [0, 10, 0], rotate: [-15, -5, -15] }}
                                                     transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                                                    src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Coffee_bean_symbol.svg"
+                                                    src="/Decorativo/grano_cafe.svg"
                                                     className="absolute w-16 lg:w-24 filter invert top-[40%] right-[10%] lg:right-[20%] opacity-20 hover:opacity-80 transition-opacity duration-300 pointer-events-auto"
                                                     alt="Grano de café decorativo 4"
                                                 />
                                                 <motion.img
                                                     animate={{ scale: [1, 1.05, 1], rotate: [10, 15, 10] }}
                                                     transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                                                    src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Coffee_bean_symbol.svg"
+                                                    src="/Decorativo/grano_cafe.svg"
                                                     className="absolute w-24 lg:w-36 filter invert bottom-[5%] left-[20%] lg:left-[30%] opacity-25 hover:opacity-85 transition-opacity duration-300 pointer-events-auto"
                                                     alt="Grano de café decorativo 5"
                                                 />
