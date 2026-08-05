@@ -51,9 +51,24 @@ const InfoSection = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {[
-                        { title: "Meta 1: Trazabilidad y Ubicación", desc: "Mapeo territorial de proveedores y tiendas de café. Permite a los compradores y clientes geolocalizar fincas productoras y puntos de venta de café de especialidad de la Sierra Negra.", img: "/Fotos/Recorridos/onix.jpg" },
-                        { title: "Meta 2: Profesionalización y Cursos", desc: "Capacitación constante a productores y vendedores locales. Programas de tecnificación agrícola y comercialización digital para aumentar la competitividad de la cadena de valor.", img: "/Fotos/Recorridos/dinosaurios.jpg" },
-                        { title: "Meta 3: Articulación Comercial", desc: "Directorio interactivo de clientes y proveedores que conecta directamente a los caficultores de la Sierra Negra con mercados locales, nacionales y de comercio justo.", img: "/Fotos/Recorridos/mezcal.jpg" }
+                        { 
+                            title: "Meta 1: Trazabilidad y Ubicación", 
+                            desc: "Mapeo territorial de proveedores y tiendas de café. Permite a los compradores y clientes geolocalizar fincas productoras y puntos de venta de café de especialidad de la Sierra Negra.", 
+                            // img: "/Fotos/Recorridos/onix.jpg", // Original Local
+                            img: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=800" // Internet (Finca Cafetalera)
+                        },
+                        { 
+                            title: "Meta 2: Profesionalización y Cursos", 
+                            desc: "Capacitación constante a productores y vendedores locales. Programas de tecnificación agrícola y comercialización digital para aumentar la competitividad de la cadena de valor.", 
+                            // img: "/Fotos/Recorridos/dinosaurios.jpg", // Original Local
+                            img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=800" // Internet (Calidad de Taza)
+                        },
+                        { 
+                            title: "Meta 3: Articulación Comercial", 
+                            desc: "Directorio interactivo de clientes y proveedores que conecta directamente a los caficultores de la Sierra Negra con mercados locales, nacionales y de comercio justo.", 
+                            // img: "/Fotos/Recorridos/mezcal.jpg", // Original Local
+                            img: "https://images.unsplash.com/photo-1507133750040-4a8f57021571?auto=format&fit=crop&q=80&w=800" // Internet (Comercialización)
+                        }
                     ].map((ruta, index) => (
                         <motion.div
                             key={index}
