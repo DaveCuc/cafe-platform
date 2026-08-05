@@ -234,12 +234,102 @@ const TeacherSection = () => {
     );
 }
 
+// ─── Extracción dinámica de imágenes de la carpeta /public/Maestros/galeria ───
+const galeriaModules = import.meta.glob('/public/Maestros/galeria/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', {
+    eager: true,
+    import: 'default',
+});
+const galeriaExtraida = Object.values(galeriaModules).sort((a, b) => String(a).localeCompare(String(b)));
+
+// Fotografías de respaldo/demostración si la carpeta local aún no contiene archivos
+const fallbackGaleria = [
+    "/Maestros/644692521_1343821637781700_2373404607899068229_n.jpg",
+    "/Maestros/qwe.jpg",
+    "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=1200",
+    "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=1200",
+    "https://images.unsplash.com/photo-1524350876685-274059332603?auto=format&fit=crop&q=80&w=1200"
+];
+
+const galeriaFotos = galeriaExtraida.length > 0 ? galeriaExtraida : fallbackGaleria;
+
+const AboutUsGallerySection = () => {
+    return (
+        <section className="bg-[#3b0811] py-24 text-white border-t border-rose-900 relative overflow-hidden">
+            {/* Patrón decorativo de fondo */}
+            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px]"></div>
+
+            <div className="container mx-auto px-4 max-w-7xl relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
+                    <motion.div {...fadeUp} className="lg:col-span-5">
+                        <span className="inline-block bg-brand-mint text-white text-xs font-extrabold uppercase tracking-widest px-3 py-1 mb-4 rounded-none">
+                            Sobre Nosotros
+                        </span>
+                        <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6 leading-tight">
+                            Impulsando el Desarrollo Cafetalero
+                        </h2>
+                        <p className="text-lg text-white/90 font-light leading-relaxed mb-6">
+                            Somos una iniciativa regional dedicada al fortalecimiento de la cadena de valor del café en la Sierra Negra. Unimos la investigación académica, la innovación técnica y la tradición caficultora para proyectar el talento local hacia mercados de especialidad.
+                        </p>
+                        <p className="text-sm text-white/75 font-light leading-relaxed">
+                            A través de capacitaciones comunitarias, certificaciones de calidad y digitalización comercial, acompañamos a productores y empresas en cada etapa del proceso productivo.
+                        </p>
+                    </motion.div>
+
+                    <motion.div {...fadeRight} className="lg:col-span-7">
+                        <div className="relative px-2 md:px-8">
+                            <Carousel
+                                opts={{
+                                    align: "start",
+                                    loop: true,
+                                }}
+                                plugins={[
+                                    Autoplay({
+                                        delay: 3500,
+                                        stopOnInteraction: false,
+                                    })
+                                ]}
+                                className="w-full"
+                            >
+                                <CarouselContent className="-ml-4">
+                                    {galeriaFotos.map((foto, index) => (
+                                        <CarouselItem key={index} className="pl-4 md:basis-1/2">
+                                            <div className="group relative overflow-hidden rounded-none border border-white/20 shadow-2xl h-72">
+                                                <img
+                                                    src={foto}
+                                                    alt={`Galería Sobre Nosotros ${index + 1}`}
+                                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                                    onError={(e) => {
+                                                        e.target.src = 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=800';
+                                                    }}
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                                                    <span className="text-white text-xs font-bold uppercase tracking-wider">
+                                                        Caficultura Sierra Negra
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </CarouselItem>
+                                    ))}
+                                </CarouselContent>
+
+                                <CarouselPrevious className="-left-4 h-12 w-12 bg-white/90 text-brand-darker hover:bg-white hover:text-black border-none rounded-none shadow-md" />
+                                <CarouselNext className="-right-4 h-12 w-12 bg-white/90 text-brand-darker hover:bg-white hover:text-black border-none rounded-none shadow-md" />
+                            </Carousel>
+                        </div>
+                    </motion.div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
 export default function Cursos() {
     return (
         <HomeLayout>
             <Head title="Cursos y Capacitación" />
             <CursoSection />
             <TeacherSection />
+            <AboutUsGallerySection />
             <RegistroSection />
         </HomeLayout>
     );
