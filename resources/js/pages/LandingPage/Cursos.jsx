@@ -258,66 +258,66 @@ const AboutUsGallerySection = () => {
             {/* Patrón decorativo de fondo */}
             <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
-            <div className="container mx-auto px-4 max-w-7xl relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
-                    <motion.div {...fadeUp} className="lg:col-span-5">
-                        <span className="inline-block bg-brand-mint text-white text-xs font-extrabold uppercase tracking-widest px-3 py-1 mb-4 rounded-none">
-                            Sobre Nosotros
-                        </span>
-                        <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6 leading-tight">
-                            Impulsando el Desarrollo Cafetalero
-                        </h2>
-                        <p className="text-lg text-white/90 font-light leading-relaxed mb-6">
-                            Somos una iniciativa regional dedicada al fortalecimiento de la cadena de valor del café en la Sierra Negra. Unimos la investigación académica, la innovación técnica y la tradición caficultora para proyectar el talento local hacia mercados de especialidad.
-                        </p>
-                        <p className="text-sm text-white/75 font-light leading-relaxed">
-                            A través de capacitaciones comunitarias, certificaciones de calidad y digitalización comercial, acompañamos a productores y empresas en cada etapa del proceso productivo.
-                        </p>
-                    </motion.div>
+            <div className="w-full max-w-[1700px] mx-auto px-4 md:px-8 relative z-10">
+                {/* Encabezado Principal */}
+                <motion.div {...fadeUp} className="text-center max-w-4xl mx-auto mb-16">
+                    <span className="inline-block bg-brand-mint text-white text-xs font-extrabold uppercase tracking-widest px-4 py-1.5 mb-6 rounded-none shadow-sm">
+                        Sobre Nosotros
+                    </span>
+                    <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+                        Impulsando el Desarrollo Cafetalero
+                    </h2>
+                    <p className="text-lg md:text-xl text-white/90 font-light leading-relaxed max-w-3xl mx-auto">
+                        Somos una iniciativa regional dedicada al fortalecimiento de la cadena de valor del café en la Sierra Negra. Unimos la investigación académica, la innovación técnica y la tradición caficultora para proyectar el talento local hacia mercados de especialidad.
+                    </p>
+                </motion.div>
 
-                    <motion.div {...fadeRight} className="lg:col-span-7">
-                        <div className="relative px-2 md:px-8">
-                            <Carousel
-                                opts={{
-                                    align: "start",
-                                    loop: true,
-                                }}
-                                plugins={[
-                                    Autoplay({
-                                        delay: 3500,
-                                        stopOnInteraction: false,
-                                    })
-                                ]}
-                                className="w-full"
-                            >
-                                <CarouselContent className="-ml-4">
-                                    {galeriaFotos.map((foto, index) => (
-                                        <CarouselItem key={index} className="pl-4 md:basis-1/2">
-                                            <div className="group relative overflow-hidden rounded-none border border-white/20 shadow-2xl h-72">
-                                                <img
-                                                    src={foto}
-                                                    alt={`Galería Sobre Nosotros ${index + 1}`}
-                                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                                    onError={(e) => {
-                                                        e.target.src = 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=800';
-                                                    }}
-                                                />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                                                    <span className="text-white text-xs font-bold uppercase tracking-wider">
-                                                        Caficultura Sierra Negra
-                                                    </span>
-                                                </div>
+                {/* Carrusel de Galería Gran Formato (Pantalla Completa) */}
+                <motion.div {...fadeUp} className="w-full relative px-2 md:px-12">
+                    <Carousel
+                        opts={{
+                            align: "center",
+                            loop: true,
+                        }}
+                        plugins={[
+                            Autoplay({
+                                delay: 4000,
+                                stopOnInteraction: false,
+                            })
+                        ]}
+                        className="w-full"
+                    >
+                        <CarouselContent className="-ml-6">
+                            {galeriaFotos.map((foto, index) => (
+                                <CarouselItem key={index} className="pl-6 md:basis-3/4 lg:basis-2/3">
+                                    <div className="group relative overflow-hidden rounded-none border-2 border-white/20 shadow-2xl h-[55vh] md:h-[65vh] lg:h-[72vh]">
+                                        <img
+                                            src={foto}
+                                            alt={`Galería Sobre Nosotros ${index + 1}`}
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                            onError={(e) => {
+                                                e.target.src = 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=1600';
+                                            }}
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 transition-opacity duration-300 flex items-end p-8 md:p-12">
+                                            <div>
+                                                <span className="text-brand-mint text-xs md:text-sm font-extrabold uppercase tracking-widest block mb-2">
+                                                    Clúster Cafetalero Sierra Negra
+                                                </span>
+                                                <h3 className="text-white text-xl md:text-3xl font-extrabold uppercase tracking-wide">
+                                                    Galería de la Red
+                                                </h3>
                                             </div>
-                                        </CarouselItem>
-                                    ))}
-                                </CarouselContent>
+                                        </div>
+                                    </div>
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
 
-                                <CarouselPrevious className="-left-4 h-12 w-12 bg-white/90 text-brand-darker hover:bg-white hover:text-black border-none rounded-none shadow-md" />
-                                <CarouselNext className="-right-4 h-12 w-12 bg-white/90 text-brand-darker hover:bg-white hover:text-black border-none rounded-none shadow-md" />
-                            </Carousel>
-                        </div>
-                    </motion.div>
-                </div>
+                        <CarouselPrevious className="-left-2 md:-left-8 h-16 w-16 bg-white text-brand-darker hover:bg-brand-mint hover:text-white border-2 border-white rounded-none shadow-2xl transition-all duration-300" />
+                        <CarouselNext className="-right-2 md:-right-8 h-16 w-16 bg-white text-brand-darker hover:bg-brand-mint hover:text-white border-2 border-white rounded-none shadow-2xl transition-all duration-300" />
+                    </Carousel>
+                </motion.div>
             </div>
         </section>
     );
