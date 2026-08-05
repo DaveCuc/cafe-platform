@@ -31,3 +31,6 @@ yarn-error.log
 .github/
 docs/
 GEMINI.md
+/.claude/
+/agent/
+/skills-lock.json
