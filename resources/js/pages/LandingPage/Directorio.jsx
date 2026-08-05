@@ -68,7 +68,7 @@ const RegistroSection = () => {
                     <span className="inline-block text-brand-mint font-semibold tracking-widest text-sm uppercase mb-4 border-b border-brand-mint pb-1">Súmate a la Red</span>
                     <h2 className="text-white text-4xl md:text-5xl font-bold mb-6 tracking-tight">¿Quieres aparecer en nuestro directorio?</h2>
                     <p className="text-white text-lg mb-10 max-w-2xl mx-auto font-light">
-                        Registra tu iniciativa ecoturística y conecta directamente con visitantes que buscan experiencias responsables.
+                        Registra tu negocio, finca o tienda de café y conecta directamente con clientes, tostadores y proveedores interesados en la producción de la Sierra Negra.
                     </p>
                 </motion.div>
                 <motion.div {...fadeUp}>
@@ -77,7 +77,7 @@ const RegistroSection = () => {
                         className="rounded-none bg-brand-mint text-brand-darker hover:bg-white hover:text-brand-dark transition-colors duration-300 px-10 py-6 text-sm font-semibold uppercase tracking-wide"
                         onClick={() => router.visit("/trade")}
                     >
-                        Regístrate Aquí
+                        Registrar Negocio
                     </Button>
                 </motion.div>
             </div>
@@ -133,7 +133,7 @@ const ResultadoSection = () => {
                 {!hasSearch ? (
                     <motion.div {...fadeUp}>
                         <p className="text-gray-600 text-center font-light text-xl p-12 bg-white border border-gray-200 institutional-shadow">
-                            Selecciona una opción en el buscador y presiona "Buscar ahora" para ver los resultados disponibles.
+                            Selecciona una opción en el buscador para localizar caficultores, proveedores o tiendas en el clúster.
                         </p>
                     </motion.div>
                 ) : isLoading ? (
@@ -145,7 +145,7 @@ const ResultadoSection = () => {
                 ) : items.length === 0 ? (
                     <motion.div {...fadeUp}>
                         <p className="text-gray-600 text-center font-light text-xl p-12 bg-white border border-gray-200 institutional-shadow">
-                            No se encontraron iniciativas con los filtros seleccionados.
+                            No se encontraron productores, tiendas o proveedores con los filtros seleccionados.
                         </p>
                     </motion.div>
                 ) : (
@@ -293,8 +293,8 @@ const BuscadorSection = () => {
                     <div className="container mx-auto px-4 text-center">
                         <div className="max-w-4xl mx-auto">
                             <h2 className="text-4xl font-sans mb-2">Busca en nuestro Directorio</h2>
-                            <h1 className="text-5xl md:text-8xl font-extrabold mb-4">Reserva de la Biosfera</h1>
-                            <h2 className="text-xl md:text-3xl font-sans mb-8">Todo en un solo lugar</h2>
+                            <h1 className="text-5xl md:text-8xl font-extrabold mb-4">Clúster Cafetalero</h1>
+                            <h2 className="text-xl md:text-3xl font-sans mb-8">Proveedores, Tiendas de Café y Clientes</h2>
 
                             <form onSubmit={onSubmit} className="bg-white/95 backdrop-blur-md p-6 md:p-8 institutional-shadow-strong border border-gray-200 flex flex-col md:flex-row md:items-end gap-6 text-left mt-4 mx-auto max-w-5xl relative z-20">
                                 <div className="grow">
