@@ -4,40 +4,40 @@ import { GeoJSON } from 'react-leaflet';
 // 1. Definimos las regiones, sus colores y sus municipios
 export const REGIONES = {
     "REGIÓN SEPTENTRIONAL": {
-        color: "#3498db", // Azul
+        color: "#1E40AF", // Deep Navy Blue
         municipios: [
             "Tecamachalco", "Palmar de Bravo", "Yehualtepec", "Tlacotepec de Benito Juárez",
             "Tepanco de López", "Santiago Miahuatlán", "Cañada Morelos", "Chapulco"
         ]
     },
     "REGIÓN DEL VALLE ZAPOTITLÁN-TEHUACÁN": {
-        color: "#e67e22", // Naranja
+        color: "#B45309", // Warm Amber / Ocre
         municipios: [
             "Tehuacán", "Zapotitlán", "San Gabriel Chilac", "San José Miahuatlán",
             "Juan N. Méndez", "Atexcal", "Caltepec"
         ]
     },
     "REGIÓN SIERRA NEGRA": {
-        color: "#2ecc71", // Verde esmeralda
+        color: "#15803D", // Deep Forest Green
         municipios: [
             "Ajalpan", "Coyomeapan", "Coxcatlán", "Zinacatepec"
         ]
     },
     "REGIÓN CHAZUMBA": {
-        color: "#9b59b6", // Morado
+        color: "#6B21A8", // Deep Royal Purple
         municipios: [
             "San Pedro Tequixtepec", "Santiago Chazumba", "Totoltepec de Guerrero"
         ]
     },
     "DISTRITO 3": {
-        color: "#f1c40f", // Amarillo
+        color: "#A16207", // Warm Bronze Ocre
         municipios: [
             "Concepción Buena Vista", "San Juan Bautista Coixtlahuaca",
             "San Miguel Tequixtepec", "Tepelmeme Villa De Morelos"
         ]
     },
     "DISTRITO 4": {
-        color: "#e74c3c", // Rojo
+        color: "#991B1B", // Deep Crimson Red
         municipios: [
             "Teotitlán de Flores Magón", "San Juan de los Cues", "San Martín Toxpalan",
             "San Antonio Nanahuatipam", "Santa María Tecomavaca", "Santa María Ixcatlan",
@@ -45,7 +45,7 @@ export const REGIONES = {
         ]
     },
     "DISTRITO 5": {
-        color: "#1abc9c", // Turquesa
+        color: "#0F766E", // Deep Teal
         municipios: [
             "San Juan Tepeuxila", "San Pedro Jaltepetongo", "Santiago Nacaltepec",
             "Santa Maria Papalo", "Santos Reyes Papalo", "Concepción Papalo",

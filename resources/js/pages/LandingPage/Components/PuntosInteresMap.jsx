@@ -18,7 +18,7 @@ const PuntosInteresMap = ({ capasActivas }) => {
             {capasActivas?.puntos && puntos.puntos && (
                 <GeoJSON
                     data={puntos.puntos}
-                    style={{ color: '#e74c3c', weight: 4 }}
+                    style={{ color: '#991B1B', weight: 4 }}
                     onEachFeature={(feature, layer) => {
                         if (feature.properties?.nombre || feature.properties?.name) {
                             layer.bindPopup(`<b>${feature.properties?.nombre || feature.properties?.name}</b><br/>Puntos de interes`);

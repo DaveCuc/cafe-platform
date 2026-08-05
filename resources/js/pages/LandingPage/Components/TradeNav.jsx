@@ -2,18 +2,16 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // ─── Categorías de la cadena productiva del café ────────────────────────────
-// PENDIENTE: Estas categorías deben coincidir con los 'giros' registrados en la
-// base de datos (tabla giros / tabla giros_digitales del negocio).
-// Si los giros en la BD tienen nombres distintos, actualiza las claves aquí.
+// Paleta elegante, armónica y de alto contraste (WCAG AA/AAA compliant)
 const CATEGORIES = {
-    "Todos":                    "#1f2937",
-    "Productor de Café":        "#4a7c59",   // Verde oscuro — cultivadores en campo
-    "Beneficiador":             "#8B5E3C",   // Café — proceso húmedo/seco
-    "Tostador":                 "#C0392B",   // Rojo tostado — tueste artesanal
-    "Comercializador":          "#E67E22",   // Naranja — exportación y venta
-    "Tienda y Punto de Venta":  "#2980B9",   // Azul — consumidor final
-    "Cooperativa / Sociedad":   "#8E44AD",   // Morado — organizaciones colectivas
-    "Transformación y Valor Agregado": "#16A085", // Verde azulado — derivados del café
+    "Todos":                          "#0F172A", // Dark Slate
+    "Productor de Café":              "#15803D", // Deep Forest Green
+    "Beneficiador":                   "#78350F", // Deep Roasted Coffee Brown
+    "Tostador":                       "#991B1B", // Deep Crimson Red
+    "Comercializador":                "#B45309", // Deep Warm Amber / Ocre
+    "Tienda y Punto de Venta":         "#1E40AF", // Deep Navy Blue
+    "Cooperativa / Sociedad":         "#6B21A8", // Deep Royal Purple
+    "Transformación y Valor Agregado":"#0F766E", // Deep Teal
 };
 
 // ─── Categorías originales de turismo rural (comentadas) ─────────────────────
@@ -79,15 +77,6 @@ const ICONS = {
     ),
 };
 
-// ─── Iconos originales de turismo rural (comentados) ─────────────────────────
-/*
-const ICONS_TURISMO = {
-    "Transporte Comunitario": ...,
-    "Talleres comunitarios": ...,
-    ...
-};
-*/
-
 const TradeNav = ({ capasActivas, activeCategories, setActiveCategories }) => {
     const [isExpanded, setIsExpanded] = React.useState(false);
 
@@ -123,7 +112,7 @@ const TradeNav = ({ capasActivas, activeCategories, setActiveCategories }) => {
                     animate={{ y: 0, opacity: 1, x: "-50%" }}
                     exit={{ y: -80, opacity: 0, x: "-50%" }}
                     transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                    className="absolute top-20 md:top-24 left-1/2 z-[500] pointer-events-auto flex flex-col justify-center items-center bg-white/95 backdrop-blur-md p-3 rounded-none shadow-xl border border-gray-100 w-[95vw] md:w-[85vw] max-w-7xl"
+                    className="absolute top-20 md:top-24 left-1/2 z-[500] pointer-events-auto flex flex-col justify-center items-center bg-white/95 backdrop-blur-md p-3 rounded-none shadow-xl border border-gray-200 w-[95vw] md:w-[85vw] max-w-7xl"
                 >
                     <div className="flex flex-wrap justify-center items-center gap-2 w-full">
                         {/* Title & Toggle */}
@@ -131,7 +120,7 @@ const TradeNav = ({ capasActivas, activeCategories, setActiveCategories }) => {
                             <span className="font-extrabold text-brand-darker uppercase tracking-widest text-xs">Filtros</span>
                             <button 
                                 onClick={() => setIsExpanded(!isExpanded)}
-                                className="flex items-center justify-center p-1.5 rounded-none bg-gray-100 text-gray-600 hover:bg-brand hover:text-white border-2 border-gray-200 hover:border-brand transition-colors"
+                                className="flex items-center justify-center p-1.5 rounded-none bg-gray-100 text-gray-700 hover:bg-brand hover:text-white border border-gray-300 hover:border-brand transition-colors"
                                 aria-label="Toggle filters"
                             >
                                 <svg className={`w-4 h-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -146,15 +135,19 @@ const TradeNav = ({ capasActivas, activeCategories, setActiveCategories }) => {
                                 <button
                                     key={name}
                                     onClick={() => handleToggleCategory(name)}
-                                    className={`whitespace-nowrap flex items-center gap-2 px-3 py-1.5 rounded-none text-[11px] font-bold uppercase tracking-wider transition-all duration-300 border-2 ${isActive ? 'text-white shadow-md scale-105' : 'bg-gray-50 border-gray-200 hover:bg-gray-100 hover:scale-105'} ${!isExpanded && !isActive ? 'hidden' : 'flex'}`}
+                                    className={`whitespace-nowrap flex items-center gap-2 px-3.5 py-2 rounded-none text-[11px] font-bold uppercase tracking-wider transition-all duration-200 border ${
+                                        isActive 
+                                            ? 'text-white shadow-md scale-105 border-transparent' 
+                                            : 'bg-white text-gray-800 border-gray-300 hover:bg-gray-100 hover:border-gray-400 hover:scale-102 shadow-xs'
+                                    } ${!isExpanded && !isActive ? 'hidden' : 'flex'}`}
                                     style={isActive ? { 
                                         backgroundColor: color,
                                         borderColor: color
-                                    } : {
-                                        color: color
-                                    }}
+                                    } : {}}
                                 >
-                                    <span className="shrink-0">{ICONS[name]}</span>
+                                    <span className="shrink-0" style={{ color: isActive ? '#FFFFFF' : color }}>
+                                        {ICONS[name]}
+                                    </span>
                                     <span>{name}</span>
                                 </button>
                             );

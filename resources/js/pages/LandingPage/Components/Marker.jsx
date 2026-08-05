@@ -8,13 +8,13 @@ import { motion } from 'framer-motion';
 // Deben coincidir exactamente con las claves de CATEGORIES en TradeNav.jsx
 // para que el color del marcador en el mapa sea consistente con el filtro.
 export const CATEGORY_COLORS = {
-    "Productor de Café":               "#4a7c59",
-    "Beneficiador":                    "#8B5E3C",
-    "Tostador":                        "#C0392B",
-    "Comercializador":                 "#E67E22",
-    "Tienda y Punto de Venta":         "#2980B9",
-    "Cooperativa / Sociedad":          "#8E44AD",
-    "Transformación y Valor Agregado": "#16A085",
+    "Productor de Café":               "#15803D",
+    "Beneficiador":                    "#78350F",
+    "Tostador":                        "#991B1B",
+    "Comercializador":                 "#B45309",
+    "Tienda y Punto de Venta":         "#1E40AF",
+    "Cooperativa / Sociedad":          "#6B21A8",
+    "Transformación y Valor Agregado": "#0F766E",
 };
 
 // ─── Colores originales de turismo rural (comentados) ────────────────────────

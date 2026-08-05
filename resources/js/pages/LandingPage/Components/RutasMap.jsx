@@ -20,10 +20,10 @@ const RutasMap = ({ capasActivas }) => {
             {capasActivas?.ruta1 && rutas.ruta1 && (
                 <GeoJSON 
                     data={rutas.ruta1} 
-                    style={{ color: '#e74c3c', weight: 4 }} 
+                    style={{ color: '#991B1B', weight: 4 }} 
                     onEachFeature={(feature, layer) => {
                         if (feature.properties?.nombre || feature.properties?.name) {
-                            layer.bindPopup(`<b>${feature.properties?.nombre || feature.properties?.name}</b><br/>Ruta Onix y Sal`);
+                            layer.bindPopup(`<b>${feature.properties?.nombre || feature.properties?.name}</b><br/>Ruta 1: Trazabilidad`);
                         }
                     }}
                 />
@@ -31,10 +31,10 @@ const RutasMap = ({ capasActivas }) => {
             {capasActivas?.ruta2 && rutas.ruta2 && (
                 <GeoJSON 
                     data={rutas.ruta2} 
-                    style={{ color: '#2ecc71', weight: 4 }} 
+                    style={{ color: '#15803D', weight: 4 }} 
                     onEachFeature={(feature, layer) => {
                         if (feature.properties?.nombre || feature.properties?.name) {
-                            layer.bindPopup(`<b>${feature.properties?.nombre || feature.properties?.name}</b><br/>Ruta Dinosaurios`);
+                            layer.bindPopup(`<b>${feature.properties?.nombre || feature.properties?.name}</b><br/>Ruta 2: Capacitación`);
                         }
                     }}
                 />
@@ -42,10 +42,10 @@ const RutasMap = ({ capasActivas }) => {
             {capasActivas?.ruta3 && rutas.ruta3 && (
                 <GeoJSON 
                     data={rutas.ruta3} 
-                    style={{ color: '#9b59b6', weight: 4 }} 
+                    style={{ color: '#6B21A8', weight: 4 }} 
                     onEachFeature={(feature, layer) => {
                         if (feature.properties?.nombre || feature.properties?.name) {
-                            layer.bindPopup(`<b>${feature.properties?.nombre || feature.properties?.name}</b><br/>Ruta Mezcal y Barro`);
+                            layer.bindPopup(`<b>${feature.properties?.nombre || feature.properties?.name}</b><br/>Ruta 3: Comercialización`);
                         }
                     }}
                 />
