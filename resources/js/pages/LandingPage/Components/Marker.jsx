@@ -4,7 +4,22 @@ import { Marker, Popup, useMap } from 'react-leaflet';
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 
+// ─── Colores por categoría de la cadena productiva del café ──────────────────
+// Deben coincidir exactamente con las claves de CATEGORIES en TradeNav.jsx
+// para que el color del marcador en el mapa sea consistente con el filtro.
 export const CATEGORY_COLORS = {
+    "Productor de Café":               "#4a7c59",
+    "Beneficiador":                    "#8B5E3C",
+    "Tostador":                        "#C0392B",
+    "Comercializador":                 "#E67E22",
+    "Tienda y Punto de Venta":         "#2980B9",
+    "Cooperativa / Sociedad":          "#8E44AD",
+    "Transformación y Valor Agregado": "#16A085",
+};
+
+// ─── Colores originales de turismo rural (comentados) ────────────────────────
+/*
+const CATEGORY_COLORS_TURISMO = {
     "Transporte Comunitario": "#FF7A5C",
     "Talleres comunitarios": "#00D126",
     "Medicina tradicional y bienestar": "#5C7AFF",
@@ -15,6 +30,8 @@ export const CATEGORY_COLORS = {
     "Balneario y Parque Acuático": "#FFA35C",
     "Gastronomía tradicional": "#00A347",
 };
+*/
+
 
 export const getCategoryColor = (trade) => {
     const category = trade.giros?.[0]?.name || trade.giro;
