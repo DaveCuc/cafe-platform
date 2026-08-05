@@ -14,12 +14,12 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            'Ecoturismo',
-            'Agroturismo',
-            'Turismo Comunitario',
-            'Solidario',
-            'Responsable',
-            'Rural Sostenible'
+            'Producción',
+            'Tostado',
+            'Barismo',
+            'Comercio Justo',
+            'Administración',
+            'Agroecología'
         ];
 
         foreach ($categories as $category) {

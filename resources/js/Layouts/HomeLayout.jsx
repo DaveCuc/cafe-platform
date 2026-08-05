@@ -189,9 +189,6 @@ export const Footer = () => {
                             <a href="http://www.ittehuacan.edu.mx/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-brand-light transition"><b>Instituto Tecnológico de Tehuacán</b></a>
                             <a href="https://www.tecnm.mx/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-brand-light transition"><b>Tecnológico Nacional de México</b> (TECNM)</a>
                             <a href="https://secihti.mx/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-brand-light transition"><b>Secretaría de Ciencia, Humanidades, Tecnología e Innovación</b> (SECIHTI)</a>
-                            <a href="https://www.gob.mx/sectur" target="_blank" rel="noopener noreferrer" className="text-white hover:text-brand-light transition"><b>Secretaría de Turismo</b> (SECTUR)</a>
-
-
                         </div>
                     </div>
                 </div>
