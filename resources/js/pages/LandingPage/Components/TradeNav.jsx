@@ -14,6 +14,24 @@ const CATEGORIES = {
     "Transformación y Valor Agregado":"#0F766E", // Deep Teal
 };
 
+// ─── Referencia de ayuda para desarrollo / manipulación futura ───────────────
+// Si en el futuro se desea reutilizar este componente para turismo u otro rubro,
+// mantén las claves anteriores y descomenta este bloque como referencia de mapeo:
+/*
+const CATEGORIES_TURISMO_GUIA = {
+    "Todos": "#1f2937",
+    "Transporte Comunitario": "#FF7A5C",
+    "Talleres comunitarios": "#00D126",
+    "Medicina tradicional y bienestar": "#5C7AFF",
+    "Parques temáticos comunitarios": "#FF8AC8",
+    "Actividades acuáticas comunitarias": "#00D1C7",
+    "Actividades de Aventura o Naturaleza": "#C7D100",
+    "Hospedaje comunitario": "#C88AFF",
+    "Balneario y Parque Acuático": "#FFA35C",
+    "Gastronomía tradicional": "#00A347",
+};
+*/
+
 // ─── Iconos SVG por categoría ────────────────────────────────────────────────
 const ICONS = {
     "Todos": (

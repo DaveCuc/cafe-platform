@@ -126,6 +126,32 @@
   }
 }
 
+@layer components {
+  /* 
+   * REGLAS DE MANEJO DE COLORES PARA BOTONES Y ELEMENTOS UI:
+   * 1. NUNCA usar Verde Oscuro (--color-verde-oscuro / --color-guinda-oscuro) y Mostaza (--color-dorado-oscuro) juntos.
+   * 2. Los botones/elementos con fondo Mostaza deben usar siempre TEXTO BLANCO (nunca texto verde oscuro).
+   * 3. Los elementos sobre fondo Verde Oscuro o Guinda deben usar siempre TEXTO BLANCO (nunca texto mostaza).
+   * 4. Bordes e Inversión al hacer Hover:
+   *    - Botón Mostaza: Fondo Mostaza + Texto Blanco + Borde Mostaza.
+   *      Hover: Fondo Blanco + Texto Mostaza + Borde Mostaza.
+   *    - Botón Verde/Guinda: Fondo Verde/Guinda + Texto Blanco + Borde Verde/Guinda.
+   *      Hover: Fondo Blanco + Texto Verde/Guinda + Borde Verde/Guinda.
+   */
+
+  .btn-mustard {
+    @apply bg-[var(--color-dorado-oscuro)] text-white border-2 border-[var(--color-dorado-oscuro)] transition-all duration-200 hover:bg-white hover:text-[var(--color-dorado-oscuro)] hover:border-[var(--color-dorado-oscuro)];
+  }
+
+  .btn-green {
+    @apply bg-[var(--color-verde-oscuro)] text-white border-2 border-[var(--color-verde-oscuro)] transition-all duration-200 hover:bg-white hover:text-[var(--color-verde-oscuro)] hover:border-[var(--color-verde-oscuro)];
+  }
+
+  .btn-guinda {
+    @apply bg-[var(--color-guinda-oscuro)] text-white border-2 border-[var(--color-guinda-oscuro)] transition-all duration-200 hover:bg-white hover:text-[var(--color-guinda-oscuro)] hover:border-[var(--color-guinda-oscuro)];
+  }
+}
+
 @layer utilities {
   /* 7. Sombras personalizadas con estilo "institucional/corporativo" */
   .institutional-shadow {

@@ -189,7 +189,7 @@ const TeacherSection = () => {
         <section className="bg-brand py-24 border-t border-brand-darker overflow-hidden">
             <div className="container mx-auto px-4 text-center max-w-7xl">
                 <motion.div {...fadeUp} >
-                    <span className="inline-block text-brand-mint font-semibold tracking-widest text-sm uppercase mb-4 border-b border-brand-mint pb-1">Excelencia Académica</span>
+                    <span className="inline-block text-white/90 font-semibold tracking-widest text-sm uppercase mb-4 border-b border-white/40 pb-1">Excelencia Académica</span>
                     <h2 className="text-4xl md:text-5xl font-bold mb-16 text-white tracking-tight">Conoce a Nuestros Educadores</h2>
                 </motion.div>
                 

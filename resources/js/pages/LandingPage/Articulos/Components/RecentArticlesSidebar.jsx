@@ -33,7 +33,7 @@ export const RecentArticlesSidebar = ({ articles, isDarkMode }) => {
                             </div>
 
                             <div className="relative z-10 flex flex-1 flex-col justify-end p-6">
-                                <Badge variant="outline" className={`mb-4 w-fit rounded-none px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest border-0 ${isDarkMode ? 'bg-brand text-white' : 'bg-brand-mint text-brand-darker'}`}>
+                                <Badge variant="outline" className={`mb-4 w-fit rounded-none px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest border-0 ${isDarkMode ? 'bg-brand text-white' : 'bg-brand-mint text-white'}`}>
                                     {recent.category?.name || "General"}
                                 </Badge>
 
@@ -49,7 +49,7 @@ export const RecentArticlesSidebar = ({ articles, isDarkMode }) => {
                                     {recent.short_description}
                                 </p>
 
-                                <Button asChild className={`w-full rounded-none px-4 py-6 text-sm font-extrabold uppercase tracking-widest transition-colors ${isDarkMode ? 'bg-brand text-white hover:bg-white hover:text-brand-darker' : 'bg-brand-mint text-brand-darker hover:bg-brand hover:text-white'}`}>
+                                <Button asChild className={`w-full rounded-none px-4 py-6 text-sm font-extrabold uppercase tracking-widest border-2 transition-all duration-200 ${isDarkMode ? 'bg-brand text-white border-brand hover:bg-white hover:text-brand hover:border-brand' : 'bg-brand-mint text-white border-brand-mint hover:bg-white hover:text-brand-mint hover:border-brand-mint'}`}>
                                     <Link href={`/articulos/${recent.id}`} className="inline-flex items-center justify-center gap-2">
                                         Ver enlace
                                         <ArrowUpRight className="h-4 w-4" />

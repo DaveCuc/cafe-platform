@@ -13,7 +13,7 @@ export default function EventCover({ event }) {
           </h1>
           
           {event.short_description && (
-            <p className="mt-8 text-xl text-brand-mint max-w-2xl leading-relaxed">
+            <p className="mt-8 text-xl text-white/90 max-w-2xl leading-relaxed">
               {event.short_description}
             </p>
           )}
@@ -21,7 +21,7 @@ export default function EventCover({ event }) {
           <div className="flex items-center gap-4 mt-10 text-white font-medium">
             {event.location && (
               <div className="flex items-center text-lg bg-black/20 p-4">
-                <MapPin className="w-6 h-6 mr-3 text-brand-mint" />
+                <MapPin className="w-6 h-6 mr-3 text-white" />
                 {event.location}
               </div>
             )}

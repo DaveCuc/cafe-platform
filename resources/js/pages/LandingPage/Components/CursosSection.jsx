@@ -30,7 +30,7 @@ export default function CursosSection() {
 
             <div className="container mx-auto px-6 text-center max-w-5xl relative z-10">
                 <motion.div {...fadeUp} className="mb-20">
-                    <span className="inline-block text-brand-mint font-semibold tracking-widest text-sm uppercase mb-6 border-b border-brand-mint pb-1">Propuesta de Valor</span>
+                    <span className="inline-block text-white/90 font-semibold tracking-widest text-sm uppercase mb-6 border-b border-white/40 pb-1">Propuesta de Valor</span>
                     <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tight mb-8 leading-tight">
                         El Modelo <span className="font-light">de Clúster</span>
                     </h1>
@@ -52,7 +52,7 @@ export default function CursosSection() {
                             Estructura productiva y competitividad. Impulsa la creación de micro tostadores locales, unidades de empaque, certificación de calidad y la diversificación hacia el agroturismo regional.
                         </p>
                         <Link href="/cursos" className="w-full mt-auto">
-                            <Button className="w-full rounded-none bg-brand text-white hover:bg-brand-dark transition-colors duration-300 px-8 py-6 text-sm font-semibold uppercase tracking-wide">
+                            <Button className="w-full rounded-none bg-brand text-white border-2 border-brand hover:bg-white hover:text-brand hover:border-brand transition-all duration-300 px-8 py-6 text-sm font-semibold uppercase tracking-wide">
                                 Ver Cursos
                             </Button>
                         </Link>
@@ -61,16 +61,16 @@ export default function CursosSection() {
 
                 <motion.div {...fadeUp} whileHover={{ y: -8 }} transition={{ duration: 0.3 }}>
                     <div className="bg-brand-dark p-10 md:p-14 border border-brand-darker institutional-shadow hover:institutional-shadow-strong transition-all h-full flex flex-col items-center text-center">
-                        <div className="w-16 h-16 bg-brand-darker rounded-none mb-8 flex items-center justify-center border border-brand-mint/10">
-                            <span className="text-2xl font-bold text-brand-mint">02</span>
+                        <div className="w-16 h-16 bg-brand-darker rounded-none mb-8 flex items-center justify-center border border-white/20">
+                            <span className="text-2xl font-bold text-white">02</span>
                         </div>
                         <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight">Social e Institucional</h2>
-                        <div className="w-12 h-1 bg-brand-mint mb-6"></div>
+                        <div className="w-12 h-1 bg-white mb-6"></div>
                         <p className="text-white/80 mb-10 flex-grow text-base font-light leading-relaxed">
                             Inclusión y gobernanza participativa. Fomenta el fortalecimiento organizativo, ecosistemas de innovación sostenibles y la cooperación interinstitucional constante.
                         </p>
                         <Link href="/directorio" className="w-full mt-auto">
-                            <Button className="w-full rounded-none bg-white text-brand-dark hover:bg-brand-mint transition-colors duration-300 px-8 py-6 text-sm font-semibold uppercase tracking-wide">
+                            <Button className="w-full rounded-none bg-white text-brand-dark border-2 border-white hover:bg-transparent hover:text-white hover:border-white transition-all duration-300 px-8 py-6 text-sm font-semibold uppercase tracking-wide">
                                 Ver Directorio
                             </Button>
                         </Link>

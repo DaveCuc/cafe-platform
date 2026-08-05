@@ -26,7 +26,7 @@ export const ArticleCover = ({ imageUrl, title, categoryName, publishedAt, userN
             {/* Bloque Sólido para Texto (Brutalismo - Debajo de la imagen) */}
             <div className={`w-full p-8 md:p-12 ${isDarkMode ? 'bg-[#252525]' : 'bg-brand'}`}>
                 <div className="flex items-center gap-x-2 mb-6">
-                    <Badge variant="outline" className={`rounded-none uppercase tracking-widest font-bold border-transparent ${isDarkMode ? 'bg-white/20 text-white' : 'bg-brand-darker text-brand-mint'}`}>
+                    <Badge variant="outline" className={`rounded-none uppercase tracking-widest font-bold border-transparent ${isDarkMode ? 'bg-white/20 text-white' : 'bg-white/20 text-white'}`}>
                         {categoryName || "General"}
                     </Badge>
                     <span className={`text-sm font-bold uppercase tracking-wider ${isDarkMode ? 'text-white' : 'text-white/90'}`}>
@@ -37,11 +37,11 @@ export const ArticleCover = ({ imageUrl, title, categoryName, publishedAt, userN
                     {title}
                 </h1>
                 <div className="flex items-center gap-x-3 mt-8 text-sm">
-                    <div className={`h-10 w-10 rounded-none flex items-center justify-center font-extrabold text-lg shadow-sm border ${isDarkMode ? 'bg-white text-[#252525] border-white' : 'bg-brand-mint text-brand-darker border-brand-darker'}`}>
+                    <div className={`h-10 w-10 rounded-none flex items-center justify-center font-extrabold text-lg shadow-sm border ${isDarkMode ? 'bg-white text-[#252525] border-white' : 'bg-brand-mint text-white border-brand-mint'}`}>
                         {userName?.charAt(0).toUpperCase()}
                     </div>
                     <div>
-                        <p className={`font-bold uppercase tracking-widest ${isDarkMode ? 'text-white' : 'text-brand-mint'}`}>Por {userName}</p>
+                        <p className={`font-bold uppercase tracking-widest ${isDarkMode ? 'text-white' : 'text-white'}`}>Por {userName}</p>
                     </div>
                 </div>
             </div>

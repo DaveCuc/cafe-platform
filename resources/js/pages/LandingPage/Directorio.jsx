@@ -76,7 +76,7 @@ const RegistroSection = () => {
         <section className="bg-brand-dark py-24 border-t border-brand-darker">
             <div className="container mx-auto text-center px-4 max-w-4xl">
                 <motion.div {...fadeUp}>
-                    <span className="inline-block text-brand-mint font-semibold tracking-widest text-sm uppercase mb-4 border-b border-brand-mint pb-1">Súmate a la Red</span>
+                    <span className="inline-block text-white/90 font-semibold tracking-widest text-sm uppercase mb-4 border-b border-white/40 pb-1">Súmate a la Red</span>
                     <h2 className="text-white text-4xl md:text-5xl font-bold mb-6 tracking-tight">¿Quieres aparecer en nuestro directorio?</h2>
                     <p className="text-white text-lg mb-10 max-w-2xl mx-auto font-light">
                         Registra tu negocio, finca o tienda de café y conecta directamente con clientes, tostadores y proveedores interesados en la producción de la Sierra Negra.
@@ -327,6 +327,18 @@ const BuscadorSection = () => {
                                                 <SelectItem value="Tienda y Punto de Venta" className="cursor-pointer">Tienda y Punto de Venta</SelectItem>
                                                 <SelectItem value="Cooperativa / Sociedad" className="cursor-pointer">Cooperativa / Sociedad</SelectItem>
                                                 <SelectItem value="Transformación y Valor Agregado" className="cursor-pointer">Transformación y Valor Agregado</SelectItem>
+                                                {/* ─── REFERENCIA PARA DESARROLLO FUTURO ───
+                                                    Si se reutiliza este selector para turismo u otras ramas, descomentar como referencia:
+                                                <SelectItem value="Transporte Comunitario" className="cursor-pointer">Transporte Comunitario</SelectItem>
+                                                <SelectItem value="Talleres comunitarios" className="cursor-pointer">Talleres comunitarios</SelectItem>
+                                                <SelectItem value="Medicina tradicional y bienestar" className="cursor-pointer">Medicina tradicional y bienestar</SelectItem>
+                                                <SelectItem value="Parques temáticos comunitarios" className="cursor-pointer">Parques temáticos comunitarios</SelectItem>
+                                                <SelectItem value="Actividades acuáticas comunitarias" className="cursor-pointer">Actividades acuáticas comunitarias</SelectItem>
+                                                <SelectItem value="Actividades de Aventura o Naturaleza" className="cursor-pointer">Actividades de Aventura o Naturaleza</SelectItem>
+                                                <SelectItem value="Hospedaje comunitario" className="cursor-pointer">Hospedaje comunitario</SelectItem>
+                                                <SelectItem value="Balneario y Parque Acuático" className="cursor-pointer">Balneario y Parque Acuático</SelectItem>
+                                                <SelectItem value="Gastronomía tradicional" className="cursor-pointer">Gastronomía tradicional</SelectItem>
+                                                */}
                                             </SelectGroup>
 
                                         </SelectContent>

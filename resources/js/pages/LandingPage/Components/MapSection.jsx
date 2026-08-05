@@ -43,8 +43,8 @@ export default function MapSection() {
 
                 {/* Textos a conservar intactos */}
                 <motion.div {...fadeUp} className="text-center max-w-3xl mb-16 md:mb-24 relative z-20">
-                    <span className="inline-block text-brand-mint font-semibold tracking-widest text-sm uppercase mb-4 border-b border-brand-mint pb-1">Objetivos del Clúster</span>
-                    <h2 className="text-4xl lg:text-5xl font-bold mb-8 leading-tight text-white">Metas de la Red <br /><span className="text-brand-mint font-light">de Caficultores</span></h2>
+                    <span className="inline-block text-white/90 font-semibold tracking-widest text-sm uppercase mb-4 border-b border-white/40 pb-1">Objetivos del Clúster</span>
+                    <h2 className="text-4xl lg:text-5xl font-bold mb-8 leading-tight text-white">Metas de la Red <br /><span className="text-white/90 font-light">de Caficultores</span></h2>
                     <p className="text-white mb-10 text-lg leading-relaxed font-light">A través del Clúster Cafetalero de la Sierra Negra, implementamos metas y rutas estratégicas de comercialización, capacitación y digitalización para integrar a los productores, tiendas locales y proveedores en un modelo de prosperidad y gobernanza local.</p>
                 </motion.div>
 
