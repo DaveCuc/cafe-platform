@@ -40,7 +40,7 @@ const RegistroSection = () => {
                     <span className="inline-block text-brand-darker font-bold tracking-widest text-sm uppercase mb-4 border-b border-[#052e16] pb-1">Profesionalización</span>
                     <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-brand-darker tracking-tight">¿Te gustaría formar parte?</h2>
                     <p className="text-brand-dark text-lg mb-10 font-medium">
-                        Explora nuestra oferta educativa y comienza tu proceso de capacitación y certificación hoy mismo.
+                        Explora nuestra oferta educativa en caficultura y comercialización digital, y comienza tu proceso de capacitación hoy mismo.
                     </p>
                 </motion.div>
                 <motion.div {...fadeUp}>
@@ -92,12 +92,12 @@ const CursoSection = () => {
                         </motion.div>
                         <motion.div {...fadeUp} >
                             <p className="text-gray-200 mb-6 text-lg leading-relaxed font-light">
-                                Nuestro programa de formación está diseñado para empoderar a los prestadores de servicios turísticos locales. A través de módulos especializados en gestión, prácticas de sostenibilidad y atención al visitante, brindamos las herramientas necesarias para elevar la calidad de las experiencias dentro de la Reserva.
+                                Nuestro programa de formación está diseñado para empoderar a los productores, tostadores y vendedores de café de la región. A través de módulos especializados en tecnificación agrícola, control de calidad de taza, procesos de beneficio, barismo y estrategias de comercialización digital, brindamos las herramientas necesarias para potenciar la competitividad del Clúster Cafetalero de la Sierra Negra.
                             </p>
                         </motion.div>
                         <motion.div {...fadeUp} >
                             <p className="text-gray-200 mb-8 text-lg leading-relaxed font-light">
-                                Todos los cursos cuentan con el respaldo académico y la certificación del Instituto Tecnológico de Tehuacán (ITT) y el Departamento de Estudios de Posgrado e Investigación (DEPI). Esta alianza garantiza un estándar de excelencia y avala la profesionalización técnica de las comunidades.
+                                Todos los cursos cuentan con el respaldo académico y la certificación del Instituto Tecnológico de Tehuacán (ITT) y el Departamento de Estudios de Posgrado e Investigación (DEPI). Esta alianza garantiza un estándar de excelencia y avala la profesionalización técnica de las comunidades caficultoras.
                             </p>
                         </motion.div>
                     </div>
