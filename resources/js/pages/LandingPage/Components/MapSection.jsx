@@ -51,7 +51,7 @@ export default function MapSection() {
                 {/* Road and Cards Container */}
                 <div className="relative w-full max-w-5xl mx-auto pb-10">
 
-                    {/* SVG Winding Road Background (Versión Original Suave - Corregida y Ensanchada) */}
+                    {/* SVG Winding Road Background (Comentado)
                     <svg
                         className="absolute left-1/2 -translate-x-1/2 top-0 h-full w-[240px] md:w-[450px] lg:w-[600px] z-0 drop-shadow-2xl"
                         preserveAspectRatio="none"
@@ -59,7 +59,6 @@ export default function MapSection() {
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                     >
-                        {/* Outer White Edge */}
                         <path
                             d="M100 0 C 300 150, 300 250, 100 400 C -100 550, -100 650, 100 800 C 300 950, 300 1050, 100 1200"
 
@@ -68,14 +67,12 @@ export default function MapSection() {
                             strokeLinecap="butt"
                             className="z-[-1]"
                         />
-                        {/* Asphalt */}
                         <path
                             d="M100 0 C 300 150, 300 250, 100 400 C -100 550, -100 650, 100 800 C 300 950, 300 1050, 100 1200"
                             stroke="#1a1a1a"
                             strokeWidth="80"
                             strokeLinecap="butt"
                         />
-                        {/* Dashed Line */}
                         <path
                             d="M100 0 C 300 150, 300 250, 100 400 C -100 550, -100 650, 100 800 C 300 950, 300 1050, 100 1200"
                             stroke="#ffffff"
@@ -83,6 +80,7 @@ export default function MapSection() {
                             strokeDasharray="20 40"
                         />
                     </svg>
+                    */}
 
                     {/* Rutas (Cards + Pins) */}
                     <div className="relative z-10 flex flex-col gap-16 md:gap-32 py-10">
@@ -117,7 +115,7 @@ export default function MapSection() {
                                         </div>
                                     </motion.div>
 
-                                    {/* Map Pin */}
+                                    {/* Map Pin (Comentado)
                                     <div className="hidden md:flex w-[10%] justify-center relative z-30">
                                         <motion.div
                                             className="text-[#dc2626] drop-shadow-2xl"
@@ -133,6 +131,7 @@ export default function MapSection() {
                                             </svg>
                                         </motion.div>
                                     </div>
+                                    */}
 
                                     {/* Empty space for the other side (with Decorative Graphics) */}
                                     <div className="hidden md:flex flex-col items-center justify-center md:w-[45%] h-full absolute md:relative pointer-events-none z-0">
