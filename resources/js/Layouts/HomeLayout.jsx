@@ -207,7 +207,7 @@ export default function HomeLayout({ children }) {
                 {children}
             </main>
 
-            <BubbleTC />
+            {/* <BubbleTC /> */}
 
             <Footer />
         </div>
