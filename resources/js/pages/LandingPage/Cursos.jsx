@@ -186,11 +186,11 @@ const teachers = [
 
 const TeacherSection = () => {
     return (
-        <section className="bg-brand py-24 border-t border-brand-darker overflow-hidden">
+        <section className="bg-slate-50 py-24 border-t border-gray-200 overflow-hidden">
             <div className="container mx-auto px-4 text-center max-w-7xl">
                 <motion.div {...fadeUp} >
-                    <span className="inline-block text-white/90 font-semibold tracking-widest text-sm uppercase mb-4 border-b border-white/40 pb-1">Excelencia Académica</span>
-                    <h2 className="text-4xl md:text-5xl font-bold mb-16 text-white tracking-tight">Conoce a Nuestros Educadores</h2>
+                    <span className="inline-block text-brand-dark font-extrabold tracking-widest text-sm uppercase mb-4 border-b-2 border-brand-dark pb-1">Excelencia Académica</span>
+                    <h2 className="text-4xl md:text-5xl font-bold mb-16 text-brand-darker tracking-tight">Conoce a Nuestros Educadores</h2>
                 </motion.div>
                 
                 <div className="relative px-4 md:px-12 mx-auto">
@@ -210,11 +210,11 @@ const TeacherSection = () => {
                         <CarouselContent className="-ml-6 py-4">
                             {teachers.map((teacher, index) => (
                                 <CarouselItem key={index} className="pl-6 md:basis-1/2 lg:basis-1/3">
-                                    <div className="bg-white p-10 rounded-none border border-brand-dark institutional-shadow hover:institutional-shadow-strong hover:-translate-y-2 transition-all duration-300 flex flex-col h-full">
+                                    <div className="bg-white p-10 rounded-none border border-gray-200 institutional-shadow hover:institutional-shadow-strong hover:-translate-y-2 transition-all duration-300 flex flex-col h-full">
                                         <img
                                             src={teacher.image}
                                             alt={teacher.name}
-                                            className="w-40 h-40 rounded-none mx-auto mb-8 object-cover shadow-md"
+                                            className="w-40 h-40 rounded-none mx-auto mb-8 object-cover shadow-md border-2 border-brand-soft"
                                         />
                                         <h3 className="text-2xl font-bold mb-3 text-brand-darker">{teacher.name}</h3>
                                         <p className="text-gray-600 font-light leading-relaxed flex-grow">
@@ -225,8 +225,8 @@ const TeacherSection = () => {
                             ))}
                         </CarouselContent>
 
-                        <CarouselPrevious className="-left-4 md:-left-12 h-14 w-14 bg-white rounded-none border-transparent shadow-lg text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-all duration-300" />
-                        <CarouselNext className="-right-4 md:-right-12 h-14 w-14 bg-white rounded-none border-transparent shadow-lg text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-all duration-300" />
+                        <CarouselPrevious className="-left-4 md:-left-12 h-14 w-14 bg-white rounded-none border border-gray-300 shadow-lg text-gray-700 hover:bg-brand hover:text-white transition-all duration-300" />
+                        <CarouselNext className="-right-4 md:-right-12 h-14 w-14 bg-white rounded-none border border-gray-300 shadow-lg text-gray-700 hover:bg-brand hover:text-white transition-all duration-300" />
                     </Carousel>
                 </div>
             </div>

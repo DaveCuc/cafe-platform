@@ -88,7 +88,7 @@ export default function CursosSection() {
                             Producción responsable alineada a la Agenda 2030. Adopción de prácticas agroecológicas bajo sombra para conservación de biodiversidad y mejora de sistemas de beneficio.
                         </p>
                         <Link href="/mapa" className="w-full mt-auto">
-                            <Button className="w-full rounded-none bg-brand text-white hover:bg-brand-dark transition-colors duration-300 px-8 py-6 text-sm font-semibold uppercase tracking-wide">
+                            <Button className="w-full rounded-none bg-brand text-white border-2 border-brand hover:bg-white hover:text-brand hover:border-brand transition-all duration-300 px-8 py-6 text-sm font-semibold uppercase tracking-wide">
                                 Ver Mapa
                             </Button>
                         </Link>
