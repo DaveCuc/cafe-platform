@@ -139,7 +139,7 @@ const CursoSection = () => {
 const teachers = [
     {
         name: "Dra. Jessica Cruz Manzo",
-        image: "/Maestros/jesi.jpg",
+        image: "/Maestros/jesi.jpeg",
         description: "Jefa de la División de Estudios de Posgrado e Investigación (TecNM) en el Instituto Tecnológico de Tehuacán."
     },
     {

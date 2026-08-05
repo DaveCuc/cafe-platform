@@ -7,9 +7,7 @@
     <style>
         @page {
             margin: 0px;
-            /* Elimina márgenes de página predeterminados */
-            size: 297mm 210mm;
-            /* A4 landscape estricto */
+            size: 297mm 210mm; /* A4 landscape */
         }
 
         html,
@@ -19,55 +17,54 @@
             padding: 0px;
             width: 297mm;
             height: 210mm;
-            background-color: #f6ffef;
+            background-color: #f4f8f4;
             box-sizing: border-box;
             overflow: hidden;
-            /* CRÍTICO: Evita saltos de página ocultando cualquier desbordamiento milimétrico */
         }
 
-        /* Eliminamos .outer-container y posicionamos directamente el marco interior */
         .inner-container {
             position: absolute;
-            top: 2cm;
-            bottom: 2cm;
-            left: 2cm;
-            right: 2cm;
-            border: 20px solid #00743c;
+            top: 1.5cm;
+            bottom: 1.5cm;
+            left: 1.5cm;
+            right: 1.5cm;
+            border: 12px solid #0B5139; /* Verde Oscuro Institucional */
+            outline: 3px solid #A57F2C; /* Filete Dorado/Mostaza */
+            outline-offset: -18px;
             background-color: #ffffff;
             box-sizing: border-box;
         }
 
-        /* La marca de agua usa márgenes negativos para un centrado más compatible con DomPDF */
+        /* Marca de agua */
         .watermark {
             position: absolute;
             top: 50%;
             left: 50%;
             margin-top: -7.8cm;
             margin-left: -6.3cm;
-
             width: 12cm;
             height: 12cm;
-            opacity: 0.05;
+            opacity: 0.04;
             z-index: -1;
         }
 
-        .logo-reserva {
+        .logo-cafe {
             position: absolute;
-            top: 1cm;
-            left: 2cm;
-            height: 2.2cm;
+            top: 1.2cm;
+            left: 1.8cm;
+            height: 2.4cm;
         }
 
         .logo-depi {
             position: absolute;
-            top: 1cm;
-            right: 2cm;
-            height: 2.5cm;
+            top: 1.2cm;
+            right: 1.8cm;
+            height: 2.4cm;
         }
 
         .logo-itt {
             position: absolute;
-            top: 1cm;
+            top: 1.2cm;
             left: 50%;
             margin-left: -1.5cm;
             height: 2.5cm;
@@ -75,7 +72,7 @@
 
         .text-container {
             position: absolute;
-            top: 4.5cm;
+            top: 4.4cm;
             left: 0;
             width: 100%;
             text-align: center;
@@ -86,40 +83,48 @@
         }
 
         .institutions div {
-            font-size: 12pt;
+            font-size: 11pt;
             font-weight: bold;
+            color: #262626;
+            letter-spacing: 1px;
         }
 
         .nombramiento {
-            margin-bottom: 0.8cm;
+            margin-bottom: 0.7cm;
         }
 
         .nombramiento-label {
-            font-size: 12pt;
+            font-size: 11pt;
             font-weight: normal;
+            color: #555555;
             margin-bottom: 0.2cm;
+            letter-spacing: 1px;
         }
 
         .student-name {
-            font-size: 30pt;
+            font-size: 28pt;
             font-weight: bold;
-            color: #00743c;
+            color: #0B5139; /* Verde Oscuro */
+            letter-spacing: 1px;
         }
 
         .course-section {
-            margin-bottom: 0.8cm;
+            margin-bottom: 0.7cm;
         }
 
         .course-label {
-            font-size: 12pt;
+            font-size: 11pt;
             font-weight: normal;
+            color: #555555;
             margin-bottom: 0.2cm;
+            letter-spacing: 1px;
         }
 
         .course-title {
-            font-size: 20pt;
+            font-size: 22pt;
             font-weight: bold;
-            color: #000000;
+            color: #4A0E17; /* Guinda Elegante */
+            letter-spacing: 1px;
         }
 
         .frase {
@@ -133,6 +138,7 @@
             font-size: 10pt;
             font-weight: normal;
             line-height: 1.4;
+            color: #333333;
         }
 
         .date-section {
@@ -140,14 +146,16 @@
         }
 
         .date-label {
-            font-size: 12pt;
+            font-size: 11pt;
             font-weight: normal;
+            color: #555555;
             margin-bottom: 0.1cm;
         }
 
         .date-value {
-            font-size: 12pt;
+            font-size: 11pt;
             font-weight: bold;
+            color: #0B5139;
         }
     </style>
 </head>
@@ -158,7 +166,7 @@
         <img src="{{ public_path('Certificados/itt.png') }}" class="watermark">
 
         <!-- Logos Institucionales -->
-        <img src="{{ public_path('Certificados/reserva.png') }}" class="logo-reserva">
+        <img src="{{ public_path('Certificados/cafe.png') }}" class="logo-cafe">
         <img src="{{ public_path('Certificados/itt.png') }}" class="logo-itt">
         <img src="{{ public_path('Certificados/depi.png') }}" class="logo-depi">
 
@@ -170,22 +178,21 @@
             </div>
 
             <div class="nombramiento">
-                <div class="nombramiento-label">CERTIFICA A:</div>
+                <div class="nombramiento-label">OTORGA EL PRESENTE RECONOCIMIENTO A:</div>
                 <div class="student-name">{{ mb_strtoupper($user->name, 'UTF-8') }}</div>
             </div>
 
             <div class="course-section">
-                <div class="course-label">QUE COMPLETO CON ÉXITO EL CURSO:</div>
+                <div class="course-label">POR HABER CONCLUIDO SATISFACTORIAMENTE EL CURSO:</div>
                 <div class="course-title">{{ mb_strtoupper($course->title, 'UTF-8') }}</div>
             </div>
 
             <div class="frase">
-                <div>UN CURSO EN LÍNEA OFRECIDO A TRAVÉS DE LA PLATAFORMA DE LA RED DE CAFICULTORES DE LA RESERVA DE LA BIOSFERA DEL
-                    INSTITUTO TECNOLÓGICO DE TEHUACÁN.</div>
+                <div>PROGRAMA DE CAPACITACIÓN OFRECIDO A TRAVÉS DE LA PLATAFORMA DEL CLÚSTER CAFETALERO DE LA SIERRA NEGRA DEL INSTITUTO TECNOLÓGICO DE TEHUACÁN.</div>
             </div>
 
             <div class="date-section">
-                <div class="date-label">FECHA:</div>
+                <div class="date-label">FECHA DE EMISIÓN:</div>
                 <div class="date-value">
                     @php
                         $carbonDate = \Carbon\Carbon::createFromFormat('d/m/Y', $date)->locale('es');
