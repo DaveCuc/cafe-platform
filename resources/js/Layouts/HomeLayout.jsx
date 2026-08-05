@@ -166,9 +166,6 @@ export const Footer = () => {
                         <p className="text-sm text-white/80 mb-4">
                             Modelo de Clúster para la Caficultura de la Sierra Negra de Puebla: Diseño, análisis territorial y propuesta estratégica para una cadena de valor competitiva y sostenible.
                         </p>
-                        <p className="text-xs text-white/60 mb-6 leading-relaxed">
-                            <b>Investigadores:</b> Iniria Guevara Ramírez, Iván Áraoz Baltazar, Jose Luis Ruan Cervantes, Oscar Del Angel Medina, Dulce María Osio Sánchez.
-                        </p>
                         © Todos los derechos reservados {new Date().getFullYear()}
 
                     </div>
