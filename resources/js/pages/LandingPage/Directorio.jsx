@@ -16,6 +16,10 @@ const fadeUp = {
     transition: { duration: 0.8, ease: "easeOut" }
 };
 
+// NOTA DE IMPLEMENTACIÓN: Las imágenes de fondo del carrusel se extraen de forma local
+// desde el directorio público '/public/Directorios/'. Para reemplazar estas imágenes con fotos reales
+// de las cafetaleras de la Sierra Negra obtenidas de internet, descargue las fotos deseadas y guárdelas
+// en la carpeta '/public/Directorios/' con formato compatible (JPG, PNG, WEBP), donde se cargarán automáticamente.
 const imageModules = import.meta.glob('/public/Directorios/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', {
     eager: true,
     import: 'default',
