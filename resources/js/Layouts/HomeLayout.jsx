@@ -163,10 +163,12 @@ export const Footer = () => {
                         <Link href="/" className="inline-flex items-center mb-4 focus:outline-none">
                             <Logo isScrolled={false} />
                         </Link>
-                        <p className="text-sm text-white/80">
-                            Desarrollo Sostenible y Turismo Comunitario en la Reserva de la Biosfera Tehuacán-Cuicatlán: Un Modelo de Prosperidad Local.
+                        <p className="text-sm text-white/80 mb-4">
+                            Modelo de Clúster para la Caficultura de la Sierra Negra de Puebla: Diseño, análisis territorial y propuesta estratégica para una cadena de valor competitiva y sostenible.
                         </p>
-                        <br></br>
+                        <p className="text-xs text-white/60 mb-6 leading-relaxed">
+                            <b>Investigadores:</b> Iniria Guevara Ramírez, Iván Áraoz Baltazar, Jose Luis Ruan Cervantes, Oscar Del Angel Medina, Dulce María Osio Sánchez.
+                        </p>
                         © Todos los derechos reservados {new Date().getFullYear()}
 
                     </div>

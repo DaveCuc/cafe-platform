@@ -89,12 +89,22 @@ export default function HeroSection() {
                     style={{ opacity: textOpacity, y: textY }}
                     className="absolute center-0 bottom-0 w-full md:w-2/3 lg:w-1/2 p-8 md:p-16 lg:px-24 lg:pb-40 z-10"
                 >
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg text-center">
-                        Un Modelo de Prosperidad Local
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg text-center leading-tight">
+                        Modelo de Clúster para la Caficultura de la Sierra Negra de Puebla
                     </h2>
-                    <p className="text-lg md:text-md font-light drop-shadow-md text-center">
-                        Explora el Patrimonio Biocultural de la Humanidad. Esta plataforma conecta a los visitantes con la riqueza natural y cultural de la región, fomentando un turismo responsable que beneficia directamente a las comunidades locales.
+                    <p className="text-lg md:text-md font-light drop-shadow-md text-center mb-8">
+                        Diseño, análisis territorial y propuesta estratégica para una cadena de valor competitiva y sostenible.
                     </p>
+                    <div className="flex justify-center">
+                        <a
+                            href="https://doi.org/10.37811/cl_rcm.v9i6.21431"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-8 py-4 bg-gobmx-dorado-oscuro hover:bg-gobmx-dorado-claro text-white font-bold uppercase tracking-wider text-sm transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-95"
+                        >
+                            Descargar Investigación
+                        </a>
+                    </div>
                 </motion.div>
             </div>
         </div>

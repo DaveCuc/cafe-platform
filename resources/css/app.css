@@ -7,75 +7,89 @@
 @tailwind utilities;
 
 @layer base {
-  /* 3. Variables de colores globales (Tema Claro / Modo Día) */
+  /* 3. Variables de colores globales (Tema Claro / Modo Día) y Tokens GobMx */
   :root {
+    --color-dorado-claro: #e6d194;
+    --color-dorado-oscuro: #a57f2c;
+    --color-guinda-oscuro: #611232;
+    --color-guinda-claro: #9b2247;
+    --color-negro-neutro: #161a1d;
+    --color-verde-oscuro: #002f2a;
+    --color-verde: #1e5b4f;
+    --color-gris: #98989A;
+
     --radius: 0rem;
     --background: #fdfdfd;
-    --foreground: #111827;
+    --foreground: #161a1d;
     --card: #ffffff;
-    --card-foreground: #111827;
+    --card-foreground: #161a1d;
     --popover: #ffffff;
-    --popover-foreground: #111827;
-    --primary: #166534;
-    /* Elegant forest green */
+    --popover-foreground: #161a1d;
+    --primary: #611232;
     --primary-foreground: #ffffff;
     --secondary: #f3f4f6;
-    --secondary-foreground: #166534;
+    --secondary-foreground: #611232;
     --muted: #f3f4f6;
-    --muted-foreground: #6b7280;
-    --accent: #065f46;
+    --muted-foreground: #98989A;
+    --accent: #a57f2c;
     --accent-foreground: #ffffff;
     --destructive: #b91c1c;
     --border: #e5e7eb;
     --input: #e5e7eb;
-    --ring: #166534;
+    --ring: #611232;
 
-    --brand: #166534;
-    --brand-dark: #14532d;
-    --brand-darker: #052e16;
-    --brand-text: #166534;
-    --brand-soft: #e4e9d7;
-    /* Earthy pale sage */
-    --brand-pale: #f5f7f2;
-    /* Organic warm off-white */
-    --brand-ink: #111827;
-    --brand-mint: #d0f52e;
-    /* Natural organic moss/leaf green */
+    --brand: #611232;
+    --brand-dark: #611232;
+    --brand-darker: #002f2a;
+    --brand-text: #611232;
+    --brand-soft: #e6d194;
+    --brand-pale: #fdfdfd;
+    --brand-ink: #161a1d;
+    --brand-mint: #a57f2c;
     --brand-panel: #ffffff;
-    --brand-earth: #111827;
+    --brand-earth: #161a1d;
     --light: #ffffff;
   }
 
   /* 4. Variables de colores globales (Tema Oscuro / Dark Mode) */
   .dark {
-    --background: #111827;
+    --color-dorado-claro: #e6d194;
+    --color-dorado-oscuro: #a57f2c;
+    --color-guinda-oscuro: #611232;
+    --color-guinda-claro: #9b2247;
+    --color-negro-neutro: #161a1d;
+    --color-verde-oscuro: #002f2a;
+    --color-verde: #1e5b4f;
+    --color-gris: #98989A;
+
+    --background: #161a1d;
     --foreground: #f9fafb;
     --card: #1f2937;
     --card-foreground: #f9fafb;
     --popover: #1f2937;
     --popover-foreground: #f9fafb;
-    --primary: #22c55e;
-    --primary-foreground: #052e16;
+    --primary: #9b2247;
+    --primary-foreground: #002f2a;
     --secondary: #374151;
     --secondary-foreground: #f9fafb;
     --muted: #374151;
-    --muted-foreground: #9ca3af;
-    --accent: #166534;
+    --muted-foreground: #98989A;
+    --accent: #a57f2c;
     --accent-foreground: #ffffff;
     --destructive: #ef4444;
     --border: #374151;
     --input: #374151;
-    --ring: #22c55e;
+    --ring: #9b2247;
 
-    --brand: #166534;
-    --brand-dark: #052e16;
-    --brand-text: #f0fdf4;
-    --brand-soft: #1f2937;
-    --brand-pale: #111827;
+    --brand: #9b2247;
+    --brand-dark: #002f2a;
+    --brand-text: #f9fafb;
+    --brand-soft: #374151;
+    --brand-pale: #161a1d;
     --brand-ink: #f9fafb;
-    --brand-mint: #064e3b;
+    --brand-mint: #a57f2c;
     --brand-panel: #1f2937;
-    --brand-earth: #166534;
+    --brand-earth: #9b2247;
   }
 }
 

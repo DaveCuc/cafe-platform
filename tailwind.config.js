@@ -20,6 +20,16 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             colors: {
+                gobmx: {
+                    "dorado-claro": "var(--color-dorado-claro)",
+                    "dorado-oscuro": "var(--color-dorado-oscuro)",
+                    "guinda-oscuro": "var(--color-guinda-oscuro)",
+                    "guinda-claro": "var(--color-guinda-claro)",
+                    "negro-neutro": "var(--color-negro-neutro)",
+                    "verde-oscuro": "var(--color-verde-oscuro)",
+                    "verde": "var(--color-verde)",
+                    "gris": "var(--color-gris)",
+                },
                 border: "var(--border)",
                 input: "var(--input)",
                 ring: "var(--ring)",
