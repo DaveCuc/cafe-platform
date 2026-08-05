@@ -30,10 +30,14 @@ export const CategoryItem = ({ label, value, isSpecial }) => {
             onClick={onClick}
             variant="outline"
             className={cn(
-                "py-2 px-5 text-sm border-2 rounded-none flex items-center gap-x-1 transition-colors font-bold uppercase tracking-wider shadow-sm",
-                isSpecial ? "border-brand-mint text-brand-darker bg-brand-mint hover:bg-white hover:text-brand-darker hover:border-brand-darker" : "border-brand",
-                !isSpecial && (isSelected ? "bg-brand text-white hover:bg-brand-darker hover:border-brand-darker" : "text-brand bg-white hover:bg-brand hover:text-white"),
-                isSpecial && isSelected && "bg-brand-darker text-brand-mint border-brand-darker hover:bg-brand-darker hover:text-brand-mint"
+                "py-2 px-5 text-sm border-2 rounded-none flex items-center gap-x-1 transition-all duration-200 font-bold uppercase tracking-wider shadow-sm",
+                isSpecial
+                    ? (isSelected
+                        ? "bg-brand-mint text-white border-brand-mint hover:bg-white hover:text-brand-mint hover:border-brand-mint"
+                        : "bg-white text-brand-mint border-brand-mint hover:bg-brand-mint hover:text-white hover:border-brand-mint")
+                    : (isSelected
+                        ? "bg-brand text-white border-brand hover:bg-white hover:text-brand hover:border-brand"
+                        : "bg-white text-brand border-brand hover:bg-brand hover:text-white hover:border-brand")
             )}
             type="button"
         >

@@ -85,7 +85,7 @@ const RegistroSection = () => {
                 <motion.div {...fadeUp}>
                     <Button
                         size="lg"
-                        className="rounded-none bg-brand-mint text-brand-darker hover:bg-white hover:text-brand-dark transition-colors duration-300 px-10 py-6 text-sm font-semibold uppercase tracking-wide"
+                        className="rounded-none bg-brand-mint text-white border-2 border-brand-mint hover:bg-white hover:text-brand-mint hover:border-brand-mint transition-all duration-300 px-10 py-6 text-sm font-semibold uppercase tracking-wide"
                         onClick={() => router.visit("/trade")}
                     >
                         Registrar Negocio

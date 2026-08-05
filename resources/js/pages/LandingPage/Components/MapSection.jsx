@@ -250,7 +250,7 @@ export default function MapSection() {
 
                 {/* Botón intacto (Tamaño aumentado) */}
                 <motion.div {...fadeUp} className="mt-20 md:mt-32 relative z-20">
-                    <Button asChild className="rounded-none bg-brand-mint text-brand-darker hover:bg-white transition-colors duration-300 px-12 py-8 text-lg lg:text-xl text-[#052e16] font-bold tracking-widest shadow-2xl hover:-translate-y-1">
+                    <Button asChild className="rounded-none bg-brand-mint text-white border-2 border-brand-mint hover:bg-white hover:text-brand-mint hover:border-brand-mint transition-all duration-300 px-12 py-8 text-lg lg:text-xl font-extrabold tracking-widest shadow-2xl hover:-translate-y-1">
                         <Link href="/mapa">Ver mapa completo</Link>
                     </Button>
                 </motion.div>

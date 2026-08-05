@@ -38,7 +38,7 @@ export function CourseLayout({ children, course, progressCount, currentChapterId
         
         <button
             onClick={toggleDarkMode}
-            className={`fixed bottom-8 right-8 p-3 shadow-xl z-50 transition-colors flex items-center justify-center border-2 border-brand-mint ${isDarkMode ? 'bg-brand-mint text-brand-darker hover:bg-white' : 'bg-brand text-white hover:bg-brand-darker'}`}
+            className={`fixed bottom-8 right-8 p-3 shadow-xl z-50 transition-all duration-200 flex items-center justify-center border-2 ${isDarkMode ? 'bg-brand-mint text-white border-brand-mint hover:bg-white hover:text-brand-mint hover:border-brand-mint' : 'bg-brand text-white border-brand hover:bg-white hover:text-brand hover:border-brand'}`}
             title={isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
         >
             {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}

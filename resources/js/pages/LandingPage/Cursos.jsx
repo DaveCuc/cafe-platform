@@ -45,19 +45,19 @@ const carouselImages = [
 
 const RegistroSection = () => {
     return (
-        <section className="bg-brand-mint py-24 border-t border-brand-darker">
+        <section className="bg-brand-dark py-24 border-t border-brand-darker">
             <div className="container mx-auto text-center px-4 max-w-3xl">
                 <motion.div {...fadeUp}>
-                    <span className="inline-block text-brand-darker font-bold tracking-widest text-sm uppercase mb-4 border-b border-[#052e16] pb-1">Profesionalización</span>
-                    <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-brand-darker tracking-tight">¿Te gustaría formar parte?</h2>
-                    <p className="text-brand-dark text-lg mb-10 font-medium">
+                    <span className="inline-block text-white/90 font-bold tracking-widest text-sm uppercase mb-4 border-b border-white/40 pb-1">Profesionalización</span>
+                    <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-white tracking-tight">¿Te gustaría formar parte?</h2>
+                    <p className="text-white/90 text-lg mb-10 font-light">
                         Explora nuestra oferta educativa en caficultura y comercialización digital, y comienza tu proceso de capacitación hoy mismo.
                     </p>
                 </motion.div>
                 <motion.div {...fadeUp}>
                     <Button
                         size="lg"
-                        className="rounded-none bg-[#052e16] text-white hover:bg-white hover:text-brand-dark transition-colors duration-300 px-10 py-6 text-sm font-semibold uppercase tracking-wide"
+                        className="rounded-none bg-brand-mint text-white border-2 border-brand-mint hover:bg-white hover:text-brand-mint hover:border-brand-mint transition-all duration-300 px-10 py-6 text-sm font-semibold uppercase tracking-wide"
                         onClick={() => window.location.assign("/search")}
                     >
                         Buscar Cursos
