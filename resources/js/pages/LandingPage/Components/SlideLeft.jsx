@@ -46,6 +46,10 @@ const SlideLeft = ({ capasActivas, setCapasActivas, mapRef, setRightSlideOpen, s
 
             <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-4 bg-gray-50">
 
+                {/* PENDIENTE: Distribución Cafetalera (reserva/tehmap)
+                    Este botón activa la capa tehmap.geojson (polígono Reserva de la Biosfera).
+                    Comentado hasta que se defina si aplica para la Red de Caficultores.
+                    Para reactivar: descomenta este bloque y activa la capa 'reserva' en ReservaMap.jsx
                 <div className="flex flex-col rounded-none border border-gray-200 bg-white shadow-sm overflow-hidden shrink-0">
                     <button
                         onClick={() => handleMapAction('reserva', 18.11111, -97.179541, 9, true)}
@@ -54,7 +58,12 @@ const SlideLeft = ({ capasActivas, setCapasActivas, mapRef, setRightSlideOpen, s
                         Distribución Cafetalera
                     </button>
                 </div>
+                */}
 
+                {/* PENDIENTE: Vista General de regiones
+                    Activa los polígonos coloreados por región (general.geojson).
+                    Comentado hasta que se defina el enfoque geográfico para la red de caficultores.
+                    Para reactivar: descomenta este bloque.
                 <div className="flex flex-col rounded-none border border-gray-200 bg-white shadow-sm overflow-hidden shrink-0">
                     <div className="p-3 bg-gray-100/50 border-b border-gray-200">
                         <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Regiones</h3>
@@ -66,26 +75,30 @@ const SlideLeft = ({ capasActivas, setCapasActivas, mapRef, setRightSlideOpen, s
                         Vista General
                     </button>
                 </div>
+                */}
 
+                {/* PENDIENTE: Rutas del Café
+                    Activa los trazados de ruta1.geojson, ruta2.geojson, ruta3.geojson.
+                    Actualmente corresponden a rutas turísticas (Onix y Sal, Dinosaurios, Mezcal y Barro).
+                    Comentado hasta que se generen rutas específicas de la red de caficultores.
+                    Para reactivar: descomenta este bloque, activa RutasMap en ReservaMap.jsx,
+                    y sube los archivos GeoJSON de rutas cafetaleras a public/Mapas/
                 <div className="flex flex-col rounded-none border border-gray-200 bg-white shadow-sm overflow-hidden shrink-0">
                     <div className="p-3 bg-gray-100/50 border-b border-gray-200">
                         <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Rutas del Café</h3>
                     </div>
-
                     <button
                         onClick={() => handleMapAction('ruta1', 18.3273, -97.4752, 13)}
                         className={`w-full text-left px-4 py-3 transition-colors font-medium text-sm border-b border-gray-100 ${capasActivas?.ruta1 ? 'bg-brand text-white' : 'text-brand-darker hover:bg-gray-50'}`}
                     >
                         Ruta 1: Trazabilidad
                     </button>
-
                     <button
                         onClick={() => handleMapAction('ruta2', 18.3145, -97.6149, 13)}
                         className={`w-full text-left px-4 py-3 transition-colors font-medium text-sm border-b border-gray-100 ${capasActivas?.ruta2 ? 'bg-brand text-white' : 'text-brand-darker hover:bg-gray-50'}`}
                     >
                         Ruta 2: Capacitación
                     </button>
-
                     <button
                         onClick={() => handleMapAction('ruta3', 18.2252, -97.4865, 13)}
                         className={`w-full text-left px-4 py-3 transition-colors font-medium text-sm ${capasActivas?.ruta3 ? 'bg-brand text-white' : 'text-brand-darker hover:bg-gray-50'}`}
@@ -93,6 +106,7 @@ const SlideLeft = ({ capasActivas, setCapasActivas, mapRef, setRightSlideOpen, s
                         Ruta 3: Comercialización
                     </button>
                 </div>
+                */}
 
                 <div className="flex flex-col rounded-none border border-gray-200 bg-white shadow-sm overflow-hidden shrink-0">
                     <div className="p-3 bg-gray-100/50 border-b border-gray-200">

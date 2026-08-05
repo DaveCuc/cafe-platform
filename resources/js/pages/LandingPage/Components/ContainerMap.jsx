@@ -5,7 +5,13 @@ import SlideRight from "./SlideRight";
 import TradeNav from "./TradeNav";
 
 const ContainerMap = () => {
-    const [capasActivas, setCapasActivas] = useState({ general: false, reserva: true, ruta1: false, ruta2: false, ruta3: false, puntos: false, negocios: false });
+    // Estado de capas del mapa:
+    // reserva: false  — PENDIENTE: tehmap.geojson (Reserva de la Biosfera) comentado temporalmente
+    // general: false  — PENDIENTE: vista de regiones coloreadas comentada temporalmente
+    // ruta1/2/3: false — PENDIENTE: rutas cafetaleras GeoJSON pendientes de subir
+    // puntos: false   — PENDIENTE: puntosinteres.geojson con datos cafetaleros pendiente
+    // negocios: activo por defecto — muestra caficultores y tiendas registradas en la plataforma
+    const [capasActivas, setCapasActivas] = useState({ general: false, reserva: false, ruta1: false, ruta2: false, ruta3: false, puntos: false, negocios: false });
     const mapRef = useRef(null);
 
     // Estado para controlar la visibilidad del SlideRight
@@ -13,8 +19,9 @@ const ContainerMap = () => {
     // Estado para filtrar/ocultar municipios del mapa
     const [hiddenMunicipios, setHiddenMunicipios] = useState([]);
     const [hiddenRegions, setHiddenRegions] = useState([]);
-    // Estado para saber qué información cargar en el SlideRight (ahora funciona como expandedLayer)
-    const [activeInfoPanel, setActiveInfoPanel] = useState('reserva');
+    // PENDIENTE: activeInfoPanel inicia en null porque el panel 'reserva' está comentado
+    // Cuando se reactive la capa reserva, cambiar a: setActiveInfoPanel('reserva')
+    const [activeInfoPanel, setActiveInfoPanel] = useState(null);
 
     // Estado para los negocios (trades)
     const [trades, setTrades] = useState([]);

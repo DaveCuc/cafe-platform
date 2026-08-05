@@ -8,13 +8,17 @@ const normalizarTexto = (texto) => {
     return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 };
 
+// LAYER_TITLES define qué capas tienen panel de información en el SlideRight.
+// PENDIENTE: 'reserva' y 'general' comentados porque sus capas GeoJSON están desactivadas.
+// Para reactivarlos: descomenta las líneas correspondientes y activa las capas en SlideLeft.jsx
 const LAYER_TITLES = {
-    reserva: "Reserva de la Biosfera",
-    general: "Regiones y Municipios",
-    negocios: "Negocios Locales"
+    // reserva: "Reserva de la Biosfera",   // PENDIENTE: descomenta al reactivar tehmap.geojson
+    // general: "Regiones y Municipios",     // PENDIENTE: descomenta al reactivar general.geojson
+    negocios: "Caficultores y Tiendas"
 };
 
-const LAYER_ORDER = ['reserva', 'general', 'negocios'];
+// PENDIENTE: agregar 'reserva' y 'general' cuando sus capas sean reactivadas
+const LAYER_ORDER = ['negocios'];
 
 const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipios, setHiddenMunicipios, hiddenRegions, setHiddenRegions, activeInfoPanel, setActiveInfoPanel, capasActivas, selectedTrade, setSelectedTrade }) => {
     const [reservaInfo, setReservaInfo] = useState(null);
@@ -83,9 +87,15 @@ const SlideRight = ({ mapRef, rightSlideOpen, setRightSlideOpen, hiddenMunicipio
                 {activeLayersWithJSON.length === 0 ? (
                     <div className="flex flex-col gap-4 justify-center items-center h-full text-gray-500">
                         <svg className="w-12 h-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                         </svg>
-                        <p className="text-sm text-center px-4">No hay capas activas con información detallada.</p>
+                        <div className="flex flex-col gap-2 text-center px-4">
+                            <p className="text-sm font-semibold text-brand-darker">Mapa en construcción</p>
+                            <p className="text-xs text-gray-400 leading-relaxed">
+                                Las capas geográficas de la Red de Caficultores están siendo preparadas.
+                                Activa <strong>Caficultores y Tiendas</strong> para ver los registros disponibles.
+                            </p>
+                        </div>
                     </div>
                 ) : (
                     activeLayersWithJSON.map((layerKey) => {
