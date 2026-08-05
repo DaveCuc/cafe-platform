@@ -5,7 +5,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import { Bold, Italic, List, ListOrdered, Strikethrough, Underline as UnderlineIcon } from "lucide-react";
 
-import { Toggle } from "@/components/ui/toggle";
+import { Toggle } from "@/Components/ui/toggle";
 
 interface EditorProps {
   onChange: (value: string) => void;
