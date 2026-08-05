@@ -25,16 +25,23 @@ const fadeLeft = {
     transition: { duration: 0.8, ease: "easeOut" }
 };
 
-// NOTA DE IMPLEMENTACIÓN: Las imágenes de fondo del carrusel se extraen de forma local
-// desde el directorio público '/public/Directorios/'. Para reemplazar estas imágenes con fotos reales
-// de las cafetaleras de la Sierra Negra obtenidas de internet, descargue las fotos deseadas y guárdelas
-// en la carpeta '/public/Directorios/' con formato compatible (JPG, PNG, WEBP), donde se cargarán automáticamente.
+/*
+// Extracción de imágenes de forma local (Original)
 const imageModules = import.meta.glob('/public/Directorios/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', {
     eager: true,
     import: 'default',
 });
 
 const carouselImages = Object.values(imageModules).sort((a, b) => String(a).localeCompare(String(b)));
+*/
+
+// Imágenes de capacitación y profesionalización del café desde Internet
+const carouselImages = [
+    "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=1920", // Barismo y preparación de café
+    "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&q=80&w=1920", // Granos de café seleccionados y tostado
+    "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=1920", // Catación y selección de calidad
+    "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=1920"  // Tecnificación en el campo cafetalero
+];
 
 const RegistroSection = () => {
     return (

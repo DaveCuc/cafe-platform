@@ -10,16 +10,23 @@ const fadeUp = {
     transition: { duration: 1 }
 };
 
-// NOTA DE IMPLEMENTACIÓN: Las imágenes de fondo del carrusel de la Sierra Negra se extraen de forma local
-// desde el directorio público '/public/Fotos/'. Para reemplazar estas imágenes con fotos reales
-// de las cafetaleras de la Sierra Negra obtenidas de internet, descargue las fotos deseadas y guárdelas
-// en la carpeta '/public/Fotos/' con formato compatible (JPG, PNG, WEBP), donde se cargarán automáticamente.
+/*
+// Extracción de imágenes de forma local (Original)
 const imageModules = import.meta.glob('/public/Fotos/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', {
     eager: true,
     import: 'default',
 });
 
 const carouselImages = Object.values(imageModules).sort((a, b) => String(a).localeCompare(String(b)));
+*/
+
+// Imágenes del Clúster de Caficultores y fincas de la Sierra Negra desde Internet
+const carouselImages = [
+    "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=1920", // Cafetal y granos seleccionados
+    "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=1920", // Finca de café de especialidad
+    "https://images.unsplash.com/photo-1524350876685-274059332603?auto=format&fit=crop&q=80&w=1920", // Cosecha manual de café bajo sombra
+    "https://images.unsplash.com/photo-1507133750040-4a8f57021571?auto=format&fit=crop&q=80&w=1920"  // Proceso de secado y selección
+];
 
 export default function HeroSection() {
     const containerRef = useRef(null);

@@ -16,16 +16,23 @@ const fadeUp = {
     transition: { duration: 0.8, ease: "easeOut" }
 };
 
-// NOTA DE IMPLEMENTACIÓN: Las imágenes de fondo del carrusel se extraen de forma local
-// desde el directorio público '/public/Directorios/'. Para reemplazar estas imágenes con fotos reales
-// de las cafetaleras de la Sierra Negra obtenidas de internet, descargue las fotos deseadas y guárdelas
-// en la carpeta '/public/Directorios/' con formato compatible (JPG, PNG, WEBP), donde se cargarán automáticamente.
+/*
+// Extracción de imágenes de forma local (Original)
 const imageModules = import.meta.glob('/public/Directorios/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', {
     eager: true,
     import: 'default',
 });
 
 const carouselImages = Object.values(imageModules).sort((a, b) => String(a).localeCompare(String(b)));
+*/
+
+// Imágenes de productores y fincas cafetaleras de la Sierra Negra desde Internet
+const carouselImages = [
+    "https://images.unsplash.com/photo-1524350876685-274059332603?auto=format&fit=crop&q=80&w=1920", // Cosecha manual de café de especialidad
+    "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=1920", // Granos de café en planta
+    "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=1920", // Fincas y plantaciones de café
+    "https://images.unsplash.com/photo-1507133750040-4a8f57021571?auto=format&fit=crop&q=80&w=1920"  // Café seleccionado y secado
+];
 
 const getSearchParamsFromUrl = (url) => {
     const query = url.includes("?") ? url.split("?")[1] : "";
