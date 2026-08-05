@@ -15,8 +15,6 @@ import {
     Settings2,    // Transformación y Valor Agregado
     Info,
     MapPin, Phone, Mail, Globe,
-    // Iconos originales de turismo (conservados para posible reutilización)
-    // Bus, Wrench, Leaf, Trees, Waves, Mountain, BedDouble, Droplets, Utensils
 } from "lucide-react";
 
 // Fix Leaflet marker icon
@@ -43,16 +41,6 @@ const getGiroIcon = (giroName) => {
     if (name.includes("cooperativa") || name.includes("sociedad")) return <Users className="w-4 h-4 mr-2" />;
     if (name.includes("transformación") || name.includes("valor")) return <Settings2 className="w-4 h-4 mr-2" />;
     return <Info className="w-4 h-4 mr-2" />;
-    // PENDIENTE: Iconos originales de turismo rural — descomentar si se reutiliza para turismo
-    // if (name.includes("transporte"))  return <Bus      className="w-4 h-4 mr-2" />;
-    // if (name.includes("talleres"))    return <Wrench   className="w-4 h-4 mr-2" />;
-    // if (name.includes("medicina"))    return <Leaf     className="w-4 h-4 mr-2" />;
-    // if (name.includes("parques"))     return <Trees    className="w-4 h-4 mr-2" />;
-    // if (name.includes("acuáticas"))   return <Waves    className="w-4 h-4 mr-2" />;
-    // if (name.includes("aventura") || name.includes("naturaleza")) return <Mountain className="w-4 h-4 mr-2" />;
-    // if (name.includes("hospedaje"))   return <BedDouble className="w-4 h-4 mr-2" />;
-    // if (name.includes("balneario"))   return <Droplets className="w-4 h-4 mr-2" />;
-    // if (name.includes("gastronomía")) return <Utensils className="w-4 h-4 mr-2" />;
 };
 
 const SummarySection = ({ trade }) => {

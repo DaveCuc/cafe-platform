@@ -327,17 +327,6 @@ const BuscadorSection = () => {
                                                 <SelectItem value="Tienda y Punto de Venta" className="cursor-pointer">Tienda y Punto de Venta</SelectItem>
                                                 <SelectItem value="Cooperativa / Sociedad" className="cursor-pointer">Cooperativa / Sociedad</SelectItem>
                                                 <SelectItem value="Transformación y Valor Agregado" className="cursor-pointer">Transformación y Valor Agregado</SelectItem>
-                                                {/* PENDIENTE: Categorías originales de turismo rural — descomentar si se reutiliza el directorio para turismo
-                                                <SelectItem value="Transporte Comunitario" className="cursor-pointer">Transporte Comunitario</SelectItem>
-                                                <SelectItem value="Talleres comunitarios" className="cursor-pointer">Talleres comunitarios</SelectItem>
-                                                <SelectItem value="Medicina tradicional y bienestar" className="cursor-pointer">Medicina tradicional y bienestar</SelectItem>
-                                                <SelectItem value="Parques temáticos comunitarios" className="cursor-pointer">Parques temáticos comunitarios</SelectItem>
-                                                <SelectItem value="Actividades acuáticas comunitarias" className="cursor-pointer">Actividades acuáticas comunitarias</SelectItem>
-                                                <SelectItem value="Actividades de Aventura o Naturaleza" className="cursor-pointer">Actividades de Aventura o Naturaleza</SelectItem>
-                                                <SelectItem value="Hospedaje comunitario" className="cursor-pointer">Hospedaje comunitario</SelectItem>
-                                                <SelectItem value="Balneario y Parque Acuático" className="cursor-pointer">Balneario y Parque Acuático</SelectItem>
-                                                <SelectItem value="Gastronomía tradicional" className="cursor-pointer">Gastronomía tradicional</SelectItem>
-                                                */}
                                             </SelectGroup>
 
                                         </SelectContent>

@@ -11,12 +11,6 @@ import {
 } from "react-icons/fc";
 
 const iconMap = {
-  "Ecoturismo": FcLandscape,
-  "Agroturismo": FcBiomass,
-  "Turismo Comunitario": FcConferenceCall,
-  "Solidario": FcLike,
-  "Responsable": FcInspection,
-  "Rural Sostenible": FcHome,
   "Producción": FcBiomass,
   "Tostado": FcLandscape,
   "Barismo": FcConferenceCall,

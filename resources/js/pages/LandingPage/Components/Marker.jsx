@@ -17,22 +17,6 @@ export const CATEGORY_COLORS = {
     "Transformación y Valor Agregado": "#0F766E",
 };
 
-// ─── Colores originales de turismo rural (comentados) ────────────────────────
-/*
-const CATEGORY_COLORS_TURISMO = {
-    "Transporte Comunitario": "#FF7A5C",
-    "Talleres comunitarios": "#00D126",
-    "Medicina tradicional y bienestar": "#5C7AFF",
-    "Parques temáticos comunitarios": "#FF8AC8",
-    "Actividades acuáticas comunitarias": "#00D1C7",
-    "Actividades de Aventura o Naturaleza": "#C7D100",
-    "Hospedaje comunitario": "#C88AFF",
-    "Balneario y Parque Acuático": "#FFA35C",
-    "Gastronomía tradicional": "#00A347",
-};
-*/
-
-
 export const getCategoryColor = (trade) => {
     const category = trade.giros?.[0]?.name || trade.giro;
     return CATEGORY_COLORS[category] || "#0B5139";

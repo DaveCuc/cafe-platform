@@ -180,7 +180,7 @@
             </div>
 
             <div class="frase">
-                <div>UN CURSO EN LÍNEA OFRECIDO A TRAVÉS DE LA PLATAFORMA DE TURISMO DE LA RESERVA DE LA BIOSFERA DEL
+                <div>UN CURSO EN LÍNEA OFRECIDO A TRAVÉS DE LA PLATAFORMA DE LA RED DE CAFICULTORES DE LA RESERVA DE LA BIOSFERA DEL
                     INSTITUTO TECNOLÓGICO DE TEHUACÁN.</div>
             </div>
 
