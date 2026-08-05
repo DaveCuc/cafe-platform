@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -25,7 +26,9 @@ return new class extends Migration
             $table->uuid('category_id')->nullable()->index();
             $table->timestamps();
 
-            $table->fullText('title');
+            if (DB::connection()->getDriverName() !== 'sqlite') {
+                $table->fullText('title');
+            }
         });
     }
 
