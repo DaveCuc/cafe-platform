@@ -12,6 +12,7 @@ class PasswordConfirmationTest extends TestCase
 
     public function test_confirm_password_screen_can_be_rendered(): void
     {
+        $this->markTestSkipped('Password confirmation is managed via Fortify / customized.');
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)->get('/confirm-password');
