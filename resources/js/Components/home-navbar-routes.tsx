@@ -1,7 +1,7 @@
 "use client";
 
 import { Logo } from "@/app/(dashboard)/_components/logo";
-import { Logo as LogoWhite } from "@/app/(dashboard)/_components/logo2"; 
+import { Logo as LogoWhite } from "@/app/(dashboard)/_components/logo"; 
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils"; 

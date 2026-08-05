@@ -88,7 +88,7 @@ export default function HeroSection() {
                 >
                     <motion.div {...fadeUp} className="w-full flex justify-center items-center">
                         <img
-                            src="/logo2.svg"
+                            src="/logo.svg"
                             alt="Logo"
                             className="w-[80%] md:w-[60%] lg:w-[50%] max-w-[1000px] h-auto object-contain drop-shadow-2xl"
                         />

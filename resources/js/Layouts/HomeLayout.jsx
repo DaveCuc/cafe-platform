@@ -35,7 +35,7 @@ export const LogoSecihti = ({ isScrolled = false, className = "" }) => (
 );
 export const Logo = ({ isScrolled = false, className = "" }) => (
     <img
-        src={isScrolled ? "/logo.svg" : "/logo2.svg"}
+        src={isScrolled ? "/logo.svg" : "/logo.svg"}
         alt="Logo"
         className={cn("h-[50px] w-auto transition-all", className)}
     />

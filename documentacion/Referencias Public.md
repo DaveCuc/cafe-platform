@@ -18,6 +18,6 @@ A continuación, se detalla qué almacena específicamente tu carpeta `public`:
 ## 4. Recursos Visuales y Estáticos del Proyecto
 A diferencia de los archivos que suben los usuarios (que van a `storage`), tu carpeta `public` tiene carpetas con imágenes "quemadas" o estáticas que diseñaste para armar la interfaz visual de tu plataforma.
 
-*   **Archivos Sueltos (`banner.svg`, `logo.png`, `logo.svg`, `logo2.png`, `logo2.svg`, `favicon.ico`)**: El logotipo principal de la plataforma, sus variantes (blanco/negro), el banner y el ícono de la pestaña del navegador (favicon).
+*   **Archivos Sueltos (`banner.svg`, `logo.png`, `logo.svg`, `favicon.ico`)**: El logotipo principal de la plataforma, sus variantes (blanco/negro), el banner y el ícono de la pestaña del navegador (favicon).
 *   **Carpeta `Institution/`**: Contiene logotipos de las instituciones que respaldan el proyecto (ej. escudos del TecNM, del ITT, SECIHTI, tanto en versiones a color como en blanco para fondos oscuros).
 *   **Carpetas de Imágenes de Diseño (`Decorativo/`, `Fotos/`, `Mapas/`, `Maestros/`, `Directorios/`, `Certificados/`)**: Estas carpetas guardan material gráfico, iconos, fotos de *stock* o placeholders que utilizas para maquetar el sitio. Por ejemplo, imágenes que pones de fondo en los sliders, marcos para los certificados de los alumnos o mapas estáticos para mostrar zonas geográficas en el directorio. Todos estos archivos pueden ser leídos directamente en React usando rutas absolutas como `src="/Institution/tecnm.png"`.
