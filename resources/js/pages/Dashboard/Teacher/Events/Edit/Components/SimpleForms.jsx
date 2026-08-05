@@ -52,7 +52,7 @@ export const TitleForm = ({ initialData, articleId }) => {
             disabled={isLoading} 
             value={title} 
             onChange={e => setTitle(e.target.value)} 
-            placeholder="Ej. 'Turismo en Oaxaca'" 
+            placeholder="Ej. 'Feria del Café de Especialidad'" 
             className="bg-white" 
             required 
           />

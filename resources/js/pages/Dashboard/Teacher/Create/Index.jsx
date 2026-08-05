@@ -28,7 +28,7 @@ export default function CreateCourse() {
                 <label className="text-sm font-medium leading-none">Título del curso</label>
                 <Input
                     disabled={processing}
-                    placeholder="Ej. 'Turismo Sostenible'"
+                    placeholder="Ej. 'Tostado de Café Especial'"
                     value={data.title}
                     onChange={(e) => setData("title", e.target.value)}
                   className="focus-visible:ring-brand-ring"

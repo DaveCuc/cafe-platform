@@ -28,7 +28,7 @@ export default function CreateArticle() {
                 <label className="text-sm font-medium leading-none">Título del enlace de interés</label>
                 <Input
                     disabled={processing}
-                    placeholder="Ej. 'Turismo Sostenible en México'"
+                    placeholder="Ej. 'Prácticas Agrícolas y Calidad del Café'"
                     value={data.title}
                     onChange={(e) => setData("title", e.target.value)}
                   className="focus-visible:ring-brand-ring"

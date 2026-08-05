@@ -17,6 +17,12 @@ const iconMap = {
   "Solidario": FcLike,
   "Responsable": FcInspection,
   "Rural Sostenible": FcHome,
+  "Producción": FcBiomass,
+  "Tostado": FcLandscape,
+  "Barismo": FcConferenceCall,
+  "Comercio Justo": FcLike,
+  "Administración": FcInspection,
+  "Agroecología": FcHome,
 };
 
 export const Categories = ({ items }) => {

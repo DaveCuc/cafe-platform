@@ -36,14 +36,14 @@ const BubbleTC = () => {
 
   return (
     <StyledWrapper style={{ bottom: bottomOffset }} className="group flex items-center">
-      <a href="https://distintivoprestadores.sectur.gob.mx" target="_blank" rel="noopener noreferrer" className="bubble">
-        <img src="/Institution/tc.jpg" alt="TC Logo" className="bubble-img" />
+      <Link href="/trade" className="bubble">
+        <img src="/logo.png" alt="Clúster Cafetalero" className="bubble-img" />
         <span className="bubble-shadow-overlay"></span>
-      </a>
+      </Link>
 
       {/* Mensaje flotante (Tooltip) */}
       <div className="absolute left-full ml-4 px-4 py-2.5 bg-brand text-[#F4F1EA] text-sm font-semibold rounded-lg shadow-xl opacity-0 -translate-x-4 pointer-events-none transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 whitespace-nowrap z-[60]">
-        Solicita el distintivo de Turismo Comunitario
+        Registra tu Tienda o Finca de Café
         {/* Triángulo apuntando a la burbuja */}
         <div className="absolute top-1/2 -left-1 -translate-y-1/2 w-3 h-3 bg-brand-mint rotate-45 rounded-sm"></div>
       </div>

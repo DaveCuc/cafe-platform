@@ -45,7 +45,7 @@ export const TitleForm = ({ initialData, articleId }) => {
             disabled={isLoading} 
             value={title} 
             onChange={e => setTitle(e.target.value)} 
-            placeholder="Ej. 'Turismo en Oaxaca'" 
+            placeholder="Ej. 'Caficultura Sostenible en Puebla'" 
             className="bg-white" 
             required 
           />

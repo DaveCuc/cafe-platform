@@ -58,8 +58,8 @@ const Certificate = ({
 
                     {/* Logos Institucionales */}
                     <img 
-                        src="/Certificados/reserva.png" 
-                        alt="Reserva de la Biosfera" 
+                        src="/logo.png" 
+                        alt="Clúster Cafetalero" 
                         style={{
                             position: 'absolute',
                             top: '2cm',
@@ -133,7 +133,7 @@ const Certificate = ({
                         {/* Frase */}
                         <div style={{ marginBottom: '0.8cm', maxWidth: '85%' }}>
                             <div style={{ fontSize: '14pt', fontWeight: 'normal', lineHeight: '1.4' }}>
-                                UN CURSO EN LÍNEA OFRECIDO A TRAVÉS DE LA PLATAFORMA DE TURISMO DE LA RESERVA DE LA BIOSFERA DEL INSTITUTO TECNOLÓGICO DE TEHUACÁN.
+                                UN CURSO EN LÍNEA OFRECIDO A TRAVÉS DE LA PLATAFORMA DEL CLÚSTER CAFETALERO DE LA SIERRA NEGRA DEL INSTITUTO TECNOLÓGICO DE TEHUACÁN.
                             </div>
                         </div>
 
