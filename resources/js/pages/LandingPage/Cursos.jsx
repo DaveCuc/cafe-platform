@@ -35,12 +35,12 @@ const imageModules = import.meta.glob('/public/Directorios/*.{jpg,jpeg,png,webp,
 const carouselImages = Object.values(imageModules).sort((a, b) => String(a).localeCompare(String(b)));
 */
 
-// Imágenes de capacitación y profesionalización del café desde Internet
+// Imágenes de capacitación y profesionalización del café desde Internet (Sembradíos y Cosecha)
 const carouselImages = [
-    "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=1920", // Barismo y preparación de café
-    "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&q=80&w=1920", // Granos de café seleccionados y tostado
-    "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=1920", // Catación y selección de calidad
-    "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=1920"  // Tecnificación en el campo cafetalero
+    "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=1920", // Planta de café con cerezas
+    "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=1920", // Plantación y sembradíos
+    "https://images.unsplash.com/photo-1524350876685-274059332603?auto=format&fit=crop&q=80&w=1920", // Cosecha de cerezas de café
+    "https://images.unsplash.com/photo-1507133750040-4a8f57021571?auto=format&fit=crop&q=80&w=1920"  // Patios de secado de café recolectado
 ];
 
 const RegistroSection = () => {
