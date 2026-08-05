@@ -13,20 +13,20 @@ const fadeUp = {
 export default function MapSection() {
     const rutas = [
         {
-            titulo: "Ruta 1: Onix y Sal",
-            descripcion: "Recorre los paisajes de las salinas de Zapotitlán y descubre los métodos prehispánicos de extracción de sal, además de conocer el mundo del ónix.",
+            titulo: "Meta 1: Trazabilidad y Ubicación",
+            descripcion: "Mapeo territorial de proveedores y tiendas de café. Permite a los compradores y clientes geolocalizar fincas productoras y puntos de venta de café de especialidad de la Sierra Negra.",
             imageUrl: "/Fotos/Recorridos/onix.jpg",
             align: "left"
         },
         {
-            titulo: "Ruta 2: Dinosaurios",
-            descripcion: "Descubre los senderos y sitios arqueológicos donde las huellas de dinosaurios cobran vida.",
+            titulo: "Meta 2: Profesionalización y Cursos",
+            descripcion: "Capacitación constante a productores y vendedores locales. Programas de tecnificación agrícola y comercialización digital para aumentar la competitividad de la cadena de valor.",
             imageUrl: "/Fotos/Recorridos/dinosaurios.jpg",
             align: "right"
         },
         {
-            titulo: "Ruta 3: Mezcal",
-            descripcion: "Descubre el proceso artesanal de producción de mezcal.",
+            titulo: "Meta 3: Articulación Comercial",
+            descripcion: "Directorio interactivo de clientes y proveedores que conecta directamente a los caficultores de la Sierra Negra con mercados locales, nacionales y de comercio justo.",
             imageUrl: "/Fotos/Recorridos/mezcal.jpg",
             align: "left"
         },
@@ -40,9 +40,9 @@ export default function MapSection() {
 
                 {/* Textos a conservar intactos */}
                 <motion.div {...fadeUp} className="text-center max-w-3xl mb-16 md:mb-24 relative z-20">
-                    <span className="inline-block text-brand-mint font-semibold tracking-widest text-sm uppercase mb-4 border-b border-brand-mint pb-1">Itinerarios y Aventuras</span>
-                    <h2 className="text-4xl lg:text-5xl font-bold mb-8 leading-tight text-white">Explora Nuestras Rutas <br /><span className="text-brand-mint font-light">Bioculturales</span></h2>
-                    <p className="text-white mb-10 text-lg leading-relaxed font-light">Sumérgete en la vasta riqueza biocultural de la Reserva a través de itinerarios cuidadosamente diseñados. Cada recorrido es una oportunidad única para vivir de cerca el patrimonio natural, aprender de las tradiciones ancestrales y apoyar directamente la economía de las comunidades locales a través de un turismo responsable.</p>
+                    <span className="inline-block text-brand-mint font-semibold tracking-widest text-sm uppercase mb-4 border-b border-brand-mint pb-1">Objetivos del Clúster</span>
+                    <h2 className="text-4xl lg:text-5xl font-bold mb-8 leading-tight text-white">Metas de la Red <br /><span className="text-brand-mint font-light">de Caficultores</span></h2>
+                    <p className="text-white mb-10 text-lg leading-relaxed font-light">A través del Clúster Cafetalero de la Sierra Negra, implementamos metas y rutas estratégicas de comercialización, capacitación y digitalización para integrar a los productores, tiendas locales y proveedores en un modelo de prosperidad y gobernanza local.</p>
                 </motion.div>
 
                 {/* Road and Cards Container */}

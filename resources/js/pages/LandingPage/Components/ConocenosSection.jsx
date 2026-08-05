@@ -34,7 +34,7 @@ export default function ConocenosSection() {
                     <motion.div {...fadeUp} className="w-full max-w-5xl mx-auto">
                         <div className="text-center mb-20 md:mb-28">
                             <h2 className="inline-block font-bold text-brand-dark text-4xl md:text-5xl tracking-tight mb-4">
-                                Contexto y Problemática
+                                Conócenos
                             </h2>
                             <div className="w-24 h-1 bg-brand mx-auto"></div>
                         </div>
@@ -52,20 +52,20 @@ export default function ConocenosSection() {
                                 </motion.div>
 
                                 <div className="text-center md:text-left">
-                                    <span className="text-brand font-semibold tracking-wider text-sm uppercase mb-2 block">Ventajas Competitivas</span>
-                                    <h3 className="text-2xl md:text-3xl font-bold mb-6 text-brand-dark leading-tight">La Caficultura en la Sierra Negra de Puebla</h3>
+                                    <span className="text-brand font-semibold tracking-wider text-sm uppercase mb-2 block">Nuestra Casa de Estudios</span>
+                                    <h3 className="text-2xl md:text-3xl font-bold mb-6 text-brand-dark leading-tight">Instituto Tecnológico de Tehuacán (ITT)</h3>
                                     <p className="text-base md:text-lg leading-relaxed text-gray-600 max-w-2xl mx-auto md:mx-0 font-light">
-                                        La caficultura en la Sierra Negra de Puebla es una actividad estratégica en las dimensiones económica, social y ambiental. La región cuenta con ventajas competitivas excepcionales como suelos volcánicos fértiles, microclimas favorables y una valiosa experiencia agrícola heredada generación tras generación.
+                                        El ITT impulsa el desarrollo regional mediante el diseño de esta plataforma digital para la gestión de caficultores de la Sierra Negra de Puebla. El sistema articula la oferta de cursos de capacitación, el directorio de clientes y el mapa de geolocalización de tiendas y proveedores, fortaleciendo la vinculación educativa y tecnológica con el sector productivo local.
                                     </p>
                                 </div>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
                                 <div className="text-center md:text-right md:order-1">
-                                    <span className="text-brand font-semibold tracking-wider text-sm uppercase mb-2 block">Desafíos del Sector</span>
-                                    <h3 className="text-2xl md:text-3xl font-bold mb-6 text-brand-dark leading-tight">Limitaciones y Desafíos Actuales</h3>
+                                    <span className="text-brand font-semibold tracking-wider text-sm uppercase mb-2 block">Investigación e Innovación</span>
+                                    <h3 className="text-2xl md:text-3xl font-bold mb-6 text-brand-dark leading-tight">Departamento de Estudios de Posgrado e Investigación</h3>
                                     <p className="text-base md:text-lg leading-relaxed text-gray-600 max-w-2xl mx-auto md:ml-auto md:mr-0 font-light">
-                                        La producción cafetalera de la región está dominada por pequeñas parcelas (menores a 3 hectáreas) con baja tecnificación e infraestructura de beneficio deficiente. Esto da como resultado rendimientos promedio de apenas 6 a 8 quintales por hectárea, muy por debajo de la media nacional, aunado a una débil gobernanza y articulación institucional.
+                                        Este departamento coordina el estudio científico del Modelo de Clúster Cafetalero, analizando el territorio para diseñar soluciones tecnológicas aplicadas que beneficien a los pequeños productores. Promovemos la sustentabilidad, la transferencia de tecnología y la optimización de los canales de comercialización de café de especialidad.
                                     </p>
                                 </div>
 
