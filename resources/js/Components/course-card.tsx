@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { BookOpen } from "lucide-react";
-import { IconBadge } from "@/components/icon-badge";
+import { IconBadge } from "@/Components/icon-badge";
 import { formatPrice } from "@/lib/format"; // Asumimos que format.ts ya existe
 import { CourseProgress } from "./course-progress";
 
